@@ -1,0 +1,11 @@
+{
+  "name": "trucksim-tracker",
+  "private": "true",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "concurrently --names \"SERVER, VITE \" -c \"bgCyan.bold,bgWhite.bold\" -- \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

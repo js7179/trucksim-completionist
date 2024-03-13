@@ -1,0 +1,71 @@
+div.achievementList {
+    display: flex;
+    flex-direction: column;
+}
+
+section.achievement {
+    border-style: solid;
+    border-color: #b85f00;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.info {
+    display: flex;
+    flex-direction: row;
+}
+
+div.icons {
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.desc {
+    align-self: center;
+    width: auto;
+    margin-top: -5px;
+    margin-left: 16px;
+    flex-grow: 2;
+}
+
+h2.achievementName {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+div.achievementCompleted {
+    margin-left: auto;
+    margin-right: 25px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="checkbox"].achComplChkbox {
+    display: none;
+}
+
+label.achComplLabel {
+    background: url("/vector/unchecked.svg") no-repeat;
+    filter: invert(33%) sepia(61%) saturate(4001%) hue-rotate(29deg) brightness(99%) contrast(101%);
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-size: auto 48px;
+    cursor: pointer;
+}
+
+input[type=checkbox].achComplChkbox:checked + label.achComplLabel { 
+    background: url("/vector/checked.svg") no-repeat;
+    filter: invert(33%) sepia(61%) saturate(4001%) hue-rotate(29deg) brightness(99%) contrast(101%);
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-size: auto 48px;
+}

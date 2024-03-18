@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import "./AchievementList.css";
+import { AchievementInfo } from "trucksim-tracker-common";
 
 export default function AchievementList({ aList }:{ aList:AchievementInfo[] }) {
     const list = aList.map((achievement) => <Achievement {...achievement} key={achievement.id} />);
@@ -37,15 +38,3 @@ function Achievement(props: AchievementInfo) {
         </section>
     );
 }
-
-interface IconType {
-    completed: string;
-    incomplete: string;
-};
-
-export interface AchievementInfo {
-    desc: string;
-    icons: IconType;
-    id: string;
-    name: string;
-};

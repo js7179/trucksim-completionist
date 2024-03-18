@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import "./AchievementList.css";
+import styles from "./AchievementList.module.css";
 import { AchievementInfo } from "trucksim-tracker-common";
 
 export default function AchievementList({ aList }:{ aList:AchievementInfo[] }) {
     const list = aList.map((achievement) => <Achievement {...achievement} key={achievement.id} />);
     return (
-        <main className="achievementList">
+        <main className={styles.achievementList}>
             {list}
         </main>
     );
@@ -21,18 +21,18 @@ function Achievement(props: AchievementInfo) {
     const checkboxID = props.id + "Checkbox";
 
     return (
-        <section className="achievement">
-            <div className="info">
-                <div className="icons">
+        <section className={styles.achievement}>
+            <div className={styles.info}>
+                <div className={styles.icons}>
                     <img src={ completed ? props.icons.completed : props.icons.incomplete } alt=''/>
                 </div>
-                <div className="desc">
-                    <h2 className="achievementName">{props.name}</h2>
+                <div className={styles.desc}>
+                    <h2 className={styles.achievementName}>{props.name}</h2>
                     <p>{props.desc}</p>
                 </div>
-                <div className="achievementCompleted">
-                    <input type="checkbox" id={checkboxID} value={completed ? 1 : 0} className="achComplChkbox" onClick={checkboxComplete} />
-                    <label htmlFor={checkboxID} className="achComplLabel"></label>
+                <div className={styles.achievementCompleted}>
+                    <input type="checkbox" id={checkboxID} value={completed ? 1 : 0} className={styles.achComplChkbox} onClick={checkboxComplete} />
+                    <label htmlFor={checkboxID} className={styles.achComplLabel}></label>
                 </div>
             </div>
         </section>

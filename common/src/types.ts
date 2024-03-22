@@ -1,4 +1,4 @@
-interface IconType {
+export interface IconType {
     completed: string;
     incomplete: string;
 };
@@ -9,3 +9,11 @@ export interface AchievementInfo {
     id: string;
     name: string;
 };
+
+export interface AchievementStateList {
+    [achievementID: string]: AchievementState;
+}
+
+export interface AchievementState {
+    completed: boolean;
+}

@@ -1,3 +1,13 @@
-import { AchievementInfo } from "./types";
+import { AchievementInfo, AchievementStateList } from "./types";
 
-export { AchievementInfo };
+function generateDefaultState(aList: AchievementInfo[]): AchievementStateList {
+    var ret: AchievementStateList = {};
+    for(const achievement of aList) {
+        ret[achievement.id] = {
+            completed: false
+        };
+    }
+    return ret;
+}
+
+export { generateDefaultState };

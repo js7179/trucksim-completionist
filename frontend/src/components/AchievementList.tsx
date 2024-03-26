@@ -32,7 +32,7 @@ function Achievement(props: AchievementInfo) {
                     <p>{props.desc}</p>
                 </div>
                 <div className={styles.achievementCompleted}>
-                    <input type="checkbox" id={checkboxID} value={completed ? 1 : 0} className={styles.achComplChkbox} onClick={() => toggleAchComplete(props.id)} />
+                    <input type="checkbox" id={checkboxID} className={styles.achComplChkbox} onClick={() => toggleAchComplete(props.id)} checked={completed} />
                     <label htmlFor={checkboxID} className={styles.achComplLabel}></label>
                 </div>
             </div>

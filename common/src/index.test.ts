@@ -1,52 +1,55 @@
-import { generateDefaultState } from "./index";
+import { generateStateTemplate } from "./index";
 import { AchievementInfo, AchievementStateList } from "./types";
 
-describe('generateDefaultState', () => {
+describe('generateStateTemplate', () => {
     it('empty achievement list', () => {
         const input: AchievementInfo[] = [];
         const output: AchievementStateList = {};
 
-        expect(generateDefaultState(input)).toStrictEqual(output);
+        expect(generateStateTemplate(input, true)).toStrictEqual(output);
     });
 
-    it('one achievement', () => {
+    it('one achievement, no objectives', () => {
         const input: AchievementInfo[] = [
             {
                 desc: "",
                 icons: { completed: "", incomplete: "" },
                 id: "foo",
-                name: ""
+                name: "",
+                objectives: []
             }
         ];
 
         const output: AchievementStateList = {
-            foo: { "completed": false }
+            foo: { "completed": false, "objectives": {} }
         };
 
-        expect(generateDefaultState(input)).toStrictEqual(output);
+        expect(generateStateTemplate(input, true)).toStrictEqual(output);
     });
 
-    it('two achievement', () => {
+    it('two achievement, no objectives', () => {
         const input: AchievementInfo[] = [
             {
                 desc: "",
                 icons: { completed: "", incomplete: "" },
                 id: "foo",
-                name: ""
+                name: "",
+                objectives: []
             },
             {
                 desc: "",
                 icons: { completed: "", incomplete: "" },
                 id: "bar",
-                name: ""
+                name: "",
+                objectives: []
             }
         ];
 
         const output: AchievementStateList = {
-            foo: { "completed": false },
-            bar: { "completed": false }
+            foo: { "completed": false, "objectives": {} },
+            bar: { "completed": false, "objectives": {} }
         };
 
-        expect(generateDefaultState(input)).toStrictEqual(output);
+        expect(generateStateTemplate(input, true)).toStrictEqual(output);
     });
 });

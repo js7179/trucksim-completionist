@@ -40,7 +40,7 @@ h2.achievementName {
 
 div.achievementCompleted {
     margin-left: auto;
-    margin-right: 25px;
+    margin-right: 16px;
     height: auto;
     display: flex;
     align-items: center;
@@ -68,4 +68,13 @@ input[type=checkbox].achComplChkbox:checked + label.achComplLabel {
     width: 48px;
     height: 48px;
     background-size: auto 48px;
+}
+
+div.objectiveContainer {
+    background-color: #13191a;
+    background-clip: content-box;
+    border-radius: 5px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 5px;
 }

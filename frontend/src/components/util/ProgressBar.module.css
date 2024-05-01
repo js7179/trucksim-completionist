@@ -1,0 +1,27 @@
+div.progressBarContainer {
+    width: auto;
+    height: 1.5lh;
+    background-color: #3a3a3a;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+
+div.progressBar {
+    background-color: #9dc34c;
+    height: 100%;
+    text-align: right;
+    line-height: 1.5lh;
+    transition: width 0.25s ease;
+}
+
+p.innerProgress {
+    margin: 0;
+    padding-right: 10px;
+    color: #000;
+}
+
+p.outerProgress {
+    padding-left: 10px;
+    color: #fff;
+}

@@ -15,10 +15,12 @@ export interface AchievementStateList {
 
 export interface AchievementState {
     completed: boolean;
-    objectives: {
-        [objID: string]: string[] | number;
-    }
+    objectives: ObjectiveState;
 };
+
+export interface ObjectiveState {
+    [objID: string]: string[] | number;
+}
 
 export interface ObjectiveInfo {
     objid: string;

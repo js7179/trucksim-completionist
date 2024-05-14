@@ -1,55 +1,92 @@
-import { generateStateTemplate } from "./index";
-import { AchievementInfo, AchievementStateList } from "./types";
+import { clamp, copyChanges, isPrimitive } from './index';
 
-describe('generateStateTemplate', () => {
-    it('empty achievement list', () => {
-        const input: AchievementInfo[] = [];
-        const output: AchievementStateList = {};
 
-        expect(generateStateTemplate(input, true)).toStrictEqual(output);
+describe("is primitive", () => {
+    it("number", () => {
+        expect(isPrimitive(5)).toBeTruthy();
     });
 
-    it('one achievement, no objectives', () => {
-        const input: AchievementInfo[] = [
-            {
-                desc: "",
-                icons: { completed: "", incomplete: "" },
-                id: "foo",
-                name: "",
-                objectives: []
-            }
-        ];
-
-        const output: AchievementStateList = {
-            foo: { "completed": false, "objectives": {} }
-        };
-
-        expect(generateStateTemplate(input, true)).toStrictEqual(output);
+    it("string array", () => {
+        expect(isPrimitive(["abc", "def", "ghi"])).toBeFalsy();
     });
 
-    it('two achievement, no objectives', () => {
-        const input: AchievementInfo[] = [
-            {
-                desc: "",
-                icons: { completed: "", incomplete: "" },
-                id: "foo",
-                name: "",
-                objectives: []
-            },
-            {
-                desc: "",
-                icons: { completed: "", incomplete: "" },
-                id: "bar",
-                name: "",
-                objectives: []
-            }
-        ];
+    it("object", () => {
+        expect(isPrimitive({})).toBeFalsy();
+    });
+});
 
-        const output: AchievementStateList = {
-            foo: { "completed": false, "objectives": {} },
-            bar: { "completed": false, "objectives": {} }
+describe("clamp", () => {
+    it("out of bound lower", () => {
+        expect(clamp(2, 1, 4)).toBe<number>(2);
+    });
+
+    it("out of bound higher", () => {
+        expect(clamp(2, 5, 4)).toBe<number>(4);
+    });
+
+    it("within range", () => {
+        expect(clamp(2, 3, 4)).toBe<number>(3);
+    });
+});
+
+describe("copyChanges", () => {
+    
+    it("empty object", () => {
+        let newCopy = {};
+        let oldCopy = {};
+
+        expect(copyChanges(newCopy, oldCopy)).toMatchObject({});
+    });
+
+    it("new entry", () => {
+        let newCopy = {
+            foo: 0,
+            bar: 0
+        };
+        let oldCopy = {
+            foo: 2
+        };
+        
+        let output = copyChanges(newCopy, oldCopy);
+        
+        expect(output).toHaveProperty("foo");
+        expect(output).toHaveProperty("bar");
+        expect(output["foo"]).toBe<number>(2);
+        expect(output["bar"]).toBe<number>(0);
+    });
+
+    it("new entry, array", () => {
+        let newCopy = {
+            foo: [],
+            bar: 0
+        };
+        let oldCopy = {
+            foo: ["baz"]
         };
 
-        expect(generateStateTemplate(input, true)).toStrictEqual(output);
+        let output = copyChanges(newCopy, oldCopy);
+
+        expect(output).toHaveProperty("foo");
+        expect(output).toHaveProperty("bar");
+        expect(output["bar"]).toBe<number>(0);
+        expect(output["foo"]).toEqual(expect.arrayContaining(["baz"]));
+    });
+
+    it("new entry, object (recurse)", () => {
+        let newCopy = {
+            foo: {
+                bar: 0
+            }
+        };
+        let oldCopy = {
+            foo: {
+                bar: 2
+            }
+        };
+
+        let output = copyChanges(newCopy, oldCopy);
+        expect(output).toHaveProperty("foo");
+        expect(output["foo"]).toHaveProperty("bar");
+        expect(output["foo"]["bar"]).toBe<number>(2);
     });
 });

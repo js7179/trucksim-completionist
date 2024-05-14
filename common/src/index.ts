@@ -51,6 +51,23 @@ export function isPrimitive(val: any): boolean {
 }
 
 /**
+ * Determines from two given arrays of the same type, do they both
+ * contain the same elements, ignoring their order in the array?
+ * 
+ * @param {T[]} a Array to compare
+ * @param {T[]} b Array to compare
+ * @returns {boolean} Do both arrays have the same elements, ignoring order
+ * @example
+ * isNonorderedArrayEqual([1, 3, 2], [1, 2, 3]) => true
+ * isNonorderedArrayEqual([], [1]) => false
+ * isNonorderedArrayEqual([], []) => true
+ */
+export function isNonorderedArrayEqual<T>(a: T[], b: T[]): boolean {
+    if(a.length !== b.length) return false;
+    return a.every(item => b.includes(item));
+}
+
+/**
  * This function clamps a number between [min, max]. This ensures the input
  * does not go below the minimum, or go above the maximum inclusive.
  * 

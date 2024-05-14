@@ -1,4 +1,4 @@
-import { clamp, copyChanges, isPrimitive } from './index';
+import { clamp, copyChanges, isNonorderedArrayEqual, isPrimitive } from './index';
 
 
 describe("is primitive", () => {
@@ -27,6 +27,46 @@ describe("clamp", () => {
     it("within range", () => {
         expect(clamp(2, 3, 4)).toBe<number>(3);
     });
+});
+
+describe("isNonorderedArrayEqual", () => {
+    it("empty array", () => {
+        let a: string[] = [];
+        let b: string[] = [];
+        expect(isNonorderedArrayEqual(a, b)).toBeTruthy();
+    });
+
+    it("one string element true", () => {
+        let a = ["foo"];
+        let b = ["foo"];
+        expect(isNonorderedArrayEqual(a, b)).toBeTruthy();
+    });
+
+    it("one string element false", () => {
+        let a = ["foo"];
+        let b = ["bar"];
+        expect(isNonorderedArrayEqual(a, b)).toBeFalsy();
+    });
+
+    it("1,2 array", () => {
+        let a = ["foo"];
+        let b = ["foo", "bar"];
+        expect(isNonorderedArrayEqual(a, b)).toBeFalsy();
+    });
+
+    it("2,1 array", () => {
+        let a = ["foo", "bar"];
+        let b = ["foo"];
+        expect(isNonorderedArrayEqual(a, b)).toBeFalsy();
+    });
+
+    it("3 array diff order", () => {
+        let a = ["bar", "baz", "foo"];
+        let b = ["foo", "bar", "baz"];
+        expect(isNonorderedArrayEqual(a, b)).toBeTruthy();
+    });
+
+    
 });
 
 describe("copyChanges", () => {

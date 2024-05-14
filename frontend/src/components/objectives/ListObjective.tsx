@@ -2,13 +2,15 @@ import styles from "./ListObjective.module.css";
 import { AchievementStateContext } from "@/store/AchievementStore";
 import { useContext } from "react";
 import { useStore } from "zustand";
-import { STATE_ACTION, ListObjectiveInfo } from "trucksim-tracker-common";
-
+import { STATE_ACTION, ListObjectiveInfo, isNonorderedArrayEqual } from "trucksim-tracker-common";
+import { useStoreWithEqualityFn } from "zustand/traditional";
 
 export default function ListObjective(props: ListObjectiveProps) {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
-    const listValues = useStore(store, (s) => s.achList[props.achID].objectives[props.objid] as string[]);
+    const listValues = useStoreWithEqualityFn(store, 
+                                              (s) => s.achList[props.achID].objectives[props.objid] as string[],
+                                              (a, b) => isNonorderedArrayEqual(a, b));
     const dispatch = useStore(store, (s) => s.performAction);
 
 

@@ -18,10 +18,8 @@ export const createAchievementStore = (defaultAchievementState: AchievementState
                 achList: structuredClone(defaultAchievementState),
                 goal: goalAchievement,
                 performAction: (args) => {
-                    let newState = { ...get() };
-                    let newAchList = doStateUpdate(newState.achList, newState.goal, args);
-                    newState.achList = newAchList;
-                    set(newState);
+                    let newAchList = doStateUpdate(get().achList, get().goal, args);
+                    set({ achList: newAchList });
                 }
             }),
             {

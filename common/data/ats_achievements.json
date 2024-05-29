@@ -1689,5 +1689,87 @@
                 "goal": 2
             }
         ]
+    },
+    {
+        "desc": "Discover every city in Nebraska (requires Nebraska DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/a34a637d0bd452f617062aa7fe0d7f0e2b697184.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/c334a955cbef676cbec3ad3873dabd115981ddcf.jpg"
+        },
+        "id": "ne_visit_cities",
+        "name": "Cornhusker State",
+        "objectives": []
+    },
+    {
+        "desc": "View cutscenes from all viewpoints in Nebraska (requires Nebraska DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/f8ad15f38b40c910fa17aa485f970f258dfddfa0.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/df0d239dbdf89049cc568e4283abf0863d1c61cf.jpg"
+        },
+        "id": "ne_cutscenes",
+        "name": "Nebraska Explorer",
+        "objectives": []
+    },
+    {
+        "desc": "Complete 3 deliveries from the Utility Vehicle Factory in Lincoln to each of the RV dealers in Omaha, Norfolk, and Columbus (requires Nebraska DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/6e672945a396e6199244dda5f34375a53f854d1d.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/560107507d2efaf49a9f02c180b4244bac27421d.jpg"
+        },
+        "id": "ne_out_car_pln",
+        "name": "Vehicle Dealer",
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "jobs",
+                "values": [
+                    {
+                        "subobjid": "omaha",
+                        "display": "Omaha"
+                    },
+                    {
+                        "subobjid": "norfolk",
+                        "display": "Norfolk"
+                    },
+                    {
+                        "subobjid": "columbus",
+                        "display": "Columbus"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "desc": "Complete one delivery of corn, grain, potatoes and soybean from or within Nebraska (requires Nebraska DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/f47251ace0ccd291af14e6d496228b78096dfccb.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/f08c36b3fd9ab4db335205471d52db641bef1dfa.jpg"
+        },
+        "id": "ne_agriculture",
+        "name": "Agriculture Expert",
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "jobs",
+                "values": [
+                    {
+                        "subobjid": "corn",
+                        "display": "Corn (Maize)"
+                    },
+                    {
+                        "subobjid": "grain",
+                        "display": "Grain"
+                    },
+                    {
+                        "subobjid": "potatoes",
+                        "display": "Potatoes"
+                    },
+                    {
+                        "subobjid": "soybean",
+                        "display": "Soybean"
+                    }
+                ]
+            }
+        ]
     }
 ]

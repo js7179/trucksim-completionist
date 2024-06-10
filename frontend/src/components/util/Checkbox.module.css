@@ -1,0 +1,22 @@
+input[type="checkbox"].checkbox {
+    display: none;
+}
+
+label.checkboxSVG {
+    background: url("/vector/unchecked.svg") no-repeat;
+    display: inline-block;
+    cursor: pointer;
+}
+
+input[type=checkbox].checkbox:checked + label.checkboxSVG { 
+    background: url("/vector/checked.svg") no-repeat;
+    display: inline-block;
+}
+
+label.checkboxText {
+    cursor: pointer;
+}
+
+input[type=checkbox].checkbox:checked ~ label.checkboxText {
+    text-decoration: line-through;
+}

@@ -12,7 +12,7 @@ export default function CounterObjective(props: CounterObjectiveProps) {
     const dispatch = useStore(store, (s) => s.performAction);
 
     const changeCount = (delta: number) => {
-        let newValue = current + delta;
+        const newValue = current + delta;
         if(newValue < 0 || newValue > props.goal) return;
         dispatch({
             type: STATE_ACTION.OBJ_SET_NUMERICAL,

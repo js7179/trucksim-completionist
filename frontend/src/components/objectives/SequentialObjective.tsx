@@ -1,9 +1,9 @@
 import styles from './SequentialObjective.module.css';
-import listStyles from './ListObjective.module.css';
 import { AchievementStateContext } from "@/store/AchievementStore";
 import { useContext } from "react";
 import { useStore } from "zustand";
 import { STATE_ACTION, SequentialObjectiveInfo } from "trucksim-tracker-common";
+import Checkbox from '../util/Checkbox';
 
 export default function SequentialObjective(props: SequentialObjectiveProps) {
     const store = useContext(AchievementStateContext);
@@ -12,6 +12,9 @@ export default function SequentialObjective(props: SequentialObjectiveProps) {
     const dispatch = useStore(store, (s) => s.performAction);
 
     const selectListItem = (stepIndex: number) => {
+        if(stepIndex == objValue) {
+            stepIndex -= 1;
+        }
         dispatch({
             type: STATE_ACTION.OBJ_SET_NUMERICAL,
             achID: props.achID,
@@ -23,16 +26,16 @@ export default function SequentialObjective(props: SequentialObjectiveProps) {
     const stepList = props.values.map((step, index) => {
         const stepIndex = index + 1;
         const isChecked = objValue >= stepIndex;
+        const htmlID = props.achID + step.subobjid;
         return (
             <li className={styles.seqObjListItem}>
-                <input type="checkbox"
-                    id={step.subobjid}
-                    className={listStyles.listObjInput}
+                <Checkbox 
+                    htmlID={htmlID} 
                     checked={isChecked}
                     onClick={() => selectListItem(stepIndex)}
-                    onChange={() => {}} />
-                <label htmlFor={step.subobjid} className={listStyles.listObjLabelSVG}/>
-                <label htmlFor={step.subobjid} className={listStyles.listObjLabelText}>{step.display}</label>
+                    filterCSS='invert(100%)'
+                    size='1lh'
+                    labelText={step.display}/>
             </li>
         );
     });

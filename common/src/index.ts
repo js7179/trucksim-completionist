@@ -1,4 +1,4 @@
-import { generateStateTemplate, STATE_ACTION, StateUpdate, doStateUpdate, compareObjectiveObjects } from "./state";
+import { generateStateTemplate, STATE_ACTION, StateUpdate, doStateUpdate } from "./state";
 import { AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo } from "./types";
 
 /** 

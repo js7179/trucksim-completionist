@@ -13,9 +13,9 @@ import { AchievementInfo, AchievementState, AchievementStateList, CounterObjecti
  * @returns {AchievementStateList} State object representing either empty slate (new account/savedata) or goals (for completion checking)
  */
 export function generateStateTemplate(achievementList: AchievementInfo[], shouldMakeEmptySlate: boolean = true): AchievementStateList {
-    var ret: AchievementStateList = {};
+    const ret: AchievementStateList = {};
     for(const achievement of achievementList) {
-        let achState: AchievementState =  {
+        const achState: AchievementState =  {
             completed: !shouldMakeEmptySlate,
             objectives: {}
         };
@@ -25,7 +25,7 @@ export function generateStateTemplate(achievementList: AchievementInfo[], should
                     if(shouldMakeEmptySlate) {
                         achState.objectives[objective.objid] = [];
                     } else {
-                        let obj = objective as ListObjectiveInfo;
+                        const obj = objective as ListObjectiveInfo;
                         achState.objectives[objective.objid] = obj.values.map((subobj) => subobj.subobjid);
                     }
                     break;
@@ -33,7 +33,7 @@ export function generateStateTemplate(achievementList: AchievementInfo[], should
                     if(shouldMakeEmptySlate) {
                         achState.objectives[objective.objid] = 0;
                     } else {
-                        let obj = objective as CounterObjectiveInfo;
+                        const obj = objective as CounterObjectiveInfo;
                         achState.objectives[objective.objid] = obj.goal;
                     }
                     break;
@@ -41,7 +41,7 @@ export function generateStateTemplate(achievementList: AchievementInfo[], should
                     if(shouldMakeEmptySlate) {
                         achState.objectives[objective.objid] = 0;
                     } else {
-                        let obj = objective as SequentialObjectiveInfo;
+                        const obj = objective as SequentialObjectiveInfo;
                         achState.objectives[objective.objid] = obj.values.length;
                     }
                     break;
@@ -70,22 +70,22 @@ export interface StateUpdate {
 }
 
 export function doStateUpdate(oldState: AchievementStateList, goalState: AchievementStateList, action: StateUpdate): AchievementStateList {
-    let newState = structuredClone(oldState);
-    let achID = action.achID;
-    let objID = action.objID ?? '';
+    const newState = structuredClone(oldState);
+    const achID = action.achID;
+    const objID = action.objID ?? '';
     if(!Object.values(STATE_ACTION).includes(action.type)) { // make sure action type is valid
         throw new Error(`Unknown action "${action.type}"`);
     }
     // Check that objID exists for objective related actions
-    if(action.type !== STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK && !action.hasOwnProperty('objID')) {
+    if(action.type !== STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK && !Object.hasOwn(action, 'objID')) {
         throw new Error(`Missing "objID" in doStateUpdate`);
     }
     switch(action.type) {
-        case STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK:
-            if(!action.hasOwnProperty('shouldMarkOff')) {
+        case STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK: {
+            if(!Object.hasOwn(action, 'shouldMarkOff')) {
                 throw new Error(`Missing "shouldMarkOff" in doStateUpdate`);
             }
-            let shouldMarkOff = action.shouldMarkOff as boolean;
+            const shouldMarkOff = action.shouldMarkOff as boolean;
             newState[achID].completed = shouldMarkOff;
             if(shouldMarkOff) {
                 newState[achID].objectives = structuredClone(goalState[achID].objectives);
@@ -93,11 +93,12 @@ export function doStateUpdate(oldState: AchievementStateList, goalState: Achieve
                 newState[achID].objectives = resetObjective(oldState[achID].objectives);
             }
             break;
-        case STATE_ACTION.OBJ_SET_NUMERICAL:
-            if(!action.hasOwnProperty('n')) {
+        }
+        case STATE_ACTION.OBJ_SET_NUMERICAL: {
+            if(!Object.hasOwn(action, 'n')) {
                 throw new Error(`Missing "n" in doStateUpdate`);
             }
-            let n = action.n! as number;
+            const n = action.n! as number;
             // data validation
             if(n < 0) {
                 throw new Error(`"n" cannot be negative`);
@@ -107,31 +108,32 @@ export function doStateUpdate(oldState: AchievementStateList, goalState: Achieve
             }
             newState[achID].objectives[objID] = n;
             break;
-        case STATE_ACTION.OBJ_TOGGLE_LIST_ITEM:
-            if(!action.hasOwnProperty('subobjID')) {
+        }
+        case STATE_ACTION.OBJ_TOGGLE_LIST_ITEM: {
+            if(!Object.hasOwn(action, 'subobjID')) {
                 throw new Error(`Missing "subobjID" in doStateUpdate`);
             }
-            if(!action.hasOwnProperty('shouldMarkOff')) {
+            if(!Object.hasOwn(action, 'shouldMarkOff')) {
                 throw new Error(`Missing "shouldMarkOff" in doStateUpdate`);
             }
-            let subobjID = action.subobjID!;
+            const subobjID = action.subobjID!;
             // data validation
-            let goalList = goalState[achID].objectives[objID] as string[];
+            const goalList = goalState[achID].objectives[objID] as string[];
             if(!goalList.includes(subobjID)) {
                 throw new Error(`subobjID given does not exist`);
             }
 
-            let oldValue = oldState[achID].objectives[objID] as string[];
+            const oldValue = oldState[achID].objectives[objID] as string[];
             if(action.shouldMarkOff) {
-                var newValue = oldValue.concat(subobjID);
+                newState[achID].objectives[objID] = oldValue.concat(subobjID);
             } else {
-                var newValue = oldValue.filter((item) => item !== subobjID);
+                newState[achID].objectives[objID] = oldValue.filter((item) => item !== subobjID);
             }
-            newState[achID].objectives[objID] = newValue;
             break;
+        }
     }
     if(action.type !== STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK) { // if we just did something with the objectives...
-        let areObjectivesFulfilled = compareObjectiveObjects(goalState[achID].objectives, newState[achID].objectives);
+        const areObjectivesFulfilled = compareObjectiveObjects(goalState[achID].objectives, newState[achID].objectives);
         if(newState[achID].completed && !areObjectivesFulfilled) { // If we are no longer fulfilling objs but still have achievement marked complete...
             newState[achID].completed = false;
         } else if(areObjectivesFulfilled && !newState[achID].completed) { // If we are fulfilling objs w/ achievement marked incomplete
@@ -149,7 +151,7 @@ export function doStateUpdate(oldState: AchievementStateList, goalState: Achieve
  * @returns {ObjectiveState} Resetted objective state
  */
 export function resetObjective(oldObjectives: ObjectiveState): ObjectiveState {
-    let newObjectives: ObjectiveState = structuredClone(oldObjectives);
+    const newObjectives: ObjectiveState = structuredClone(oldObjectives);
     for(const [key, value] of Object.entries(oldObjectives)) {
         if(isPrimitive(value)) { // is number
             newObjectives[key] = 0;
@@ -166,8 +168,8 @@ export function compareObjectiveObjects(goal: ObjectiveState, newState: Objectiv
         if(typeof value === "number") {
             if(value !== newState[key]) return false;
         } else {
-            let goalSorted = value.toSorted();
-            let newSorted = (newState[key] as string[]).toSorted();
+            const goalSorted = value.toSorted();
+            const newSorted = (newState[key] as string[]).toSorted();
 
             if(JSON.stringify(goalSorted) !== JSON.stringify(newSorted)) return false;
         }

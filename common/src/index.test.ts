@@ -31,38 +31,38 @@ describe("clamp", () => {
 
 describe("isNonorderedArrayEqual", () => {
     it("empty array", () => {
-        let a: string[] = [];
-        let b: string[] = [];
+        const a: string[] = [];
+        const b: string[] = [];
         expect(isNonorderedArrayEqual(a, b)).toBeTruthy();
     });
 
     it("one string element true", () => {
-        let a = ["foo"];
-        let b = ["foo"];
+        const a = ["foo"];
+        const b = ["foo"];
         expect(isNonorderedArrayEqual(a, b)).toBeTruthy();
     });
 
     it("one string element false", () => {
-        let a = ["foo"];
-        let b = ["bar"];
+        const a = ["foo"];
+        const b = ["bar"];
         expect(isNonorderedArrayEqual(a, b)).toBeFalsy();
     });
 
     it("1,2 array", () => {
-        let a = ["foo"];
-        let b = ["foo", "bar"];
+        const a = ["foo"];
+        const b = ["foo", "bar"];
         expect(isNonorderedArrayEqual(a, b)).toBeFalsy();
     });
 
     it("2,1 array", () => {
-        let a = ["foo", "bar"];
-        let b = ["foo"];
+        const a = ["foo", "bar"];
+        const b = ["foo"];
         expect(isNonorderedArrayEqual(a, b)).toBeFalsy();
     });
 
     it("3 array diff order", () => {
-        let a = ["bar", "baz", "foo"];
-        let b = ["foo", "bar", "baz"];
+        const a = ["bar", "baz", "foo"];
+        const b = ["foo", "bar", "baz"];
         expect(isNonorderedArrayEqual(a, b)).toBeTruthy();
     });
 
@@ -72,22 +72,22 @@ describe("isNonorderedArrayEqual", () => {
 describe("copyChanges", () => {
     
     it("empty object", () => {
-        let newCopy = {};
-        let oldCopy = {};
+        const newCopy = {};
+        const oldCopy = {};
 
         expect(copyChanges(newCopy, oldCopy)).toMatchObject({});
     });
 
     it("new entry", () => {
-        let newCopy = {
+        const newCopy = {
             foo: 0,
             bar: 0
         };
-        let oldCopy = {
+        const oldCopy = {
             foo: 2
         };
         
-        let output = copyChanges(newCopy, oldCopy);
+        const output = copyChanges(newCopy, oldCopy);
         
         expect(output).toHaveProperty("foo");
         expect(output).toHaveProperty("bar");
@@ -96,15 +96,15 @@ describe("copyChanges", () => {
     });
 
     it("new entry, array", () => {
-        let newCopy = {
+        const newCopy = {
             foo: [],
             bar: 0
         };
-        let oldCopy = {
+        const oldCopy = {
             foo: ["baz"]
         };
 
-        let output = copyChanges(newCopy, oldCopy);
+        const output = copyChanges(newCopy, oldCopy);
 
         expect(output).toHaveProperty("foo");
         expect(output).toHaveProperty("bar");
@@ -113,18 +113,18 @@ describe("copyChanges", () => {
     });
 
     it("new entry, object (recurse)", () => {
-        let newCopy = {
+        const newCopy = {
             foo: {
                 bar: 0
             }
         };
-        let oldCopy = {
+        const oldCopy = {
             foo: {
                 bar: 2
             }
         };
 
-        let output = copyChanges(newCopy, oldCopy);
+        const output = copyChanges(newCopy, oldCopy);
         expect(output).toHaveProperty("foo");
         expect(output["foo"]).toHaveProperty("bar");
         expect(output["foo"]["bar"]).toBe<number>(2);

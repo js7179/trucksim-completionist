@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "workspaces": ["common"],
   "scripts": {
-    "dev": "concurrently --names \"SERVER, VITE \" -c \"bgCyan.bold,bgWhite.bold\" -- \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
+    "dev": "concurrently --names \"SERVER, VITE \" -c \"bgCyan.bold,bgWhite.bold\" -- \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "lint": "cd common && npm run lint && cd ../frontend && npm run lint"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

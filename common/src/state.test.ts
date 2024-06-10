@@ -3,18 +3,18 @@ import { AchievementInfo, AchievementStateList, CounterObjectiveInfo, ListObject
 
 describe("generateStateTemplate", () => {
     it("empty achievement list", () => {
-        let input: AchievementInfo[] = [];
-        let output: AchievementStateList = {};
+        const input: AchievementInfo[] = [];
+        const output: AchievementStateList = {};
 
         expect(generateStateTemplate(input)).toStrictEqual(output);
     });
 
     it("empty slate, one achievement, no objectives", () => {
-        let input: AchievementInfo[] = [
+        const input: AchievementInfo[] = [
             { id: "foo", name: "", desc: "", objectives: [], icons: { incomplete: "", completed: "" } }
         ];
 
-        let output: AchievementStateList = {
+        const output: AchievementStateList = {
             foo: { completed: false, objectives: {} }
         };
 
@@ -22,11 +22,11 @@ describe("generateStateTemplate", () => {
     });
 
     it("empty slate, two achievements, no objectives", () => {
-        let input: AchievementInfo[] = [
+        const input: AchievementInfo[] = [
             { id: "foo", name: "", desc: "", objectives: [], icons: { incomplete: "", completed: "" } },
             { id: "bar", name: "", desc: "", objectives: [], icons: { incomplete: "", completed: "" } }
         ];
-        let output: AchievementStateList = {
+        const output: AchievementStateList = {
             foo: { completed: false, objectives: {} },
             bar: { completed: false, objectives: {} }
         };
@@ -35,7 +35,7 @@ describe("generateStateTemplate", () => {
     });
 
     it("empty slate, one achievement, all objectives", () => {
-        let input: AchievementInfo[] = [
+        const input: AchievementInfo[] = [
             {
                 id: "foo",
                 name: "",
@@ -62,7 +62,7 @@ describe("generateStateTemplate", () => {
             }
         ];
 
-        let output: AchievementStateList = {
+        const output: AchievementStateList = {
             foo: {
                 completed: false,
                 objectives: {
@@ -77,7 +77,7 @@ describe("generateStateTemplate", () => {
     });
 
     it("unknown objective type error", () => {
-        let input: AchievementInfo[] = [
+        const input: AchievementInfo[] = [
             {
                 id: "foo",
                 name: "",
@@ -100,7 +100,7 @@ describe("generateStateTemplate", () => {
     });
 
     it("goal state, one achievement, all objectives", () => {
-        let input: AchievementInfo[] = [
+        const input: AchievementInfo[] = [
             {
                 id: "foo",
                 name: "",
@@ -127,7 +127,7 @@ describe("generateStateTemplate", () => {
             }
         ];
 
-        let output: AchievementStateList = {
+        const output: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -144,16 +144,16 @@ describe("generateStateTemplate", () => {
 
 describe("resetObjective", () => {
     it("empty case", () => {
-        let oldObjective: ObjectiveState = {};
+        const oldObjective: ObjectiveState = {};
         expect(resetObjective(oldObjective)).toMatchObject({});
     });
     
     it("number and array", () => {
-        let oldObjective: ObjectiveState = {
+        const oldObjective: ObjectiveState = {
             foo: ["abc", "def", "ghi", "jkl"],
             bar: 5
         };
-        let newObjective: ObjectiveState = {
+        const newObjective: ObjectiveState = {
             foo: [],
             bar: 0
         };
@@ -163,29 +163,29 @@ describe("resetObjective", () => {
 
 describe("compareObjectiveObjects", () => {
     it("empty case", () => {
-        let newState: ObjectiveState = {};
-        let goalState: ObjectiveState = {};
+        const newState: ObjectiveState = {};
+        const goalState: ObjectiveState = {};
 
         expect(compareObjectiveObjects(goalState, newState)).toBeTruthy();
     });
 
     it("all objectives, false", () => {
-        let newState: ObjectiveState = { foo: 4, bar: ["abc"] };
-        let goalState: ObjectiveState = { foo: 5, bar: ["abc"] };
+        const newState: ObjectiveState = { foo: 4, bar: ["abc"] };
+        const goalState: ObjectiveState = { foo: 5, bar: ["abc"] };
 
         expect(compareObjectiveObjects(goalState, newState)).toBeFalsy();
     });
 
     it("all objectives, true", () => {
-        let newState: ObjectiveState = { foo: 5, bar: ["abc", "def"] };
-        let goalState: ObjectiveState = { foo: 5, bar: ["def", "abc"] };
+        const newState: ObjectiveState = { foo: 5, bar: ["abc", "def"] };
+        const goalState: ObjectiveState = { foo: 5, bar: ["def", "abc"] };
 
         expect(compareObjectiveObjects(goalState, newState)).toBeTruthy();
     });
 
     it("list objective, false", () => {
-        let newState: ObjectiveState = { foo: ["abc"] };
-        let goalState: ObjectiveState = { foo: ["def", "abc"] };
+        const newState: ObjectiveState = { foo: ["abc"] };
+        const goalState: ObjectiveState = { foo: ["def", "abc"] };
 
         expect(compareObjectiveObjects(goalState, newState)).toBeFalsy();
     });
@@ -193,19 +193,19 @@ describe("compareObjectiveObjects", () => {
 
 describe("doStateUpdate", () => {
     it("mark achievement complete", () => {
-        let oldState: AchievementStateList = { 
+        const oldState: AchievementStateList = { 
             foo: { completed: false, objectives: {} }
         };
-        let goalState: AchievementStateList = {
+        const goalState: AchievementStateList = {
             foo: { completed: true, objectives: {} }
         };
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK,
             achID: "foo",
             shouldMarkOff: true
         };
 
-        let output: AchievementStateList = {
+        const output: AchievementStateList = {
             foo: { completed: true, objectives: {} }
         };
 
@@ -213,7 +213,7 @@ describe("doStateUpdate", () => {
     });
 
     it("set numerical, non-cascade", () => {
-        let oldState: AchievementStateList = {
+        const oldState: AchievementStateList = {
             foo: {
                 completed: false,
                 objectives: {
@@ -221,7 +221,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let goalState: AchievementStateList = {
+        const goalState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -229,21 +229,21 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_SET_NUMERICAL,
             achID: "foo",
             objID: "bar",
             n: 4
         };
 
-        let newState: AchievementStateList = doStateUpdate(oldState, goalState, action);
+        const newState: AchievementStateList = doStateUpdate(oldState, goalState, action);
 
         expect(newState["foo"].objectives["bar"]).toBe<number>(4);
         expect(newState["foo"].completed).toBeFalsy();
     });
 
     it("toggle ON list item, non-cascade", () => {
-        let goalState: AchievementStateList = {
+        const goalState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -251,7 +251,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let oldState: AchievementStateList = {
+        const oldState: AchievementStateList = {
             foo: {
                 completed: false,
                 objectives: {
@@ -259,7 +259,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
             achID: "foo",
             objID: "bar",
@@ -267,15 +267,15 @@ describe("doStateUpdate", () => {
             shouldMarkOff: true
         };
 
-        let outputState = doStateUpdate(oldState, goalState, action);
-        let outputArr = outputState["foo"].objectives["bar"] as string[];
+        const outputState = doStateUpdate(oldState, goalState, action);
+        const outputArr = outputState["foo"].objectives["bar"] as string[];
 
         expect(outputArr.includes("def")).toBeTruthy();
         expect(outputState["foo"].completed).toBeFalsy();
     });
 
     it("toggle OFF list item, non-cascade", () => {
-        let goalState: AchievementStateList = {
+        const goalState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -283,7 +283,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let oldState: AchievementStateList = {
+        const oldState: AchievementStateList = {
             foo: {
                 completed: false,
                 objectives: {
@@ -291,7 +291,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
             achID: "foo",
             objID: "bar",
@@ -299,15 +299,15 @@ describe("doStateUpdate", () => {
             shouldMarkOff: false
         };
 
-        let outputState = doStateUpdate(oldState, goalState, action);
-        let outputArr = outputState["foo"].objectives["bar"] as string[];
+        const outputState = doStateUpdate(oldState, goalState, action);
+        const outputArr = outputState["foo"].objectives["bar"] as string[];
         
         expect(outputArr.includes("def")).toBeFalsy();
         expect(outputState["foo"].completed).toBeFalsy();
     });
 
     it("set numeric, objectives satisfied", () => {
-        let goalState: AchievementStateList = {
+        const goalState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -315,7 +315,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let oldState: AchievementStateList = {
+        const oldState: AchievementStateList = {
             foo: {
                 completed: false,
                 objectives: {
@@ -324,20 +324,20 @@ describe("doStateUpdate", () => {
             }
         };
 
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_SET_NUMERICAL,
             achID: "foo",
             objID: "bar",
             n: 5
         };
 
-        let outputState = doStateUpdate(oldState, goalState, action);
+        const outputState = doStateUpdate(oldState, goalState, action);
         expect(outputState["foo"].completed).toBeTruthy();
         expect(outputState["foo"].objectives["bar"]).toBe<number>(5);
     });
 
     it("set numeric, objectives no longer satisfied", () => {
-        let goalState: AchievementStateList = {
+        const goalState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -345,7 +345,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let oldState: AchievementStateList = {
+        const oldState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -354,20 +354,20 @@ describe("doStateUpdate", () => {
             }
         };
 
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_SET_NUMERICAL,
             achID: "foo",
             objID: "bar",
             n: 4
         };
 
-        let outputState = doStateUpdate(oldState, goalState, action);
+        const outputState = doStateUpdate(oldState, goalState, action);
         expect(outputState["foo"].completed).toBeFalsy();
         expect(outputState["foo"].objectives["bar"]).toBe<number>(4);
     });
 
     it("unmark achievement complete, cascade objective reset", () => {
-        let oldState: AchievementStateList = {
+        const oldState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -376,7 +376,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let goalState: AchievementStateList = {
+        const goalState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -385,13 +385,13 @@ describe("doStateUpdate", () => {
                 }
             }
         }
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK,
             achID: "foo",
             shouldMarkOff: false
         };
         
-        let endState: AchievementStateList = {
+        const endState: AchievementStateList = {
             foo: {
                 completed: false,
                 objectives: {
@@ -403,11 +403,11 @@ describe("doStateUpdate", () => {
         expect(doStateUpdate(oldState, goalState, action)).toMatchObject(endState);
     });
 
-    let emptyState: AchievementStateList = {};
+    const emptyState: AchievementStateList = {};
 
     // error states
     it("missing objID", () => {
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_SET_NUMERICAL,
             achID: "foo"
         };
@@ -419,7 +419,7 @@ describe("doStateUpdate", () => {
     });
 
     it("unknown action type", () => {
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: "foo",
             achID: "bar"
         };
@@ -431,7 +431,7 @@ describe("doStateUpdate", () => {
     });
 
     it("mark achievement, missing shouldMarkOff", () => {
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK,
             achID: "foo",
         };
@@ -442,7 +442,7 @@ describe("doStateUpdate", () => {
     });
 
     it("set numerical, missing n", () => {
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_SET_NUMERICAL,
             achID: "foo",
             objID: "bar"
@@ -454,7 +454,7 @@ describe("doStateUpdate", () => {
     });
 
     it("set numerical, negative n", () => {
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_SET_NUMERICAL,
             achID: "foo",
             objID: "bar",
@@ -467,7 +467,7 @@ describe("doStateUpdate", () => {
     });
 
     it("set numerical, n greater than goal", () => {
-        let oldState: AchievementStateList = {
+        const oldState: AchievementStateList = {
             foo: {
                 completed: false,
                 objectives: {
@@ -475,7 +475,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let goalState: AchievementStateList = {
+        const goalState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -483,7 +483,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_SET_NUMERICAL,
             achID: "foo",
             objID: "bar",
@@ -496,7 +496,7 @@ describe("doStateUpdate", () => {
     });
 
     it("toggle list item, missing subobjid", () => {
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
             achID: "foo",
             objID: "bar",
@@ -509,7 +509,7 @@ describe("doStateUpdate", () => {
     });
 
     it("toggle list item, missing shouldMarkOff", () => {
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
             achID: "foo",
             objID: "bar",
@@ -522,7 +522,7 @@ describe("doStateUpdate", () => {
     });
 
     it("toggle list item, subobjID does not exist", () => {
-        let goalState: AchievementStateList = {
+        const goalState: AchievementStateList = {
             foo: {
                 completed: true,
                 objectives: {
@@ -530,7 +530,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let oldState: AchievementStateList = {
+        const oldState: AchievementStateList = {
             foo: {
                 completed: false,
                 objectives: {
@@ -538,7 +538,7 @@ describe("doStateUpdate", () => {
                 }
             }
         };
-        let action: StateUpdate = {
+        const action: StateUpdate = {
             type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
             achID: "foo",
             objID: "bar",

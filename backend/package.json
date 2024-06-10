@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec node --loader ts-node/esm src/app.ts"
+    "dev": "nodemon --exec node --loader ts-node/esm src/app.ts",
+    "lint": ""
   },
   "dependencies": {
     "express": "^4.18.3",

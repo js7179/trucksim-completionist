@@ -17,13 +17,14 @@ import { AchievementInfo, AchievementStateList, AchievementState, ObjectiveState
  * @param {Object} oldCopy  What we're migrating from
  * @returns {Object} The new format with the values from the old, plus defaults
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function copyChanges(newCopy: any, oldCopy: any): any {
-    let finalCopy = structuredClone(newCopy);
+    const finalCopy = structuredClone(newCopy);
     for (const [key, value] of Object.entries(newCopy)) {
         if(!(key in oldCopy)) continue; // skip if this is a new entry
 
         if(isPrimitive(value)) { // test if primitive
-            finalCopy[key] = oldCopy[key]
+            finalCopy[key] = oldCopy[key];
         } else {
             if(Array.isArray(value)) { // if is array
                 finalCopy[key] = Array.from(oldCopy[key]);
@@ -46,6 +47,7 @@ export function copyChanges(newCopy: any, oldCopy: any): any {
  * @param val The value to test if primitive or not
  * @returns {boolean}  If value is a primitive
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isPrimitive(val: any): boolean {
     return Object(val) !== val;
 }

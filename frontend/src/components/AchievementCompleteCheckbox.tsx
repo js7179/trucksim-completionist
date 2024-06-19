@@ -2,7 +2,15 @@ import { AchievementStateContext } from '@/store/AchievementStore';
 import { useContext } from 'react';
 import { useStore } from 'zustand';
 import { STATE_ACTION } from 'trucksim-tracker-common';
-import Checkbox from './util/Checkbox';
+import StylizedCheckbox from './util/StylizedCheckbox';
+
+const CHECKBOX_COMMON_STYLE: React.CSSProperties = {
+    filter: 'invert(33%) sepia(61%) saturate(4001%) hue-rotate(29deg) brightness(99%) contrast(101%)',
+    width: '48px',
+    height: '48px',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 100%'
+};
 
 export function LocalCompleteCheckbox(props: AchievementCheckboxProps) {
     const store = useContext(AchievementStateContext);
@@ -18,16 +26,21 @@ export function LocalCompleteCheckbox(props: AchievementCheckboxProps) {
         });
     };
 
-    const htmlID = props.achID + '.completed';
+    const htmlID = `${props.achID}.completed`;
 
     return (
-        <Checkbox 
+        <StylizedCheckbox 
             htmlID={htmlID} 
             checked={completed} 
             onClick={() => toggleAchievement()} 
-            filterCSS='invert(33%) sepia(61%) saturate(4001%) hue-rotate(29deg) brightness(99%) contrast(101%)' 
-            size='48px'
-            />
+            buttonCheckedStyle={{
+                backgroundImage: `url("/vector/checked.svg")`,
+                ...CHECKBOX_COMMON_STYLE
+            }}
+            buttonUncheckedStyle={{
+                backgroundImage: `url("/vector/unchecked.svg")`,
+                ...CHECKBOX_COMMON_STYLE
+            }} />
     );
 }
 

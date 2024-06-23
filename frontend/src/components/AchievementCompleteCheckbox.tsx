@@ -5,7 +5,7 @@ import { STATE_ACTION } from 'trucksim-tracker-common';
 import StylizedCheckbox from './util/StylizedCheckbox';
 
 const CHECKBOX_COMMON_STYLE: React.CSSProperties = {
-    filter: 'invert(33%) sepia(61%) saturate(4001%) hue-rotate(29deg) brightness(99%) contrast(101%)',
+    filter: 'var(--primary-color-filter)',
     width: '48px',
     height: '48px',
     backgroundRepeat: 'no-repeat',

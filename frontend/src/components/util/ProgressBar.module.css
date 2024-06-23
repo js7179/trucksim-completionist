@@ -1,14 +1,14 @@
 div.progressBarContainer {
     width: auto;
     height: 1.5lh;
-    background-color: #3a3a3a;
+    background-color: var(--progress-bar-bg-color);
     display: flex;
     flex-grow: 1;
     align-items: center;
 }
 
 div.progressBar {
-    background-color: #9dc34c;
+    background-color: var(--progress-bar-color);
     height: 100%;
     text-align: right;
     line-height: 1.5lh;

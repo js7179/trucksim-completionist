@@ -49,7 +49,7 @@ export default function ListObjective(props: ListObjectiveProps) {
 }
 
 const COMMON_CHECKBOX_STYLES: React.CSSProperties = {
-    filter: 'invert(100%)',
+    filter: 'var(--text-color-filter)',
     width: '1lh',
     height: '1lh',
     backgroundRepeat: 'no-repeat',

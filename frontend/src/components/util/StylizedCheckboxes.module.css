@@ -27,4 +27,5 @@ img.showInfoButtonImg {
     height: 48px;
     filter: var(--primary-color-filter);
     transition: 0.125s ease;
+    cursor: pointer;
 }

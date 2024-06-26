@@ -3,7 +3,7 @@ import { AchievementStateContext } from "@/store/AchievementStore";
 import { useContext } from "react";
 import { useStore } from "zustand";
 import { STATE_ACTION, SequentialObjectiveInfo } from "trucksim-tracker-common";
-import { ObjectiveCheckbox } from './ListObjective';
+import { CheckboxButton } from '../util/StylizedCheckbox';
 
 export default function SequentialObjective(props: SequentialObjectiveProps) {
     const store = useContext(AchievementStateContext);
@@ -29,7 +29,13 @@ export default function SequentialObjective(props: SequentialObjectiveProps) {
         const htmlID = `${props.achID}.${props.objid}.${step.subobjid}`;
         return (
             <li className={styles.seqObjListItem} key={htmlID}>
-                <ObjectiveCheckbox htmlID={htmlID} isChecked={isChecked} onClick={() => selectListItem(stepIndex)} label={step.display}/>
+                <CheckboxButton 
+                    htmlID={htmlID}
+                    checked={isChecked}
+                    onClick={() => selectListItem(stepIndex)}
+                    size="1lh"
+                    colorFilter="var(--text-color-filter)"
+                    label={step.display}/>
             </li>
         );
     });

@@ -1,0 +1,30 @@
+input.checkboxButtonInput {
+    display: none;
+}
+
+img.checkboxButtonImg {
+    cursor: pointer;
+}
+
+label.checkboxButtonImgLabel {
+    display: inline-block;
+}
+
+label.checkboxButtonTextLabel {
+    margin-left: 0.25em;
+}
+
+input.checkboxButtonInput:checked ~ label.checkboxButtonTextLabel {
+    text-decoration: line-through;
+}
+
+input.showInfoBtnInput {
+    display: none;
+}
+
+img.showInfoButtonImg {
+    width: 48px;
+    height: 48px;
+    filter: var(--primary-color-filter);
+    transition: 0.125s ease;
+}

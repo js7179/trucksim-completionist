@@ -1,44 +1,10 @@
-div.listObj {
-    padding: 5px;
+ul.listObj {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     row-gap: 5px;
 }
 
-div.listObjItem {
+li.listObjItem {
     display: flex;
     column-gap: 0.25em;
-    align-items: center;
-}
-
-input.listObjInput {
-    display: none;
-}
-
-label.listObjLabelSVG {
-    background: url("/vector/unchecked.svg") no-repeat;
-    filter: invert(100%);
-    display: inline-block;
-    width: 1lh;
-    height: 1lh;
-    background-size: auto 1lh;
-    cursor: pointer;
-}
-
-input[type=checkbox].listObjInput:checked + label.listObjLabelSVG {
-    background: url("/vector/checked.svg") no-repeat;
-    filter: invert(100%);
-    display: inline-block;
-    width: 1lh;
-    height: 1lh;
-    background-size: auto 1lh;
-    cursor: pointer;
-}
-
-label.listObjLabelText {
-    cursor: pointer;
-}
-
-input[type=checkbox].listObjInput:checked ~ label.listObjLabelText {
-    text-decoration: line-through;
 }

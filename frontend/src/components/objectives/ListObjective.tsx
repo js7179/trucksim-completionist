@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { useStore } from "zustand";
 import { STATE_ACTION, ListObjectiveInfo, isNonorderedArrayEqual } from "trucksim-tracker-common";
 import { useStoreWithEqualityFn } from "zustand/traditional";
-import StylizedCheckbox from "../util/StylizedCheckbox";
+import { CheckboxButton } from "../util/StylizedCheckbox";
 
 export default function ListObjective(props: ListObjectiveProps) {
     const store = useContext(AchievementStateContext);
@@ -31,56 +31,25 @@ export default function ListObjective(props: ListObjectiveProps) {
         const isChecked = listValues.includes(subobj.subobjid);
 
         return (
-            <div className={styles.listObjItem} key={inputID}>
-                <ObjectiveCheckbox 
+            <li className={styles.listObjItem} key={inputID}>
+                <CheckboxButton 
                     htmlID={inputID}
-                    isChecked={isChecked}
+                    checked={isChecked}
                     onClick={() => toggleItem(subobj.subobjid)}
-                    label={subobj.display} />
-            </div>
+                    size="1lh"
+                    colorFilter="var(--text-color-filter)"
+                    label={subobj.display}/>
+            </li>
         );
     });
 
     return (
-        <div className={styles.listObj}>
+        <ul className={styles.listObj}>
             {...listItems}
-        </div>
+        </ul>
     );
-}
-
-const COMMON_CHECKBOX_STYLES: React.CSSProperties = {
-    filter: 'var(--text-color-filter)',
-    width: '1lh',
-    height: '1lh',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%'
-};
-
-export function ObjectiveCheckbox(props:ObjectiveCheckboxProps) {
-    return (<StylizedCheckbox 
-        htmlID={props.htmlID} 
-        checked={props.isChecked}
-        onClick={props.onClick}
-        buttonCheckedStyle={{
-            backgroundImage: 'url("/vector/checked.svg")',
-            ...COMMON_CHECKBOX_STYLES
-        }}
-        buttonUncheckedStyle={{
-            backgroundImage: 'url("/vector/unchecked.svg")',
-            ...COMMON_CHECKBOX_STYLES
-        }}
-        labelText={props.label}
-        labelCheckedStyle={{textDecoration: 'line-through'}}
-    />);
 }
 
 interface ListObjectiveProps extends ListObjectiveInfo {
     achID: string;
-}
-
-interface ObjectiveCheckboxProps {
-    htmlID: string;
-    isChecked: boolean;
-    onClick: VoidFunction;
-    label: string;
 }

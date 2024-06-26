@@ -2,15 +2,8 @@ import { AchievementStateContext } from '@/store/AchievementStore';
 import { useContext } from 'react';
 import { useStore } from 'zustand';
 import { STATE_ACTION } from 'trucksim-tracker-common';
-import StylizedCheckbox from './util/StylizedCheckbox';
+import { CheckboxButton } from './util/StylizedCheckbox';
 
-const CHECKBOX_COMMON_STYLE: React.CSSProperties = {
-    filter: 'var(--primary-color-filter)',
-    width: '48px',
-    height: '48px',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%'
-};
 
 export function LocalCompleteCheckbox(props: AchievementCheckboxProps) {
     const store = useContext(AchievementStateContext);
@@ -29,18 +22,7 @@ export function LocalCompleteCheckbox(props: AchievementCheckboxProps) {
     const htmlID = `${props.achID}.completed`;
 
     return (
-        <StylizedCheckbox 
-            htmlID={htmlID} 
-            checked={completed} 
-            onClick={() => toggleAchievement()} 
-            buttonCheckedStyle={{
-                backgroundImage: `url("/vector/checked.svg")`,
-                ...CHECKBOX_COMMON_STYLE
-            }}
-            buttonUncheckedStyle={{
-                backgroundImage: `url("/vector/unchecked.svg")`,
-                ...CHECKBOX_COMMON_STYLE
-            }} />
+        <CheckboxButton htmlID={htmlID} checked={completed} onClick={toggleAchievement} size="48px" colorFilter="var(--primary-color-filter)"/>
     );
 }
 

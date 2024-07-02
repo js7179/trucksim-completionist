@@ -1,33 +1,25 @@
 import styles from "./ListObjective.module.css";
-import { AchievementStateContext } from "@/store/AchievementStore";
-import { useContext } from "react";
-import { useStore } from "zustand";
-import { STATE_ACTION, ListObjectiveInfo, isNonorderedArrayEqual } from "trucksim-tracker-common";
-import { useStoreWithEqualityFn } from "zustand/traditional";
+import { STATE_ACTION, ListObjectiveInfo } from "trucksim-tracker-common";
 import { CheckboxButton } from "../util/StylizedCheckbox";
+import { useAchievementDispatch, useAchievementObjectiveList } from "@/hooks/AchievementHooks";
 
-export default function ListObjective(props: ListObjectiveProps) {
-    const store = useContext(AchievementStateContext);
-    if(!store) throw new Error("Missing AchievementStateContext.Provider");
-    const listValues = useStoreWithEqualityFn(store, 
-                                              (s) => s.achList[props.achID].objectives[props.objid] as string[],
-                                              (a, b) => isNonorderedArrayEqual(a, b));
-    const dispatch = useStore(store, (s) => s.performAction);
-
+export default function ListObjective({achID, objid, values}: ListObjectiveProps) {
+    const listValues = useAchievementObjectiveList(achID, objid);
+    const dispatch = useAchievementDispatch();
 
     const toggleItem = (subobjID: string) => {
         const isMarkedOffCurrently = listValues.includes(subobjID);
         dispatch({
             type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
-            achID: props.achID,
-            objID: props.objid,
+            achID: achID,
+            objID: objid,
             subobjID: subobjID,
             shouldMarkOff: !isMarkedOffCurrently
         });
     };
 
-    const listItems = props.values.map((subobj) => {
-        const inputID = `${props.achID}.${props.objid}.${subobj.subobjid}`;
+    const listItems = values.map((subobj) => {
+        const inputID = `${achID}.${objid}.${subobj.subobjid}`;
         const isChecked = listValues.includes(subobj.subobjid);
 
         return (

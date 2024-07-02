@@ -1,15 +1,11 @@
 import styles from './SequentialObjective.module.css';
-import { AchievementStateContext } from "@/store/AchievementStore";
-import { useContext } from "react";
-import { useStore } from "zustand";
 import { STATE_ACTION, SequentialObjectiveInfo } from "trucksim-tracker-common";
 import { CheckboxButton } from '../util/StylizedCheckbox';
+import { useAchievementDispatch, useAchievementObjectiveNumber } from '@/hooks/AchievementHooks';
 
-export default function SequentialObjective(props: SequentialObjectiveProps) {
-    const store = useContext(AchievementStateContext);
-    if(!store) throw new Error("Missing AchievementStateContext.Provider");
-    const objValue = useStore(store, (s) => s.achList[props.achID].objectives[props.objid] as number);
-    const dispatch = useStore(store, (s) => s.performAction);
+export default function SequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
+    const objValue = useAchievementObjectiveNumber(achID, objid);
+    const dispatch = useAchievementDispatch();
 
     const selectListItem = (stepIndex: number) => {
         if(stepIndex == objValue) {
@@ -17,16 +13,16 @@ export default function SequentialObjective(props: SequentialObjectiveProps) {
         }
         dispatch({
             type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: props.achID,
-            objID: props.objid,
+            achID: achID,
+            objID: objid,
             n: stepIndex
         });
     };
 
-    const stepList = props.values.map((step, index) => {
+    const stepList = values.map((step, index) => {
         const stepIndex = index + 1;
         const isChecked = objValue >= stepIndex;
-        const htmlID = `${props.achID}.${props.objid}.${step.subobjid}`;
+        const htmlID = `${achID}.${objid}.${step.subobjid}`;
         return (
             <li className={styles.seqObjListItem} key={htmlID}>
                 <CheckboxButton 

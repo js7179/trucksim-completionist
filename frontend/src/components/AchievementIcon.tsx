@@ -1,15 +1,11 @@
-import { AchievementStateContext } from "@/store/AchievementStore";
-import { useContext } from "react";
-import { useStore } from "zustand";
 import styles from "./AchievementIcon.module.css";
+import { useAchievementCompleted } from "@/hooks/AchievementHooks";
 
-export function LocalIcon(props: IconProps) {
-    const store = useContext(AchievementStateContext);
-    if(!store) throw new Error("Missing AchievementStateContext.Provider");
-    const completed = useStore(store, (s) => s.achList[props.achID].completed);
-    
+export function LocalIcon({achID, completed, incomplete}: IconProps) {
+    const isDone = useAchievementCompleted(achID);
+
     return (
-        <img src={ completed ? props.completed : props.incomplete } className={styles.icon} alt=''/>
+        <img src={ isDone ? completed : incomplete } className={styles.icon} alt=''/>
     );
 }
 

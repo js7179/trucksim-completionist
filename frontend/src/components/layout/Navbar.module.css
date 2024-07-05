@@ -1,0 +1,28 @@
+nav.navBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 2lh;
+    column-gap: 3em;
+    background-color: var(--primary-color);
+    position: sticky;
+    top: 0px;
+}
+
+.appTitle {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: bolder;
+    font-size: 150%;
+    margin-left: 15px;
+}
+
+.gameLink {
+    color: inherit;
+    text-decoration: inherit;
+    padding: 0.33333lh;
+}
+
+.gameLink:hover {
+    backdrop-filter: brightness(50%);
+}

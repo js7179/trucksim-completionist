@@ -1,28 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Root from "./routes/root.tsx";
 import "./index.css";
 import ETS2LocalPage from './routes/ets2.tsx';
 import ATSLocalPage from './routes/ats.tsx';
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-  },
-  {
-    path: "/ats",
-    element: <ATSLocalPage />,
-  },
-  {
-    path: "/ets2",
-    element: <ETS2LocalPage />,
-  }
-]);
+import NavbarLayout from './components/layout/NavbarLayout.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter>
+      <Routes>
+        <Route element={<NavbarLayout />}>
+          <Route index element={<Root />} />
+          <Route path='/ats' element={<ATSLocalPage/>} />
+          <Route path='/ets2' element={<ETS2LocalPage/>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
 )

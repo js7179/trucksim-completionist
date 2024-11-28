@@ -1,4 +1,4 @@
-import { STATE_ACTION } from 'trucksim-tracker-common';
+import { STATE_ACTION } from 'trucksim-completionist-common';
 import { CheckboxButton } from './util/StylizedCheckbox';
 import { useAchievementCompleted, useAchievementDispatch } from '@/hooks/AchievementHooks';
 

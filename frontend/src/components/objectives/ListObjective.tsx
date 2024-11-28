@@ -1,5 +1,5 @@
 import styles from "./ListObjective.module.css";
-import { STATE_ACTION, ListObjectiveInfo } from "trucksim-tracker-common";
+import { STATE_ACTION, ListObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from "../util/StylizedCheckbox";
 import { useAchievementDispatch, useAchievementObjectiveList } from "@/hooks/AchievementHooks";
 

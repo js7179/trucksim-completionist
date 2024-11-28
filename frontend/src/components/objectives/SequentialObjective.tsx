@@ -1,5 +1,5 @@
 import styles from './SequentialObjective.module.css';
-import { STATE_ACTION, SequentialObjectiveInfo } from "trucksim-tracker-common";
+import { STATE_ACTION, SequentialObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from '../util/StylizedCheckbox';
 import { useAchievementDispatch, useAchievementObjectiveNumber } from '@/hooks/AchievementHooks';
 

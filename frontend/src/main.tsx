@@ -6,17 +6,30 @@ import "./index.css";
 import ETS2LocalPage from './routes/ets2.tsx';
 import ATSLocalPage from './routes/ats.tsx';
 import NavbarLayout from './components/layout/NavbarLayout.tsx';
+import SignupPage from './routes/auth/signup.tsx';
+import { AuthProvider } from './hooks/Auth.tsx';
+import LoginPage from './routes/auth/login.tsx';
+import SignoutPage from './routes/auth/signout.tsx';
+import SendPwResetPage from './routes/auth/sendpwreset.tsx';
+import ResetPasswordPage from './routes/auth/resetpw.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route element={<NavbarLayout />}>
-          <Route index element={<Root />} />
-          <Route path='/ats' element={<ATSLocalPage/>} />
-          <Route path='/ets2' element={<ETS2LocalPage/>} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<NavbarLayout />}>
+            <Route index element={<Root />} />
+            <Route path='/ats' element={<ATSLocalPage/>} />
+            <Route path='/ets2' element={<ETS2LocalPage/>} />
+            <Route path='/signup' element={<SignupPage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/signout' element={<SignoutPage />} />
+            <Route path='/sendpwreset' element={<SendPwResetPage />} />
+            <Route path='/resetpw' element={<ResetPasswordPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>,
 )

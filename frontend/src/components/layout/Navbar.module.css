@@ -7,6 +7,9 @@ nav.navBar {
     background-color: var(--primary-color);
     position: sticky;
     top: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    z-index: 2;
 }
 
 .appTitle {
@@ -14,7 +17,6 @@ nav.navBar {
     text-decoration: inherit;
     font-weight: bolder;
     font-size: 150%;
-    margin-left: 15px;
 }
 
 .gameLink {
@@ -25,4 +27,12 @@ nav.navBar {
 
 .gameLink:hover {
     backdrop-filter: brightness(50%);
+}
+
+span.blankSpace {
+    flex-grow: 2;
+}
+
+span.displayName {
+    font-weight: bolder;
 }

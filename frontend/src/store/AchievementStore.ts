@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { copyChanges, StateUpdate, doStateUpdate, AchievementStateList } from "trucksim-tracker-common";
+import { copyChanges, StateUpdate, doStateUpdate, AchievementStateList } from "trucksim-completionist-common";
 import { createStore } from "zustand";
 import { persist } from "zustand/middleware";
 

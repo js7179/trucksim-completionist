@@ -1,6 +1,6 @@
 import { AchievementStateContext } from "@/store/AchievementStore";
 import { useContext } from "react";
-import { isNonorderedArrayEqual } from "trucksim-tracker-common";
+import { isNonorderedArrayEqual } from "trucksim-completionist-common";
 import { useStore } from "zustand";
 import { useStoreWithEqualityFn } from "zustand/traditional";
 

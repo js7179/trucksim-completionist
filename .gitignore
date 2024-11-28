@@ -23,5 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Remove code coverage report
+# Remove code coverage report and Playwright traces
 */coverage/*
+**/trace.zip
+**/.last-run.json

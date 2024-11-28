@@ -1,6 +1,6 @@
 import styles from './CounterObjective.module.css';
 import { ProgressBar } from '../util/ProgressBar';
-import { STATE_ACTION, CounterObjectiveInfo } from 'trucksim-tracker-common';
+import { STATE_ACTION, CounterObjectiveInfo } from 'trucksim-completionist-common';
 import { useAchievementDispatch, useAchievementObjectiveNumber } from '@/hooks/AchievementHooks';
 
 export default function CounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {

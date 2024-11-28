@@ -3,7 +3,7 @@ import styles from "./AchievementList.module.css";
 import ListObjective from './objectives/ListObjective';
 import CounterObjective from './objectives/CounterObjective';
 import SequentialObjective from './objectives/SequentialObjective';
-import { AchievementInfo, CounterObjectiveInfo, ListObjectiveInfo, SequentialObjectiveInfo } from 'trucksim-tracker-common';
+import { AchievementInfo, CounterObjectiveInfo, ListObjectiveInfo, SequentialObjectiveInfo } from 'trucksim-completionist-common';
 import { IconProps, LocalIcon } from './AchievementIcon';
 import { AchievementCheckboxProps, LocalCompleteCheckbox } from './AchievementCompleteCheckbox';
 import { ShowInformationButton } from './util/StylizedCheckbox';

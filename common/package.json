@@ -1,5 +1,5 @@
 {
-  "name": "trucksim-tracker-common",
+  "name": "trucksim-completionist-common",
   "private": true,
   "version": "0.0.0",
   "main": "src/index.ts",

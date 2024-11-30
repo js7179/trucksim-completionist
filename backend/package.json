@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec node --loader ts-node/esm src/app.ts",
+    "dev": "nodemon --watch \"src\" --ext \"ts\" --ignore \"dist\" --exec \"tsx ./src/app.ts\"",
     "lint": ""
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "typescript": "^5.4.2"
   }
 }

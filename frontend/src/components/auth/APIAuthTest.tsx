@@ -10,19 +10,21 @@ export default function APIAuthTest() {
         const url = new URL('/testauth', import.meta.env.VITE_API_URL).href;
         
         const authHeader = session ? `Bearer ${session.access_token}` : '';
-
-        const req = await axios.get(url, {
+        const res = await axios.get(url, {
             headers: {
                 Authorization: authHeader
             }
         });
-
-        setBody(req.data);
+        if(res.status === 200) {
+            setBody(`200 ${res.data}`);
+        } else {
+            setBody(`Error code ${res.status} ${res.statusText}`);
+        }
     };
 
     return (<div>
         {body && (<p>{body}</p>)}
-        <button type='button' onClick={() => onClick()}>Make API Request</button>
+        <button type='button' onClick={onClick}>Make API Request</button>
     </div>);
 
 }

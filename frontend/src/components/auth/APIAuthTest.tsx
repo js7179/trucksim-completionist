@@ -9,22 +9,24 @@ export default function APIAuthTest() {
     const onClick = async () => {
         const url = new URL('/testauth', import.meta.env.VITE_API_URL).href;
         
-        const authHeader = session ? `Bearer ${session.access_token}` : '';
-        const res = await axios.get(url, {
-            headers: {
-                Authorization: authHeader
-            }
-        });
-        if(res.status === 200) {
-            setBody(`200 ${res.data}`);
-        } else {
-            setBody(`Error code ${res.status} ${res.statusText}`);
+        const authHeader = session ? `Bearer ${session.access_token}` : 'Bearer Bearer Bearer';
+        try {
+            const res = await axios.get(url, {
+                headers: {
+                    Authorization: authHeader
+                }
+            });
+            setBody(`Your UUID is ${res.data.uuid}!`);
+        } catch (err) {
+            const error = err as Error;
+            setBody(error.message);
         }
     };
 
     return (<div>
         {body && (<p>{body}</p>)}
         <button type='button' onClick={onClick}>Make API Request</button>
+        <button type='button' onClick={() => setBody('')}>Clear</button>
     </div>);
 
 }

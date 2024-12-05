@@ -2,7 +2,11 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 import { auth } from '@/supabase';
 
 export const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL
+    baseURL: import.meta.env.VITE_API_URL,
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
 });
 
 async function authorizationHeader(config: InternalAxiosRequestConfig) {

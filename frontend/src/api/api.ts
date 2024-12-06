@@ -19,8 +19,3 @@ async function authorizationHeader(config: InternalAxiosRequestConfig) {
 }
 
 api.interceptors.request.use(authorizationHeader);
-
-export async function testUser(): Promise<string> {
-    const res = await api.get('/testauth');
-    return res.data.uuid as string;
-}

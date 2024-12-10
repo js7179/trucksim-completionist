@@ -1771,5 +1771,200 @@
                 ]
             }
         ]
+    },
+    {
+        "desc": "Discover at least 8 cities in Arkansas (requires Arkansas DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/e9d2c29493127c75b8044570137f118d1fd06477.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/d2f2352ed2952b56374c3e629090a4a51972a2c7.jpg"
+        },
+        "id": "ar_visit_cities",
+        "name": "The Natural State",
+        "objectives": []
+    },
+    {
+        "desc": "View cutscenes from at least 8 viewpoints in Arkansas (requires Arkansas DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/6b55226ceb4729e725a73997ad0e576cbe58d2d9.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/ca8387d5053363fb29b8aaec3832c982fb90c184.jpg"
+        },
+        "id": "ar_cutscenes",
+        "name": "I Saw Arkansas",
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "fy",
+                        "display": "Fayetteville"
+                    },
+                    {
+                        "subobjid": "ha",
+                        "display": "Harrison"
+                    },
+                    {
+                        "subobjid": "eha",
+                        "display": "US-412 (East of Harrison)"
+                    },
+                    {
+                        "subobjid": "eel",
+                        "display": "US-65 (East of El Dorado)"
+                    },
+                    {
+                        "subobjid": "pb",
+                        "display": "Pine Bluff"
+                    },
+                    {
+                        "subobjid": "txe",
+                        "display": "Texarkana - Evergreen"
+                    },
+                    {
+                        "subobjid": "hst",
+                        "display": "Hot Springs - Taylor Construction Group"
+                    },
+                    {
+                        "subobjid": "fsm",
+                        "display": "Fort Smith - MWM"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "desc": "Complete 3 deliveries of Logs to Chuck & Jack's, and 3 deliveries of\n Wood Shavings to Page & Price Paper, within Arkansas (requires \nArkansas DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/ac3f89fffb0ed6753c8f8ed60ba72aaa5d700f53.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/23027feee10abdb7f9ce26ac76b98fb3adfbf507.jpg"
+        },
+        "id": "ar_paper",
+        "name": "Paper Trail",
+        "objectives": [
+            {
+                "type": "counter",
+                "obj": "logs",
+                "display": "Log Deliveries to Chuck & Jack's",
+                "goal": 3
+            },
+            {
+                "type": "counter",
+                "obj": "shavings",
+                "display": "Wood Shavings Deliveries to Page & Price Paper",
+                "goal": 3
+            }
+        ]
+    },
+    {
+        "desc": "Complete a delivery to 5 different companies in Hot Springs (requires Arkansas DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/b97969c8cbb27ce906edf6715511d7152fc60619.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/0c93bf3b0b3ba0c836eb0730f4ab77a94002ae34.jpg"
+        },
+        "id": "ar_hot_springs",
+        "name": "Spa City",
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "companies",
+                "values": [
+                    {
+                        "subobjid": "cj",
+                        "display": "Chuck & Jack's"
+                    },
+                    {
+                        "subobjid": "ept",
+                        "display": "Equos Power Transport"
+                    },
+                    {
+                        "subobjid": "fb",
+                        "display": "Farmer's Barn"
+                    },
+                    {
+                        "subobjid": "gss",
+                        "display": "Global Sky Services"
+                    },
+                    {
+                        "subobjid": "gp",
+                        "display": "Grand Pastures"
+                    },
+                    {
+                        "subobjid": "na",
+                        "display": "NAMIQ"
+                    },
+                    {
+                        "subobjid": "sh",
+                        "display": "Sea Horizon"
+                    },
+                    {
+                        "subobjid": "st",
+                        "display": "Shop Town"
+                    },
+                    {
+                        "subobjid": "tcg",
+                        "display": "Taylor Construction Group"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "desc": "Complete the first scenario of the first chapter in Truck Driving Basics (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/f111d20de9f50d680a7b636597eaf3f22944eb27.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/7f987a7f2d66c25b29266ef8ce66da4e15beee70.jpg"
+        },
+        "id": "aca_first",
+        "name": "Get the Ball Rollin'",
+        "objectives": []
+    },
+    {
+        "desc": "Complete at least 6 scenarios in the fourth chapter of Truck Driving \nBasics while using only the interior camera (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/6649089537ee4a8a5df43f56eb8d81f558b70a5c.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/bfe85366019817828c7bcd91c6fe389e0458ab8a.jpg"
+        },
+        "id": "aca_interior",
+        "name": "Professional Driver",
+        "objectives": []
+    },
+    {
+        "desc": "Complete at least 28 scenarios in Truck Driving Basics including the final exams (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/e594e13fb10fb783c674f8239052b250173baf14.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/1fb678d41f8522e6392258f291151abec188728c.jpg"
+        },
+        "id": "aca_truck_driving",
+        "name": "Dedicated Student",
+        "objectives": []
+    },
+    {
+        "desc": "Complete any scenario in fourth chapter of Truck Driving Basics in one \nattempt without correcting by driving forward (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/29739caf46d433d4e85e15479a58ba904660ea50.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/6c455da4a2f695b71a6fe81b35db8074f06f4c13.jpg"
+        },
+        "id": "aca_no_forward",
+        "name": "One-Shottin' It",
+        "objectives": []
+    },
+    {
+        "desc": "Complete 20 scenarios in chapters two, three or four of Truck Driving \nBasics using an H-shifter or sequential transmission (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/2946ab452f17cd51c84cdd3e39683c2b3ee1a2af.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/8ca9c6df7294302122a644201998830dbb335dd6.jpg"
+        },
+        "id": "aca_manual_transmission",
+        "name": "Rowing Through the Gears",
+        "objectives": []
+    },
+    {
+        "desc": "Complete any 5 scenarios in a row without failure from the third or fourth chapter in Truck Driving Basics (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/42c8d23894c6cb67a505c56b4b8b255b11d715d3.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/875f243bee18e6b78a49b82154a93c7e0b3a3e6f.jpg"
+        },
+        "id": "aca_consecutive",
+        "name": "Failure Is Not an Option",
+        "objectives": []
     }
 ]

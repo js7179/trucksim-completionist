@@ -1734,5 +1734,115 @@
                 ]
             }
         ]
+    },
+    {
+        "desc": "Complete the first scenario of the first chapter in Truck Driving Basics (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/f111d20de9f50d680a7b636597eaf3f22944eb27.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/7f987a7f2d66c25b29266ef8ce66da4e15beee70.jpg"
+        },
+        "id": "aca_first",
+        "name": "Get the Ball Rollin'",
+        "objectives": []
+    },
+    {
+        "desc": "Complete at least 6 scenarios in the fourth chapter of Truck Driving Basics while using only the interior camera (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/6649089537ee4a8a5df43f56eb8d81f558b70a5c.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/bfe85366019817828c7bcd91c6fe389e0458ab8a.jpg"
+        },
+        "id": "aca_interior",
+        "name": "Professional Driver",
+        "objectives": []
+    },
+    {
+        "desc": "Complete at least 28 scenarios in Truck Driving Basics including the final exams (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/e594e13fb10fb783c674f8239052b250173baf14.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/1fb678d41f8522e6392258f291151abec188728c.jpg"
+        },
+        "id": "aca_truck_driving",
+        "name": "Dedicated Student",
+        "objectives": []
+    },
+    {
+        "desc": "Complete any scenario in fourth chapter of Truck Driving Basics in one \nattempt without correcting by driving forward (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/29739caf46d433d4e85e15479a58ba904660ea50.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/6c455da4a2f695b71a6fe81b35db8074f06f4c13.jpg"
+        },
+        "id": "aca_no_forward",
+        "name": "One-Shottin' It",
+        "objectives": []
+    },
+    {
+        "desc": "Complete 20 scenarios in chapters two, three or four of Truck Driving \nBasics using an H-shifter or sequential transmission (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/2946ab452f17cd51c84cdd3e39683c2b3ee1a2af.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/8ca9c6df7294302122a644201998830dbb335dd6.jpg"
+        },
+        "id": "aca_manual_transmission",
+        "name": "Rowing Through the Gears",
+        "objectives": []
+    },
+    {
+        "desc": "Complete any 5 scenarios in a row without failure from the third or fourth chapter in Truck Driving Basics (Driving Academy)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/42c8d23894c6cb67a505c56b4b8b255b11d715d3.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/875f243bee18e6b78a49b82154a93c7e0b3a3e6f.jpg"
+        },
+        "id": "aca_consecutive",
+        "name": "Failure Is Not an Option",
+        "objectives": []
+    },
+    {
+        "desc": "Discover at least 12 cities in Greece (requires Greece DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/4736eb810452188bd026b3c6f056e733732c15fb.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/30acf6087190479ce345aac8ced9760fd8c0dcdc.jpg"
+        },
+        "id": "gr_visit_cities",
+        "name": "Odyssean Voyager",
+        "objectives": []
+    },
+    {
+        "desc": "View cutscenes from at least 8 viewpoints in Greece (requires Greece DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/daffc498aafb4f8fc8128df9324ac204fbf37002.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/94b4866dd230450cad035fbc0a6ae5d748b4a037.jpg"
+        },
+        "id": "gr_cutscenes",
+        "name": "Sights and Legends",
+        "objectives": []
+    },
+    {
+        "desc": "Deliver cargo to at least 4 unique hotels in Greece (requires Greece DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/fbd015f83e0af70affd9424233dbbbe6dca118ab.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/58727a457cdcb4eb3fdb2dd918e4ba7c5ad2622e.jpg"
+        },
+        "id": "gr_hotels",
+        "name": "All Inclusive",
+        "objectives": []
+    },
+    {
+        "desc": "Deliver olives or olive oil from Eliarchos Olive Farm to 5 different cities in Greece (requires Greece DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/92f4e2d1d501759776a5388e0f17de5224f0285e.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/e597fdeb9a279a6e4858994b16bccfa555eefd94.jpg"
+        },
+        "id": "gr_olive",
+        "name": "Gift of Athena",
+        "objectives": []
+    },
+    {
+        "desc": "Deliver 3 Marble Blocks and 3 undamaged Marble Slabs from Rock Eater Quarry in Greece (requires Greece DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/cb69ce12149f7142f198cdea6e2a01091092f235.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/227300/e597fdeb9a279a6e4858994b16bccfa555eefd94.jpg"
+        },
+        "id": "gr_marble",
+        "name": "Temple Worthy",
+        "objectives": []
     }
 ]

@@ -7,7 +7,110 @@
         },
         "id": "ca_visit_cities",
         "name": "California Dreamin'",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "bk",
+                        "display": "Bakersfield"
+                    },
+                    {
+                        "subobjid": "br",
+                        "display": "Barstow"
+                    },
+                    {
+                        "subobjid": "bl",
+                        "display": "Blythe"
+                    },
+                    {
+                        "subobjid": "ec",
+                        "display": "El Centro"
+                    },
+                    {
+                        "subobjid": "eu",
+                        "display": "Eureka"
+                    },
+                    {
+                        "subobjid": "fr",
+                        "display": "Fresno"
+                    },
+                    {
+                        "subobjid": "hi",
+                        "display": "Hilt"
+                    },
+                    {
+                        "subobjid": "hu",
+                        "display": "Huron"
+                    },
+                    {
+                        "subobjid": "in",
+                        "display": "Indio"
+                    },
+                    {
+                        "subobjid": "la",
+                        "display": "Los Angeles"
+                    },
+                    {
+                        "subobjid": "mj",
+                        "display": "Mojave"
+                    },
+                    {
+                        "subobjid": "md",
+                        "display": "Modesto"
+                    },
+                    {
+                        "subobjid": "oa",
+                        "display": "Oakland"
+                    },
+                    {
+                        "subobjid": "ox",
+                        "display": "Oxnard"
+                    },
+                    {
+                        "subobjid": "re",
+                        "display": "Redding"
+                    },
+                    {
+                        "subobjid": "sa",
+                        "display": "Sacramento"
+                    },
+                    {
+                        "subobjid": "sd",
+                        "display": "San Diego"
+                    },
+                    {
+                        "subobjid": "sf",
+                        "display": "San Francisco"
+                    },
+                    {
+                        "subobjid": "sj",
+                        "display": "San Jose"
+                    },
+                    {
+                        "subobjid": "sc",
+                        "display": "Santa Cruz"
+                    },
+                    {
+                        "subobjid": "sm",
+                        "display": "Santa Maria"
+                    },
+                    {
+                        "subobjid": "st",
+                        "display": "Stockton"
+                    },
+                    {
+                        "subobjid": "tr",
+                        "display": "Truckee"
+                    },
+                    {
+                        "subobjid": "uk",
+                        "display": "Ukiah"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver cargo to a port in Oakland and a port in San Francisco",
@@ -35,7 +138,7 @@
         ]
     },
     {
-        "desc": "Deliver cargo from all 3 vineyards in California",
+        "desc": "Deliver cargo from all 4 vineyards in California",
         "icons": {
             "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/509e01efbf6ad5fa531fb15cec9ba772fa4c1566.jpg",
             "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/a8036e53eba0da1d94c38a4863f47d99aaf5e55f.jpg"
@@ -48,16 +151,20 @@
                 "objid": "vineyards",
                 "values": [
                     {
-                        "subobjid": "ca",
-                        "display": "Carlsbad (Darchelle Uzau)"
+                        "subobjid": "sd",
+                        "display": "San Diego"
                     },
                     {
                         "subobjid": "sa",
-                        "display": "Sacramento (Mon Coeur)"
+                        "display": "Sacramento"
                     },
                     {
                         "subobjid": "uk",
-                        "display": "Ukiah (Mon Coeur)"
+                        "display": "Ukiah"
+                    },
+                    {
+                        "subobjid": "fr",
+                        "display": "Fresno"
                     }
                 ]
             }
@@ -91,7 +198,14 @@
         },
         "id": "jobs15comp",
         "name": "Company Collector",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "counter",
+                "objid": "companies",
+                "display": "Unique Companies",
+                "goal": 15
+            }
+        ]
     },
     {
         "desc": "Complete a perfect delivery (no damage, no fines, in-time) for a job that is at least 600 miles",
@@ -198,7 +312,54 @@
         },
         "id": "nv_visit_cities",
         "name": "Silver State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "cc",
+                        "display": "Carson City"
+                    },
+                    {
+                        "subobjid": "ek",
+                        "display": "Elko"
+                    },
+                    {
+                        "subobjid": "ey",
+                        "display": "Ely"
+                    },
+                    {
+                        "subobjid": "ja",
+                        "display": "Jackpot"
+                    },
+                    {
+                        "subobjid": "lv",
+                        "display": "Las Vegas"
+                    },
+                    {
+                        "subobjid": "pi",
+                        "display": "Pioche"
+                    },
+                    {
+                        "subobjid": "pr",
+                        "display": "Primm"
+                    },
+                    {
+                        "subobjid": "re",
+                        "display": "Reno"
+                    },
+                    {
+                        "subobjid": "to",
+                        "display": "Tonopah"
+                    },
+                    {
+                        "subobjid": "wm",
+                        "display": "Winnemucca"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver cargo to both quarries in Nevada",
@@ -233,7 +394,74 @@
         },
         "id": "az_visit_cities",
         "name": "Copper State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "cv",
+                        "display": "Camp Verde"
+                    },
+                    {
+                        "subobjid": "cl",
+                        "display": "Clifton"
+                    },
+                    {
+                        "subobjid": "fl",
+                        "display": "Flagstaff"
+                    },
+                    {
+                        "subobjid": "gcv",
+                        "display": "Grand Canyon Village"
+                    },
+                    {
+                        "subobjid": "hb",
+                        "display": "Holbrook"
+                    },
+                    {
+                        "subobjid": "ky",
+                        "display": "Kayenta"
+                    },
+                    {
+                        "subobjid": "ki",
+                        "display": "Kingman"
+                    },
+                    {
+                        "subobjid": "no",
+                        "display": "Nogales"
+                    },
+                    {
+                        "subobjid": "pa",
+                        "display": "Page"
+                    },
+                    {
+                        "subobjid": "ph",
+                        "display": "Phoenix"
+                    },
+                    {
+                        "subobjid": "ss",
+                        "display": "San Simon"
+                    },
+                    {
+                        "subobjid": "sl",
+                        "display": "Show Low"
+                    },
+                    {
+                        "subobjid": "sv",
+                        "display": "Sierra Vista"
+                    },
+                    {
+                        "subobjid": "tu",
+                        "display": "Tucson"
+                    },
+                    {
+                        "subobjid": "yu",
+                        "display": "Yuma"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver cargo to the Phoenix Airport",
@@ -270,27 +498,27 @@
                 "values": [
                     {
                         "subobjid": "yu",
-                        "display": "Yuma, Rt 8"
+                        "display": "Yuma (AZ) - I-8"
                     },
                     {
                         "subobjid": "ki",
-                        "display": "Kingman, Rt 40"
+                        "display": "Kingman (AZ) - I-40"
                     },
                     {
-                        "subobjid": "eh",
-                        "display": "Ehrenberg, Rt 10"
+                        "subobjid": "bl",
+                        "display": "Blythe (CA) - I-10"
                     },
                     {
                         "subobjid": "lv",
-                        "display": "Las Vegas, Rt 93"
+                        "display": "Las Vegas (NV) - I-11 / US-93"
                     },
                     {
                         "subobjid": "pa",
-                        "display": "West of Page"
+                        "display": "Page (AZ) - US-89"
                     },
                     {
                         "subobjid": "gc",
-                        "display": "North of Grand Canyon Village"
+                        "display": "Grand Canyon Village (AZ)"
                     }
                 ]
             }
@@ -344,7 +572,54 @@
         },
         "id": "hc_allcargos",
         "name": "I Thought This Should Be Heavy?!",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cargo",
+                "values": [
+                    {
+                        "subobjid": "alc",
+                        "display": "All Terrain Crane"
+                    },
+                    {
+                        "subobjid": "cr",
+                        "display": "Cable Reel"
+                    },
+                    {
+                        "subobjid": "ch",
+                        "display": "Cotton Harvester"
+                    },
+                    {
+                        "subobjid": "ct",
+                        "display": "Crawler Tractor"
+                    },
+                    {
+                        "subobjid": "hb",
+                        "display": "Heavy Bulldozer"
+                    },
+                    {
+                        "subobjid": "lt",
+                        "display": "Lift Truck"
+                    },
+                    {
+                        "subobjid": "ltc",
+                        "display": "Lift Truck Chassis"
+                    },
+                    {
+                        "subobjid": "mm",
+                        "display": "Milling Machine"
+                    },
+                    {
+                        "subobjid": "sc",
+                        "display": "Scraper"
+                    },
+                    {
+                        "subobjid": "tr",
+                        "display": "Transformer"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Discover every city in New Mexico (requires New Mexico DLC)",
@@ -354,7 +629,70 @@
         },
         "id": "nm_visit_cities",
         "name": "The Land of Enchantment",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "al",
+                        "display": "Alamogordo"
+                    },
+                    {
+                        "subobjid": "abq",
+                        "display": "Albuquerque"
+                    },
+                    {
+                        "subobjid": "ar",
+                        "display": "Artesia"
+                    },
+                    {
+                        "subobjid": "ca",
+                        "display": "Carlsbad"
+                    },
+                    {
+                        "subobjid": "cl",
+                        "display": "Clovis"
+                    },
+                    {
+                        "subobjid": "fa",
+                        "display": "Farmington"
+                    },
+                    {
+                        "subobjid": "ga",
+                        "display": "Gallup"
+                    },
+                    {
+                        "subobjid": "ho",
+                        "display": "Hobbs"
+                    },
+                    {
+                        "subobjid": "lc",
+                        "display": "Las Cruces"
+                    },
+                    {
+                        "subobjid": "ra",
+                        "display": "Raton"
+                    },
+                    {
+                        "subobjid": "ro",
+                        "display": "Roswell"
+                    },
+                    {
+                        "subobjid": "sf",
+                        "display": "Santa Fe"
+                    },
+                    {
+                        "subobjid": "so",
+                        "display": "Socorro"
+                    },
+                    {
+                        "subobjid": "tu",
+                        "display": "Tucumcari"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Visit all large truck stops and rest stops in New Mexico (requires New Mexico DLC)",
@@ -364,7 +702,102 @@
         },
         "id": "nm_truckstops",
         "name": "Truck Stop Tour",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "stops",
+                "values": [
+                    {
+                        "subobjid": "ar6425",
+                        "display": "Aron, US-64 / I-25 intersection"
+                    },
+                    {
+                        "subobjid": "nb25sr",
+                        "display": "Unmarked, northbound I-25, south of Raton"
+                    },
+                    {
+                        "subobjid": "sb25sr",
+                        "display": "Unmarked, southbound I-25, south of Raton"
+                    },
+                    {
+                        "subobjid": "go40tu",
+                        "display": "Gallon Oil, off I-40, within Tucumcari"
+                    },
+                    {
+                        "subobjid": "un40tu",
+                        "display": "Unmarked, both directions I-40, west of Tucumcari"
+                    },
+                    {
+                        "subobjid": "ph84tu",
+                        "display": "Phoenix, northbound US-84, west of Tucumcari"
+                    },
+                    {
+                        "subobjid": "ar84tu",
+                        "display": "Aron, southbound US-84, west of Tucumcari"
+                    },
+                    {
+                        "subobjid": "eb40al",
+                        "display": "Unmarked, eastbound I-40, east of Albuquerque"
+                    },
+                    {
+                        "subobjid": "wb40al",
+                        "display": "Unmarked, westbound I-40, east of Albuquerque"
+                    },
+                    {
+                        "subobjid": "go25al",
+                        "display": "Gallon Oil, I-25, within Albuquerque"
+                    },
+                    {
+                        "subobjid": "go40al",
+                        "display": "Gallon Oil, westbound I-40, west of Albuquerque"
+                    },
+                    {
+                        "subobjid": "un40al",
+                        "display": "Unmarked, eastbound I-40, west of Albuquerque"
+                    },
+                    {
+                        "subobjid": "na40ga",
+                        "display": "NAF, I-40, east of Gallup"
+                    },
+                    {
+                        "subobjid": "wb40ga",
+                        "display": "Unmarked, westbound I-40, west of Gallup"
+                    },
+                    {
+                        "subobjid": "fu10lc",
+                        "display": "Fusion, eastbound I-10, west of Las Cruces"
+                    },
+                    {
+                        "subobjid": "go10lc",
+                        "display": "Gallon Oil, westbound I-10, west of Las Cruces"
+                    },
+                    {
+                        "subobjid": "eb10lc",
+                        "display": "Unmarked, eastbound I-10, west of Las Cruces"
+                    },
+                    {
+                        "subobjid": "fc25sb",
+                        "display": "Fort Craig, southbound I-25, south of Socorro"
+                    },
+                    {
+                        "subobjid": "fc25nb",
+                        "display": "Fort Craig, northbound I-25, south of Socorro"
+                    },
+                    {
+                        "subobjid": "go54al",
+                        "display": "Gallon Oil, US-54, north of Alamogordo"
+                    },
+                    {
+                        "subobjid": "go54cl",
+                        "display": "Gallon Oil, US-54, west of Clovis"
+                    },
+                    {
+                        "subobjid": "go60cl",
+                        "display": "Gallon Oil, US-60, within Clovis"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Discover shortcut through the forest (requires New Mexico DLC)",
@@ -414,7 +847,314 @@
         },
         "id": "st_all_routes",
         "name": "Go Big or Go Home",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "routes",
+                "values": [
+                    {
+                        "subobjid": "eure",
+                        "display": "Eureka (CA) to Redding (CA)"
+                    },
+                    {
+                        "subobjid": "frba",
+                        "display": "Fresno (CA) to Bakersfield (CA)"
+                    },
+                    {
+                        "subobjid": "losa",
+                        "display": "Los Angeles (CA) to San Diego (CA)"
+                    },
+                    {
+                        "subobjid": "oafr",
+                        "display": "Oakland (CA) to Fresno (CA)"
+                    },
+                    {
+                        "subobjid": "oahu",
+                        "display": "Oakland (CA) to Huron (CA)"
+                    },
+                    {
+                        "subobjid": "oxba",
+                        "display": "Oxnard (CA) to Barstow (CA)"
+                    },
+                    {
+                        "subobjid": "samo",
+                        "display": "Sacramento (CA) to Modesto (CA)"
+                    },
+                    {
+                        "subobjid": "sasa",
+                        "display": "Santa Cruz (CA) to Santa Maria (CA)"
+                    },
+                    {
+                        "subobjid": "sthu",
+                        "display": "Stockton (CA) to Huron (CA)"
+                    },
+                    {
+                        "subobjid": "stsa",
+                        "display": "Stockton (CA) to San Francisco (CA)"
+                    },
+                    {
+                        "subobjid": "trcacanv",
+                        "display": "Truckee (CA) to Carson City (NV)"
+                    },
+                    {
+                        "subobjid": "troa",
+                        "display": "Truckee (CA) to Oakland (CA)"
+                    },
+                    {
+                        "subobjid": "prel",
+                        "display": "Primm (NV) to Ely (NV)"
+                    },
+                    {
+                        "subobjid": "wica",
+                        "display": "Winnemucca (NV) to Carson City (NV)"
+                    },
+                    {
+                        "subobjid": "kifl",
+                        "display": "Kingman (AZ) to Flagstaff (AZ)"
+                    },
+                    {
+                        "subobjid": "phsi",
+                        "display": "Phoenix (AZ) to Sierra Vista (AZ)"
+                    },
+                    {
+                        "subobjid": "yutu",
+                        "display": "Yuma (AZ) to Tucson (AZ)"
+                    },
+                    {
+                        "subobjid": "liel",
+                        "display": "Little Rock (AR) to El Dorado (AR)"
+                    },
+                    {
+                        "subobjid": "lite",
+                        "display": "Little Rock (AR) to Texarkana (AR)"
+                    },
+                    {
+                        "subobjid": "joho",
+                        "display": "Jonesboro (AR) to Hot Springs (AR)"
+                    },
+                    {
+                        "subobjid": "bula",
+                        "display": "Burlington (CO) to Lamar (CO)"
+                    },
+                    {
+                        "subobjid": "deco",
+                        "display": "Denver (CO) to Colorado Springs (CO)"
+                    },
+                    {
+                        "subobjid": "degr",
+                        "display": "Denver (CO) to Grand Junction (CO)"
+                    },
+                    {
+                        "subobjid": "pude",
+                        "display": "Pueblo (CO) to Denver (CO)"
+                    },
+                    {
+                        "subobjid": "pupu",
+                        "display": "Pueblo (CO) to Pueblo (CO)"
+                    },
+                    {
+                        "subobjid": "stco",
+                        "display": "Sterling (CO) to Colorado Springs (CO)"
+                    },
+                    {
+                        "subobjid": "bogr",
+                        "display": "Boise (ID) to Grangeville (ID)"
+                    },
+                    {
+                        "subobjid": "idsa",
+                        "display": "Idaho Falls (ID) to Salmon (ID)"
+                    },
+                    {
+                        "subobjid": "lesa",
+                        "display": "Lewiston (ID) to Sandpoint (ID)"
+                    },
+                    {
+                        "subobjid": "twna",
+                        "display": "Twin Falls (ID) to Nampa (ID)"
+                    },
+                    {
+                        "subobjid": "cohu",
+                        "display": "Colby (KS) to Hutchinson (KS)"
+                    },
+                    {
+                        "subobjid": "doem",
+                        "display": "Dodge City (KS) to Emporia (KS)"
+                    },
+                    {
+                        "subobjid": "pucomaks",
+                        "display": "Pueblo (CO) to Marysville (KS)"
+                    },
+                    {
+                        "subobjid": "pucodoks",
+                        "display": "Pueblo (CO) to Dodge City (KS)"
+                    },
+                    {
+                        "subobjid": "topi",
+                        "display": "Topeka (KS) to Pittsburg (KS)"
+                    },
+                    {
+                        "subobjid": "wisa",
+                        "display": "Wichita (KS) to Salina (KS)"
+                    },
+                    {
+                        "subobjid": "bubo",
+                        "display": "Butte (MT) to Bozeman (MT)"
+                    },
+                    {
+                        "subobjid": "hale",
+                        "display": "Havre (MT) to Lewistown (MT)"
+                    },
+                    {
+                        "subobjid": "labi",
+                        "display": "Laurel (MT) to Billings (MT)"
+                    },
+                    {
+                        "subobjid": "lagl",
+                        "display": "Laurel (MT) to Glendive (MT)"
+                    },
+                    {
+                        "subobjid": "thka",
+                        "display": "Thompson Falls (MT) to Kalispell (MT)"
+                    },
+                    {
+                        "subobjid": "arla",
+                        "display": "Artesia (NM) to Las Cruces (NM)"
+                    },
+                    {
+                        "subobjid": "clho",
+                        "display": "Clovis (NM) to Hobbs (NM)"
+                    },
+                    {
+                        "subobjid": "fara",
+                        "display": "Farmington (NM) to Raton (NM)"
+                    },
+                    {
+                        "subobjid": "gara",
+                        "display": "Gallup (NM) to Raton (NM)"
+                    },
+                    {
+                        "subobjid": "saso",
+                        "display": "Santa Fe (NM) to Socorro (NM)"
+                    },
+                    {
+                        "subobjid": "sonmtuaz",
+                        "display": "Socorro (NM) to Tucson (AZ)"
+                    },
+                    {
+                        "subobjid": "lino",
+                        "display": "Lincoln (NE) to North Platte (NE)"
+                    },
+                    {
+                        "subobjid": "noom",
+                        "display": "Norfolk (NE) to Omaha (NE)"
+                    },
+                    {
+                        "subobjid": "scmc",
+                        "display": "Scottsbluff (NE) to McCook (NE)"
+                    },
+                    {
+                        "subobjid": "lamc",
+                        "display": "Lawton (OK) to McAlester (OK)"
+                    },
+                    {
+                        "subobjid": "oktu",
+                        "display": "Oklahoma City (OK) to Tulsa (OK)"
+                    },
+                    {
+                        "subobjid": "clgu",
+                        "display": "Clinton (OK) to Guymon (OK)"
+                    },
+                    {
+                        "subobjid": "pebu",
+                        "display": "Pendleton (OR) to Burns (OR)"
+                    },
+                    {
+                        "subobjid": "pone",
+                        "display": "Portland (OR) to Newport (OR)"
+                    },
+                    {
+                        "subobjid": "thsa",
+                        "display": "The Dalles (OR) to Salem (OR)"
+                    },
+                    {
+                        "subobjid": "cobr",
+                        "display": "Corpus Christi (TX) to Brownsville (TX)"
+                    },
+                    {
+                        "subobjid": "deva",
+                        "display": "Del Rio (TX) to Van Horn (TX)"
+                    },
+                    {
+                        "subobjid": "foab",
+                        "display": "Fort Stockton (TX) to Abilene (TX)"
+                    },
+                    {
+                        "subobjid": "lasa",
+                        "display": "Laredo (TX) to San Antonio (TX)"
+                    },
+                    {
+                        "subobjid": "loga",
+                        "display": "Longview (TX) to Galveston (TX)"
+                    },
+                    {
+                        "subobjid": "luod",
+                        "display": "Lubbock (TX) to Odessa (TX)"
+                    },
+                    {
+                        "subobjid": "sada",
+                        "display": "San Angelo (TX) to Dallas (TX)"
+                    },
+                    {
+                        "subobjid": "wiam",
+                        "display": "Wichita Falls (TX) to Amarillo (TX)"
+                    },
+                    {
+                        "subobjid": "prpr",
+                        "display": "Provo (UT) to Price (UT)"
+                    },
+                    {
+                        "subobjid": "sace",
+                        "display": "Salina (UT) to Cedar City (UT)"
+                    },
+                    {
+                        "subobjid": "vesa",
+                        "display": "Vernal (UT) to Salt Lake City (UT)"
+                    },
+                    {
+                        "subobjid": "omya",
+                        "display": "Omak (WA) to Yakima (WA)"
+                    },
+                    {
+                        "subobjid": "poab",
+                        "display": "Port Angeles (WA) to Aberdeen (WA)"
+                    },
+                    {
+                        "subobjid": "seev",
+                        "display": "Seattle (WA) to Everett (WA)"
+                    },
+                    {
+                        "subobjid": "spgr",
+                        "display": "Spokane (WA) to Grand Coulee (WA)"
+                    },
+                    {
+                        "subobjid": "cagi",
+                        "display": "Casper (WY) to Gillette (WY)"
+                    },
+                    {
+                        "subobjid": "chro",
+                        "display": "Cheyenne (WY) to Rock Springs (WY)"
+                    },
+                    {
+                        "subobjid": "lara",
+                        "display": "Laramie (WY) to Rawlins (WY)"
+                    },
+                    {
+                        "subobjid": "rija",
+                        "display": "Riverton (WY) to Jackson (WY)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Successfully deliver a Helicopter Special Transport DLC mission with no damage and on time (requires Special Transport DLC)",
@@ -458,19 +1198,19 @@
                         "display": "Large Reservoir Tank"
                     },
                     {
-                        "subobjid": "silo",
+                        "subobjid": "sil",
                         "display": "Giant Silo"
                     },
                     {
-                        "subobjid": "tyres",
-                        "display": "Huge Tyres"
+                        "subobjid": "tir",
+                        "display": "Huge Tires"
                     },
                     {
                         "subobjid": "acc",
                         "display": "Air Conditioning Complex"
                     },
                     {
-                        "subobjid": "boat",
+                        "subobjid": "boa",
                         "display": "Service Boat"
                     },
                     {
@@ -490,7 +1230,7 @@
                         "display": "Massive Tech Part"
                     },
                     {
-                        "subobjid": "heli",
+                        "subobjid": "hel",
                         "display": "Transport Helicopter"
                     }
                 ]
@@ -511,8 +1251,8 @@
                 "objid": "cargo",
                 "values": [
                     {
-                        "subobjid": "tyres",
-                        "display": "Huge Tyres"
+                        "subobjid": "tires",
+                        "display": "Huge Tires"
                     },
                     {
                         "subobjid": "htc",
@@ -544,7 +1284,70 @@
         },
         "id": "or_visit_cities",
         "name": "The Beaver State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "as",
+                        "display": "Astoria"
+                    },
+                    {
+                        "subobjid": "be",
+                        "display": "Bend"
+                    },
+                    {
+                        "subobjid": "bu",
+                        "display": "Burns"
+                    },
+                    {
+                        "subobjid": "cb",
+                        "display": "Coos Bay"
+                    },
+                    {
+                        "subobjid": "eu",
+                        "display": "Eugene"
+                    },
+                    {
+                        "subobjid": "kf",
+                        "display": "Klamath Falls"
+                    },
+                    {
+                        "subobjid": "lv",
+                        "display": "Lakeview"
+                    },
+                    {
+                        "subobjid": "md",
+                        "display": "Medford"
+                    },
+                    {
+                        "subobjid": "np",
+                        "display": "Newport"
+                    },
+                    {
+                        "subobjid": "on",
+                        "display": "Ontario"
+                    },
+                    {
+                        "subobjid": "pt",
+                        "display": "Pendleton"
+                    },
+                    {
+                        "subobjid": "pl",
+                        "display": "Portland"
+                    },
+                    {
+                        "subobjid": "sa",
+                        "display": "Salem"
+                    },
+                    {
+                        "subobjid": "td",
+                        "display": "The Dalles"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Travel across the New Youngs Bay Bridge (requires Oregon DLC)",
@@ -571,23 +1374,23 @@
                 "values": [
                     {
                         "subobjid": "me",
-                        "display": "Southwest of Medford"
+                        "display": "Medford (west)"
                     },
                     {
                         "subobjid": "sa",
-                        "display": "East of Salem"
+                        "display": "Salem"
                     },
                     {
                         "subobjid": "be",
-                        "display": "South of Bend"
+                        "display": "Bend (southwest)"
                     },
                     {
                         "subobjid": "ne",
-                        "display": "East of Newport"
+                        "display": "Newport (north)"
                     },
                     {
                         "subobjid": "as",
-                        "display": "East of Astoria"
+                        "display": "Astoria (east)"
                     }
                 ]
             }
@@ -608,19 +1411,19 @@
                 "values": [
                     {
                         "subobjid": "cl",
-                        "display": "Crater Lake (North of Kalamath Falls)"
+                        "display": "Crater Lake"
                     },
                     {
                         "subobjid": "cr",
-                        "display": "Crooked River Gorge (North of Bend)"
+                        "display": "Crooked River Gorge"
                     },
                     {
                         "subobjid": "tw",
-                        "display": "Thor's Well (North of Coos Bay)"
+                        "display": "Thor's Well"
                     },
                     {
                         "subobjid": "yh",
-                        "display": "Yaquina Head Lighthouse (North of Newport)"
+                        "display": "Yaquina Head Lighthouse"
                     }
                 ]
             }
@@ -644,7 +1447,78 @@
         },
         "id": "wa_visit_cities",
         "name": "The Evergreen State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "ad",
+                        "display": "Aberdeen"
+                    },
+                    {
+                        "subobjid": "bh",
+                        "display": "Bellingham"
+                    },
+                    {
+                        "subobjid": "cv",
+                        "display": "Colville"
+                    },
+                    {
+                        "subobjid": "ev",
+                        "display": "Everett"
+                    },
+                    {
+                        "subobjid": "gc",
+                        "display": "Grand Coulee"
+                    },
+                    {
+                        "subobjid": "kw",
+                        "display": "Kennewick"
+                    },
+                    {
+                        "subobjid": "lv",
+                        "display": "Longview"
+                    },
+                    {
+                        "subobjid": "ol",
+                        "display": "Olympia"
+                    },
+                    {
+                        "subobjid": "om",
+                        "display": "Omak"
+                    },
+                    {
+                        "subobjid": "pa",
+                        "display": "Port Angeles"
+                    },
+                    {
+                        "subobjid": "se",
+                        "display": "Seattle"
+                    },
+                    {
+                        "subobjid": "sp",
+                        "display": "Spokane"
+                    },
+                    {
+                        "subobjid": "ta",
+                        "display": "Tacoma"
+                    },
+                    {
+                        "subobjid": "va",
+                        "display": "Vancouver"
+                    },
+                    {
+                        "subobjid": "we",
+                        "display": "Wenatchee"
+                    },
+                    {
+                        "subobjid": "yk",
+                        "display": "Yakima"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver a cargo to an aerospace company in Washington (requires Washington DLC)",
@@ -751,11 +1625,11 @@
                 "values": [
                     {
                         "subobjid": "mra",
-                        "display": "Mount Rainier (Rt 12)"
+                        "display": "Mount Rainier"
                     },
                     {
                         "subobjid": "msh",
-                        "display": "Mount St. Helens (Rt 12)"
+                        "display": "Mount St. Helens"
                     },
                     {
                         "subobjid": "gcd",
@@ -839,7 +1713,54 @@
         },
         "id": "ut_visit_cities",
         "name": "Beehive State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "cc",
+                        "display": "Cedar City"
+                    },
+                    {
+                        "subobjid": "lo",
+                        "display": "Logan"
+                    },
+                    {
+                        "subobjid": "mo",
+                        "display": "Moab"
+                    },
+                    {
+                        "subobjid": "og",
+                        "display": "Ogden"
+                    },
+                    {
+                        "subobjid": "pc",
+                        "display": "Price"
+                    },
+                    {
+                        "subobjid": "pv",
+                        "display": "Provo"
+                    },
+                    {
+                        "subobjid": "sa",
+                        "display": "Salina"
+                    },
+                    {
+                        "subobjid": "slc",
+                        "display": "Salt Lake City"
+                    },
+                    {
+                        "subobjid": "sg",
+                        "display": "St George"
+                    },
+                    {
+                        "subobjid": "ve",
+                        "display": "Vernal"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Visit all mines & quarries in Utah (requires Utah DLC)",
@@ -856,15 +1777,15 @@
                 "values": [
                     {
                         "subobjid": "slc",
-                        "display": "Southwest of Salt Lake City (HMS)"
+                        "display": "Salt Lake City - HMS"
                     },
                     {
                         "subobjid": "ve",
-                        "display": "West of Vernal (Coastline Mining)"
+                        "display": "Vernal - Coastline Mining"
                     },
                     {
                         "subobjid": "cc",
-                        "display": "West of Cedar City (Coastline Mining)"
+                        "display": "Cedar City - Coastline Mining"
                     }
                 ]
             }
@@ -943,24 +1864,28 @@
                 "objid": "sites",
                 "values": [
                     {
-                        "subobjid": "ve",
-                        "display": "Vernal (Northern-most)"
+                        "subobjid": "nv",
+                        "display": "Vernal (Northernmost)"
+                    },
+                    {
+                        "subobjid": "sv",
+                        "display": "Vernal (Southernmost)"
                     },
                     {
                         "subobjid": "np",
-                        "display": "Price (Northern-most)"
+                        "display": "Price (Northernmost)"
                     },
                     {
                         "subobjid": "sp",
-                        "display": "Price (Southern-most)"
+                        "display": "Price (Southernmost)"
                     },
                     {
                         "subobjid": "nm",
-                        "display": "Moab (Northern-most)"
+                        "display": "Moab (Northernmost)"
                     },
                     {
                         "subobjid": "sm",
-                        "display": "Moab (Southern-most)"
+                        "display": "Moab (Southernmost)"
                     }
                 ]
             }
@@ -974,7 +1899,58 @@
         },
         "id": "id_visit_cities",
         "name": "Gem State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "bo",
+                        "display": "Boise"
+                    },
+                    {
+                        "subobjid": "cd",
+                        "display": "Coeur d'Alene"
+                    },
+                    {
+                        "subobjid": "gr",
+                        "display": "Grangeville"
+                    },
+                    {
+                        "subobjid": "if",
+                        "display": "Idaho Falls"
+                    },
+                    {
+                        "subobjid": "kt",
+                        "display": "Ketchum"
+                    },
+                    {
+                        "subobjid": "lw",
+                        "display": "Lewiston"
+                    },
+                    {
+                        "subobjid": "na",
+                        "display": "Nampa"
+                    },
+                    {
+                        "subobjid": "po",
+                        "display": "Pocatello"
+                    },
+                    {
+                        "subobjid": "sl",
+                        "display": "Salmon"
+                    },
+                    {
+                        "subobjid": "sn",
+                        "display": "Sandpoint"
+                    },
+                    {
+                        "subobjid": "tf",
+                        "display": "Twin Falls"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete five deliveries of potatoes from Idaho farms (requires Idaho DLC)",
@@ -1034,7 +2010,54 @@
         },
         "id": "id_cutscenes",
         "name": "The Director",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "tfpf",
+                        "display": "Twin Falls Potato Farm"
+                    },
+                    {
+                        "subobjid": "pmb",
+                        "display": "Perrine Memorial Bridge"
+                    },
+                    {
+                        "subobjid": "cotm",
+                        "display": "Craters of the Moon National Monument & Preserve"
+                    },
+                    {
+                        "subobjid": "idfa",
+                        "display": "The City of Idaho Falls"
+                    },
+                    {
+                        "subobjid": "bois",
+                        "display": "The City of Boise"
+                    },
+                    {
+                        "subobjid": "gasu",
+                        "display": "Galena Summit"
+                    },
+                    {
+                        "subobjid": "mhra",
+                        "display": "Midvale Hill Rest Area"
+                    },
+                    {
+                        "subobjid": "mcca",
+                        "display": "The town of McCall"
+                    },
+                    {
+                        "subobjid": "ths",
+                        "display": "Timber Harvest Site"
+                    },
+                    {
+                        "subobjid": "sand",
+                        "display": "The City of Sandpoint"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Visit 45th parallel in Idaho - a halfway between the Equator and the North Pole (requires Idaho DLC)",
@@ -1054,7 +2077,66 @@
         },
         "id": "co_visit_cities",
         "name": "The Centennial State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "al",
+                        "display": "Alamosa"
+                    },
+                    {
+                        "subobjid": "bu",
+                        "display": "Burlington"
+                    },
+                    {
+                        "subobjid": "cs",
+                        "display": "Colorado Springs"
+                    },
+                    {
+                        "subobjid": "de",
+                        "display": "Denver"
+                    },
+                    {
+                        "subobjid": "du",
+                        "display": "Durango"
+                    },
+                    {
+                        "subobjid": "fc",
+                        "display": "Fort Collins"
+                    },
+                    {
+                        "subobjid": "gj",
+                        "display": "Grand Junction"
+                    },
+                    {
+                        "subobjid": "la",
+                        "display": "Lamar"
+                    },
+                    {
+                        "subobjid": "mo",
+                        "display": "Montrose"
+                    },
+                    {
+                        "subobjid": "pu",
+                        "display": "Pueblo"
+                    },
+                    {
+                        "subobjid": "ra",
+                        "display": "Rangely"
+                    },
+                    {
+                        "subobjid": "ss",
+                        "display": "Steamboat Springs"
+                    },
+                    {
+                        "subobjid": "st",
+                        "display": "Sterling"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Drive along this famously scenic and thrilling section of the U.S. 550 in Colorado (requires Colorado DLC)",
@@ -1074,7 +2156,22 @@
         },
         "id": "co_tunnels",
         "name": "Cruising High Below",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "directions",
+                "values": [
+                    {
+                        "subobjid": "east",
+                        "display": "I-70 East-bound"
+                    },
+                    {
+                        "subobjid": "west",
+                        "display": "I-70 West-bound"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver a Tower and Nacelle to both Vitas Power wind turbine construction sites in Colorado (requires Colorado DLC)",
@@ -1161,7 +2258,58 @@
         },
         "id": "wy_visit_cities",
         "name": "The Equality State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "ca",
+                        "display": "Casper"
+                    },
+                    {
+                        "subobjid": "ch",
+                        "display": "Cheyenne"
+                    },
+                    {
+                        "subobjid": "co",
+                        "display": "Cody"
+                    },
+                    {
+                        "subobjid": "ev",
+                        "display": "Evanston"
+                    },
+                    {
+                        "subobjid": "gi",
+                        "display": "Gillette"
+                    },
+                    {
+                        "subobjid": "ha",
+                        "display": "Jackson"
+                    },
+                    {
+                        "subobjid": "la",
+                        "display": "Laramie"
+                    },
+                    {
+                        "subobjid": "ra",
+                        "display": "Rawlins"
+                    },
+                    {
+                        "subobjid": "ri",
+                        "display": "Riverton"
+                    },
+                    {
+                        "subobjid": "rs",
+                        "display": "Rock Springs"
+                    },
+                    {
+                        "subobjid": "sh",
+                        "display": "Sheridan"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "View cutscenes from all viewpoints in Wyoming (requires Wyoming DLC)",
@@ -1171,7 +2319,54 @@
         },
         "id": "wy_cutscenes",
         "name": "Over Plains and Mountains",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "gtn",
+                        "display": "Grand Teton National Park"
+                    },
+                    {
+                        "subobjid": "al",
+                        "display": "Alpine"
+                    },
+                    {
+                        "subobjid": "ev",
+                        "display": "City of Evanston"
+                    },
+                    {
+                        "subobjid": "fgd",
+                        "display": "Flaming Gorge Dam"
+                    },
+                    {
+                        "subobjid": "che",
+                        "display": "City of Cheyenne"
+                    },
+                    {
+                        "subobjid": "bl",
+                        "display": "Bear Lake"
+                    },
+                    {
+                        "subobjid": "hha",
+                        "display": "Hell's Half Acre"
+                    },
+                    {
+                        "subobjid": "bsp",
+                        "display": "Boysen State Park"
+                    },
+                    {
+                        "subobjid": "dt",
+                        "display": "Devils Tower"
+                    },
+                    {
+                        "subobjid": "bnf",
+                        "display": "Bighorn National Forest"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Discover and visit the town of Buford (requires Wyoming DLC)",
@@ -1197,8 +2392,8 @@
                 "objid": "cargo",
                 "values": [
                     {
-                        "subobjid": "tp",
-                        "display": "Train Parts"
+                        "subobjid": "ta",
+                        "display": "Train Axles"
                     },
                     {
                         "subobjid": "tm",
@@ -1237,7 +2432,74 @@
         },
         "id": "mt_visit_cities",
         "name": "The Last Best Place",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "bi",
+                        "display": "Billings"
+                    },
+                    {
+                        "subobjid": "bo",
+                        "display": "Bozeman"
+                    },
+                    {
+                        "subobjid": "bu",
+                        "display": "Butte"
+                    },
+                    {
+                        "subobjid": "ga",
+                        "display": "Glasgow"
+                    },
+                    {
+                        "subobjid": "ge",
+                        "display": "Glendive"
+                    },
+                    {
+                        "subobjid": "gf",
+                        "display": "Great Falls"
+                    },
+                    {
+                        "subobjid": "ha",
+                        "display": "Havre"
+                    },
+                    {
+                        "subobjid": "he",
+                        "display": "Helena"
+                    },
+                    {
+                        "subobjid": "kl",
+                        "display": "Kalispell"
+                    },
+                    {
+                        "subobjid": "lu",
+                        "display": "Laurel"
+                    },
+                    {
+                        "subobjid": "lw",
+                        "display": "Lewiston"
+                    },
+                    {
+                        "subobjid": "mlc",
+                        "display": "Miles City"
+                    },
+                    {
+                        "subobjid": "ms",
+                        "display": "Missoula"
+                    },
+                    {
+                        "subobjid": "si",
+                        "display": "Sidney"
+                    },
+                    {
+                        "subobjid": "tf",
+                        "display": "Thompson Falls"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "View cutscenes from all viewpoints in Montana (requires Montana DLC)",
@@ -1247,7 +2509,58 @@
         },
         "id": "mt_cutscenes",
         "name": "Big Sky Country",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "tf",
+                        "display": "Thompson Falls (18 WoS Heritage)"
+                    },
+                    {
+                        "subobjid": "fl",
+                        "display": "Flathead Lake"
+                    },
+                    {
+                        "subobjid": "gnp",
+                        "display": "Glacier National Park"
+                    },
+                    {
+                        "subobjid": "gf",
+                        "display": "Great Falls"
+                    },
+                    {
+                        "subobjid": "lw",
+                        "display": "Lewiston"
+                    },
+                    {
+                        "subobjid": "fps",
+                        "display": "Fort Peck Spillway"
+                    },
+                    {
+                        "subobjid": "spc",
+                        "display": "Signal Peak Coal Mine"
+                    },
+                    {
+                        "subobjid": "bi",
+                        "display": "City of Billings"
+                    },
+                    {
+                        "subobjid": "bu",
+                        "display": "City of Butte"
+                    },
+                    {
+                        "subobjid": "el",
+                        "display": "Earthquake Lake"
+                    },
+                    {
+                        "subobjid": "ynp",
+                        "display": "Yellowstone National Park"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Show your support for zero waste by completing a total of 10 deliveries of the Dumpster Bins and Waste Paper cargoes to the Waste Transfer Stations in Montana, and at least one Garbage Truck cargo to or from anywhere in Montana (requires Montana DLC)",
@@ -1327,16 +2640,16 @@
                 "objid": "jobs",
                 "values": [
                     {
-                        "subobjid": "mach",
-                        "display": "Machinery to Bull Mountains coal mine (to NAMIQ north of Billings)"
+                        "subobjid": "ma",
+                        "display": "Machinery"
                     },
                     {
                         "subobjid": "tp",
-                        "display": "Talc Powder (from NAMIQ south of Butte or north of Bozeman)"
+                        "display": "Talc Powder"
                     },
                     {
                         "subobjid": "si",
-                        "display": "Silane (from CHEMS in Butte)"
+                        "display": "Silane"
                     }
                 ]
             }
@@ -1367,7 +2680,134 @@
         },
         "id": "tx_visit_cities",
         "name": "The Lone Star State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "ab",
+                        "display": "Abilene"
+                    },
+                    {
+                        "subobjid": "am",
+                        "display": "Amarillo"
+                    },
+                    {
+                        "subobjid": "au",
+                        "display": "Austin"
+                    },
+                    {
+                        "subobjid": "bu",
+                        "display": "Beaumont"
+                    },
+                    {
+                        "subobjid": "br",
+                        "display": "Brownsville"
+                    },
+                    {
+                        "subobjid": "cc",
+                        "display": "Corpus Christi"
+                    },
+                    {
+                        "subobjid": "dh",
+                        "display": "Dalhart"
+                    },
+                    {
+                        "subobjid": "dl",
+                        "display": "Dallas"
+                    },
+                    {
+                        "subobjid": "dr",
+                        "display": "Del Rio"
+                    },
+                    {
+                        "subobjid": "ep",
+                        "display": "El Paso"
+                    },
+                    {
+                        "subobjid": "fs",
+                        "display": "Fort Stockton"
+                    },
+                    {
+                        "subobjid": "fw",
+                        "display": "Fort Worth"
+                    },
+                    {
+                        "subobjid": "gl",
+                        "display": "Galveston"
+                    },
+                    {
+                        "subobjid": "hu",
+                        "display": "Houston"
+                    },
+                    {
+                        "subobjid": "hn",
+                        "display": "Huntsville"
+                    },
+                    {
+                        "subobjid": "ju",
+                        "display": "Junction"
+                    },
+                    {
+                        "subobjid": "lr",
+                        "display": "Laredo"
+                    },
+                    {
+                        "subobjid": "lv",
+                        "display": "Longview"
+                    },
+                    {
+                        "subobjid": "lb",
+                        "display": "Lubbock"
+                    },
+                    {
+                        "subobjid": "lf",
+                        "display": "Lufkin"
+                    },
+                    {
+                        "subobjid": "ma",
+                        "display": "McAllen"
+                    },
+                    {
+                        "subobjid": "od",
+                        "display": "Odessa"
+                    },
+                    {
+                        "subobjid": "sang",
+                        "display": "San Angelo"
+                    },
+                    {
+                        "subobjid": "sant",
+                        "display": "San Antonio"
+                    },
+                    {
+                        "subobjid": "tk",
+                        "display": "Texarkana"
+                    },
+                    {
+                        "subobjid": "ty",
+                        "display": "Tyler"
+                    },
+                    {
+                        "subobjid": "va",
+                        "display": "Van Horn"
+                    },
+                    {
+                        "subobjid": "vi",
+                        "display": "Victoria"
+                    },
+                    {
+                        "subobjid": "wa",
+                        "display": "Waco"
+                    },
+                    {
+                        "subobjid": "wi",
+                        "display": "Wichita Falls"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "View cutscenes from at least 25 viewpoints in Texas (requires Texas DLC)",
@@ -1377,7 +2817,134 @@
         },
         "id": "tx_cutscenes",
         "name": "Big Country Views",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "sprf",
+                        "display": "Space Rocket facility"
+                    },
+                    {
+                        "subobjid": "lare",
+                        "display": "The City of Laredo"
+                    },
+                    {
+                        "subobjid": "coch",
+                        "display": "The City of Corpus Christi"
+                    },
+                    {
+                        "subobjid": "pala",
+                        "display": "The City of Palacios"
+                    },
+                    {
+                        "subobjid": "galv",
+                        "display": "The City of Galveston"
+                    },
+                    {
+                        "subobjid": "uval",
+                        "display": "The City of Uvalde"
+                    },
+                    {
+                        "subobjid": "deri",
+                        "display": "The City of Del Rio"
+                    },
+                    {
+                        "subobjid": "glb",
+                        "display": "Governor's Landing Bridge"
+                    },
+                    {
+                        "subobjid": "quar",
+                        "display": "Quarry"
+                    },
+                    {
+                        "subobjid": "peri",
+                        "display": "The Pecos River"
+                    },
+                    {
+                        "subobjid": "aust",
+                        "display": "The City of Austin"
+                    },
+                    {
+                        "subobjid": "fred",
+                        "display": "The City of Fredericksburg"
+                    },
+                    {
+                        "subobjid": "marf",
+                        "display": "Marfa Lights"
+                    },
+                    {
+                        "subobjid": "buco",
+                        "display": "Buna County"
+                    },
+                    {
+                        "subobjid": "lali",
+                        "display": "Lake Livingston"
+                    },
+                    {
+                        "subobjid": "cfs",
+                        "display": "The City of Fort Stockton"
+                    },
+                    {
+                        "subobjid": "wpp",
+                        "display": "Wind Power Plants"
+                    },
+                    {
+                        "subobjid": "vanh",
+                        "display": "The City of Van Horn"
+                    },
+                    {
+                        "subobjid": "sana",
+                        "display": "The City of San Angelo"
+                    },
+                    {
+                        "subobjid": "peco",
+                        "display": "The Town of Pecos"
+                    },
+                    {
+                        "subobjid": "tsf",
+                        "display": "The Salt Flats"
+                    },
+                    {
+                        "subobjid": "cors",
+                        "display": "The City of Corsicana"
+                    },
+                    {
+                        "subobjid": "ecap",
+                        "display": "El Capitan"
+                    },
+                    {
+                        "subobjid": "epa",
+                        "display": "El Paso Airport"
+                    },
+                    {
+                        "subobjid": "bspr",
+                        "display": "The City of Big Spring"
+                    },
+                    {
+                        "subobjid": "pecf",
+                        "display": "Pecan Farm"
+                    },
+                    {
+                        "subobjid": "gate",
+                        "display": "The Gateway to Texas"
+                    },
+                    {
+                        "subobjid": "sfra",
+                        "display": "Silver Falls Rest Area"
+                    },
+                    {
+                        "subobjid": "adri",
+                        "display": "The City of Adrian"
+                    },
+                    {
+                        "subobjid": "amar",
+                        "display": "The City of Amarillo"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Discover at least 30 historical markers in Texas (requires Texas DLC)",
@@ -1387,7 +2954,242 @@
         },
         "id": "tx_markers",
         "name": "Avid Historian",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "8",
+                        "display": "Presidio - Oldest Town in America"
+                    },
+                    {
+                        "subobjid": "173",
+                        "display": "Anson Opera House"
+                    },
+                    {
+                        "subobjid": "327",
+                        "display": "Last Battle of the Civil War"
+                    },
+                    {
+                        "subobjid": "471",
+                        "display": "Bovina"
+                    },
+                    {
+                        "subobjid": "573",
+                        "display": "Burkett Pecan Tree"
+                    },
+                    {
+                        "subobjid": "610",
+                        "display": "Christopher Columbus Doty"
+                    },
+                    {
+                        "subobjid": "816",
+                        "display": "Charles H. Noyes"
+                    },
+                    {
+                        "subobjid": "1048",
+                        "display": "Cook Cemetery"
+                    },
+                    {
+                        "subobjid": "1141",
+                        "display": "The Oldest Czech Settlement"
+                    },
+                    {
+                        "subobjid": "1344",
+                        "display": "Early Humble Camp in Permian Basin"
+                    },
+                    {
+                        "subobjid": "1360",
+                        "display": "Early Trails in Montague County"
+                    },
+                    {
+                        "subobjid": "1435",
+                        "display": "El Paso Salt War"
+                    },
+                    {
+                        "subobjid": "1533",
+                        "display": "First Post Office"
+                    },
+                    {
+                        "subobjid": "2111",
+                        "display": "First Producing Gas Well in Kleberg County"
+                    },
+                    {
+                        "subobjid": "2249",
+                        "display": "Grand Opera House"
+                    },
+                    {
+                        "subobjid": "2332",
+                        "display": "Half Moon Reef Lighthouse"
+                    },
+                    {
+                        "subobjid": "2594",
+                        "display": "Hughes' Springs"
+                    },
+                    {
+                        "subobjid": "2941",
+                        "display": "Kincaid Hotel"
+                    },
+                    {
+                        "subobjid": "2944",
+                        "display": "King County"
+                    },
+                    {
+                        "subobjid": "2969",
+                        "display": "Knippa Trap Rock Plant"
+                    },
+                    {
+                        "subobjid": "3208",
+                        "display": "Marfa Lights"
+                    },
+                    {
+                        "subobjid": "3315",
+                        "display": "Medio Creek"
+                    },
+                    {
+                        "subobjid": "3404",
+                        "display": "Zapata County"
+                    },
+                    {
+                        "subobjid": "3684",
+                        "display": "Oil and Gas Industry in Pecos County"
+                    },
+                    {
+                        "subobjid": "3868",
+                        "display": "Orient Hotel"
+                    },
+                    {
+                        "subobjid": "3951",
+                        "display": "Paisano Pass"
+                    },
+                    {
+                        "subobjid": "4033",
+                        "display": "Pioneer Stagecoach Stand Operators Mr. and Mrs. Isaac J. Rude"
+                    },
+                    {
+                        "subobjid": "4071",
+                        "display": "World's First Rodeo"
+                    },
+                    {
+                        "subobjid": "4100",
+                        "display": "Potton House"
+                    },
+                    {
+                        "subobjid": "4530",
+                        "display": "San Clemente Mission"
+                    },
+                    {
+                        "subobjid": "4556",
+                        "display": "San Saba Peak"
+                    },
+                    {
+                        "subobjid": "4664",
+                        "display": "Sheep and Goat Industry in Texas"
+                    },
+                    {
+                        "subobjid": "4998",
+                        "display": "Spanish Explorers"
+                    },
+                    {
+                        "subobjid": "5299",
+                        "display": "The Caprock"
+                    },
+                    {
+                        "subobjid": "5397",
+                        "display": "The Pecos Cantaloupe"
+                    },
+                    {
+                        "subobjid": "5436",
+                        "display": "The Texas Rangers and the Fence Cutters"
+                    },
+                    {
+                        "subobjid": "7170",
+                        "display": "Sacred Heart Church"
+                    },
+                    {
+                        "subobjid": "7183",
+                        "display": "Sidney Sherman"
+                    },
+                    {
+                        "subobjid": "7452",
+                        "display": "Bolivar Point"
+                    },
+                    {
+                        "subobjid": "7925",
+                        "display": "Clark Hotel"
+                    },
+                    {
+                        "subobjid": "7930",
+                        "display": "Guadalupe Peak"
+                    },
+                    {
+                        "subobjid": "8053",
+                        "display": "Jefferson"
+                    },
+                    {
+                        "subobjid": "10123",
+                        "display": "Vereins Kirche"
+                    },
+                    {
+                        "subobjid": "10381",
+                        "display": "Village of the Alabama and Coushatti Indians"
+                    },
+                    {
+                        "subobjid": "10400",
+                        "display": "Early Indian Trails"
+                    },
+                    {
+                        "subobjid": "10407",
+                        "display": "Locomotive No. 5"
+                    },
+                    {
+                        "subobjid": "10419",
+                        "display": "Polk County"
+                    },
+                    {
+                        "subobjid": "10554",
+                        "display": "Port of Beaumont"
+                    },
+                    {
+                        "subobjid": "12197",
+                        "display": "Barnard's Trading Post No. 2"
+                    },
+                    {
+                        "subobjid": "12477",
+                        "display": "Site of Uribeño"
+                    },
+                    {
+                        "subobjid": "12681",
+                        "display": "Texas Business Pioneer Pleasant C. Sams"
+                    },
+                    {
+                        "subobjid": "16071",
+                        "display": "South Llano Crossing"
+                    },
+                    {
+                        "subobjid": "16553",
+                        "display": "Baxter's Curve Train Robbery"
+                    },
+                    {
+                        "subobjid": "16924",
+                        "display": "Mills Wharf"
+                    },
+                    {
+                        "subobjid": "17522",
+                        "display": "Tex Randall"
+                    },
+                    {
+                        "subobjid": "18214",
+                        "display": "Bankhead Highway through Eastland County"
+                    },
+                    {
+                        "subobjid": "22690",
+                        "display": "Randall County"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver cargo to or from all shipyards and cargo ports in Texas (requires Texas DLC)",
@@ -1538,7 +3340,54 @@
         },
         "id": "ok_visit_cities",
         "name": "The Sooner State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "ar",
+                        "display": "Ardmore"
+                    },
+                    {
+                        "subobjid": "cl",
+                        "display": "Clinton"
+                    },
+                    {
+                        "subobjid": "en",
+                        "display": "Enid"
+                    },
+                    {
+                        "subobjid": "gy",
+                        "display": "Guymon"
+                    },
+                    {
+                        "subobjid": "id",
+                        "display": "Idabel"
+                    },
+                    {
+                        "subobjid": "lw",
+                        "display": "Lawton"
+                    },
+                    {
+                        "subobjid": "mc",
+                        "display": "McAlester"
+                    },
+                    {
+                        "subobjid": "oc",
+                        "display": "Oklahoma City"
+                    },
+                    {
+                        "subobjid": "tu",
+                        "display": "Tulsa"
+                    },
+                    {
+                        "subobjid": "ww",
+                        "display": "Woodward"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "View cutscenes from all viewpoints in Oklahoma (requires Oklahoma DLC)",
@@ -1548,7 +3397,54 @@
         },
         "id": "ok_cutscenes",
         "name": "Can Do!",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "bc",
+                        "display": "Boise City"
+                    },
+                    {
+                        "subobjid": "wdw",
+                        "display": "Woodward"
+                    },
+                    {
+                        "subobjid": "gms",
+                        "display": "Gloss Mountain State Park"
+                    },
+                    {
+                        "subobjid": "ltf",
+                        "display": "Lawton Tire Factory"
+                    },
+                    {
+                        "subobjid": "ar",
+                        "display": "Ardmore"
+                    },
+                    {
+                        "subobjid": "okc",
+                        "display": "Oklahoma City"
+                    },
+                    {
+                        "subobjid": "tl",
+                        "display": "Tulsa"
+                    },
+                    {
+                        "subobjid": "mca",
+                        "display": "McAlester"
+                    },
+                    {
+                        "subobjid": "hls",
+                        "display": "Hugo Lake Spillway"
+                    },
+                    {
+                        "subobjid": "bbs",
+                        "display": "Beavers Bend State Park"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver 5 Bus Hood cargoes to and 5 School Bus cargoes from the bus factory in Tulsa (requires Oklahoma DLC)",
@@ -1562,13 +3458,13 @@
             {
                 "type": "counter",
                 "objid": "hood",
-                "display": "Bus Hoods to",
+                "display": "Bus Hoods to Yelco",
                 "goal": 5
             },
             {
                 "type": "counter",
                 "objid": "bus",
-                "display": "School Buses from",
+                "display": "School Buses from Yelco",
                 "goal": 5
             }
         ]
@@ -1585,13 +3481,13 @@
             {
                 "type": "counter",
                 "objid": "lawton",
-                "display": "From Lawton",
+                "display": "Deliveries from Lawton",
                 "goal": 3
             },
             {
                 "type": "counter",
                 "objid": "ardmore",
-                "display": "From Ardmore",
+                "display": "Deliveries from Ardmore",
                 "goal": 3
             }
         ]
@@ -1604,7 +3500,70 @@
         },
         "id": "ks_visit_cities",
         "name": "The Sunflower State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "co",
+                        "display": "Colby"
+                    },
+                    {
+                        "subobjid": "dc",
+                        "display": "Dodge City"
+                    },
+                    {
+                        "subobjid": "em",
+                        "display": "Emporia"
+                    },
+                    {
+                        "subobjid": "gc",
+                        "display": "Garden City"
+                    },
+                    {
+                        "subobjid": "ha",
+                        "display": "Hays"
+                    },
+                    {
+                        "subobjid": "hu",
+                        "display": "Hutchinson"
+                    },
+                    {
+                        "subobjid": "jc",
+                        "display": "Junction City"
+                    },
+                    {
+                        "subobjid": "kc",
+                        "display": "Kansas City"
+                    },
+                    {
+                        "subobjid": "ma",
+                        "display": "Marysville"
+                    },
+                    {
+                        "subobjid": "ph",
+                        "display": "Phillipsburg"
+                    },
+                    {
+                        "subobjid": "pi",
+                        "display": "Pittsburg"
+                    },
+                    {
+                        "subobjid": "sa",
+                        "display": "Salina"
+                    },
+                    {
+                        "subobjid": "to",
+                        "display": "Topeka"
+                    },
+                    {
+                        "subobjid": "wi",
+                        "display": "Wichita"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "View cutscenes from all viewpoints in Kansas (requires Kansas DLC)",
@@ -1614,7 +3573,54 @@
         },
         "id": "ks_cutscenes",
         "name": "Wheat State Explorer",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "msu",
+                        "display": "Mount Sunflower"
+                    },
+                    {
+                        "subobjid": "mro",
+                        "display": "Monument Rocks"
+                    },
+                    {
+                        "subobjid": "dc",
+                        "display": "Entrance to Dodge City"
+                    },
+                    {
+                        "subobjid": "hut",
+                        "display": "Elevators in Hutchinson"
+                    },
+                    {
+                        "subobjid": "eld",
+                        "display": "El Dorado"
+                    },
+                    {
+                        "subobjid": "bcl",
+                        "display": "Butler County Line"
+                    },
+                    {
+                        "subobjid": "bcp",
+                        "display": "Bazaar Cattle Pens"
+                    },
+                    {
+                        "subobjid": "fse",
+                        "display": "Farm and Surrounding Area"
+                    },
+                    {
+                        "subobjid": "jcc",
+                        "display": "Junction City Center"
+                    },
+                    {
+                        "subobjid": "kc",
+                        "display": "Kansas City"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver an Aircraft Wing and Jet Engine Inlets to or from every aviation depot in Wichita (requires Kansas DLC)",
@@ -1631,27 +3637,27 @@
                 "values": [
                     {
                         "subobjid": "awd",
-                        "display": "Aircraft Wing (Darwing)"
+                        "display": "Darwing - Aircraft Wing"
                     },
                     {
                         "subobjid": "jeicd",
-                        "display": "Jet Engine Inlet Cowl (Darwing)"
+                        "display": "Darwing - Jet Engine Inlet Cowl"
                     },
                     {
                         "subobjid": "awwsh",
-                        "display": "Aircraft Wing (Wichita Sky Harbor)"
+                        "display": "Wichita Sky Harbor - Aircraft Wing"
                     },
                     {
                         "subobjid": "jeicwsh",
-                        "display": "Jet Engine Inlet Cowl (Wichita Sky Harbor)"
+                        "display": "Wichita Sky Harbor - Jet Engine Inlet Cowl"
                     },
                     {
                         "subobjid": "awgss",
-                        "display": "Aircraft Wing (Global Sky Service)"
+                        "display": "Global Sky Service - Aircraft Wing"
                     },
                     {
                         "subobjid": "jeicgss",
-                        "display": "Jet Engine Inlet Cowl (Global Sky Service)"
+                        "display": "Global Sky Service - Jet Engine Inlet Cowl"
                     }
                 ]
             }
@@ -1665,7 +3671,74 @@
         },
         "id": "ks_secret_roads",
         "name": "Can you Keep a Secret?",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "roads",
+                "values": [
+                    {
+                        "subobjid": "col",
+                        "display": "Colby"
+                    },
+                    {
+                        "subobjid": "phi",
+                        "display": "Phillipsburg"
+                    },
+                    {
+                        "subobjid": "gc1",
+                        "display": "Garden City 1"
+                    },
+                    {
+                        "subobjid": "gc2",
+                        "display": "Garden City 2"
+                    },
+                    {
+                        "subobjid": "gc3",
+                        "display": "Garden City 3"
+                    },
+                    {
+                        "subobjid": "hut",
+                        "display": "Hutchinson"
+                    },
+                    {
+                        "subobjid": "em1",
+                        "display": "Emporia 1"
+                    },
+                    {
+                        "subobjid": "em2",
+                        "display": "Emporia 2"
+                    },
+                    {
+                        "subobjid": "em3",
+                        "display": "Emporia 3"
+                    },
+                    {
+                        "subobjid": "pi1",
+                        "display": "Pittsburg 1"
+                    },
+                    {
+                        "subobjid": "pi2",
+                        "display": "Pittsburg 2"
+                    },
+                    {
+                        "subobjid": "pi3",
+                        "display": "Pittsburg 3"
+                    },
+                    {
+                        "subobjid": "kc1",
+                        "display": "Kansas City 1"
+                    },
+                    {
+                        "subobjid": "kc2",
+                        "display": "Kansas Ciy 2"
+                    },
+                    {
+                        "subobjid": "kc3",
+                        "display": "Kansas City 3"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete 6 deliveries from the Hutchinson Salt Mine in Kansas. At least 2 deliveries must be to a Food Factory (requires Kansas DLC)",
@@ -1685,7 +3758,7 @@
             {
                 "type": "counter",
                 "objid": "foodfac",
-                "display": "To Food Factory",
+                "display": "Deliveries to Flavorfair",
                 "goal": 2
             }
         ]
@@ -1698,7 +3771,62 @@
         },
         "id": "ne_visit_cities",
         "name": "Cornhusker State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "al",
+                        "display": "Alliance"
+                    },
+                    {
+                        "subobjid": "ch",
+                        "display": "Chadron"
+                    },
+                    {
+                        "subobjid": "co",
+                        "display": "Columbus"
+                    },
+                    {
+                        "subobjid": "gi",
+                        "display": "Grand Island"
+                    },
+                    {
+                        "subobjid": "ln",
+                        "display": "Lincoln"
+                    },
+                    {
+                        "subobjid": "mc",
+                        "display": "McCook"
+                    },
+                    {
+                        "subobjid": "nf",
+                        "display": "Norfolk"
+                    },
+                    {
+                        "subobjid": "np",
+                        "display": "North Platte"
+                    },
+                    {
+                        "subobjid": "oh",
+                        "display": "Omaha"
+                    },
+                    {
+                        "subobjid": "sc",
+                        "display": "Scottsbluff"
+                    },
+                    {
+                        "subobjid": "si",
+                        "display": "Sidney"
+                    },
+                    {
+                        "subobjid": "vl",
+                        "display": "Valentine"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "View cutscenes from all viewpoints in Nebraska (requires Nebraska DLC)",
@@ -1708,7 +3836,50 @@
         },
         "id": "ne_cutscenes",
         "name": "Nebraska Explorer",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "soc",
+                        "display": "US-20 Scenic Overlook"
+                    },
+                    {
+                        "subobjid": "sbn",
+                        "display": "Scotts Bluff National Monument"
+                    },
+                    {
+                        "subobjid": "chm",
+                        "display": "Chimney Rock"
+                    },
+                    {
+                        "subobjid": "crh",
+                        "display": "Carhenge"
+                    },
+                    {
+                        "subobjid": "lmc",
+                        "display": "Lake McConaughy"
+                    },
+                    {
+                        "subobjid": "gst",
+                        "display": "Golden Spike Tower"
+                    },
+                    {
+                        "subobjid": "slt",
+                        "display": "Scott Lookout Tower"
+                    },
+                    {
+                        "subobjid": "gpr",
+                        "display": "Great Platte River Road Archway Monument"
+                    },
+                    {
+                        "subobjid": "bb",
+                        "display": "Brownville Boat"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete 3 deliveries from the Utility Vehicle Factory in Lincoln to each of the RV dealers in Omaha, Norfolk, and Columbus (requires Nebraska DLC)",
@@ -1754,18 +3925,18 @@
                 "values": [
                     {
                         "subobjid": "corn",
-                        "display": "Corn (Maize)"
+                        "display": "Corn"
                     },
                     {
-                        "subobjid": "grain",
+                        "subobjid": "gr",
                         "display": "Grain"
                     },
                     {
-                        "subobjid": "potatoes",
+                        "subobjid": "pt",
                         "display": "Potatoes"
                     },
                     {
-                        "subobjid": "soybean",
+                        "subobjid": "sy",
                         "display": "Soybean"
                     }
                 ]
@@ -1780,7 +3951,54 @@
         },
         "id": "ar_visit_cities",
         "name": "The Natural State",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "spd",
+                        "display": "Springdale"
+                    },
+                    {
+                        "subobjid": "fy",
+                        "display": "Fayetteville"
+                    },
+                    {
+                        "subobjid": "fs",
+                        "display": "Fort Smith"
+                    },
+                    {
+                        "subobjid": "txk",
+                        "display": "Texarkana"
+                    },
+                    {
+                        "subobjid": "hs",
+                        "display": "Hot Springs"
+                    },
+                    {
+                        "subobjid": "hrs",
+                        "display": "Harrison"
+                    },
+                    {
+                        "subobjid": "eld",
+                        "display": "El Dorado"
+                    },
+                    {
+                        "subobjid": "lr",
+                        "display": "Little Rock"
+                    },
+                    {
+                        "subobjid": "pb",
+                        "display": "Pine Bluff"
+                    },
+                    {
+                        "subobjid": "jb",
+                        "display": "Jonesboro"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "View cutscenes from at least 8 viewpoints in Arkansas (requires Arkansas DLC)",
@@ -1805,27 +4023,35 @@
                     },
                     {
                         "subobjid": "eha",
-                        "display": "US-412 (East of Harrison)"
+                        "display": "Norfolk Lake"
                     },
                     {
                         "subobjid": "eel",
-                        "display": "US-65 (East of El Dorado)"
+                        "display": "Lake Village"
                     },
                     {
                         "subobjid": "pb",
-                        "display": "Pine Bluff"
+                        "display": "Pine Bluff Lock & Dam 4"
                     },
                     {
                         "subobjid": "txe",
-                        "display": "Texarkana - Evergreen"
+                        "display": "Magnolia"
                     },
                     {
-                        "subobjid": "hst",
-                        "display": "Hot Springs - Taylor Construction Group"
+                        "subobjid": "hs",
+                        "display": "Hot Springs"
                     },
                     {
-                        "subobjid": "fsm",
-                        "display": "Fort Smith - MWM"
+                        "subobjid": "fs",
+                        "display": "Fort Smith"
+                    },
+                    {
+                        "subobjid": "lr",
+                        "display": "Little Rock"
+                    },
+                    {
+                        "subobjid": "ano",
+                        "display": "Arkansas Nuclear One"
                     }
                 ]
             }
@@ -1842,13 +4068,13 @@
         "objectives": [
             {
                 "type": "counter",
-                "obj": "logs",
+                "objid": "logs",
                 "display": "Log Deliveries to Chuck & Jack's",
                 "goal": 3
             },
             {
                 "type": "counter",
-                "obj": "shavings",
+                "objid": "shavings",
                 "display": "Wood Shavings Deliveries to Page & Price Paper",
                 "goal": 3
             }
@@ -1925,7 +4151,50 @@
         },
         "id": "aca_interior",
         "name": "Professional Driver",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "scenarios",
+                "values": [
+                    {
+                        "subobjid": "41",
+                        "display": "Reversing with a Trailer"
+                    },
+                    {
+                        "subobjid": "42",
+                        "display": "Reversing into a Turn"
+                    },
+                    {
+                        "subobjid": "43",
+                        "display": "Alley Parking Maoeuvre"
+                    },
+                    {
+                        "subobjid": "44",
+                        "display": "Offset Reversing Manoeuvre"
+                    },
+                    {
+                        "subobjid": "45",
+                        "display": "Diagonal Parking in Reverse"
+                    },
+                    {
+                        "subobjid": "46",
+                        "display": "Blind Side Reversing"
+                    },
+                    {
+                        "subobjid": "47",
+                        "display": "Reversing From a 45 Degree Set-Up"
+                    },
+                    {
+                        "subobjid": "48",
+                        "display": "Manoeuvring in a Tight Space"
+                    },
+                    {
+                        "subobjid": "49",
+                        "display": "Parallel Parking with a Trailer"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete at least 28 scenarios in Truck Driving Basics including the final exams (Driving Academy)",
@@ -1935,7 +4204,14 @@
         },
         "id": "aca_truck_driving",
         "name": "Dedicated Student",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "counter",
+                "objid": "scenarios",
+                "display": "Scenarios Completed",
+                "goal": 28
+            }
+        ]
     },
     {
         "desc": "Complete any scenario in fourth chapter of Truck Driving Basics in one \nattempt without correcting by driving forward (Driving Academy)",
@@ -1955,7 +4231,106 @@
         },
         "id": "aca_manual_transmission",
         "name": "Rowing Through the Gears",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "scenarios",
+                "values": [
+                    {
+                        "subobjid": "21",
+                        "display": "Ch. 2 - Parking Next to an Obstacle"
+                    },
+                    {
+                        "subobjid": "22",
+                        "display": "Ch. 2 - Slalom Between the Cones"
+                    },
+                    {
+                        "subobjid": "23",
+                        "display": "Ch. 2 - Combined Driving Manoeuvres"
+                    },
+                    {
+                        "subobjid": "24",
+                        "display": "Ch. 2 - Reverse Parking Next to an Obstacle"
+                    },
+                    {
+                        "subobjid": "25",
+                        "display": "Ch. 2 - Parallel Parking"
+                    },
+                    {
+                        "subobjid": "26",
+                        "display": "Ch. 2 - Simple Training Course"
+                    },
+                    {
+                        "subobjid": "27",
+                        "display": "Ch. 2 - Advanced Training Course"
+                    },
+                    {
+                        "subobjid": "31",
+                        "display": "Ch. 3 - Connecting a Trailer"
+                    },
+                    {
+                        "subobjid": "32",
+                        "display": "Ch. 3 - Braking with a Trailer"
+                    },
+                    {
+                        "subobjid": "33",
+                        "display": "Ch. 3 - Parking in a Narrow Space"
+                    },
+                    {
+                        "subobjid": "34",
+                        "display": "Ch. 3 - Diagonal Parking"
+                    },
+                    {
+                        "subobjid": "35",
+                        "display": "Ch. 3 - Jug Handle and Button Hook Turns"
+                    },
+                    {
+                        "subobjid": "36",
+                        "display": "Ch. 3 - Driving on a Road Course"
+                    },
+                    {
+                        "subobjid": "37",
+                        "display": "Ch. 3 - Advanced Training Course - Trailer"
+                    },
+                    {
+                        "subobjid": "41",
+                        "display": "Ch. 4 - Reversing with a Trailer"
+                    },
+                    {
+                        "subobjid": "42",
+                        "display": "Ch. 4 - Reversing into a Turn"
+                    },
+                    {
+                        "subobjid": "43",
+                        "display": "Ch. 4 - Alley Parking Maoeuvre"
+                    },
+                    {
+                        "subobjid": "44",
+                        "display": "Ch. 4 - Offset Reversing Manoeuvre"
+                    },
+                    {
+                        "subobjid": "45",
+                        "display": "Ch. 4 - Diagonal Parking in Reverse"
+                    },
+                    {
+                        "subobjid": "46",
+                        "display": "Ch. 4 - Blind Side Reversing"
+                    },
+                    {
+                        "subobjid": "47",
+                        "display": "Ch. 4 - Reversing From a 45 Degree Set-Up"
+                    },
+                    {
+                        "subobjid": "48",
+                        "display": "Ch. 4 - Manoeuvring in a Tight Space"
+                    },
+                    {
+                        "subobjid": "49",
+                        "display": "Ch. 4 - Parallel Parking with a Trailer"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete any 5 scenarios in a row without failure from the third or fourth chapter in Truck Driving Basics (Driving Academy)",
@@ -1965,6 +4340,13 @@
         },
         "id": "aca_consecutive",
         "name": "Failure Is Not an Option",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "counter",
+                "objid": "scenarios",
+                "display": "Scenarios",
+                "goal": 5
+            }
+        ]
     }
 ]

@@ -57,7 +57,266 @@
         },
         "id": "use_all_ports",
         "name": "Successfully Docked",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "ports",
+                "values": [
+                    {
+                        "subobjid": "gbnut",
+                        "display": "Newcastle upon Tyne (GB)"
+                    },
+                    {
+                        "subobjid": "gbgr",
+                        "display": "Grimsby (GB)"
+                    },
+                    {
+                        "subobjid": "gbfe",
+                        "display": "Felixstowe (GB)"
+                    },
+                    {
+                        "subobjid": "gbdt",
+                        "display": "Dover, Train (GB)"
+                    },
+                    {
+                        "subobjid": "fct",
+                        "display": "Calais, Train (F)"
+                    },
+                    {
+                        "subobjid": "gbdf",
+                        "display": "Dover, Ferry (GB)"
+                    },
+                    {
+                        "subobjid": "fcf",
+                        "display": "Calais, Ferry (F)"
+                    },
+                    {
+                        "subobjid": "gbpl",
+                        "display": "Plymouth (GB)"
+                    },
+                    {
+                        "subobjid": "fro",
+                        "display": "Roscoff (F)"
+                    },
+                    {
+                        "subobjid": "esa",
+                        "display": "Santander (E)"
+                    },
+                    {
+                        "subobjid": "ebi",
+                        "display": "Bilbao (E)"
+                    },
+                    {
+                        "subobjid": "nlr",
+                        "display": "Rotterdam (NL)"
+                    },
+                    {
+                        "subobjid": "nla",
+                        "display": "Amsterdam (NL)"
+                    },
+                    {
+                        "subobjid": "dke",
+                        "display": "Esbjerg (DK)"
+                    },
+                    {
+                        "subobjid": "dkh",
+                        "display": "Hirtshals (DK)"
+                    },
+                    {
+                        "subobjid": "dkf",
+                        "display": "Frederikshavn (DK)"
+                    },
+                    {
+                        "subobjid": "dkg",
+                        "display": "Gedser (DK)"
+                    },
+                    {
+                        "subobjid": "gtr",
+                        "display": "3x Travemünde (G)"
+                    },
+                    {
+                        "subobjid": "gro",
+                        "display": "Rostock (G)"
+                    },
+                    {
+                        "subobjid": "plg",
+                        "display": "2x Gdańsk (PL)"
+                    },
+                    {
+                        "subobjid": "str",
+                        "display": "Trelleborg (S)"
+                    },
+                    {
+                        "subobjid": "ska",
+                        "display": "Karlskrona (S)"
+                    },
+                    {
+                        "subobjid": "sgo",
+                        "display": "Göteborg (S)"
+                    },
+                    {
+                        "subobjid": "sny",
+                        "display": "Nynäshamn (S)"
+                    },
+                    {
+                        "subobjid": "skp",
+                        "display": "Kapellskär (S)"
+                    },
+                    {
+                        "subobjid": "nos",
+                        "display": "Oslo (N)"
+                    },
+                    {
+                        "subobjid": "nkr",
+                        "display": "Kristiansand (N)"
+                    },
+                    {
+                        "subobjid": "nst",
+                        "display": "Stavanger (N)"
+                    },
+                    {
+                        "subobjid": "nbe",
+                        "display": "Bergen (N)"
+                    },
+                    {
+                        "subobjid": "lvl",
+                        "display": "Liepāja (LV)"
+                    },
+                    {
+                        "subobjid": "lvv",
+                        "display": "Ventspils (LV)"
+                    },
+                    {
+                        "subobjid": "estpa",
+                        "display": "Paldiski (EST)"
+                    },
+                    {
+                        "subobjid": "estta",
+                        "display": "Tallinn (EST)"
+                    },
+                    {
+                        "subobjid": "fina",
+                        "display": "Naantali (FI)"
+                    },
+                    {
+                        "subobjid": "fihe",
+                        "display": "Helsinki (FI)"
+                    },
+                    {
+                        "subobjid": "eva",
+                        "display": "València (E)"
+                    },
+                    {
+                        "subobjid": "eba",
+                        "display": "Barcelona (E)"
+                    },
+                    {
+                        "subobjid": "isa",
+                        "display": "Sassari (I)"
+                    },
+                    {
+                        "subobjid": "ica",
+                        "display": "Cagliari (I)"
+                    },
+                    {
+                        "subobjid": "faj",
+                        "display": "Ajaccio (F)"
+                    },
+                    {
+                        "subobjid": "fpv",
+                        "display": "Porto-Vecchio (F)"
+                    },
+                    {
+                        "subobjid": "fmr",
+                        "display": "Marseille (F)"
+                    },
+                    {
+                        "subobjid": "ina",
+                        "display": "Naples (I)"
+                    },
+                    {
+                        "subobjid": "ipa",
+                        "display": "Palermo (I)"
+                    },
+                    {
+                        "subobjid": "ime",
+                        "display": "Messina (I)"
+                    },
+                    {
+                        "subobjid": "ivsg",
+                        "display": "Villa San Giovanni (I)"
+                    },
+                    {
+                        "subobjid": "iba",
+                        "display": "Bari (I)"
+                    },
+                    {
+                        "subobjid": "ian",
+                        "display": "Ancona (I)"
+                    },
+                    {
+                        "subobjid": "itr",
+                        "display": "Trieste (I)"
+                    },
+                    {
+                        "subobjid": "hrs",
+                        "display": "Split (HR)"
+                    },
+                    {
+                        "subobjid": "aldu",
+                        "display": "Durrës (AL)"
+                    },
+                    {
+                        "subobjid": "roga",
+                        "display": "2x Galați (RO)"
+                    },
+                    {
+                        "subobjid": "grio",
+                        "display": "2x Ioannina (Ιωάννινα) (GR)"
+                    },
+                    {
+                        "subobjid": "grar",
+                        "display": "2x Argostoli (Αργοστόλι) (GR)"
+                    },
+                    {
+                        "subobjid": "grpa",
+                        "display": "2x Patras (Πάτρα) (GR)"
+                    },
+                    {
+                        "subobjid": "grka",
+                        "display": "Kalamata (Καλαμάτα) (GR)"
+                    },
+                    {
+                        "subobjid": "grch",
+                        "display": "2x Chania (Χανιά) (GR)"
+                    },
+                    {
+                        "subobjid": "grhe",
+                        "display": "Heraklion (Ηράκλειο) (GR)"
+                    },
+                    {
+                        "subobjid": "grrh",
+                        "display": "Rhodes (Ρόδος) (GR)"
+                    },
+                    {
+                        "subobjid": "grat",
+                        "display": "Athens (Αθήνα) (GR)"
+                    },
+                    {
+                        "subobjid": "grci",
+                        "display": "Chios (Χίος) (GR)"
+                    },
+                    {
+                        "subobjid": "grmi",
+                        "display": "Mitilini (Μυτιλήνη) (GR)"
+                    },
+                    {
+                        "subobjid": "grkv",
+                        "display": "Kavala (Καβάλα) (GR)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Buy a truck online",
@@ -93,31 +352,31 @@
                 "objid": "brands",
                 "values": [
                     {
-                        "subobjid": "man",
+                        "subobjid": "ma",
                         "display": "MAN"
                     },
                     {
-                        "subobjid": "daf",
+                        "subobjid": "da",
                         "display": "DAF"
                     },
                     {
-                        "subobjid": "mercedes",
+                        "subobjid": "me",
                         "display": "Mercedes-Benz"
                     },
                     {
-                        "subobjid": "renault",
+                        "subobjid": "re",
                         "display": "Renault"
                     },
                     {
-                        "subobjid": "iveco",
+                        "subobjid": "iv",
                         "display": "Iveco"
                     },
                     {
-                        "subobjid": "scania",
+                        "subobjid": "sc",
                         "display": "Scania"
                     },
                     {
-                        "subobjid": "volvo",
+                        "subobjid": "vo",
                         "display": "Volvo"
                     }
                 ]
@@ -178,35 +437,35 @@
                 "objid": "cargotype",
                 "values": [
                     {
-                        "subobjid": "machinery",
+                        "subobjid": "m",
                         "display": "Machinery"
                     },
                     {
-                        "subobjid": "adr",
+                        "subobjid": "a",
                         "display": "ADR Cargo"
                     },
                     {
-                        "subobjid": "container",
+                        "subobjid": "co",
                         "display": "Container"
                     },
                     {
-                        "subobjid": "reefer",
+                        "subobjid": "r",
                         "display": "Refrigerated"
                     },
                     {
-                        "subobjid": "liquid",
+                        "subobjid": "l",
                         "display": "Liquid"
                     },
                     {
-                        "subobjid": "fragile",
+                        "subobjid": "f",
                         "display": "Fragile"
                     },
                     {
-                        "subobjid": "construction",
+                        "subobjid": "cs",
                         "display": "Construction"
                     },
                     {
-                        "subobjid": "bulk",
+                        "subobjid": "b",
                         "display": "Bulk"
                     }
                 ]
@@ -394,16 +653,16 @@
                 "objid": "marinas",
                 "values": [
                     {
-                        "subobjid": "esbjerg",
-                        "display": "Esbjerg (Denmark)"
+                        "subobjid": "e",
+                        "display": "Esbjerg (DK)"
                     },
                     {
-                        "subobjid": "oslo",
-                        "display": "Oslo (Norway)"
+                        "subobjid": "o",
+                        "display": "Oslo (N)"
                     },
                     {
-                        "subobjid": "stockholm",
-                        "display": "Stockholm (Sweden)"
+                        "subobjid": "s",
+                        "display": "Stockholm (S)"
                     }
                 ]
             }
@@ -423,12 +682,12 @@
                 "objid": "ports",
                 "values": [
                     {
-                        "subobjid": "esbjerg",
-                        "display": "Esbjerg (Denmark)"
+                        "subobjid": "e",
+                        "display": "Esbjerg (DK)"
                     },
                     {
-                        "subobjid": "oslo",
-                        "display": "Oslo (Norway)"
+                        "subobjid": "o",
+                        "display": "Oslo (N)"
                     }
                 ]
             }
@@ -452,7 +711,122 @@
         },
         "id": "sc_visit_cities",
         "name": "Sightseer",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "dka",
+                        "display": "Aalborg (DK)"
+                    },
+                    {
+                        "subobjid": "dkes",
+                        "display": "Esbjerg (DK)"
+                    },
+                    {
+                        "subobjid": "dkfr",
+                        "display": "Frederikshavn (DK)"
+                    },
+                    {
+                        "subobjid": "dkge",
+                        "display": "Gedser (DK)"
+                    },
+                    {
+                        "subobjid": "dkhi",
+                        "display": "Hirtshals (DK)"
+                    },
+                    {
+                        "subobjid": "dkko",
+                        "display": "København (DK)"
+                    },
+                    {
+                        "subobjid": "dkod",
+                        "display": "Odense (DK)"
+                    },
+                    {
+                        "subobjid": "nbe",
+                        "display": "Bergen (N)"
+                    },
+                    {
+                        "subobjid": "nkr",
+                        "display": "Kristiansand (N)"
+                    },
+                    {
+                        "subobjid": "nos",
+                        "display": "Oslo (N)"
+                    },
+                    {
+                        "subobjid": "nst",
+                        "display": "Stavanger (N)"
+                    },
+                    {
+                        "subobjid": "sgo",
+                        "display": "Göteborg (S)"
+                    },
+                    {
+                        "subobjid": "she",
+                        "display": "Helsingborg (S)"
+                    },
+                    {
+                        "subobjid": "sjo",
+                        "display": "Jönköping (S)"
+                    },
+                    {
+                        "subobjid": "skl",
+                        "display": "Kalmar (S)"
+                    },
+                    {
+                        "subobjid": "skp",
+                        "display": "Kapellskär (S)"
+                    },
+                    {
+                        "subobjid": "skk",
+                        "display": "Karlskrona (S)"
+                    },
+                    {
+                        "subobjid": "sli",
+                        "display": "Linköping (S)"
+                    },
+                    {
+                        "subobjid": "sma",
+                        "display": "Malmö (S)"
+                    },
+                    {
+                        "subobjid": "sny",
+                        "display": "Nynäshamn (S)"
+                    },
+                    {
+                        "subobjid": "sor",
+                        "display": "Örebro (S)"
+                    },
+                    {
+                        "subobjid": "sto",
+                        "display": "Stockholm (S)"
+                    },
+                    {
+                        "subobjid": "sod",
+                        "display": "Södertälje (S)"
+                    },
+                    {
+                        "subobjid": "str",
+                        "display": "Trelleborg (S)"
+                    },
+                    {
+                        "subobjid": "sup",
+                        "display": "Uppsala (S)"
+                    },
+                    {
+                        "subobjid": "svs",
+                        "display": "Västerås (S)"
+                    },
+                    {
+                        "subobjid": "svx",
+                        "display": "Växjö (S)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete delivery jobs to all quarries in Scandinavia (requires Scandinavia DLC)",
@@ -469,31 +843,31 @@
                 "values": [
                     {
                         "subobjid": "jonkoping",
-                        "display": "Jönköping (Sweden)"
+                        "display": "Jönköping (S)"
                     },
                     {
                         "subobjid": "kalmar",
-                        "display": "Kalmar (Sweden)"
+                        "display": "Kalmar (S)"
                     },
                     {
                         "subobjid": "vaxjo",
-                        "display": "Vaxjö (Sweden)"
+                        "display": "Vaxjö (S)"
                     },
                     {
                         "subobjid": "linkoping",
-                        "display": "Linköping (Sweden)"
+                        "display": "Linköping (S)"
                     },
                     {
                         "subobjid": "oslo",
-                        "display": "Oslo (Norway)"
+                        "display": "Oslo (N)"
                     },
                     {
                         "subobjid": "stavanger",
-                        "display": "Stavanger (Norway)"
+                        "display": "Stavanger (N)"
                     },
                     {
                         "subobjid": "kristiansand",
-                        "display": "Kristiansand (Norway)"
+                        "display": "Kristiansand (N)"
                     }
                 ]
             }
@@ -517,7 +891,138 @@
         },
         "id": "fr_visit_cities",
         "name": "Bon Voyage!",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "a",
+                        "display": "Ajaccio"
+                    },
+                    {
+                        "subobjid": "bs",
+                        "display": "Bastia"
+                    },
+                    {
+                        "subobjid": "by",
+                        "display": "Bayonne"
+                    },
+                    {
+                        "subobjid": "bn",
+                        "display": "Bonifacio"
+                    },
+                    {
+                        "subobjid": "br",
+                        "display": "Bordeaux"
+                    },
+                    {
+                        "subobjid": "bu",
+                        "display": "Bourges"
+                    },
+                    {
+                        "subobjid": "bres",
+                        "display": "Brest"
+                    },
+                    {
+                        "subobjid": "ci",
+                        "display": "Calais"
+                    },
+                    {
+                        "subobjid": "cv",
+                        "display": "Calvi"
+                    },
+                    {
+                        "subobjid": "cf",
+                        "display": "Clermont-Ferrand"
+                    },
+                    {
+                        "subobjid": "d",
+                        "display": "Dijon"
+                    },
+                    {
+                        "subobjid": "lir",
+                        "display": "L'Île-Rousse"
+                    },
+                    {
+                        "subobjid": "lq",
+                        "display": "Lacq"
+                    },
+                    {
+                        "subobjid": "lr",
+                        "display": "La Rochelle"
+                    },
+                    {
+                        "subobjid": "lh",
+                        "display": "Le Havre"
+                    },
+                    {
+                        "subobjid": "lm",
+                        "display": "Le Mans"
+                    },
+                    {
+                        "subobjid": "li",
+                        "display": "Lille"
+                    },
+                    {
+                        "subobjid": "lg",
+                        "display": "Limoges"
+                    },
+                    {
+                        "subobjid": "ly",
+                        "display": "Lyon"
+                    },
+                    {
+                        "subobjid": "ma",
+                        "display": "Marseille"
+                    },
+                    {
+                        "subobjid": "me",
+                        "display": "Metz"
+                    },
+                    {
+                        "subobjid": "mo",
+                        "display": "Montpellier"
+                    },
+                    {
+                        "subobjid": "na",
+                        "display": "Nantes"
+                    },
+                    {
+                        "subobjid": "ni",
+                        "display": "Nice"
+                    },
+                    {
+                        "subobjid": "pr",
+                        "display": "Paris"
+                    },
+                    {
+                        "subobjid": "pv",
+                        "display": "Porto-Vecchio"
+                    },
+                    {
+                        "subobjid": "ri",
+                        "display": "Reims"
+                    },
+                    {
+                        "subobjid": "rn",
+                        "display": "Rennes"
+                    },
+                    {
+                        "subobjid": "ro",
+                        "display": "Roscoff"
+                    },
+                    {
+                        "subobjid": "st",
+                        "display": "Strasbourg"
+                    },
+                    {
+                        "subobjid": "to",
+                        "display": "Toulouse"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Discover following landmarks of France: Carcassonne, Brotonne bridge, Tiger tank, Peyrat-le-Château, Château de Ventadour, Château d'Ussé (requires Vive la France ! DLC)",
@@ -533,27 +1038,27 @@
                 "objid": "landmarks",
                 "values": [
                     {
-                        "subobjid": "brotonne",
+                        "subobjid": "bb",
                         "display": "Brotonne Bridge"
                     },
                     {
-                        "subobjid": "carcassonne",
+                        "subobjid": "ca",
                         "display": "Carcassonne"
                     },
                     {
-                        "subobjid": "usse",
+                        "subobjid": "cu",
                         "display": "Château d'Ussé"
                     },
                     {
-                        "subobjid": "ventadour",
+                        "subobjid": "cv",
                         "display": "Château de Ventadour"
                     },
                     {
-                        "subobjid": "peyrat",
+                        "subobjid": "py",
                         "display": "Peyrat-le-Château"
                     },
                     {
-                        "subobjid": "tigertank",
+                        "subobjid": "tt",
                         "display": "Tiger Tank"
                     }
                 ]
@@ -574,23 +1079,23 @@
                 "objid": "plants",
                 "values": [
                     {
-                        "subobjid": "civaux",
+                        "subobjid": "ci",
                         "display": "Civaux"
                     },
                     {
-                        "subobjid": "golfech",
+                        "subobjid": "go",
                         "display": "Golfech"
                     },
                     {
-                        "subobjid": "paluel",
+                        "subobjid": "pa",
                         "display": "Paluel"
                     },
                     {
-                        "subobjid": "stalban",
+                        "subobjid": "sa",
                         "display": "Saint-Alban-du-Rhone"
                     },
                     {
-                        "subobjid": "stlaurent",
+                        "subobjid": "sl",
                         "display": "Saint-Laurent"
                     }
                 ]
@@ -611,35 +1116,35 @@
                 "objid": "airports",
                 "values": [
                     {
-                        "subobjid": "basti",
+                        "subobjid": "ba",
                         "display": "Basti"
                     },
                     {
-                        "subobjid": "brest",
+                        "subobjid": "br",
                         "display": "Brest"
                     },
                     {
-                        "subobjid": "calvi",
+                        "subobjid": "ca",
                         "display": "Calvi"
                     },
                     {
-                        "subobjid": "clermont",
+                        "subobjid": "cl",
                         "display": "Clermont-Ferrand"
                     },
                     {
-                        "subobjid": "montpellier",
+                        "subobjid": "mo",
                         "display": "Montpellier"
                     },
                     {
-                        "subobjid": "nantes",
+                        "subobjid": "na",
                         "display": "Nantes"
                     },
                     {
-                        "subobjid": "paris",
+                        "subobjid": "pa",
                         "display": "Paris"
                     },
                     {
-                        "subobjid": "toulouse",
+                        "subobjid": "to",
                         "display": "Toulouse"
                     }
                 ]
@@ -660,31 +1165,31 @@
                 "objid": "truckstop",
                 "values": [
                     {
-                        "subobjid": "bordeaux",
+                        "subobjid": "bo",
                         "display": "Bordeaux"
                     },
                     {
-                        "subobjid": "havre",
+                        "subobjid": "ha",
                         "display": "Le Havre"
                     },
                     {
-                        "subobjid": "mans",
+                        "subobjid": "lm",
                         "display": "Le Mans"
                     },
                     {
-                        "subobjid": "limoges",
+                        "subobjid": "li",
                         "display": "Limoges"
                     },
                     {
-                        "subobjid": "marseille",
+                        "subobjid": "ma",
                         "display": "Marseille"
                     },
                     {
-                        "subobjid": "montpellier",
+                        "subobjid": "mo",
                         "display": "Montpellier"
                     },
                     {
-                        "subobjid": "nantes",
+                        "subobjid": "na",
                         "display": "Nantes"
                     }
                 ]
@@ -709,7 +1214,14 @@
         },
         "id": "hc_threeperf",
         "name": "Keep Calm and Haul Heavy",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "counter",
+                "objid": "deliveries",
+                "display": "Consecutive Heavy Deliveries",
+                "goal": 3
+            }
+        ]
     },
     {
         "desc": "Collect 1,000 XP from parking on Heavy Cargo Pack deliveries (requires Heavy Cargo Pack DLC)",
@@ -745,36 +1257,36 @@
                 "objid": "cargo",
                 "values": [
                     {
-                        "subobjid": "miller",
-                        "display": "Asphalt Miller (44t)"
+                        "subobjid": "am",
+                        "display": "Asphalt Miller"
                     },
                     {
-                        "subobjid": "cable",
-                        "display": "Industrial Cable Reel (34t)"
+                        "subobjid": "icr",
+                        "display": "Industrial Cable Reel"
                     },
                     {
-                        "subobjid": "beams",
-                        "display": "Concrete Beams (51t)"
+                        "subobjid": "cb",
+                        "display": "Concrete Beams"
                     },
                     {
-                        "subobjid": "dozer",
-                        "display": "Dozer Crawl (39t)"
+                        "subobjid": "dc",
+                        "display": "Dozer Crawl"
                     },
                     {
-                        "subobjid": "locomotive",
-                        "display": "Locomotive (61t)"
+                        "subobjid": "lo",
+                        "display": "Locomotive"
                     },
                     {
-                        "subobjid": "centering",
-                        "display": "Metal Centering (28t)"
+                        "subobjid": "mec",
+                        "display": "Metal Centering"
                     },
                     {
-                        "subobjid": "crane",
-                        "display": "Mobile Crane (36t)"
+                        "subobjid": "moc",
+                        "display": "Mobile Crane"
                     },
                     {
-                        "subobjid": "transformer",
-                        "display": "Transformer (47t)"
+                        "subobjid": "tr",
+                        "display": "Transformer"
                     }
                 ]
             }
@@ -788,7 +1300,122 @@
         },
         "id": "it_visit_cities",
         "name": "Imperator",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "a",
+                        "display": "Ancona"
+                    },
+                    {
+                        "subobjid": "ba",
+                        "display": "Bari"
+                    },
+                    {
+                        "subobjid": "bo",
+                        "display": "Bologna"
+                    },
+                    {
+                        "subobjid": "cg",
+                        "display": "Cagliari"
+                    },
+                    {
+                        "subobjid": "cs",
+                        "display": "Cassino"
+                    },
+                    {
+                        "subobjid": "ct",
+                        "display": "Catania"
+                    },
+                    {
+                        "subobjid": "cz",
+                        "display": "Catanzaro"
+                    },
+                    {
+                        "subobjid": "f",
+                        "display": "Firenze"
+                    },
+                    {
+                        "subobjid": "g",
+                        "display": "Genova"
+                    },
+                    {
+                        "subobjid": "l",
+                        "display": "Livorno"
+                    },
+                    {
+                        "subobjid": "me",
+                        "display": "Messina"
+                    },
+                    {
+                        "subobjid": "mi",
+                        "display": "Milano"
+                    },
+                    {
+                        "subobjid": "n",
+                        "display": "Napoli"
+                    },
+                    {
+                        "subobjid": "o",
+                        "display": "Olbia"
+                    },
+                    {
+                        "subobjid": "pl",
+                        "display": "Palermo"
+                    },
+                    {
+                        "subobjid": "pr",
+                        "display": "Parma"
+                    },
+                    {
+                        "subobjid": "ps",
+                        "display": "Pescara"
+                    },
+                    {
+                        "subobjid": "r",
+                        "display": "Roma"
+                    },
+                    {
+                        "subobjid": "sa",
+                        "display": "Sassari"
+                    },
+                    {
+                        "subobjid": "su",
+                        "display": "Suzzara"
+                    },
+                    {
+                        "subobjid": "ta",
+                        "display": "Taranto"
+                    },
+                    {
+                        "subobjid": "te",
+                        "display": "Terni"
+                    },
+                    {
+                        "subobjid": "to",
+                        "display": "Torino"
+                    },
+                    {
+                        "subobjid": "tr",
+                        "display": "Trieste"
+                    },
+                    {
+                        "subobjid": "vn",
+                        "display": "Venezia"
+                    },
+                    {
+                        "subobjid": "vr",
+                        "display": "Verona"
+                    },
+                    {
+                        "subobjid": "vsg",
+                        "display": "Villa San Giovanni"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Own a garage in every Sicilian city (requires Italia DLC)",
@@ -804,15 +1431,15 @@
                 "objid": "garages",
                 "values": [
                     {
-                        "subobjid": "catania",
+                        "subobjid": "c",
                         "display": "Catania"
                     },
                     {
-                        "subobjid": "messina",
+                        "subobjid": "m",
                         "display": "Messina"
                     },
                     {
-                        "subobjid": "palermo",
+                        "subobjid": "p",
                         "display": "Palermo"
                     }
                 ]
@@ -833,11 +1460,11 @@
                 "objid": "shipyards",
                 "values": [
                     {
-                        "subobjid": "ancona",
+                        "subobjid": "a",
                         "display": "Ancona"
                     },
                     {
-                        "subobjid": "messina",
+                        "subobjid": "m",
                         "display": "Messina"
                     }
                 ]
@@ -858,11 +1485,11 @@
                 "objid": "volcanoes",
                 "values": [
                     {
-                        "subobjid": "etna",
+                        "subobjid": "e",
                         "display": "Etna (Messina)"
                     },
                     {
-                        "subobjid": "vesuvius",
+                        "subobjid": "v",
                         "display": "Vesuvius (Napoli)"
                     }
                 ]
@@ -883,19 +1510,19 @@
                 "objid": "corridors",
                 "values": [
                     {
-                        "subobjid": "north",
+                        "subobjid": "n",
                         "display": "A90 from North"
                     },
                     {
-                        "subobjid": "east",
+                        "subobjid": "e",
                         "display": "A24 from East"
                     },
                     {
-                        "subobjid": "south",
+                        "subobjid": "s",
                         "display": "A1 from South"
                     },
                     {
-                        "subobjid": "west",
+                        "subobjid": "w",
                         "display": "A12 from West"
                     }
                 ]
@@ -930,7 +1557,58 @@
         },
         "id": "st_all_cargos",
         "name": "The Bigger the Better",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cargos",
+                "values": [
+                    {
+                        "subobjid": "bp",
+                        "display": "Boiler Part"
+                    },
+                    {
+                        "subobjid": "cs",
+                        "display": "Construction Staircase"
+                    },
+                    {
+                        "subobjid": "eb",
+                        "display": "Excavator Bucket"
+                    },
+                    {
+                        "subobjid": "gs",
+                        "display": "Giant Silo"
+                    },
+                    {
+                        "subobjid": "htc",
+                        "display": "Haul Truck Chassis"
+                    },
+                    {
+                        "subobjid": "he",
+                        "display": "Heat Exchanger"
+                    },
+                    {
+                        "subobjid": "htd",
+                        "display": "High Tech Device"
+                    },
+                    {
+                        "subobjid": "ht",
+                        "display": "Huge Tires"
+                    },
+                    {
+                        "subobjid": "ic",
+                        "display": "Industrial Condenser"
+                    },
+                    {
+                        "subobjid": "mtp",
+                        "display": "Massive Tech Part"
+                    },
+                    {
+                        "subobjid": "sb",
+                        "display": "Service Boat"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete deliveries on all oversize routes in current map (requires Special Transport DLC)",
@@ -940,7 +1618,246 @@
         },
         "id": "st_all_routes",
         "name": "Driver Exceptionnel",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "routes",
+                "values": [
+                    {
+                        "subobjid": "liabrcz",
+                        "display": "Linz (A) to Brno (CZ)"
+                    },
+                    {
+                        "subobjid": "brbamnl",
+                        "display": "Brussel (B) to Amsterdam (NL)"
+                    },
+                    {
+                        "subobjid": "prcznüd",
+                        "display": "Praha (CZ) to Nürnberg (D)"
+                    },
+                    {
+                        "subobjid": "cabi",
+                        "display": "Cardiff (GB) to Birmingham (GB)"
+                    },
+                    {
+                        "subobjid": "glab",
+                        "display": "Glasgow (GB) to Aberdeen (GB)"
+                    },
+                    {
+                        "subobjid": "lofe",
+                        "display": "London (GB) to Felixstowe (GB)"
+                    },
+                    {
+                        "subobjid": "pldo",
+                        "display": "Plymouth (GB) to Dover (GB)"
+                    },
+                    {
+                        "subobjid": "shbi",
+                        "display": "Sheffield (GB) to Birmingham (GB)"
+                    },
+                    {
+                        "subobjid": "difgech",
+                        "display": "Dijon (F) to Genève (CH)"
+                    },
+                    {
+                        "subobjid": "rest",
+                        "display": "Reims (F) to Strasbourg (F)"
+                    },
+                    {
+                        "subobjid": "bedszpl",
+                        "display": "Berlin (D) to Szczecin (PL)"
+                    },
+                    {
+                        "subobjid": "brtr",
+                        "display": "Bremen (D) to Travemünde (D)"
+                    },
+                    {
+                        "subobjid": "doha",
+                        "display": "Dortmund (D) to Hannover (D)"
+                    },
+                    {
+                        "subobjid": "drdwrpl",
+                        "display": "Dresden (D) to Wrocław (PL)"
+                    },
+                    {
+                        "subobjid": "ködamnl",
+                        "display": "Köln (D) to Amsterdam (NL)"
+                    },
+                    {
+                        "subobjid": "müdsaa",
+                        "display": "München (D) to Salzburg (A)"
+                    },
+                    {
+                        "subobjid": "lullib",
+                        "display": "Luxembourg (L) to Liège (B)"
+                    },
+                    {
+                        "subobjid": "brskgra",
+                        "display": "Bratislava (SK) to Graz (A)"
+                    },
+                    {
+                        "subobjid": "pohe",
+                        "display": "Pori (FI) to Helsinki (FI)"
+                    },
+                    {
+                        "subobjid": "darē",
+                        "display": "Daugavpils (LV) to Rēzekne (LV)"
+                    },
+                    {
+                        "subobjid": "sasa",
+                        "display": "Saint Petersburg (RUS) to Saint Petersburg (RUS)"
+                    },
+                    {
+                        "subobjid": "szde",
+                        "display": "Szeged (H) to Debrecen (H)"
+                    },
+                    {
+                        "subobjid": "krplbask",
+                        "display": "Kraków (PL) to Banská Bystrica (SK)"
+                    },
+                    {
+                        "subobjid": "olbi",
+                        "display": "Olsztyn (PL) to Białystok (PL)"
+                    },
+                    {
+                        "subobjid": "waka",
+                        "display": "Warszawa (PL) to Katowice (PL)"
+                    },
+                    {
+                        "subobjid": "koskbuh",
+                        "display": "Košice (SK) to Budapest (H)"
+                    },
+                    {
+                        "subobjid": "lipo",
+                        "display": "Lisboa (P) to Ponte de Sor (P)"
+                    },
+                    {
+                        "subobjid": "olse",
+                        "display": "Olhão (P) to Setúbal (P)"
+                    },
+                    {
+                        "subobjid": "bava",
+                        "display": "Barcelona (E) to Vandellòs (E)"
+                    },
+                    {
+                        "subobjid": "gina",
+                        "display": "Gijón (E) to Navia (E)"
+                    },
+                    {
+                        "subobjid": "huse",
+                        "display": "Huelva (E) to Sevilla (E)"
+                    },
+                    {
+                        "subobjid": "mapu",
+                        "display": "Madrid (E) to Puertollano (E)"
+                    },
+                    {
+                        "subobjid": "sote",
+                        "display": "Soria (E) to Teruel (E)"
+                    },
+                    {
+                        "subobjid": "casa",
+                        "display": "Cagliari (I) to Sassari (I)"
+                    },
+                    {
+                        "subobjid": "nate",
+                        "display": "Napoli (I) to Terni (I)"
+                    },
+                    {
+                        "subobjid": "paca",
+                        "display": "Palermo (I) to Catania (I)"
+                    },
+                    {
+                        "subobjid": "vepa",
+                        "display": "Verona (I) to Parma (I)"
+                    },
+                    {
+                        "subobjid": "plso",
+                        "display": "Pleven (BG) to Sofia (BG)"
+                    },
+                    {
+                        "subobjid": "gaia",
+                        "display": "Galați (RO) to Iași (RO)"
+                    },
+                    {
+                        "subobjid": "retâ",
+                        "display": "Reșița (RO) to Târgu Mureș (RO)"
+                    },
+                    {
+                        "subobjid": "i̇ed",
+                        "display": "İstanbul (TR) to Edirne (TR)"
+                    },
+                    {
+                        "subobjid": "odhi",
+                        "display": "Odense (DK) to Hirtshals (DK)"
+                    },
+                    {
+                        "subobjid": "stos",
+                        "display": "Stavanger (N) to Oslo (N)"
+                    },
+                    {
+                        "subobjid": "göhe",
+                        "display": "Göteborg (S) to Helsingborg (S)"
+                    },
+                    {
+                        "subobjid": "lika",
+                        "display": "Linköping (S) to Kalmar (S)"
+                    },
+                    {
+                        "subobjid": "trsesdk",
+                        "display": "Trelleborg (S) to Esbjerg (DK)"
+                    },
+                    {
+                        "subobjid": "brre",
+                        "display": "Brest (F) to Rennes (F)"
+                    },
+                    {
+                        "subobjid": "naci",
+                        "display": "Nantes (F) to Civaux (F)"
+                    },
+                    {
+                        "subobjid": "nini",
+                        "display": "Nice (F) to Nice (F)"
+                    },
+                    {
+                        "subobjid": "tomo",
+                        "display": "Toulouse (F) to Montpellier (F)"
+                    },
+                    {
+                        "subobjid": "krno",
+                        "display": "Kragujevac (SRB) to Novi Sad (SRB)"
+                    },
+                    {
+                        "subobjid": "bekr",
+                        "display": "Belgrade (SRB) to Kragujevac (SRB)"
+                    },
+                    {
+                        "subobjid": "kono",
+                        "display": "Koper (SLO) to Novo Mesto (SLO)"
+                    },
+                    {
+                        "subobjid": "zeka",
+                        "display": "Zenica (BIH) to Karakaj (BIH)"
+                    },
+                    {
+                        "subobjid": "skbi",
+                        "display": "Skopje (NMK) to Bitola (NMK)"
+                    },
+                    {
+                        "subobjid": "atat",
+                        "display": "Athens (GR) to Athens (GR)"
+                    },
+                    {
+                        "subobjid": "thtr",
+                        "display": "Thessaloniki (GR) to Trikala (GR)"
+                    },
+                    {
+                        "subobjid": "iogrvlal",
+                        "display": "Ioannina (GR) to Vlorë (AL)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete 3 consecutive oversize jobs without any damage (requires Special Transport DLC)",
@@ -950,7 +1867,14 @@
         },
         "id": "st_no_damage",
         "name": "Not a Big Problem",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "counter",
+                "objid": "deliveries",
+                "display": "Consecutive special deliveries",
+                "goal": 3
+            }
+        ]
     },
     {
         "desc": "Complete delivery of the Silo cargo (requires Special Transport DLC)",
@@ -1000,7 +1924,154 @@
         },
         "id": "ba_visit_cities",
         "name": "Baltic Tourist",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "estk",
+                        "display": "Kunda (EST)"
+                    },
+                    {
+                        "subobjid": "estn",
+                        "display": "Narva (EST)"
+                    },
+                    {
+                        "subobjid": "estpa",
+                        "display": "Paldiski (EST)"
+                    },
+                    {
+                        "subobjid": "estpä",
+                        "display": "Pärnu (EST)"
+                    },
+                    {
+                        "subobjid": "esttal",
+                        "display": "Tallinn (EST)"
+                    },
+                    {
+                        "subobjid": "esttar",
+                        "display": "Tartu (EST)"
+                    },
+                    {
+                        "subobjid": "fih",
+                        "display": "Helsinki (FI)"
+                    },
+                    {
+                        "subobjid": "fikot",
+                        "display": "Kotka (FI)"
+                    },
+                    {
+                        "subobjid": "fikou",
+                        "display": "Kouvola (FI)"
+                    },
+                    {
+                        "subobjid": "fila",
+                        "display": "Lahti (FI)"
+                    },
+                    {
+                        "subobjid": "filo",
+                        "display": "Loviisa (FI)"
+                    },
+                    {
+                        "subobjid": "fin",
+                        "display": "Naantali (FI)"
+                    },
+                    {
+                        "subobjid": "fio",
+                        "display": "Olkiluoto (FI)"
+                    },
+                    {
+                        "subobjid": "fip",
+                        "display": "Pori (FI)"
+                    },
+                    {
+                        "subobjid": "fita",
+                        "display": "Tampere (FI)"
+                    },
+                    {
+                        "subobjid": "fitu",
+                        "display": "Turku (FI)"
+                    },
+                    {
+                        "subobjid": "ltka",
+                        "display": "Kaunas (LT)"
+                    },
+                    {
+                        "subobjid": "ltkl",
+                        "display": "Klaipėda (LT)"
+                    },
+                    {
+                        "subobjid": "ltm",
+                        "display": "Mažeikiai (LT)"
+                    },
+                    {
+                        "subobjid": "ltp",
+                        "display": "Panevėžys (LT)"
+                    },
+                    {
+                        "subobjid": "ltu",
+                        "display": "Utena (LT)"
+                    },
+                    {
+                        "subobjid": "ltv",
+                        "display": "Vilnius (LT)"
+                    },
+                    {
+                        "subobjid": "ltš",
+                        "display": "Šiauliai (LT)"
+                    },
+                    {
+                        "subobjid": "lvd",
+                        "display": "Daugavpils (LV)"
+                    },
+                    {
+                        "subobjid": "lvl",
+                        "display": "Liepāja (LV)"
+                    },
+                    {
+                        "subobjid": "lvrē",
+                        "display": "Rēzekne (LV)"
+                    },
+                    {
+                        "subobjid": "lvrī",
+                        "display": "Rīga (LV)"
+                    },
+                    {
+                        "subobjid": "lvva",
+                        "display": "Valmiera (LV)"
+                    },
+                    {
+                        "subobjid": "lvve",
+                        "display": "Ventspils (LV)"
+                    },
+                    {
+                        "subobjid": "rusk",
+                        "display": "Kaliningrad (RUS)"
+                    },
+                    {
+                        "subobjid": "rusl",
+                        "display": "Luga (RUS)"
+                    },
+                    {
+                        "subobjid": "rusp",
+                        "display": "Pskov (RUS)"
+                    },
+                    {
+                        "subobjid": "russa",
+                        "display": "Saint Petersburg (RUS)"
+                    },
+                    {
+                        "subobjid": "russo",
+                        "display": "Sosnovy Bor (RUS)"
+                    },
+                    {
+                        "subobjid": "rusv",
+                        "display": "Vyborg (RUS)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete perfect deliveries (no damage, no fines, on time) between the following countries: Russia - Lithuania; Lithuania - Latvia; Latvia - Estonia; Estonia - Russia; Russia - Finland. Any order or direction counts (requires Beyond the Baltic Sea DLC)",
@@ -1051,7 +2122,7 @@
             {
                 "type": "counter",
                 "objid": "jobs",
-                "display": "Deliveries",
+                "display": "Deliveries from Kaliningrad",
                 "goal": 5
             }
         ]
@@ -1085,73 +2156,73 @@
             {
                 "type": "counter",
                 "objid": "helsinki",
-                "display": "Helsinki (Renat)",
+                "display": "Helsinki, FI (Renat)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "rigaren",
-                "display": "Riga (Renat)",
+                "display": "Riga, LV (Renat)",
                 "goal": 2
             },
             {
                 "type": "counter",
-                "objid": "siauliai",
-                "display": "Siauliai (Renat)",
+                "objid": "Šiauliai ",
+                "display": "Siauliai, LT (Renat)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "rezekne",
-                "display": "Rezekne (Renat)",
+                "display": "Rēzekne , LT (Renat)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "tartu",
-                "display": "Tartu (Renat)",
+                "display": "Tartu, EST (Renat)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "dagauvpilsren",
-                "display": "Dagauvpils (Renat)",
+                "display": "Dagauvpils, LV (Renat)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "vilnius",
-                "display": "Vilnius (Vilniaus Popieriaus Fabrikas)",
+                "display": "Vilnius, LT (Vilniaus Popieriaus Fabrikas)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "rigarup",
-                "display": "Riga (Latvijas Vagonu Rupnica)",
+                "display": "Riga, LV (Latvijas Vagonu Rupnica)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "dagauvpilsrup",
-                "display": "Dagauvpils (Latvijas Vagonu Rupnica)",
+                "display": "Dagauvpils, LV (Latvijas Vagonu Rupnica)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "kouvola",
-                "display": "Kouvola (Viljo paperitehdas Oy)",
+                "display": "Kouvola, FI (Viljo paperitehdas Oy)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "tampere",
-                "display": "Tampere (Viljo paperitehdas Oy)",
+                "display": "Tampere, FI (Viljo paperitehdas Oy)",
                 "goal": 2
             },
             {
                 "type": "counter",
                 "objid": "kunda",
-                "display": "Kunda (Estonian Papers)",
+                "display": "Kunda, EST (Estonian Papers)",
                 "goal": 2
             }
         ]
@@ -1171,67 +2242,67 @@
                 "values": [
                     {
                         "subobjid": "riga",
-                        "display": "Riga (Latvia, Eviksi ZS)"
+                        "display": "Riga, LV (Eviksi ZS)"
                     },
                     {
                         "subobjid": "dagauvpils",
-                        "display": "Dagauvpils (Latvia, Eviksi ZS)"
+                        "display": "Dagauvpils, LV (Eviksi ZS)"
                     },
                     {
                         "subobjid": "ventspils",
-                        "display": "Ventspils (Latvia, Eviksi ZS)"
+                        "display": "Ventspils, LV (Eviksi ZS)"
                     },
                     {
                         "subobjid": "valmiera",
-                        "display": "Valmiera (Latvia, Eviksi ZS)"
+                        "display": "Valmiera, LV (Eviksi ZS)"
                     },
                     {
                         "subobjid": "nliepaja",
-                        "display": "North Liepāja (Latvia, Eviksi ZS)"
+                        "display": "North Liepāja, LV (Eviksi ZS)"
                     },
                     {
                         "subobjid": "sliepaja",
-                        "display": "South Liepāja (Latvia, Eviksi ZS)"
+                        "display": "South Liepāja, LV (Eviksi ZS)"
                     },
                     {
                         "subobjid": "narwa",
-                        "display": "Narwa (Estonia, Onnelik talu)"
+                        "display": "Narwa, EST (Onnelik talu)"
                     },
                     {
                         "subobjid": "tartu",
-                        "display": "Tartu (Estonia, Onnelik talu)"
+                        "display": "Tartu, EST (Onnelik talu)"
                     },
                     {
                         "subobjid": "nwparnu",
-                        "display": "Northwest Pärnu (Estonia, Onnelik talu)"
+                        "display": "Northwest Pärnu, EST (Onnelik talu)"
                     },
                     {
                         "subobjid": "separnu",
-                        "display": "Southeast Pärnu (Estonia, Onnelik talu)"
+                        "display": "Southeast Pärnu, EST (Onnelik talu)"
                     },
                     {
                         "subobjid": "kouvola",
-                        "display": "Kouvola (Finland, Maatila Egres)"
+                        "display": "Kouvola, FI (Maatila Egres)"
                     },
                     {
                         "subobjid": "helsinki",
-                        "display": "Helsinki (Finland, Maatila Egres)"
+                        "display": "Helsinki, FI (Maatila Egres)"
                     },
                     {
                         "subobjid": "stpetes",
-                        "display": "Saint Petersburg (Russia, Zelenye Polja)"
+                        "display": "Saint Petersburg, RUS (Zelenye Polja)"
                     },
                     {
                         "subobjid": "kaliru",
-                        "display": "Kaliningrad (Russia, Zelenye Polja)"
+                        "display": "Kaliningrad, RUS (Zelenye Polja)"
                     },
                     {
                         "subobjid": "nutena",
-                        "display": "North Utena (Lithuania, Agrominta UAB)"
+                        "display": "North Utena, LT (Agrominta UAB)"
                     },
                     {
                         "subobjid": "nwutena",
-                        "display": "Northwest Utena (Lithuania, Agrominta UAB)"
+                        "display": "Northwest Utena, LT (Agrominta UAB)"
                     }
                 ]
             }
@@ -1245,7 +2316,26 @@
         },
         "id": "it_visit_sardinia",
         "name": "All Around the Blue Island",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "c",
+                        "display": "Cagliari"
+                    },
+                    {
+                        "subobjid": "o",
+                        "display": "Olbia"
+                    },
+                    {
+                        "subobjid": "s",
+                        "display": "Sassari"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Discover all Corsican cities (requires Vive la France ! DLC)",
@@ -1255,7 +2345,38 @@
         },
         "id": "fr_visit_corsica",
         "name": "All Around the Isle of Beauty",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "a",
+                        "display": "Ajaccio"
+                    },
+                    {
+                        "subobjid": "ba",
+                        "display": "Bastia"
+                    },
+                    {
+                        "subobjid": "bo",
+                        "display": "Bonifacio"
+                    },
+                    {
+                        "subobjid": "c",
+                        "display": "Calvi"
+                    },
+                    {
+                        "subobjid": "l",
+                        "display": "L'Île-Rousse "
+                    },
+                    {
+                        "subobjid": "p",
+                        "display": "Porto-Vecchio"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Discover all cities in Romania, Bulgaria and Turkey (requires Road to the Black Sea DLC)",
@@ -1265,7 +2386,134 @@
         },
         "id": "be_visit_cities",
         "name": "Balkan Explorer",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "bgb",
+                        "display": "Burgas (BG)"
+                    },
+                    {
+                        "subobjid": "bgka",
+                        "display": "Karlovo (BG)"
+                    },
+                    {
+                        "subobjid": "bgko",
+                        "display": "Kozloduy (BG)"
+                    },
+                    {
+                        "subobjid": "bgpe",
+                        "display": "Pernik (BG)"
+                    },
+                    {
+                        "subobjid": "bgpi",
+                        "display": "Pirdop (BG)"
+                    },
+                    {
+                        "subobjid": "bgple",
+                        "display": "Pleven (BG)"
+                    },
+                    {
+                        "subobjid": "bgplo",
+                        "display": "Plovdiv (BG)"
+                    },
+                    {
+                        "subobjid": "bgr",
+                        "display": "Ruse (BG)"
+                    },
+                    {
+                        "subobjid": "bgs",
+                        "display": "Sofia (BG)"
+                    },
+                    {
+                        "subobjid": "bgva",
+                        "display": "Varna (BG)"
+                    },
+                    {
+                        "subobjid": "bgve",
+                        "display": "Veliko Tarnovo (BG)"
+                    },
+                    {
+                        "subobjid": "roba",
+                        "display": "Bacău (RO)"
+                    },
+                    {
+                        "subobjid": "robr",
+                        "display": "Brașov (RO)"
+                    },
+                    {
+                        "subobjid": "robu",
+                        "display": "București (RO)"
+                    },
+                    {
+                        "subobjid": "roce",
+                        "display": "Cernavodă (RO)"
+                    },
+                    {
+                        "subobjid": "rocl",
+                        "display": "Cluj-Napoca (RO)"
+                    },
+                    {
+                        "subobjid": "roco",
+                        "display": "Constanța (RO)"
+                    },
+                    {
+                        "subobjid": "rocr",
+                        "display": "Craiova (RO)"
+                    },
+                    {
+                        "subobjid": "rocă",
+                        "display": "Călărași (RO)"
+                    },
+                    {
+                        "subobjid": "rog",
+                        "display": "Galați (RO)"
+                    },
+                    {
+                        "subobjid": "roh",
+                        "display": "Hunedoara (RO)"
+                    },
+                    {
+                        "subobjid": "roi",
+                        "display": "Iași (RO)"
+                    },
+                    {
+                        "subobjid": "rom",
+                        "display": "Mangalia (RO)"
+                    },
+                    {
+                        "subobjid": "rop",
+                        "display": "Pitești (RO)"
+                    },
+                    {
+                        "subobjid": "ror",
+                        "display": "Reșița (RO)"
+                    },
+                    {
+                        "subobjid": "roti",
+                        "display": "Timișoara (RO)"
+                    },
+                    {
+                        "subobjid": "rotâ",
+                        "display": "Târgu Mureș (RO)"
+                    },
+                    {
+                        "subobjid": "tre",
+                        "display": "Edirne (TR)"
+                    },
+                    {
+                        "subobjid": "tri",
+                        "display": "İstanbul (TR)"
+                    },
+                    {
+                        "subobjid": "trt",
+                        "display": "Tekirdağ (TR)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Visit all border crossings between Romania, Bulgaria and Turkey (requires Road to the Black Sea DLC)",
@@ -1282,23 +2530,23 @@
                 "values": [
                     {
                         "subobjid": "mv",
-                        "display": "Mangalia - Varna"
+                        "display": "Mangalia (RO) - Varna (BG)"
                     },
                     {
                         "subobjid": "br",
-                        "display": "Bucharest - Ruse"
+                        "display": "Bucharest (RO) - Ruse (BG)"
                     },
                     {
-                        "subobjid": "ev",
-                        "display": "Edirne - Veliko Tarnovo"
+                        "subobjid": "eb",
+                        "display": "Edirne (TR) - Burgas (BG)"
                     },
                     {
                         "subobjid": "ep",
-                        "display": "Edirne - Plovdiv"
+                        "display": "Edirne (TR) - Plovdiv (BG)"
                     },
                     {
                         "subobjid": "kc",
-                        "display": "Kozloduy - Craiova"
+                        "display": "Kozloduy (BG) - Craiova (RO)"
                     }
                 ]
             }
@@ -1328,24 +2576,24 @@
                 "objid": "landmarks",
                 "values": [
                     {
-                        "subobjid": "iron",
-                        "display": "Iron Gates (Romania)"
+                        "subobjid": "bc",
+                        "display": "Bran Castle"
                     },
                     {
-                        "subobjid": "bran",
-                        "display": "Bran Castle (Romania)"
+                        "subobjid": "ig",
+                        "display": "Iron Gates"
                     },
                     {
-                        "subobjid": "beach",
-                        "display": "Pomorie Beach (Bulgaria)"
+                        "subobjid": "lk",
+                        "display": "Lake Küçükçekmece"
                     },
                     {
-                        "subobjid": "wall",
-                        "display": "Wall of Heroes in Varna (Bulgaria)"
+                        "subobjid": "pb",
+                        "display": "Pomorie Beach"
                     },
                     {
-                        "subobjid": "lake",
-                        "display": "Lake Küçükçekmece in Istanbul (Turkey)"
+                        "subobjid": "wh",
+                        "display": "Wall of Heroes"
                     }
                 ]
             }
@@ -1416,27 +2664,27 @@
                 "values": [
                     {
                         "subobjid": "past",
-                        "display": "Paris - Strasbourg"
+                        "display": "Paris (F) - Strasbourg (F)"
                     },
                     {
                         "subobjid": "stmu",
-                        "display": "Strasbourg - Munich"
+                        "display": "Strasbourg (F) - Munich (G)"
                     },
                     {
                         "subobjid": "muvi",
-                        "display": "Munich - Vienna"
+                        "display": "Munich (G) - Vienna (A)"
                     },
                     {
                         "subobjid": "vibu",
-                        "display": "Vienna - Budapest"
+                        "display": "Vienna (A) - Budapest (H)"
                     },
                     {
                         "subobjid": "bubh",
-                        "display": "Budapest - Bucharest"
+                        "display": "Budapest (H) - Bucharest (RO)"
                     },
                     {
                         "subobjid": "bhis",
-                        "display": "Bucharest - Istanbul"
+                        "display": "Bucharest (RO) - Istanbul (TR)"
                     }
                 ]
             }
@@ -1450,7 +2698,218 @@
         },
         "id": "ib_visit_cities",
         "name": "Conquistador",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "ea",
+                        "display": "A Coruña (E)"
+                    },
+                    {
+                        "subobjid": "ealb",
+                        "display": "Albacete (E)"
+                    },
+                    {
+                        "subobjid": "ealg",
+                        "display": "Algeciras (E)"
+                    },
+                    {
+                        "subobjid": "ealma",
+                        "display": "Almaraz (E)"
+                    },
+                    {
+                        "subobjid": "ealme",
+                        "display": "Almería (E)"
+                    },
+                    {
+                        "subobjid": "ebad",
+                        "display": "Badajoz (E)"
+                    },
+                    {
+                        "subobjid": "ebai",
+                        "display": "Bailén (E)"
+                    },
+                    {
+                        "subobjid": "ebar",
+                        "display": "Barcelona (E)"
+                    },
+                    {
+                        "subobjid": "ebi",
+                        "display": "Bilbao (E)"
+                    },
+                    {
+                        "subobjid": "ebu",
+                        "display": "Burgos (E)"
+                    },
+                    {
+                        "subobjid": "eci",
+                        "display": "Ciudad Real (E)"
+                    },
+                    {
+                        "subobjid": "ecó",
+                        "display": "Córdoba (E)"
+                    },
+                    {
+                        "subobjid": "ee",
+                        "display": "El Ejido (E)"
+                    },
+                    {
+                        "subobjid": "egi",
+                        "display": "Gijón (E)"
+                    },
+                    {
+                        "subobjid": "egr",
+                        "display": "Granada (E)"
+                    },
+                    {
+                        "subobjid": "eh",
+                        "display": "Huelva (E)"
+                    },
+                    {
+                        "subobjid": "ele",
+                        "display": "León (E)"
+                    },
+                    {
+                        "subobjid": "ell",
+                        "display": "Lleida (E)"
+                    },
+                    {
+                        "subobjid": "ema",
+                        "display": "Madrid (E)"
+                    },
+                    {
+                        "subobjid": "eme",
+                        "display": "Mengíbar (E)"
+                    },
+                    {
+                        "subobjid": "emu",
+                        "display": "Murcia (E)"
+                    },
+                    {
+                        "subobjid": "emá",
+                        "display": "Málaga (E)"
+                    },
+                    {
+                        "subobjid": "en",
+                        "display": "Navia (E)"
+                    },
+                    {
+                        "subobjid": "eo",
+                        "display": "O Barco (E)"
+                    },
+                    {
+                        "subobjid": "epa",
+                        "display": "Pamplona (E)"
+                    },
+                    {
+                        "subobjid": "epo",
+                        "display": "Port de Sagunt (E)"
+                    },
+                    {
+                        "subobjid": "epu",
+                        "display": "Puertollano (E)"
+                    },
+                    {
+                        "subobjid": "esal",
+                        "display": "Salamanca (E)"
+                    },
+                    {
+                        "subobjid": "esan",
+                        "display": "Santander (E)"
+                    },
+                    {
+                        "subobjid": "ese",
+                        "display": "Sevilla (E)"
+                    },
+                    {
+                        "subobjid": "eso",
+                        "display": "Soria (E)"
+                    },
+                    {
+                        "subobjid": "eta",
+                        "display": "Tarragona (E)"
+                    },
+                    {
+                        "subobjid": "ete",
+                        "display": "Teruel (E)"
+                    },
+                    {
+                        "subobjid": "evall",
+                        "display": "Valladolid (E)"
+                    },
+                    {
+                        "subobjid": "evalè",
+                        "display": "València (E)"
+                    },
+                    {
+                        "subobjid": "evan",
+                        "display": "Vandellòs (E)"
+                    },
+                    {
+                        "subobjid": "evig",
+                        "display": "Vigo (E)"
+                    },
+                    {
+                        "subobjid": "evil",
+                        "display": "Vila-real (E)"
+                    },
+                    {
+                        "subobjid": "ez",
+                        "display": "Zaragoza (E)"
+                    },
+                    {
+                        "subobjid": "pb",
+                        "display": "Beja (P)"
+                    },
+                    {
+                        "subobjid": "pcoi",
+                        "display": "Coimbra (P)"
+                    },
+                    {
+                        "subobjid": "pcor",
+                        "display": "Cortiçadas de Lavre (P)"
+                    },
+                    {
+                        "subobjid": "pf",
+                        "display": "Faro (P)"
+                    },
+                    {
+                        "subobjid": "pg",
+                        "display": "Guarda (P)"
+                    },
+                    {
+                        "subobjid": "pl",
+                        "display": "Lisboa (P)"
+                    },
+                    {
+                        "subobjid": "po",
+                        "display": "Olhão (P)"
+                    },
+                    {
+                        "subobjid": "ppon",
+                        "display": "Ponte de Sor (P)"
+                    },
+                    {
+                        "subobjid": "ppor",
+                        "display": "Porto (P)"
+                    },
+                    {
+                        "subobjid": "pse",
+                        "display": "Setúbal (P)"
+                    },
+                    {
+                        "subobjid": "psi",
+                        "display": "Sines (P)"
+                    },
+                    {
+                        "subobjid": "pe",
+                        "display": "Évora (P)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver cargo to all container ports in Iberia (requires Iberia DLC)",
@@ -1466,48 +2925,48 @@
                 "objid": "ports",
                 "values": [
                     {
-                        "subobjid": "li",
-                        "display": "Lisbon (PT)"
+                        "subobjid": "ealg",
+                        "display": "Algeciras (E)"
                     },
                     {
-                        "subobjid": "po",
-                        "display": "Porto (PT)"
+                        "subobjid": "ebar",
+                        "display": "Barcelona (E)"
                     },
                     {
-                        "subobjid": "si",
-                        "display": "Sines (PT)"
+                        "subobjid": "ebi",
+                        "display": "Bilbao (E)"
                     },
                     {
-                        "subobjid": "al",
-                        "display": "Algeciras (ES)"
+                        "subobjid": "egi",
+                        "display": "Gijón (E)"
                     },
                     {
-                        "subobjid": "ba",
-                        "display": "Barcelona (ES)"
+                        "subobjid": "emá",
+                        "display": "Málaga (E)"
                     },
                     {
-                        "subobjid": "bi",
-                        "display": "Bilbao (ES)"
+                        "subobjid": "eta",
+                        "display": "Tarragona (E)"
                     },
                     {
-                        "subobjid": "gi",
-                        "display": "Gijón (ES)"
+                        "subobjid": "evalè",
+                        "display": "València (E)"
                     },
                     {
-                        "subobjid": "ma",
-                        "display": "Málaga (ES)"
+                        "subobjid": "evig",
+                        "display": "Vigo (E)"
                     },
                     {
-                        "subobjid": "ta",
-                        "display": "Tarragona (ES)"
+                        "subobjid": "pl",
+                        "display": "Lisboa (P)"
                     },
                     {
-                        "subobjid": "va",
-                        "display": "València (ES)"
+                        "subobjid": "ppor",
+                        "display": "Porto (P)"
                     },
                     {
-                        "subobjid": "vi",
-                        "display": "Vigo (ES)"
+                        "subobjid": "psi",
+                        "display": "Sines (P)"
                     }
                 ]
             }
@@ -1528,23 +2987,23 @@
                 "values": [
                     {
                         "subobjid": "ba",
-                        "display": "Badajoz"
+                        "display": "Badajoz (E)"
                     },
                     {
                         "subobjid": "ci",
-                        "display": "Ciudad Real"
+                        "display": "Ciudad Real (E)"
                     },
                     {
                         "subobjid": "gr",
-                        "display": "Granda"
+                        "display": "Granada (E)"
                     },
                     {
                         "subobjid": "pu",
-                        "display": "Puertollano"
+                        "display": "Puertollano (E)"
                     },
                     {
                         "subobjid": "se",
-                        "display": "Sevilla"
+                        "display": "Sevilla (E)"
                     }
                 ]
             }
@@ -1564,20 +3023,20 @@
                 "objid": "shipyards",
                 "values": [
                     {
-                        "subobjid": "al",
-                        "display": "Algeciras"
+                        "subobjid": "ealg",
+                        "display": "Algeciras (E)"
                     },
                     {
-                        "subobjid": "gi",
-                        "display": "Gijon"
+                        "subobjid": "egi",
+                        "display": "Gijón (E)"
                     },
                     {
-                        "subobjid": "se",
-                        "display": "Setubal"
+                        "subobjid": "evig",
+                        "display": "Vigo (E)"
                     },
                     {
-                        "subobjid": "vi",
-                        "display": "Vigo"
+                        "subobjid": "pse",
+                        "display": "Setúbal (P)"
                     }
                 ]
             }
@@ -1597,16 +3056,16 @@
                 "objid": "routes",
                 "values": [
                     {
-                        "subobjid": "li",
-                        "display": "Lisbon - A Coruña"
+                        "subobjid": "pa",
+                        "display": "Pamplona (E) - A Coruña (E)"
                     },
                     {
                         "subobjid": "se",
-                        "display": "Sevilla - A Coruña"
+                        "display": "Sevilla (E) - A Coruña (E)"
                     },
                     {
-                        "subobjid": "pa",
-                        "display": "Pamplona - A Coruña"
+                        "subobjid": "li",
+                        "display": "Lisboa (P) - A Coruña (E)"
                     }
                 ]
             }
@@ -1620,7 +3079,74 @@
         },
         "id": "ib_cutscenes",
         "name": "Grand Tour Guide",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "ab",
+                        "display": "25 de Abril Bridge"
+                    },
+                    {
+                        "subobjid": "gee",
+                        "display": "Greenhouses of El Ejido"
+                    },
+                    {
+                        "subobjid": "gib",
+                        "display": "Guadiana International Bridge"
+                    },
+                    {
+                        "subobjid": "ltc",
+                        "display": "Los Tres Cuñados Quarry"
+                    },
+                    {
+                        "subobjid": "rbl",
+                        "display": "Reservoir of Barrios de Luna"
+                    },
+                    {
+                        "subobjid": "cba",
+                        "display": "The City of Barcelona"
+                    },
+                    {
+                        "subobjid": "col",
+                        "display": "The City of Olhão"
+                    },
+                    {
+                        "subobjid": "fps",
+                        "display": "The Ferry Port of Santander"
+                    },
+                    {
+                        "subobjid": "hpo",
+                        "display": "The Harbour of Porto"
+                    },
+                    {
+                        "subobjid": "ppp",
+                        "display": "The Parabolic Power Plant of Andalusia"
+                    },
+                    {
+                        "subobjid": "pos",
+                        "display": "The Port of Sines"
+                    },
+                    {
+                        "subobjid": "pov",
+                        "display": "The Port of Valencia"
+                    },
+                    {
+                        "subobjid": "rpu",
+                        "display": "The Refinery of Puertollano"
+                    },
+                    {
+                        "subobjid": "scz",
+                        "display": "The Shopping Center of Zaragoza"
+                    },
+                    {
+                        "subobjid": "spt",
+                        "display": "The Solar Power Tower of Andalusia"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete 20 deliveries choosing the trailer delivery option which requires reversing",
@@ -1647,7 +3173,134 @@
         },
         "id": "bw_visit_cities",
         "name": "Road to the Adriatics",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "ald",
+                        "display": "Durrës (AL)"
+                    },
+                    {
+                        "subobjid": "alf",
+                        "display": "Fier (AL)"
+                    },
+                    {
+                        "subobjid": "alt",
+                        "display": "Tiranë (AL)"
+                    },
+                    {
+                        "subobjid": "alv",
+                        "display": "Vlorë (AL)"
+                    },
+                    {
+                        "subobjid": "bihba",
+                        "display": "Banja Luka (BIH)"
+                    },
+                    {
+                        "subobjid": "bihbi",
+                        "display": "Bihać (BIH)"
+                    },
+                    {
+                        "subobjid": "bihk",
+                        "display": "Karakaj (BIH)"
+                    },
+                    {
+                        "subobjid": "bihm",
+                        "display": "Mostar (BIH)"
+                    },
+                    {
+                        "subobjid": "bihs",
+                        "display": "Sarajevo (BIH)"
+                    },
+                    {
+                        "subobjid": "biht",
+                        "display": "Tuzla (BIH)"
+                    },
+                    {
+                        "subobjid": "bihz",
+                        "display": "Zenica (BIH)"
+                    },
+                    {
+                        "subobjid": "hro",
+                        "display": "Osijek (HR)"
+                    },
+                    {
+                        "subobjid": "hrr",
+                        "display": "Rijeka (HR)"
+                    },
+                    {
+                        "subobjid": "hrs",
+                        "display": "Split (HR)"
+                    },
+                    {
+                        "subobjid": "hrzad",
+                        "display": "Zadar (HR)"
+                    },
+                    {
+                        "subobjid": "hrzag",
+                        "display": "Zagreb (HR)"
+                    },
+                    {
+                        "subobjid": "mneb",
+                        "display": "Bijelo Polje (MNE)"
+                    },
+                    {
+                        "subobjid": "mnen",
+                        "display": "Nikšić (MNE)"
+                    },
+                    {
+                        "subobjid": "mnep",
+                        "display": "Podgorica (MNE)"
+                    },
+                    {
+                        "subobjid": "nmkb",
+                        "display": "Bitola (NMK)"
+                    },
+                    {
+                        "subobjid": "nmks",
+                        "display": "Skopje (NMK)"
+                    },
+                    {
+                        "subobjid": "r",
+                        "display": "Prishtinë (RKS)"
+                    },
+                    {
+                        "subobjid": "slok",
+                        "display": "Koper (SLO)"
+                    },
+                    {
+                        "subobjid": "slol",
+                        "display": "Ljubljana (SLO)"
+                    },
+                    {
+                        "subobjid": "slom",
+                        "display": "Maribor (SLO)"
+                    },
+                    {
+                        "subobjid": "slon",
+                        "display": "Novo Mesto (SLO)"
+                    },
+                    {
+                        "subobjid": "srbb",
+                        "display": "Belgrade (SRB)"
+                    },
+                    {
+                        "subobjid": "srbk",
+                        "display": "Kragujevac (SRB)"
+                    },
+                    {
+                        "subobjid": "srbni",
+                        "display": "Niš (SRB)"
+                    },
+                    {
+                        "subobjid": "srbno",
+                        "display": "Novi Sad (SRB)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "View cutscenes from all viewpoints in West Balkans (requires West Balkans DLC)",
@@ -1657,7 +3310,74 @@
         },
         "id": "bw_cutscenes",
         "name": "Grand Adventurer",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "b",
+                        "display": "Bihać"
+                    },
+                    {
+                        "subobjid": "cp",
+                        "display": "Center of Pristina"
+                    },
+                    {
+                        "subobjid": "db",
+                        "display": "Dubrovnik"
+                    },
+                    {
+                        "subobjid": "dm",
+                        "display": "Durres Marina"
+                    },
+                    {
+                        "subobjid": "fo",
+                        "display": "Fier Oil Fields"
+                    },
+                    {
+                        "subobjid": "kp",
+                        "display": "Koper"
+                    },
+                    {
+                        "subobjid": "kv",
+                        "display": "Kovacica Wind Park"
+                    },
+                    {
+                        "subobjid": "lj",
+                        "display": "Ljubljana"
+                    },
+                    {
+                        "subobjid": "sa",
+                        "display": "Old Town of Sarajevo"
+                    },
+                    {
+                        "subobjid": "pk",
+                        "display": "Prokuplje"
+                    },
+                    {
+                        "subobjid": "qg",
+                        "display": "Quarry near Gostivar"
+                    },
+                    {
+                        "subobjid": "rp",
+                        "display": "Rijeka Port"
+                    },
+                    {
+                        "subobjid": "sp",
+                        "display": "Split"
+                    },
+                    {
+                        "subobjid": "ti",
+                        "display": "Tirana"
+                    },
+                    {
+                        "subobjid": "dt",
+                        "display": "Đurđevića Tara Bridge"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete a perfect delivery (no damage, no fines, on time) between Pristina and Bijelo Polje (requires West Balkans DLC)",
@@ -1679,7 +3399,7 @@
         "name": "Holiday Coastline",
         "objectives": [
             {
-                "type": "sequential",
+                "type": "list",
                 "objid": "routes",
                 "values": [
                     {
@@ -1712,24 +3432,24 @@
                 "objid": "routes",
                 "values": [
                     {
-                        "subobjid": "ore",
-                        "display": "Ore (Aluxion)"
+                        "subobjid": "o",
+                        "display": "Ore"
                     },
                     {
-                        "subobjid": "ingots",
-                        "display": "Aluminium Ingots (Aluxion)"
+                        "subobjid": "i",
+                        "display": "Aluminum Ingots"
                     },
                     {
-                        "subobjid": "wiring",
-                        "display": "Electrical Wiring (Betunia)"
+                        "subobjid": "w",
+                        "display": "Electrical Wiring"
                     },
                     {
-                        "subobjid": "elec",
-                        "display": "Electronics (Eumefa)"
+                        "subobjid": "e",
+                        "display": "Electronics"
                     },
                     {
-                        "subobjid": "camp",
-                        "display": "Campervans (Larus)"
+                        "subobjid": "c",
+                        "display": "Campervans"
                     }
                 ]
             }
@@ -1783,7 +3503,110 @@
         },
         "id": "aca_manual_transmission",
         "name": "Rowing Through the Gears",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "scenarios",
+                "values": [
+                    {
+                        "subobjid": "21",
+                        "display": "Ch. 2 - Stopping Close to an Obstacle"
+                    },
+                    {
+                        "subobjid": "22",
+                        "display": "Ch. 2 - Parking Next to an Obstacle"
+                    },
+                    {
+                        "subobjid": "23",
+                        "display": "Ch. 2 - Slalom Between the Cones"
+                    },
+                    {
+                        "subobjid": "24",
+                        "display": "Ch. 2 - Combined Driving Manoeuvres"
+                    },
+                    {
+                        "subobjid": "25",
+                        "display": "Ch. 2 - Reverse Parking Next to an Obstacle"
+                    },
+                    {
+                        "subobjid": "26",
+                        "display": "Ch. 2 - Parallel Parking"
+                    },
+                    {
+                        "subobjid": "27",
+                        "display": "Ch. 2 - Driving on a Handling Track"
+                    },
+                    {
+                        "subobjid": "28",
+                        "display": "Ch. 2 - Advanced Training Course"
+                    },
+                    {
+                        "subobjid": "31",
+                        "display": "Ch. 3 - Connecting a Trailer"
+                    },
+                    {
+                        "subobjid": "32",
+                        "display": "Ch. 3 - Braking with a Trailer"
+                    },
+                    {
+                        "subobjid": "33",
+                        "display": "Ch. 3 - Parking in a Narrow Space"
+                    },
+                    {
+                        "subobjid": "34",
+                        "display": "Ch. 3 - Diagonal Parking"
+                    },
+                    {
+                        "subobjid": "35",
+                        "display": "Ch. 3 - Driving on a Roundabout"
+                    },
+                    {
+                        "subobjid": "36",
+                        "display": "Ch. 3 - Driving through Simple Turns"
+                    },
+                    {
+                        "subobjid": "37",
+                        "display": "Ch. 3 - Driving Through Complex Turns"
+                    },
+                    {
+                        "subobjid": "38",
+                        "display": "Ch. 3 - Advanced Training Course - Trailer"
+                    },
+                    {
+                        "subobjid": "41",
+                        "display": "Ch. 4 - Reversing with a Trailer"
+                    },
+                    {
+                        "subobjid": "42",
+                        "display": "Ch. 4 - Reversing into a Turn"
+                    },
+                    {
+                        "subobjid": "43",
+                        "display": "Ch. 4 - Reverse Parking in a Tight Lot"
+                    },
+                    {
+                        "subobjid": "44",
+                        "display": "Ch. 4 - Offset Reversing Manoeuvre"
+                    },
+                    {
+                        "subobjid": "45",
+                        "display": "Ch. 4 - Parallel Parking with a Trailer"
+                    },
+                    {
+                        "subobjid": "46",
+                        "display": "Ch. 4 - Diagonal Parking in Reverse"
+                    },
+                    {
+                        "subobjid": "47",
+                        "display": "Ch. 4 - Blind Side Reversing"
+                    },
+                    {
+                        "subobjid": "48",
+                        "display": "Ch. 4 - Manoeuvring in a Tight Space"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete any 5 scenarios in a row without failure from the third or fourth chapter in Truck Driving Basics (Driving Academy)",
@@ -1793,7 +3616,14 @@
         },
         "id": "aca_consecutive",
         "name": "Failure Is Not an Option",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "counter",
+                "objid": "scenarios",
+                "display": "Scenarios",
+                "goal": 5
+            }
+        ]
     },
     {
         "desc": "Discover at least 12 cities in Greece (requires Greece DLC)",
@@ -1803,7 +3633,74 @@
         },
         "id": "gr_visit_cities",
         "name": "Odyssean Voyager",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "ar",
+                        "display": "Argostoli (Αργοστόλι)"
+                    },
+                    {
+                        "subobjid": "at",
+                        "display": "Athens (Αθήνα)"
+                    },
+                    {
+                        "subobjid": "ca",
+                        "display": "Chania (Χανιά)"
+                    },
+                    {
+                        "subobjid": "ci",
+                        "display": "Chios (Χίος)"
+                    },
+                    {
+                        "subobjid": "he",
+                        "display": "Heraklion (Ηράκλειο)"
+                    },
+                    {
+                        "subobjid": "io",
+                        "display": "Ioannina (Ιωάννινα)"
+                    },
+                    {
+                        "subobjid": "kl",
+                        "display": "Kalamata (Καλαμάτα)"
+                    },
+                    {
+                        "subobjid": "kv",
+                        "display": "Kavala (Καβάλα)"
+                    },
+                    {
+                        "subobjid": "lm",
+                        "display": "Lamia (Λαμία)"
+                    },
+                    {
+                        "subobjid": "lr",
+                        "display": "Larissa (Λάρισα)"
+                    },
+                    {
+                        "subobjid": "mi",
+                        "display": "Mitilini (Μυτιλήνη)"
+                    },
+                    {
+                        "subobjid": "pa",
+                        "display": "Patras (Πάτρα)"
+                    },
+                    {
+                        "subobjid": "rh",
+                        "display": "Rhodes (Ρόδος)"
+                    },
+                    {
+                        "subobjid": "th",
+                        "display": "Thessaloniki (Θεσσαλονίκη)"
+                    },
+                    {
+                        "subobjid": "tr",
+                        "display": "Trikala (Τρίκαλα)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "View cutscenes from at least 8 viewpoints in Greece (requires Greece DLC)",
@@ -1813,7 +3710,61 @@
         },
         "id": "gr_cutscenes",
         "name": "Sights and Legends",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "lix",
+                        "display": "Lixouri"
+                    },
+                    {
+                        "subobjid": "pso",
+                        "display": "Port of Souda"
+                    },
+                    {
+                        "subobjid": "fb",
+                        "display": "Faliraki Beach"
+                    },
+                    {
+                        "subobjid": "man",
+                        "display": "Monastery of Agios Nectarios"
+                    },
+                    {
+                        "subobjid": "ppa",
+                        "display": "Piraeus Port of Athens"
+                    },
+                    {
+                        "subobjid": "cc",
+                        "display": "Corinth Canal"
+                    },
+                    {
+                        "subobjid": "kam",
+                        "display": "Kalabaka and Meteora"
+                    },
+                    {
+                        "subobjid": "tcp",
+                        "display": "Thessaloniki Cement Plant"
+                    },
+                    {
+                        "subobjid": "km",
+                        "display": "Kavala Marina"
+                    },
+                    {
+                        "subobjid": "lfb",
+                        "display": "Lake Polyfytos Bridge"
+                    },
+                    {
+                        "subobjid": "lbr",
+                        "display": "Lesbos Hotel Resort"
+                    },
+                    {
+                        "subobjid": ""
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver cargo to at least 4 unique hotels in Greece (requires Greece DLC)",
@@ -1823,7 +3774,34 @@
         },
         "id": "gr_hotels",
         "name": "All Inclusive",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "hotels",
+                "values": [
+                    {
+                        "subobjid": "ar",
+                        "display": "Argostoli (Αργοστόλι)"
+                    },
+                    {
+                        "subobjid": "ca",
+                        "display": "Chania (Χανιά)"
+                    },
+                    {
+                        "subobjid": "ci",
+                        "display": "Chios (Χίος)"
+                    },
+                    {
+                        "subobjid": "mi",
+                        "display": "Mitilini (Μυτιλήνη)"
+                    },
+                    {
+                        "subobjid": "rh",
+                        "display": "Rhodes (Ρόδος)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver olives or olive oil from Eliarchos Olive Farm to 5 different cities in Greece (requires Greece DLC)",
@@ -1833,7 +3811,74 @@
         },
         "id": "gr_olive",
         "name": "Gift of Athena",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cities",
+                "values": [
+                    {
+                        "subobjid": "ar",
+                        "display": "Argostoli (Αργοστόλι)"
+                    },
+                    {
+                        "subobjid": "at",
+                        "display": "Athens (Αθήνα)"
+                    },
+                    {
+                        "subobjid": "ca",
+                        "display": "Chania (Χανιά)"
+                    },
+                    {
+                        "subobjid": "ci",
+                        "display": "Chios (Χίος)"
+                    },
+                    {
+                        "subobjid": "he",
+                        "display": "Heraklion (Ηράκλειο)"
+                    },
+                    {
+                        "subobjid": "io",
+                        "display": "Ioannina (Ιωάννινα)"
+                    },
+                    {
+                        "subobjid": "kl",
+                        "display": "Kalamata (Καλαμάτα)"
+                    },
+                    {
+                        "subobjid": "kv",
+                        "display": "Kavala (Καβάλα)"
+                    },
+                    {
+                        "subobjid": "lm",
+                        "display": "Lamia (Λαμία)"
+                    },
+                    {
+                        "subobjid": "lr",
+                        "display": "Larissa (Λάρισα)"
+                    },
+                    {
+                        "subobjid": "mi",
+                        "display": "Mitilini (Μυτιλήνη)"
+                    },
+                    {
+                        "subobjid": "pa",
+                        "display": "Patras (Πάτρα)"
+                    },
+                    {
+                        "subobjid": "rh",
+                        "display": "Rhodes (Ρόδος)"
+                    },
+                    {
+                        "subobjid": "th",
+                        "display": "Thessaloniki (Θεσσαλονίκη)"
+                    },
+                    {
+                        "subobjid": "tr",
+                        "display": "Trikala (Τρίκαλα)"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Deliver 3 Marble Blocks and 3 undamaged Marble Slabs from Rock Eater Quarry in Greece (requires Greece DLC)",
@@ -1843,6 +3888,19 @@
         },
         "id": "gr_marble",
         "name": "Temple Worthy",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "counter",
+                "objid": "blocks",
+                "display": "Deliveries of Marble Blocks",
+                "goal": 3
+            },
+            {
+                "type": "counter",
+                "objid": "slabs",
+                "display": "Deliveries of Marble Slabs",
+                "goal": 3
+            }
+        ]
     }
 ]

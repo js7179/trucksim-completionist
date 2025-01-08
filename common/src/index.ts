@@ -1,5 +1,5 @@
 import { generateStateTemplate, STATE_ACTION, StateUpdate, doStateUpdate } from "./state";
-import { AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo } from "./types";
+import { AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo, PartialObjectiveInfo } from "./types";
 
 /** 
  * This function is used to copy values over from an old format
@@ -83,4 +83,4 @@ export const clamp = (min: number, num: number, max: number): number => Math.min
 /* c8 ignore next */
 export { generateStateTemplate, STATE_ACTION, doStateUpdate }; // re-export
 /* c8 ignore next */
-export type { StateUpdate, AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo };
+export type { StateUpdate, AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo, PartialObjectiveInfo };

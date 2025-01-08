@@ -18,8 +18,10 @@ export interface AchievementState {
     objectives: ObjectiveState;
 }
 
+export type ObjectiveValueType = string[] | number;
+
 export interface ObjectiveState {
-    [objID: string]: string[] | number;
+    [objID: string]: ObjectiveValueType;
 }
 
 export interface ObjectiveInfo {
@@ -43,4 +45,8 @@ export interface SequentialObjectiveInfo extends ObjectiveInfo {
 export interface CounterObjectiveInfo extends ObjectiveInfo {
     display: string;
     goal: number;
+}
+
+export interface PartialObjectiveInfo extends ListObjectiveInfo {
+    count: number;
 }

@@ -48,9 +48,9 @@ export class StateUpdateError extends Error {
 };
 
 const NEW_STATE_ACTION: Record<string, (newState: AchievementStateList, achInfo: AchievementInfo, action: StateUpdate) => string[]> = {
-    'achComplete': achCompleteMark,
-    'objSetNumerical': objSetNumerical, 
-    'objSetList': objSetList
+    [STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK]: achCompleteMark,
+    [STATE_ACTION.OBJ_SET_NUMERICAL]: objSetNumerical, 
+    [STATE_ACTION.OBJ_TOGGLE_LIST_ITEM]: objSetList
 };
 
 const DEFAULTS: Record<string, ObjectiveValueType> = {

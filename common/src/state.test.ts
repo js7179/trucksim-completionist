@@ -1,553 +1,544 @@
-import { STATE_ACTION, StateUpdate, compareObjectiveObjects, doStateUpdate, generateStateTemplate, resetObjective } from "./state";
-import { AchievementInfo, AchievementStateList, CounterObjectiveInfo, ListObjectiveInfo, ObjectiveState, SequentialObjectiveInfo } from "./types";
+import { generateDefaultAchievementState, generateStateTemplate, isAchievementObjectivesFulfilled, performStateUpdate, STATE_ACTION, StateUpdate, StateUpdateError } from "./state";
+import { AchievementInfo, AchievementState, AchievementStateList, CounterObjectiveInfo, ListObjectiveInfo, PartialObjectiveInfo, SequentialObjectiveInfo } from "./types";
 
-describe("generateStateTemplate", () => {
-    it("empty achievement list", () => {
-        const input: AchievementInfo[] = [];
-        const output: AchievementStateList = {};
+const sampleAch: AchievementInfo = { desc: "", icons: { completed: "", incomplete: "" }, id: "sample", name: "", objectives: [] };
 
-        expect(generateStateTemplate(input)).toStrictEqual(output);
-    });
+const sampleCounterObj: CounterObjectiveInfo = { objid: "co", type: "counter", display: "SampleCounter", goal: 5 };
+const sampleListObj: ListObjectiveInfo = { objid: "li", type: "list", values: [ { subobjid: "foo", display: "Foo" }, { subobjid: "bar", display: "Bar" }]};
+const sampleSeqObj: SequentialObjectiveInfo = { objid: "se", type: "sequential", values: [ { subobjid: "foo", display: "Foo" }, { subobjid: "bar", display: "Bar" }, { subobjid: "baz", display: "Baz" } ] };
+const samplePartialObj: PartialObjectiveInfo = { objid: "pa", type: "partial", count: 2, values: [ { subobjid: "foo", display: "Foo" }, { subobjid: "bar", display: "Bar" }, { subobjid: "baz", display: "Baz" } ] };
 
-    it("empty slate, one achievement, no objectives", () => {
-        const input: AchievementInfo[] = [
-            { id: "foo", name: "", desc: "", objectives: [], icons: { incomplete: "", completed: "" } }
-        ];
+const baseSampleOldState: AchievementStateList = { sample: { completed:false, objectives: {} } };
+const baseSampleAchList: AchievementInfo[] = [ sampleAch ];
 
-        const output: AchievementStateList = {
-            foo: { completed: false, objectives: {} }
-        };
-
-        expect(generateStateTemplate(input, true)).toStrictEqual(output);
-    });
-
-    it("empty slate, two achievements, no objectives", () => {
-        const input: AchievementInfo[] = [
-            { id: "foo", name: "", desc: "", objectives: [], icons: { incomplete: "", completed: "" } },
-            { id: "bar", name: "", desc: "", objectives: [], icons: { incomplete: "", completed: "" } }
-        ];
-        const output: AchievementStateList = {
-            foo: { completed: false, objectives: {} },
-            bar: { completed: false, objectives: {} }
-        };
-
-        expect(generateStateTemplate(input, true)).toStrictEqual(output);
-    });
-
-    it("empty slate, one achievement, all objectives", () => {
-        const input: AchievementInfo[] = [
-            {
-                id: "foo",
-                name: "",
-                desc: "",
-                icons: { incomplete: "", completed: "" }, 
-                objectives: [
-                    {
-                        objid: "a",
-                        type: "list",
-                        values: [{ subobjid: "foo", display: "foo" }]
-                    } as ListObjectiveInfo,
-                    {
-                        objid: "b",
-                        type: "counter",
-                        display: "",
-                        goal: 5
-                    } as CounterObjectiveInfo,
-                    {
-                        objid: "c",
-                        type: "sequential",
-                        values: [{ subobjid: "foo", display: "foo" }, { subobjid: "bar", display: "bar" }]
-                    } as SequentialObjectiveInfo
-                ]
-            }
-        ];
-
-        const output: AchievementStateList = {
-            foo: {
-                completed: false,
-                objectives: {
-                    a: [],
-                    b: 0,
-                    c: 0
-                }
-            }
-        };
-
-        expect(generateStateTemplate(input, true)).toStrictEqual(output);
-    });
-
-    it("unknown objective type error", () => {
-        const input: AchievementInfo[] = [
-            {
-                id: "foo",
-                name: "",
-                desc: "",
-                icons: { incomplete: "", completed: "" }, 
-                objectives: [
-                    {
-                        objid: "a",
-                        type: "error",
-                    },
-                ]
-            }
-        ];
-        const t = () => {
-            generateStateTemplate(input, true);
-        }
-
-        expect(t).toThrow(Error);
-        expect(t).toThrow('Unknown objective type "error"');        
-    });
-
-    it("goal state, one achievement, all objectives", () => {
-        const input: AchievementInfo[] = [
-            {
-                id: "foo",
-                name: "",
-                desc: "",
-                icons: { incomplete: "", completed: "" }, 
-                objectives: [
-                    {
-                        objid: "a",
-                        type: "list",
-                        values: [{ subobjid: "foo", display: "foo" }, { subobjid: "bar", display: "bar" }]
-                    } as ListObjectiveInfo,
-                    {
-                        objid: "b",
-                        type: "counter",
-                        display: "",
-                        goal: 5
-                    } as CounterObjectiveInfo,
-                    {
-                        objid: "c",
-                        type: "sequential",
-                        values: [{ subobjid: "foo", display: "foo" }, { subobjid: "bar", display: "bar" }]
-                    } as SequentialObjectiveInfo
-                ]
-            }
-        ];
-
-        const output: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    a: ["foo", "bar"],
-                    b: 5,
-                    c: 2
-                }
-            }
-        };
-
-        expect(generateStateTemplate(input, false)).toStrictEqual(output);
-    });
-});
-
-describe("resetObjective", () => {
-    it("empty case", () => {
-        const oldObjective: ObjectiveState = {};
-        expect(resetObjective(oldObjective)).toMatchObject({});
-    });
-    
-    it("number and array", () => {
-        const oldObjective: ObjectiveState = {
-            foo: ["abc", "def", "ghi", "jkl"],
-            bar: 5
-        };
-        const newObjective: ObjectiveState = {
-            foo: [],
-            bar: 0
-        };
-        expect(resetObjective(oldObjective)).toMatchObject(newObjective);
-    });
-});
-
-describe("compareObjectiveObjects", () => {
-    it("empty case", () => {
-        const newState: ObjectiveState = {};
-        const goalState: ObjectiveState = {};
-
-        expect(compareObjectiveObjects(goalState, newState)).toBeTruthy();
-    });
-
-    it("all objectives, false", () => {
-        const newState: ObjectiveState = { foo: 4, bar: ["abc"] };
-        const goalState: ObjectiveState = { foo: 5, bar: ["abc"] };
-
-        expect(compareObjectiveObjects(goalState, newState)).toBeFalsy();
-    });
-
-    it("all objectives, true", () => {
-        const newState: ObjectiveState = { foo: 5, bar: ["abc", "def"] };
-        const goalState: ObjectiveState = { foo: 5, bar: ["def", "abc"] };
-
-        expect(compareObjectiveObjects(goalState, newState)).toBeTruthy();
-    });
-
-    it("list objective, false", () => {
-        const newState: ObjectiveState = { foo: ["abc"] };
-        const goalState: ObjectiveState = { foo: ["def", "abc"] };
-
-        expect(compareObjectiveObjects(goalState, newState)).toBeFalsy();
-    });
-});
-
-describe("doStateUpdate", () => {
-    it("mark achievement complete", () => {
-        const oldState: AchievementStateList = { 
-            foo: { completed: false, objectives: {} }
-        };
-        const goalState: AchievementStateList = {
-            foo: { completed: true, objectives: {} }
-        };
-        const action: StateUpdate = {
-            type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK,
-            achID: "foo",
-            shouldMarkOff: true
-        };
-
-        const output: AchievementStateList = {
-            foo: { completed: true, objectives: {} }
-        };
-
-        expect(doStateUpdate(oldState, goalState, action)).toMatchObject(output);
-    });
-
-    it("set numerical, non-cascade", () => {
-        const oldState: AchievementStateList = {
-            foo: {
-                completed: false,
-                objectives: {
-                    bar: 3
-                }
-            }
-        };
-        const goalState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: 5
-                }
-            }
-        };
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: "foo",
-            objID: "bar",
-            n: 4
-        };
-
-        const newState: AchievementStateList = doStateUpdate(oldState, goalState, action);
-
-        expect(newState["foo"].objectives["bar"]).toBe<number>(4);
-        expect(newState["foo"].completed).toBeFalsy();
-    });
-
-    it("toggle ON list item, non-cascade", () => {
-        const goalState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: ["abc", "def", "xyz"]
-                }
-            }
-        };
-        const oldState: AchievementStateList = {
-            foo: {
-                completed: false,
-                objectives: {
-                    bar: ["xyz"]
-                }
-            }
-        };
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
-            achID: "foo",
-            objID: "bar",
-            subobjID: "def",
-            shouldMarkOff: true
-        };
-
-        const outputState = doStateUpdate(oldState, goalState, action);
-        const outputArr = outputState["foo"].objectives["bar"] as string[];
-
-        expect(outputArr.includes("def")).toBeTruthy();
-        expect(outputState["foo"].completed).toBeFalsy();
-    });
-
-    it("toggle OFF list item, non-cascade", () => {
-        const goalState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: ["abc", "def", "xyz"]
-                }
-            }
-        };
-        const oldState: AchievementStateList = {
-            foo: {
-                completed: false,
-                objectives: {
-                    bar: ["xyz", "def"]
-                }
-            }
-        };
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
-            achID: "foo",
-            objID: "bar",
-            subobjID: "def",
-            shouldMarkOff: false
-        };
-
-        const outputState = doStateUpdate(oldState, goalState, action);
-        const outputArr = outputState["foo"].objectives["bar"] as string[];
+describe("performStateUpdate, success", () => {
+    it("mark no-obj achievement complete", () => {
+        const inputOldState: AchievementStateList = baseSampleOldState;
+        const inputAchList: AchievementInfo[] = baseSampleAchList;
+        const inputAction: StateUpdate = { type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK, achID: "sample", shouldMarkOff: true };
         
-        expect(outputArr.includes("def")).toBeFalsy();
-        expect(outputState["foo"].completed).toBeFalsy();
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+
+        const expectedNewState: AchievementStateList = {
+            sample: { completed: true, objectives: {} }
+        };
+
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(1);
+        expect(rowsChanged[0]).toBe(`sample.completed`);
     });
 
-    it("set numeric, objectives satisfied", () => {
-        const goalState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: 5
-                }
-            }
+    it("mark achievement complete, with objective", () => {
+        const inputOldState: AchievementStateList = {
+            sample: { completed: false, objectives: {
+                co: 0,
+                li: [],
+                se: 0,
+                pa: []
+            } }
         };
-        const oldState: AchievementStateList = {
-            foo: {
-                completed: false,
-                objectives: {
-                    bar: 4
-                }
-            }
-        };
-
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: "foo",
-            objID: "bar",
-            n: 5
-        };
-
-        const outputState = doStateUpdate(oldState, goalState, action);
-        expect(outputState["foo"].completed).toBeTruthy();
-        expect(outputState["foo"].objectives["bar"]).toBe<number>(5);
-    });
-
-    it("set numeric, objectives no longer satisfied", () => {
-        const goalState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: 5
-                }
-            }
-        };
-        const oldState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: 5
-                }
-            }
-        };
-
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: "foo",
-            objID: "bar",
-            n: 4
-        };
-
-        const outputState = doStateUpdate(oldState, goalState, action);
-        expect(outputState["foo"].completed).toBeFalsy();
-        expect(outputState["foo"].objectives["bar"]).toBe<number>(4);
-    });
-
-    it("unmark achievement complete, cascade objective reset", () => {
-        const oldState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: ["abc", "def", "ghi"],
-                    baz: 5
-                }
-            }
-        };
-        const goalState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: ["abc", "def", "ghi"],
-                    baz: 5
-                }
-            }
-        }
-        const action: StateUpdate = {
-            type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK,
-            achID: "foo",
-            shouldMarkOff: false
-        };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch,
+             objectives: [sampleCounterObj, sampleListObj, sampleSeqObj, samplePartialObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK, achID: "sample", shouldMarkOff: true };
         
-        const endState: AchievementStateList = {
-            foo: {
-                completed: false,
-                objectives: {
-                    bar: [],
-                    baz: 0
-                }
-            }
-        }
-        expect(doStateUpdate(oldState, goalState, action)).toMatchObject(endState);
-    });
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
 
-    const emptyState: AchievementStateList = {};
-
-    // error states
-    it("missing objID", () => {
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: "foo"
+        const expectedNewState: AchievementStateList = {
+            sample: { completed: true, objectives: {
+                co: 5,
+                li: ["foo", "bar"],
+                se: 3,
+                pa: ["foo", "bar", "baz"]
+            } }
         };
 
-        const t = () => doStateUpdate(emptyState, emptyState, action);
+        const expectedRowsChanged = [`sample.completed`, `sample.objectives.co`, `sample.objectives.li`, `sample.objectives.se`, `sample.objectives.pa`];
 
-        expect(t).toThrow(Error);
-        expect(t).toThrow(`Missing "objID" in doStateUpdate`);
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(expectedRowsChanged.length);
+        expect(rowsChanged).toEqual(expect.arrayContaining(expectedRowsChanged));
     });
 
-    it("unknown action type", () => {
-        const action: StateUpdate = {
-            type: "foo",
-            achID: "bar"
+    it("mark achievement incomplete, with objective", () => {
+        const inputOldState: AchievementStateList = {
+            sample: { completed: true, objectives: {
+                co: 4,
+                li: ["foo"],
+                se: 1,
+                pa: ["bar", "baz"]
+            } }
+        };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleCounterObj, sampleListObj, sampleSeqObj, samplePartialObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK, achID: "sample", shouldMarkOff: false };
+        
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+
+        const expectedNewState: AchievementStateList = {
+            sample: { completed: false, objectives: {
+                co: 0,
+                li: [],
+                se: 0,
+                pa: []
+            } }
         };
 
-        const t = () => doStateUpdate(emptyState, emptyState, action);
+        const expectedRowsChanged = [`sample.completed`, `sample.objectives.co`, `sample.objectives.li`, `sample.objectives.se`, `sample.objectives.pa`];
 
-        expect(t).toThrow(Error);
-        expect(t).toThrow(`Unknown action "foo"`);
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(expectedRowsChanged.length);
+        expect(rowsChanged).toEqual(expect.arrayContaining(expectedRowsChanged));
     });
 
-    it("mark achievement, missing shouldMarkOff", () => {
-        const action: StateUpdate = {
-            type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK,
-            achID: "foo",
+    it("mark already-incompleted achievement incomplete, no change", () => {
+        const inputOldState: AchievementStateList = {
+            sample: { completed: false, objectives: { li: ["foo"] } }
         };
+        const inputAchList: AchievementInfo[] = [ { ...sampleAch, objectives: [sampleListObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK, achID: "sample", shouldMarkOff: false };
 
-        const t = () => doStateUpdate(emptyState, emptyState, action);
-        expect(t).toThrow(Error);
-        expect(t).toThrow(`Missing "shouldMarkOff" in doStateUpdate`);
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        expect(newState).toMatchObject(inputOldState);
+        expect(rowsChanged).toHaveLength(0);
+    });
+
+    it("set counter obj w/o completing achievement", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: false, objectives: { co: 3 } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleCounterObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "co", n: 4 };
+
+        const expectedNewState: AchievementStateList = { sample: { completed: false, objectives: { co: 4 } } };
+
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(1);
+        expect(rowsChanged[0]).toBe(`sample.objectives.co`);
+    });
+
+    it("set counter obj w/ completing achievement", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: false, objectives: { co: 4 } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleCounterObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "co", n: 5 };
+
+        const expectedNewState: AchievementStateList = { sample: { completed: true, objectives: { co: 5 } } };
+
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        const expectedRowsChanged = [`sample.completed`, `sample.objectives.co`];
+
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(expectedRowsChanged.length);
+        expect(rowsChanged).toEqual(expect.arrayContaining(expectedRowsChanged));
+    });
+
+    it("set counter obj, unmarking achievement", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: true, objectives: { co: 5 } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleCounterObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "co", n: 4 };
+
+        const expectedNewState: AchievementStateList = { sample: { completed: false, objectives: { co: 4 } } };
+
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        const expectedRowsChanged = [`sample.completed`, `sample.objectives.co`];
+
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(expectedRowsChanged.length);
+        expect(rowsChanged).toEqual(expect.arrayContaining(expectedRowsChanged));
+    });
+
+    it("set sequential obj w/o completing achievement", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: false, objectives: { se: 0 } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleSeqObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "se", n: 3 };
+
+        const expectedNewState: AchievementStateList = { sample: { completed: true, objectives: { se: 3 } } };
+
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        const expectedRowsChanged = [`sample.completed`, `sample.objectives.se`];
+
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(expectedRowsChanged.length);
+        expect(rowsChanged).toEqual(expect.arrayContaining(expectedRowsChanged));
+    });
+
+    it("set counter obj, no change", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: false, objectives: { co: 3 } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleCounterObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "co", n: 3 };
+
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        expect(newState).toMatchObject(inputOldState);
+        expect(rowsChanged).toHaveLength(0);
+    });
+
+    it("mark list item w/o completing achievement", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: false, objectives: { li: [] } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleListObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "li", subobjID: "foo", shouldMarkOff: true };
+
+        const expectedNewState: AchievementStateList = { sample: { completed: false, objectives: { li: ["foo"] } } };
+
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(1);
+        expect(rowsChanged[0]).toBe(`sample.objectives.li`);
+    });
+
+    it("mark list item w/ completing achievement", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: false, objectives: { li: ["foo"] } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleListObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "li", subobjID: "bar", shouldMarkOff: true };
+
+        const expectedNewState: AchievementStateList = { sample: { completed: true, objectives: { li: ["foo", "bar"] } } };
+
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        const expectedRowsChanged = [`sample.completed`, `sample.objectives.li`];
+
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(expectedRowsChanged.length);
+        expect(rowsChanged).toEqual(expect.arrayContaining(expectedRowsChanged));
+    });
+
+    it("unmark list item, unmarking achievement", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: true, objectives: { li: ["foo", "bar"] } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleListObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "li", subobjID: "bar", shouldMarkOff: false };
+        
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        const expectedNewState: AchievementStateList = { sample: { completed: false, objectives: { li: ["foo"] } } };
+        const expectedRowsChanged = [`sample.completed`, `sample.objectives.li`];
+
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(expectedRowsChanged.length);
+        expect(rowsChanged).toEqual(expect.arrayContaining(expectedRowsChanged));
+    });
+
+    it("unmark list item, no-change", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: false, objectives: { li: ["foo"] } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [sampleListObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "li", subobjID: "bar", shouldMarkOff: false };
+        
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+        
+        expect(newState).toMatchObject(inputOldState);
+        expect(rowsChanged).toHaveLength(0);
+    });
+
+    it("mark partial off, complete achievement", () => {
+        const inputOldState: AchievementStateList = { sample: { completed: false, objectives: { pa: ["foo"] } } };
+        const inputAchList: AchievementInfo[] = [ 
+            {...sampleAch, 
+             objectives: [samplePartialObj]
+            } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "pa", subobjID: "baz", shouldMarkOff: true };
+
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+
+        const expectedNewState: AchievementStateList = { sample: { completed: true, objectives: { pa: ["foo", "baz"] } } };
+        const expectedRowChanged = [`sample.completed`, `sample.objectives.pa`];
+
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(expectedRowChanged.length);
+        expect(rowsChanged).toEqual(expect.arrayContaining(expectedRowChanged));
+    });
+
+    it("tolerate missing ach in statedata", () => {
+        const inputOldState: AchievementStateList = {};
+        const inputAchList: AchievementInfo[] = [
+            {...sampleAch, objectives: [sampleCounterObj, sampleSeqObj] }
+        ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK, achID: "sample", shouldMarkOff: true };
+
+        const { newState, rowsChanged } = performStateUpdate(inputOldState, inputAchList, inputAction);
+
+        const expectedNewState: AchievementStateList = { sample: { completed: true, objectives: { co: 5, se: 3 } } };
+        const expectedRowsChanged = [`sample.completed`, `sample.objectives.co`, `sample.objectives.se`];
+
+        expect(newState).toMatchObject(expectedNewState);
+        expect(rowsChanged).toHaveLength(expectedRowsChanged.length);
+        expect(rowsChanged).toEqual(expect.arrayContaining(expectedRowsChanged));
+    });
+});
+
+describe("performStateUpdate, error conditions", () => {
+    it("general, missing type in action", () => {
+        const inputOldState = baseSampleOldState, inputAchList = baseSampleAchList;
+        const inputAction: Partial<StateUpdate> = { achID: "sample" };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction as StateUpdate)).toThrow(StateUpdateError);
+    });
+
+    it("general, missing achID in action", () => {
+        const inputOldState = baseSampleOldState, inputAchList = baseSampleAchList;
+        const inputAction: Partial<StateUpdate> = { type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction as StateUpdate)).toThrow(StateUpdateError);
+    });
+
+    it("general, unknown action type", () => {
+        const inputOldState = baseSampleOldState, inputAchList = baseSampleAchList;
+        const inputAction: StateUpdate = { type: "blaaaaaaaaaa", achID: "sample" };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("general, missing objid", () => {
+        const inputOldState = baseSampleOldState, inputAchList = baseSampleAchList;
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample" };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("general, missing achievement", () => {
+        const inputOldState = baseSampleOldState;
+        const inputAchList: AchievementInfo[] = [];
+        const inputAction: StateUpdate = { type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK, achID: "sample", shouldMarkOff: true };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("mark no-obj achievement complete, missing shouldMarkOff", () => {
+        const inputOldState = baseSampleOldState, inputAchList = baseSampleAchList;
+        const inputAction: StateUpdate = { type: STATE_ACTION.ACHIEVEMENT_COMPLETE_MARK, achID: "sample" };
+        
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("set numerical, unknown objid", () => {
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleCounterObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "blablafoobar", n: 3 };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("set numerical, invalid action", () => {
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleListObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "li", n: 5 };
+        
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
     });
 
     it("set numerical, missing n", () => {
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: "foo",
-            objID: "bar"
-        };
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleCounterObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "co" };
 
-        const t = () => doStateUpdate(emptyState, emptyState, action);
-        expect(t).toThrow(Error);
-        expect(t).toThrow(`Missing "n" in doStateUpdate`);
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
     });
 
     it("set numerical, negative n", () => {
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: "foo",
-            objID: "bar",
-            n: -1
-        };
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleCounterObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "co", n: -1 };
 
-        const t = () => doStateUpdate(emptyState, emptyState, action);
-        expect(t).toThrow(Error);
-        expect(t).toThrow(`"n" cannot be negative`);
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
     });
 
-    it("set numerical, n greater than goal", () => {
-        const oldState: AchievementStateList = {
-            foo: {
-                completed: false,
-                objectives: {
-                    bar: 4
-                }
+    it("set numerical, n exceeds goal", () => {
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleCounterObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_SET_NUMERICAL, achID: "sample", objID: "co", n: Infinity };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("mark list, missing subobjID", () => {
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleListObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "li", shouldMarkOff: true };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("mark list, missing shouldMarkOff", () => {
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleListObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "li", subobjID: "foo" };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("mark list, invalid objid", () => {
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleListObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "blablablabla", subobjID: "foo", shouldMarkOff: true };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("mark list, wrong action type", () => {
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleCounterObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "co", subobjID: "foo", shouldMarkOff: true };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+
+    it("mark list, invalid subobjid", () => {
+        const inputOldState = baseSampleOldState;
+        const inputAchList = [ { ...sampleAch, objectives: [sampleListObj] } ];
+        const inputAction: StateUpdate = { type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM, achID: "sample", objID: "li", subobjID: "blablablabla", shouldMarkOff: true };
+
+        expect(() => performStateUpdate(inputOldState, inputAchList, inputAction)).toThrow(StateUpdateError);
+    });
+});
+
+describe("isAchievementObjectivesFulfilled", () => {
+    it("no obj", () => {
+        const inputState: AchievementStateList = { sample: { completed: false, objectives: {} } };
+        const inputAch: AchievementInfo = sampleAch;
+
+        const result = isAchievementObjectivesFulfilled(inputState, inputAch);
+        expect(result).toBeTruthy();
+    });
+
+    it("one obj, false", () => {
+        const inputState: AchievementStateList = { sample: { completed: false, objectives: { co: 2 } } };
+        const inputAch: AchievementInfo = { ...sampleAch, objectives: [sampleCounterObj] };
+
+        const result = isAchievementObjectivesFulfilled(inputState, inputAch);
+        expect(result).toBeFalsy();
+    });
+
+    it("one obj, true", () => {
+        const inputState: AchievementStateList = { sample: { completed: false, objectives: { co: sampleCounterObj.goal } } };
+        const inputAch: AchievementInfo = { ...sampleAch, objectives: [sampleCounterObj] };
+
+        const result = isAchievementObjectivesFulfilled(inputState, inputAch);
+        expect(result).toBeTruthy();
+    });
+
+    it("one obj, another missing, false", () => {
+        const inputState: AchievementStateList = { sample: { completed: false, objectives: { co: sampleCounterObj.goal } } };
+        const inputAch: AchievementInfo = { ...sampleAch, objectives: [sampleCounterObj, sampleListObj] };
+
+        const result = isAchievementObjectivesFulfilled(inputState, inputAch);
+        expect(result).toBeFalsy();
+    });
+
+    it("one partial obj, false", () => {
+        const inputState: AchievementStateList = { sample: { completed: false, objectives: { pa: ["foo"] } } };
+        const inputAch: AchievementInfo = { ...sampleAch, objectives: [samplePartialObj] };
+
+        const result = isAchievementObjectivesFulfilled(inputState, inputAch);
+        expect(result).toBeFalsy();
+    });
+
+    it("fail on unknown objtype", () => {
+        const inputState: AchievementStateList = { sample: { completed: false, objectives: { co : 2 } } };
+        const inputAch: AchievementInfo = { ...sampleAch, objectives: [ { objid: "co", type: "nonexistent type" } ] };
+
+        expect(() => isAchievementObjectivesFulfilled(inputState, inputAch)).toThrow(StateUpdateError);
+    });
+});
+
+describe("generateDefaultAchievementState", () => {
+    it("no-obj achievement", () => {
+        const ach: AchievementInfo = sampleAch;
+
+        const expectedState: AchievementState = {
+            completed: false,
+            objectives: {}
+        };
+
+        const defaultState = generateDefaultAchievementState(ach);
+        expect(defaultState).toMatchObject(expectedState);
+    });
+
+    it("all-obj achievement", () => {
+        const ach: AchievementInfo = {...sampleAch, objectives: [sampleCounterObj, sampleListObj, sampleSeqObj, samplePartialObj] };
+
+        const expectedState: AchievementState = {
+            completed: false,
+            objectives: {
+                co: 0,
+                li: [],
+                se: 0,
+                pa: []
             }
         };
-        const goalState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: 5
-                }
-            }
-        };
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: "foo",
-            objID: "bar",
-            n: 6
-        };
 
-        const t = () => doStateUpdate(oldState, goalState, action);
-        expect(t).toThrow(Error);
-        expect(t).toThrow(`"n" cannot be greater than goal state n`);
+        const defaultState = generateDefaultAchievementState(ach);
+        expect(defaultState).toMatchObject(expectedState);
+    });
+});
+
+describe("generateStateTemplate", () => {
+    it("empty base case", () => {
+        const output = generateStateTemplate([]);
+        expect(JSON.stringify(output)).toBe('{}');
     });
 
-    it("toggle list item, missing subobjid", () => {
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
-            achID: "foo",
-            objID: "bar",
-            shouldMarkOff: false
-        };
-
-        const t = () => doStateUpdate(emptyState, emptyState, action);
-        expect(t).toThrow(Error);
-        expect(t).toThrow(`Missing "subobjID" in doStateUpdate`);
+    it("one achievement, no objectives", () => {
+        const expectedOutput: AchievementStateList = { sample: { completed: false, objectives: {} } };
+        const output = generateStateTemplate(baseSampleAchList);
+        expect(output).toMatchObject(expectedOutput);
     });
 
-    it("toggle list item, missing shouldMarkOff", () => {
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
-            achID: "foo",
-            objID: "bar",
-            subobjID: "baz"
-        };
-
-        const t = () => doStateUpdate(emptyState, emptyState, action);
-        expect(t).toThrow(Error);
-        expect(t).toThrow(`Missing "shouldMarkOff" in doStateUpdate`);
+    it("one achievement, all objectives", () => {
+        const inputAchList: AchievementInfo[] = [ { ...sampleAch, objectives: [sampleCounterObj, sampleListObj, sampleSeqObj, samplePartialObj] } ];
+        const expectedOutput: AchievementStateList = { sample: { completed: false, objectives: { co: 0, li: [], se: 0, pa: [] } } };
+        const output = generateStateTemplate(inputAchList);
+        expect(output).toMatchObject(expectedOutput);
     });
 
-    it("toggle list item, subobjID does not exist", () => {
-        const goalState: AchievementStateList = {
-            foo: {
-                completed: true,
-                objectives: {
-                    bar: ["a", "b", "c"]
-                }
-            }
-        };
-        const oldState: AchievementStateList = {
-            foo: {
-                completed: false,
-                objectives: {
-                    bar: []
-                }
-            }
-        };
-        const action: StateUpdate = {
-            type: STATE_ACTION.OBJ_TOGGLE_LIST_ITEM,
-            achID: "foo",
-            objID: "bar",
-            subobjID: "x",
-            shouldMarkOff: true
+    it("four achievement, one objective each", () => {
+        const inputAchList: AchievementInfo[] = [
+            { ...sampleAch, id: "one", objectives: [sampleCounterObj] },
+            { ...sampleAch, id: "two", objectives: [sampleListObj] },
+            { ...sampleAch, id: "three", objectives: [sampleSeqObj] },
+            { ...sampleAch, id: "four", objectives: [samplePartialObj] }
+        ];
+        const expectedOutput: AchievementStateList = {
+            one: { completed: false, objectives: { co: 0 }},
+            two: { completed: false, objectives: { li: [] }},
+            three: { completed: false, objectives: { se: 0 }},
+            four: { completed: false, objectives: { pa: [] }},
         };
 
-        const t = () => doStateUpdate(oldState, goalState, action);
-        expect(t).toThrow(Error);
-        expect(t).toThrow(`subobjID given does not exist`);
+        const output = generateStateTemplate(inputAchList);
+        expect(output).toMatchObject(expectedOutput);
     });
+
 });

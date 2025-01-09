@@ -1,4 +1,4 @@
-import { generateStateTemplate, STATE_ACTION, StateUpdate, doStateUpdate } from "./state";
+import { generateStateTemplate, STATE_ACTION, StateUpdate, performStateUpdate } from "./state";
 import { AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo, PartialObjectiveInfo } from "./types";
 
 /** 
@@ -80,7 +80,5 @@ export function isNonorderedArrayEqual<T>(a: T[], b: T[]): boolean {
  */
 export const clamp = (min: number, num: number, max: number): number => Math.min(Math.max(num, min), max);
 
-/* c8 ignore next */
-export { generateStateTemplate, STATE_ACTION, doStateUpdate }; // re-export
-/* c8 ignore next */
+export { generateStateTemplate, STATE_ACTION, performStateUpdate }; // re-export
 export type { StateUpdate, AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo, PartialObjectiveInfo };

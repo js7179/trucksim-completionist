@@ -1,21 +1,16 @@
 import styles from './CounterObjective.module.css';
 import { ProgressBar } from '../util/ProgressBar';
-import { STATE_ACTION, CounterObjectiveInfo } from 'trucksim-completionist-common';
-import { useAchievementDispatch, useAchievementObjectiveNumber } from '@/hooks/AchievementHooks';
+import { CounterObjectiveInfo } from 'trucksim-completionist-common';
+import { useFuncSetNumberObj, useStateAchievementNumberObj } from '@/hooks/AchievementHooks';
 
 export default function CounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {
-    const current = useAchievementObjectiveNumber(achID, objid);
-    const dispatch = useAchievementDispatch();
+    const current = useStateAchievementNumberObj(achID, objid);
+    const dispatch = useFuncSetNumberObj();
 
     const changeCount = (delta: number) => {
         const newValue = current + delta;
         if(newValue < 0 || newValue > goal) return;
-        dispatch({
-            type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: achID,
-            objID: objid,
-            n: newValue
-        });
+        dispatch(achID, objid, newValue);
     }
 
     return (

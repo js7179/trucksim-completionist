@@ -178,6 +178,17 @@ function objSetList(newState: AchievementStateList, achInfo: AchievementInfo, ac
     return rowsChanged;
 }
 
+const MEETS_GOAL: Record<string, (value: ObjectiveValueType, obj: ObjectiveInfo) => boolean> = {
+    'counter': (value, obj) => (value as number) === (GET_GOAL['counter'](obj) as number),
+    'list': (value, obj) => {
+        const goal = GET_GOAL['list'](obj) as string[];
+        const val = value as string[];
+        return goal.every((subobjid) => val.includes(subobjid));
+    },
+    'sequential': (value, obj) => (value as number) === (GET_GOAL['sequential'](obj) as number), 
+    'partial': (value, obj) => (value as string[]).length >= (obj as PartialObjectiveInfo).count
+};
+
 export function isAchievementObjectivesFulfilled(newState: AchievementStateList, achInfo: AchievementInfo): boolean {
     const objState = newState[achInfo.id].objectives;
     for(const obj of achInfo.objectives) {
@@ -185,27 +196,14 @@ export function isAchievementObjectivesFulfilled(newState: AchievementStateList,
         if(!Object.hasOwn(objState, objID)) { // fail-safe
             return false;
         }
-        if(!Object.hasOwn(GET_GOAL, obj.type)) {
+        if(!Object.hasOwn(MEETS_GOAL, obj.type)) {
             // hypothetically speaking this should _never_ happen
             throw new StateUpdateError(`Unknown objtype ${objType}`);
         }
-        const goal = GET_GOAL[obj.type](obj);
         const objVal = objState[objID];
 
-        if(objType === 'counter' || objType === 'sequential') {
-            if(goal !== objVal) return false;
-        } else if (objType === 'list') {
-            const goalCasted = goal as string[];
-            const valCasted = objVal as string[];
-            
-            const check = goalCasted.every((subobjid) => valCasted.includes(subobjid));
-            if(!check) return false;
-        } else if(objType === 'partial') {
-            const valLength = (objVal as string[]).length;
-            const objCasted = obj as PartialObjectiveInfo;
-            
-            if(valLength < objCasted.count) return false;
-        }
+        const doesObjMeetGoal = MEETS_GOAL[objType](objVal, obj);
+        if(!doesObjMeetGoal) return false;
     }
     return true;
 }

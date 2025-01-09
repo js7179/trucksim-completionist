@@ -1,4 +1,4 @@
-import styles from './SequentialObjective.module.css';
+import styles from './Objectives.module.css';
 import { SequentialObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from '../util/StylizedCheckbox';
 import { useFuncSetNumberObj, useStateAchievementNumberObj } from '@/hooks/AchievementHooks';
@@ -38,6 +38,6 @@ export default function SequentialObjective({achID, objid, values}: SequentialOb
     );
 }
 
-interface SequentialObjectiveProps extends SequentialObjectiveInfo {
+interface SequentialObjectiveProps extends Omit<SequentialObjectiveInfo, "type"> {
     achID: string;
 }

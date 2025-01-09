@@ -2819,8 +2819,9 @@
         "name": "Big Country Views",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "viewpoints",
+                "count": 25,
                 "values": [
                     {
                         "subobjid": "sprf",
@@ -2956,8 +2957,9 @@
         "name": "Avid Historian",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "viewpoints",
+                "count": 30,
                 "values": [
                     {
                         "subobjid": "8",
@@ -3673,8 +3675,9 @@
         "name": "Can you Keep a Secret?",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "roads",
+                "count": 3,
                 "values": [
                     {
                         "subobjid": "col",
@@ -3953,8 +3956,9 @@
         "name": "The Natural State",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "cities",
+                "count": 8,
                 "values": [
                     {
                         "subobjid": "spd",
@@ -4010,8 +4014,9 @@
         "name": "I Saw Arkansas",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "viewpoints",
+                "count": 8,
                 "values": [
                     {
                         "subobjid": "fy",
@@ -4153,8 +4158,9 @@
         "name": "Professional Driver",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "scenarios",
+                "count": 6,
                 "values": [
                     {
                         "subobjid": "41",
@@ -4233,8 +4239,9 @@
         "name": "Rowing Through the Gears",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "scenarios",
+                "count": 20,
                 "values": [
                     {
                         "subobjid": "21",

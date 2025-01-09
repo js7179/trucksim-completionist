@@ -3,10 +3,11 @@ import styles from "./AchievementList.module.css";
 import ListObjective from './objectives/ListObjective';
 import CounterObjective from './objectives/CounterObjective';
 import SequentialObjective from './objectives/SequentialObjective';
-import { AchievementInfo, CounterObjectiveInfo, ListObjectiveInfo, SequentialObjectiveInfo } from 'trucksim-completionist-common';
+import { AchievementInfo, CounterObjectiveInfo, ListObjectiveInfo, PartialObjectiveInfo, SequentialObjectiveInfo } from 'trucksim-completionist-common';
 import { IconProps, LocalIcon } from './AchievementIcon';
 import { AchievementCheckboxProps, LocalCompleteCheckbox } from './AchievementCompleteCheckbox';
 import { ShowInformationButton } from './util/StylizedCheckbox';
+import PartialObjective from './objectives/PartialObjective';
 
 export default function AchievementList({ aList }:{ aList:AchievementInfo[] }) {
     const list = aList.map((achievement) => <Achievement {...achievement} key={achievement.id} Icon={LocalIcon} CompleteCheckbox={LocalCompleteCheckbox} />);
@@ -29,6 +30,8 @@ function Achievement(props: AchievementProps) {
                 return <CounterObjective {...obj as CounterObjectiveInfo} achID={props.id} key={obj.objid}/>;
             case 'sequential':
                 return <SequentialObjective {...obj as SequentialObjectiveInfo} achID={props.id} key={obj.objid} />;
+            case 'partial':
+                return <PartialObjective {...obj as PartialObjectiveInfo} achID={props.id} key={obj.objid} />;
         }
     });
 

@@ -1,4 +1,4 @@
-import styles from './CounterObjective.module.css';
+import styles from './Objectives.module.css';
 import { ProgressBar } from '../util/ProgressBar';
 import { CounterObjectiveInfo } from 'trucksim-completionist-common';
 import { useFuncSetNumberObj, useStateAchievementNumberObj } from '@/hooks/AchievementHooks';
@@ -23,6 +23,6 @@ export default function CounterObjective({achID, objid, goal, display}: CounterO
     );
 }
 
-interface CounterObjectiveProps extends CounterObjectiveInfo {
+interface CounterObjectiveProps extends Omit<CounterObjectiveInfo, "type"> {
     achID: string;
 }

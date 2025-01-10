@@ -17,7 +17,7 @@ export function generateStateTemplate(achievementList: AchievementInfo[]): Achie
     return ret;
 }
 
-export function generateDefaultAchievementState(ach: AchievementInfo): AchievementState {
+function generateDefaultAchievementState(ach: AchievementInfo): AchievementState {
     const newState: AchievementState = { completed: false, objectives: {} };
     for(const obj of ach.objectives) {
         newState.objectives[obj.objid] = DEFAULTS[obj.type];
@@ -189,7 +189,13 @@ const MEETS_GOAL: Record<string, (value: ObjectiveValueType, obj: ObjectiveInfo)
     'partial': (value, obj) => (value as string[]).length >= (obj as PartialObjectiveInfo).count
 };
 
-export function isAchievementObjectivesFulfilled(newState: AchievementStateList, achInfo: AchievementInfo): boolean {
+/** Given an achievement with its objective, determine if the user has fulfilled the objectives
+ * from the user's savedata
+ * @param newState User's new savedata
+ * @param achInfo The achievement to check for completion
+ * @returns True if achievement objectives are met, false otherwise
+ */
+function isAchievementObjectivesFulfilled(newState: AchievementStateList, achInfo: AchievementInfo): boolean {
     const objState = newState[achInfo.id].objectives;
     for(const obj of achInfo.objectives) {
         const objID = obj.objid, objType = obj.type;
@@ -243,3 +249,8 @@ export function performStateUpdate(oldState: AchievementStateList, achList: Achi
     const rowsChanged = NEW_STATE_ACTION[actionType](newState, achievementInfo, action);
     return { newState, rowsChanged };
 }
+
+export const onlyForTesting = {
+    isAchievementObjectivesFulfilled,
+    generateDefaultAchievementState
+};

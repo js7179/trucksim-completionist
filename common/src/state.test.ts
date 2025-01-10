@@ -1,5 +1,6 @@
-import { generateDefaultAchievementState, generateStateTemplate, isAchievementObjectivesFulfilled, performStateUpdate, STATE_ACTION, StateUpdate, StateUpdateError } from "./state";
+import { generateStateTemplate, performStateUpdate, STATE_ACTION, StateUpdate, StateUpdateError, onlyForTesting } from "./state";
 import { AchievementInfo, AchievementState, AchievementStateList, CounterObjectiveInfo, ListObjectiveInfo, PartialObjectiveInfo, SequentialObjectiveInfo } from "./types";
+const { isAchievementObjectivesFulfilled, generateDefaultAchievementState } = onlyForTesting;
 
 const sampleAch: AchievementInfo = { desc: "", icons: { completed: "", incomplete: "" }, id: "sample", name: "", objectives: [] };
 

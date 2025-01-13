@@ -1,22 +1,17 @@
-import styles from './SequentialObjective.module.css';
-import { STATE_ACTION, SequentialObjectiveInfo } from "trucksim-completionist-common";
+import styles from './Objectives.module.css';
+import { SequentialObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from '../util/StylizedCheckbox';
-import { useAchievementDispatch, useAchievementObjectiveNumber } from '@/hooks/AchievementHooks';
+import { useFuncSetNumberObj, useStateAchievementNumberObj } from '@/hooks/AchievementHooks';
 
 export default function SequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
-    const objValue = useAchievementObjectiveNumber(achID, objid);
-    const dispatch = useAchievementDispatch();
+    const objValue = useStateAchievementNumberObj(achID, objid);
+    const dispatch = useFuncSetNumberObj();
 
     const selectListItem = (stepIndex: number) => {
         if(stepIndex == objValue) {
             stepIndex -= 1;
         }
-        dispatch({
-            type: STATE_ACTION.OBJ_SET_NUMERICAL,
-            achID: achID,
-            objID: objid,
-            n: stepIndex
-        });
+        dispatch(achID, objid, stepIndex);
     };
 
     const stepList = values.map((step, index) => {
@@ -43,6 +38,6 @@ export default function SequentialObjective({achID, objid, values}: SequentialOb
     );
 }
 
-interface SequentialObjectiveProps extends SequentialObjectiveInfo {
+interface SequentialObjectiveProps extends Omit<SequentialObjectiveInfo, "type"> {
     achID: string;
 }

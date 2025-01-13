@@ -1,8 +1,8 @@
 import styles from "./AchievementIcon.module.css";
-import { useAchievementCompleted } from "@/hooks/AchievementHooks";
+import { useStateAchievementCompleted } from "@/hooks/AchievementHooks";
 
 export function LocalIcon({achID, completed, incomplete}: IconProps) {
-    const isDone = useAchievementCompleted(achID);
+    const isDone = useStateAchievementCompleted(achID);
 
     return (
         <img src={ isDone ? completed : incomplete } className={styles.icon} alt=''/>

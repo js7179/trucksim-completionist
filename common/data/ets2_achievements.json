@@ -3473,7 +3473,47 @@
         },
         "id": "aca_interior",
         "name": "Professional Driver",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "partial",
+                "objid": "scenarios",
+                "count": 6,
+                "values": [
+                    {
+                        "subobjid": "1",
+                        "display": "Reversing with a Trailer"
+                    },
+                    {
+                        "subobjid": "2",
+                        "display": "Reversing into a Turn"
+                    },
+                    {
+                        "subobjid": "3",
+                        "display": "Reverse Parking in a Tight Lot"
+                    },
+                    {
+                        "subobjid": "4",
+                        "display": "Offset Reversing Manoeuvre"
+                    },
+                    {
+                        "subobjid": "5",
+                        "display": "Parallel Parking with a Trailer"
+                    },
+                    {
+                        "subobjid": "6",
+                        "display": "Diagonal Parking in Reverse"
+                    },
+                    {
+                        "subobjid": "7",
+                        "display": "Blind side Reversing"
+                    },
+                    {
+                        "subobjid": "8",
+                        "display": "Manoeuvring in a Tight Space"
+                    }
+                ]
+            }
+        ]
     },
     {
         "desc": "Complete at least 28 scenarios in Truck Driving Basics including the final exams (Driving Academy)",
@@ -3483,7 +3523,14 @@
         },
         "id": "aca_truck_driving",
         "name": "Dedicated Student",
-        "objectives": []
+        "objectives": [
+            {
+                "type": "counter",
+                "objid": "scenarios",
+                "display": "Scenarios Completed",
+                "goal": 28
+            }
+        ]
     },
     {
         "desc": "Complete any scenario in fourth chapter of Truck Driving Basics in one \nattempt without correcting by driving forward (Driving Academy)",
@@ -3505,8 +3552,9 @@
         "name": "Rowing Through the Gears",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "scenarios",
+                "count": 20,
                 "values": [
                     {
                         "subobjid": "21",
@@ -3635,8 +3683,9 @@
         "name": "Odyssean Voyager",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "cities",
+                "count": 12,
                 "values": [
                     {
                         "subobjid": "ar",
@@ -3712,8 +3761,9 @@
         "name": "Sights and Legends",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "viewpoints",
+                "count": 8,
                 "values": [
                     {
                         "subobjid": "lix",
@@ -3758,9 +3808,6 @@
                     {
                         "subobjid": "lbr",
                         "display": "Lesbos Hotel Resort"
-                    },
-                    {
-                        "subobjid": ""
                     }
                 ]
             }
@@ -3776,8 +3823,9 @@
         "name": "All Inclusive",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "hotels",
+                "count": 4,
                 "values": [
                     {
                         "subobjid": "ar",
@@ -3813,8 +3861,9 @@
         "name": "Gift of Athena",
         "objectives": [
             {
-                "type": "list",
+                "type": "partial",
                 "objid": "cities",
+                "count": 5,
                 "values": [
                     {
                         "subobjid": "ar",

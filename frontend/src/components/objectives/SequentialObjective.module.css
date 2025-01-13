@@ -1,9 +1,0 @@
-ol.seqObjList {
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-}
-
-li.seqObjListItem > * {
-    vertical-align: text-top;
-}

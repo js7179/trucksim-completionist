@@ -57,16 +57,20 @@ CREATE TABLE data_obj_list(
 );
 
 -- Set up trigger to insert row on user creation
-CREATE FUNCTION user_created_add_lastupdated() RETURNS TRIGGER AS $user_created_add_lastupdated$
+CREATE FUNCTION public.user_created_add_lastupdated() 
+RETURNS TRIGGER 
+LANGUAGE plpgsql
+SECURITY DEFINER SET search_path = ''
+AS $$
 	BEGIN
-		INSERT INTO data_last_updated (uid) VALUES (NEW.id);
-		RETURN NULL;
+		INSERT INTO public.data_last_updated (uid) VALUES (NEW.id);
+		RETURN NEW;
 	END;
-$user_created_add_lastupdated$ LANGUAGE plpgsql;
+$$;
 
 CREATE TRIGGER on_user_created_insert_lastupdated
 	AFTER INSERT ON auth.users
-	FOR EACH ROW EXECUTE FUNCTION user_created_add_lastupdated();
+	FOR EACH ROW EXECUTE PROCEDURE public.user_created_add_lastupdated();
 
 -- Set up timestamp trigger for databases
 CREATE VIEW info_mapping_objnid_game AS 
@@ -78,7 +82,10 @@ CREATE VIEW info_mapping_objnid_game AS
 		FROM info_obj_list
 		JOIN info_achievement ON info_achievement.ach_nid=info_obj_list.ach_nid;
 
-CREATE OR REPLACE FUNCTION update_lastupdated() RETURNS TRIGGER AS $update_lastupdated$
+CREATE FUNCTION update_lastupdated() 
+RETURNS TRIGGER 
+LANGUAGE plpgsql
+AS $$
 	DECLARE
 		game trucksim_game; 
 	BEGIN
@@ -102,7 +109,7 @@ CREATE OR REPLACE FUNCTION update_lastupdated() RETURNS TRIGGER AS $update_lastu
 		END IF;
 		RETURN NEW;
 	END;
-$update_lastupdated$ LANGUAGE plpgsql;
+$$;
 
 CREATE TRIGGER data_obj_counter_updatets
 	AFTER INSERT OR UPDATE ON data_obj_counter
@@ -118,39 +125,45 @@ CREATE TRIGGER data_ach_completed_updatets
 	
 -- Set up validation functions
 --		List validation
-CREATE FUNCTION data_listobj_validation() RETURNS TRIGGER AS $data_listobj_validation$
+CREATE FUNCTION data_listobj_validation() 
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
 	BEGIN
 		RETURN CASE
 			WHEN NEW.val <@ (SELECT goal FROM info_obj_list WHERE obj_nid=NEW.obj_nid) THEN NEW
 			ELSE NULL END;
 	END;
-$data_listobj_validation$ LANGUAGE plpgsql;
+$$;
 
 CREATE TRIGGER data_listobj_validate_val
 	BEFORE INSERT OR UPDATE ON data_obj_list
 	FOR EACH ROW EXECUTE FUNCTION data_listobj_validation();
 	
 --		Counter validation
-CREATE FUNCTION data_counterobj_validation() RETURNS TRIGGER AS $data_counterobj_validation$
+CREATE FUNCTION data_counterobj_validation() 
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
 	BEGIN
 		RETURN CASE
 			WHEN NEW.val < 0 THEN NULL
 			WHEN NEW.val > (SELECT goal FROM info_obj_counter WHERE obj_nid=NEW.obj_nid) THEN NULL
 			ELSE NEW END;
 	END;
-$data_counterobj_validation$ LANGUAGE plpgsql;
+$$;
 
 CREATE TRIGGER data_counterobj_validate_val
 	BEFORE INSERT OR UPDATE ON data_obj_counter
 	FOR EACH ROW EXECUTE FUNCTION data_counterobj_validation();
 
 -- Permissions
-CREATE ROLE infomanager;
+CREATE ROLE info;
 CREATE ROLE webserv;
 
 CREATE USER webserv1 WITH PASSWORD 'webserv1' IN ROLE webserv;
-CREATE USER infomanager WITH PASSWORD 'infomanager' IN ROLE infomanager;
+CREATE USER infomanager WITH PASSWORD 'infomanager' IN ROLE info;
 
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO infomanager, webserv;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO info, webserv;
 GRANT INSERT, UPDATE, DELETE ON data_last_updated, data_ach_completed, data_obj_counter, data_obj_list TO webserv;
-GRANT INSERT, UPDATE, DELETE ON info_achievement, info_obj_counter, info_obj_list TO infomanager;
+GRANT INSERT, UPDATE, DELETE ON info_achievement, info_obj_counter, info_obj_list TO info;

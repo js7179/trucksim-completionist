@@ -73,12 +73,12 @@ CREATE TRIGGER on_user_created_insert_lastupdated
 	FOR EACH ROW EXECUTE PROCEDURE public.user_created_add_lastupdated();
 
 -- Set up timestamp trigger for databases
-CREATE VIEW info_mapping_objnid_game AS 
-	SELECT obj_nid, info_achievement.game 
+CREATE VIEW info_mapping_objectives AS 
+	SELECT obj_nid, obj_tid, info_achievement.ach_tid, info_achievement.game 
 		FROM info_obj_counter 
 		JOIN info_achievement ON info_achievement.ach_nid=info_obj_counter.ach_nid 
 	UNION 
-	SELECT obj_nid, info_achievement.game
+	SELECT obj_nid, obj_tid, info_achievement.ach_tid, info_achievement.game 
 		FROM info_obj_list
 		JOIN info_achievement ON info_achievement.ach_nid=info_obj_list.ach_nid;
 
@@ -90,7 +90,7 @@ AS $$
 		game trucksim_game; 
 	BEGIN
 		IF TG_ARGV[0] = 'objid' THEN
-			game := (SELECT info_mapping_objnid_game.game FROM info_mapping_objnid_game WHERE obj_nid=NEW.obj_nid);
+			game := (SELECT info_mapping_objectives.game FROM info_mapping_objectives WHERE obj_nid=NEW.obj_nid);
 		ELSIF TG_ARGV[0] = 'achid' THEN
 			game := (SELECT info_achievement.game FROM info_achievement WHERE ach_nid=NEW.ach_nid);
 		ELSE

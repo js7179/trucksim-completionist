@@ -16,6 +16,13 @@ def checkJson(data):
             print(f'Conflict with achID {achid}')
         else:
             achid_check.add(achid)
+
+        if not achid.isascii(): 
+            print(f'achID {achid} not ASCII')
+            issues += 1
+        if len(achid.strip()) != len(achid):
+            print(f'achID {objid} has extraneous characters at start and end')
+            issues += 1
         if len(achievement['objectives']) == 0:
             continue
         objid_check = set()
@@ -30,6 +37,13 @@ def checkJson(data):
                 print(f'Conflict with objid {objid} for achID {achid}')
             else:
                 objid_check.add(objid)
+            
+            if not objid.isascii():
+                print(f'objID {objid} not ASCII for achID {achid}')
+                issues += 1
+            if len(objid.strip()) != len(objid):
+                print(f'objID {objid} has extraneous characters at start and end for achID {achid}')
+                issues += 1
             
             if objective['type'] == 'counter':
                 continue
@@ -50,6 +64,12 @@ def checkJson(data):
                     print(f'Conflict with subobjids {subobjid} in {achid}\'s {objid}')
                 else:
                     subobjid_check.add(subobjid)
+                if not subobjid.isascii():
+                    print(f'subobjid {subobjid} not ASCII for achID {achid} and objID {objid}')
+                    issues += 1
+                if len(subobjid.strip()) != len(subobjid):
+                    print(f'subobjid {subobjid} has extraneous characters at start and end for achID {achid} and objID {objid}')
+                    issues += 1
     return issues
 
 def main():

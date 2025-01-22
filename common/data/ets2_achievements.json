@@ -1632,7 +1632,7 @@
                         "display": "Brussel (B) to Amsterdam (NL)"
                     },
                     {
-                        "subobjid": "prcznüd",
+                        "subobjid": "prcznud",
                         "display": "Praha (CZ) to Nürnberg (D)"
                     },
                     {
@@ -1680,11 +1680,11 @@
                         "display": "Dresden (D) to Wrocław (PL)"
                     },
                     {
-                        "subobjid": "ködamnl",
+                        "subobjid": "kodamnl",
                         "display": "Köln (D) to Amsterdam (NL)"
                     },
                     {
-                        "subobjid": "müdsaa",
+                        "subobjid": "mudsaa",
                         "display": "München (D) to Salzburg (A)"
                     },
                     {
@@ -1700,7 +1700,7 @@
                         "display": "Pori (FI) to Helsinki (FI)"
                     },
                     {
-                        "subobjid": "darē",
+                        "subobjid": "dare",
                         "display": "Daugavpils (LV) to Rēzekne (LV)"
                     },
                     {
@@ -1780,11 +1780,11 @@
                         "display": "Galați (RO) to Iași (RO)"
                     },
                     {
-                        "subobjid": "retâ",
+                        "subobjid": "reta",
                         "display": "Reșița (RO) to Târgu Mureș (RO)"
                     },
                     {
-                        "subobjid": "i̇ed",
+                        "subobjid": "ied",
                         "display": "İstanbul (TR) to Edirne (TR)"
                     },
                     {
@@ -1796,7 +1796,7 @@
                         "display": "Stavanger (N) to Oslo (N)"
                     },
                     {
-                        "subobjid": "göhe",
+                        "subobjid": "gohe",
                         "display": "Göteborg (S) to Helsingborg (S)"
                     },
                     {
@@ -1938,11 +1938,11 @@
                         "display": "Narva (EST)"
                     },
                     {
-                        "subobjid": "estpa",
+                        "subobjid": "estpl",
                         "display": "Paldiski (EST)"
                     },
                     {
-                        "subobjid": "estpä",
+                        "subobjid": "estpr",
                         "display": "Pärnu (EST)"
                     },
                     {
@@ -2018,7 +2018,7 @@
                         "display": "Vilnius (LT)"
                     },
                     {
-                        "subobjid": "ltš",
+                        "subobjid": "lts",
                         "display": "Šiauliai (LT)"
                     },
                     {
@@ -2030,11 +2030,11 @@
                         "display": "Liepāja (LV)"
                     },
                     {
-                        "subobjid": "lvrē",
+                        "subobjid": "lvre",
                         "display": "Rēzekne (LV)"
                     },
                     {
-                        "subobjid": "lvrī",
+                        "subobjid": "lvri",
                         "display": "Rīga (LV)"
                     },
                     {
@@ -2167,8 +2167,8 @@
             },
             {
                 "type": "counter",
-                "objid": "Šiauliai ",
-                "display": "Siauliai, LT (Renat)",
+                "objid": "siauliai",
+                "display": "Šiauliai, LT (Renat)",
                 "goal": 2
             },
             {
@@ -2464,7 +2464,7 @@
                         "display": "Craiova (RO)"
                     },
                     {
-                        "subobjid": "rocă",
+                        "subobjid": "roca",
                         "display": "Călărași (RO)"
                     },
                     {
@@ -2496,7 +2496,7 @@
                         "display": "Timișoara (RO)"
                     },
                     {
-                        "subobjid": "rotâ",
+                        "subobjid": "rota",
                         "display": "Târgu Mureș (RO)"
                     },
                     {
@@ -2748,7 +2748,7 @@
                         "display": "Ciudad Real (E)"
                     },
                     {
-                        "subobjid": "ecó",
+                        "subobjid": "eco",
                         "display": "Córdoba (E)"
                     },
                     {
@@ -2788,7 +2788,7 @@
                         "display": "Murcia (E)"
                     },
                     {
-                        "subobjid": "emá",
+                        "subobjid": "eml",
                         "display": "Málaga (E)"
                     },
                     {
@@ -2840,7 +2840,7 @@
                         "display": "Valladolid (E)"
                     },
                     {
-                        "subobjid": "evalè",
+                        "subobjid": "evale",
                         "display": "València (E)"
                     },
                     {
@@ -2941,7 +2941,7 @@
                         "display": "Gijón (E)"
                     },
                     {
-                        "subobjid": "emá",
+                        "subobjid": "eml",
                         "display": "Málaga (E)"
                     },
                     {
@@ -2949,7 +2949,7 @@
                         "display": "Tarragona (E)"
                     },
                     {
-                        "subobjid": "evalè",
+                        "subobjid": "evale",
                         "display": "València (E)"
                     },
                     {

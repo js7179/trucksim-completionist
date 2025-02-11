@@ -9,10 +9,12 @@
     "lint": ""
   },
   "dependencies": {
+    "@types/pg": "^8.11.10",
     "cors": "^2.8.5",
     "express": "^4.18.3",
     "http-errors": "^2.0.0",
-    "jose": "^5.9.6"
+    "jose": "^5.9.6",
+    "pg": "^8.13.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -20,6 +22,7 @@
     "@types/node": "^20.11.26",
     "cookie-parser": "^1.4.6",
     "debug": "^4.3.4",
+    "dotenv": "^16.4.7",
     "morgan": "^1.10.0",
     "node-mocks-http": "^1.16.1",
     "nodemon": "^3.1.0",

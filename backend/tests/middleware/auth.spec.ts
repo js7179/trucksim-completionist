@@ -1,6 +1,6 @@
 import * as jose from 'jose';
 import { vi } from 'vitest';
-import AuthorizationHeaderMiddleware from './auth';
+import AuthorizationHeaderMiddleware from '../../src/middleware/auth';
 import httpMocks from 'node-mocks-http';
 import { JOSEError, JWSInvalid, JWTClaimValidationFailed, JWTExpired } from 'jose/errors';
 

@@ -3,7 +3,9 @@
   "private": "true",
   "version": "0.0.0",
   "workspaces": [
-    "common"
+    "common",
+    "frontend",
+    "backend"
   ],
   "scripts": {
     "dev": "concurrently --names \"SERVER, VITE \" -c \"bgCyan.bold,bgWhite.bold\" -- \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",

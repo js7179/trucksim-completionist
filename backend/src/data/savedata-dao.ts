@@ -64,7 +64,7 @@ export default class UserSavedataPGDAO implements UserSavedataDAO {
         this.client = client;
     }
 
-    async getUserAllAchievementComplete(user: UUID, game: string): Promise<Map<string, boolean> | null> {
+    async getUserAllAchievementComplete(user: UUID, game: string): Promise<Map<string, boolean>> {
         const output = new Map<string, boolean>();
         const queryRes = await this.client.query(QUERY_GET_ACHCOMPLETED, [user, game]);
         const rows = queryRes.rows;
@@ -74,7 +74,7 @@ export default class UserSavedataPGDAO implements UserSavedataDAO {
         return output;
     }
 
-    async getUserAllObjectivesList(user: UUID, game: string): Promise<Map<AchObj, string[]> | null> {
+    async getUserAllObjectivesList(user: UUID, game: string): Promise<Map<AchObj, string[]>> {
         const output = new Map<AchObj, string[]>();
         const queryRes = await this.client.query(QUERY_GET_OBJ_LIST, [user, game]);
         const rows = queryRes.rows;
@@ -84,7 +84,7 @@ export default class UserSavedataPGDAO implements UserSavedataDAO {
         return output;
     }
     
-    async getUserAllObjectivesCounter(user: UUID, game: string): Promise<Map<AchObj, number> | null> {
+    async getUserAllObjectivesCounter(user: UUID, game: string): Promise<Map<AchObj, number>> {
         const output = new Map<AchObj, number>();
         const queryRes = await this.client.query(QUERY_GET_OBJ_COUNTER, [user, game]);
         const rows = queryRes.rows;

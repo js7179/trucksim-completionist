@@ -1,5 +1,5 @@
 import pg from 'pg';
-import UserSavedataPGDAO from '../../src/db/savedata-dao';
+import UserSavedataPGDAO from '../../src/data/savedata-dao';
 
 const adminConnection = new pg.Client({
     host: process.env.PGHOST,

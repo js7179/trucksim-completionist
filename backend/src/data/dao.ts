@@ -7,7 +7,7 @@ export interface UserSavedataDAO {
      * @param game Specific game of the user to retrieve savedata for
      * @returns Map where key is achID and value is boolean (true if complete, false if not)
      */
-    getUserAllAchievementComplete(user: UUID, game: string): Promise<Map<string, boolean> | null>;
+    getUserAllAchievementComplete(user: UUID, game: string): Promise<Map<string, boolean>>;
 
     /** Given a specific user ID and a game value, return all current list (or generally string[]) objective values
      * Used to rebuild user savedata
@@ -15,7 +15,7 @@ export interface UserSavedataDAO {
      * @param game Specific game of the user to retrieve savedata for
      * @returns Map where key is 2-length tuple object where {achID, objID} and value is that objective's current value
      */
-    getUserAllObjectivesList(user: UUID, game: string): Promise<Map<AchObj, string[]> | null>;
+    getUserAllObjectivesList(user: UUID, game: string): Promise<Map<AchObj, string[]>>;
     
     /** Given a specific user ID and a game value, return all counter objective values
      * Used to rebuild user savedata
@@ -23,7 +23,7 @@ export interface UserSavedataDAO {
      * @param game Specific game of the user to retrieve savedata for
      * @returns Map where key is 2-length tuple object where {achID, objID} and value is that objective's current value
      */
-    getUserAllObjectivesCounter(user: UUID, game: string): Promise<Map<AchObj, number> | null>;
+    getUserAllObjectivesCounter(user: UUID, game: string): Promise<Map<AchObj, number>>;
 
     /** Mark an achievement in/complete, mutating data in the underlying database
      * @param user User whose savedata we are mutating

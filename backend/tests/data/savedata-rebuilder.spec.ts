@@ -1,6 +1,7 @@
 import { SavedataRebuilder } from "../../src/data/savedata-rebuilder";
 import { AchObj, UserSavedataDAO } from "../../src/data/dao";
-import { AchievementStateList } from "trucksim-completionist-common";
+import { AchievementInfo, AchievementStateList, CounterObjectiveInfo, ListObjectiveInfo } from "trucksim-completionist-common";
+import { GameInfo } from "../../src/data/gameinfo";
 
 const defaultState: AchievementStateList = { 
     test: { 
@@ -11,6 +12,11 @@ const defaultState: AchievementStateList = {
         } 
     } 
 };
+
+const counterObj: CounterObjectiveInfo = { display: "", goal: 10, objid: "co", type: "counter" };
+const listObj: ListObjectiveInfo = { values: [{subobjid: "a", display: "a"},{subobjid: "b", display: "b"},{subobjid: "c", display: "c"}], objid: "li", type: "list" };
+
+const achInfo: AchievementInfo[] = [{ desc: "", icons: { completed: "", incomplete: "" }, id: "test", name: "", objectives: [ counterObj, listObj ] }];
 const NIL_UUID = '00000000-0000-0000-0000-000000000000';
 const GAME = 'ets2';
 
@@ -23,17 +29,15 @@ const mockDAO: UserSavedataDAO = {
     setUserOneObjectiveCounter: vi.fn()
 };
 
-const rebuilder = new SavedataRebuilder(mockDAO);
+const gameInfo = new GameInfo(new Map<string, AchievementInfo[]>([
+    [GAME, achInfo]
+]));
+
+const spyGetSavedataTemplate = vi.spyOn(gameInfo, 'getSavedataTemplate');
+
+const rebuilder = new SavedataRebuilder(mockDAO, gameInfo);
 
 describe("savedata rebuilder", async () => {
-    beforeAll(() => {
-        // Override getSavedataTemplate which just structure clones a copy of the state
-        Object.defineProperty(rebuilder, "getSavedataTemplate", {
-            value: vi.fn().mockReturnValue(defaultState),
-            writable: true,
-        });
-    });
-
     afterEach(() => {
         vi.clearAllMocks();
     });
@@ -46,7 +50,7 @@ describe("savedata rebuilder", async () => {
         const rebuiltSavedata = await rebuilder.rebuildSavedata(NIL_UUID, GAME);
 
         expect(rebuiltSavedata).toMatchObject(defaultState);
-        expect(rebuilder["getSavedataTemplate"]).toBeCalledWith(GAME);
+        expect(spyGetSavedataTemplate).toBeCalledWith(GAME);
         expect(mockDAO.getUserAllAchievementComplete).toHaveBeenCalledOnce();
         expect(mockDAO.getUserAllObjectivesCounter).toHaveBeenCalledOnce();
         expect(mockDAO.getUserAllObjectivesList).toHaveBeenCalledOnce();
@@ -78,7 +82,7 @@ describe("savedata rebuilder", async () => {
             }
         });
 
-        expect(rebuilder["getSavedataTemplate"]).toBeCalledWith(GAME);
+        expect(spyGetSavedataTemplate).toBeCalledWith(GAME);
         expect(mockDAO.getUserAllAchievementComplete).toHaveBeenCalledOnce();
         expect(mockDAO.getUserAllObjectivesCounter).toHaveBeenCalledOnce();
         expect(mockDAO.getUserAllObjectivesList).toHaveBeenCalledOnce();
@@ -113,7 +117,7 @@ describe("savedata rebuilder", async () => {
             }
         });
 
-        expect(rebuilder["getSavedataTemplate"]).toBeCalledWith(GAME);
+        expect(spyGetSavedataTemplate).toBeCalledWith(GAME);
         expect(mockDAO.getUserAllAchievementComplete).toHaveBeenCalledOnce();
         expect(mockDAO.getUserAllObjectivesCounter).toHaveBeenCalledOnce();
         expect(mockDAO.getUserAllObjectivesList).toHaveBeenCalledOnce();
@@ -148,7 +152,7 @@ describe("savedata rebuilder", async () => {
                 }
             }
         });
-        expect(rebuilder["getSavedataTemplate"]).toBeCalledWith(GAME);
+        expect(spyGetSavedataTemplate).toBeCalledWith(GAME);
         expect(mockDAO.getUserAllAchievementComplete).toHaveBeenCalledOnce();
         expect(mockDAO.getUserAllObjectivesCounter).toHaveBeenCalledOnce();
         expect(mockDAO.getUserAllObjectivesList).toHaveBeenCalledOnce();

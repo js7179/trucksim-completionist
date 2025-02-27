@@ -1,4 +1,4 @@
-import { SavedataRebuilder } from "../../src/data/savedata-rebuilder";
+import { SavedataManager } from "../../src/data/savedata-manager";
 import { AchObj, UserSavedataDAO } from "../../src/data/dao";
 import { AchievementInfo, AchievementStateList, CounterObjectiveInfo, ListObjectiveInfo } from "trucksim-completionist-common";
 import { GameInfo } from "../../src/data/gameinfo";
@@ -35,7 +35,7 @@ const gameInfo = new GameInfo(new Map<string, AchievementInfo[]>([
 
 const spyGetSavedataTemplate = vi.spyOn(gameInfo, 'getSavedataTemplate');
 
-const rebuilder = new SavedataRebuilder(mockDAO, gameInfo);
+const rebuilder = new SavedataManager(mockDAO, gameInfo);
 
 describe("savedata rebuilder", async () => {
     afterEach(() => {

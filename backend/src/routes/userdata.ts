@@ -1,8 +1,10 @@
 // "/:uid/:game"
 import express, { Request, Response } from 'express';
 import { UUID } from "crypto";
-import { SavedataRebuilder } from '@/data/savedata-rebuilder';
+import { SavedataManager } from '@/data/savedata-manager';
 import gameInfo from '@/data/gameinfo';
+import { UserSavedataCache } from '@/data/cache';
+import { AchievementStateList, performStateUpdate } from 'trucksim-completionist-common';
 
 const userSavedataRouter = express.Router({
     mergeParams: true
@@ -13,7 +15,7 @@ interface RouteParams {
     game: string;
 }
 
-const userdataRouter = (savedataRebuider: SavedataRebuilder) => {
+const userdataRouter = (savedataManager: SavedataManager, savedataCache: UserSavedataCache) => {
     userSavedataRouter.get('/', async (req: Request<RouteParams>, res: Response) => {
         const { uid, game } = req.params;
         if(!uid || !game) {
@@ -29,13 +31,22 @@ const userdataRouter = (savedataRebuider: SavedataRebuilder) => {
             return;
         }*/
 
-        const userSavedata = await savedataRebuider.rebuildSavedata(uid, game);
-
-        res.status(200);
-        res.json(userSavedata);
+        let savedata: AchievementStateList;
+        if(savedataCache.hasUserSavedataCached(uid, game)) {
+            savedata = savedataCache.getUserSavedata(uid, game)!;
+        } else {
+            try {
+                savedata = await savedataManager.rebuildSavedata(uid, game);
+                savedataCache.setUserSavedata(uid, game, savedata);
+            } catch(err) {
+                res.sendStatus(503);
+                return;
+            }
+        }
+        res.status(200).json(savedata);
     });
     
-    userSavedataRouter.patch('/', async (req: Request<RouteParams>, res: Response) => {
+    userSavedataRouter.post('/', async (req: Request<RouteParams>, res: Response) => {
         const { uid, game } = req.params;
         if(!uid || !game) {
             res.status(400).send('Bad Request');
@@ -49,12 +60,38 @@ const userdataRouter = (savedataRebuider: SavedataRebuilder) => {
             res.status(403).send('Forbidden');
             return;
         }*/
-        res.sendStatus(200);
+
+        let savedata: AchievementStateList;
+        if(savedataCache.hasUserSavedataCached(uid, game)) {
+            savedata = savedataCache.getUserSavedata(uid, game)!;
+        } else {
+            try {
+                savedata = await savedataManager.rebuildSavedata(uid, game);
+            } catch (err) {
+                res.sendStatus(503);
+                return;
+            }
+        }
+        try {
+            const action = req.body;
+            const { newState, rowsChanged } = performStateUpdate(savedata, gameInfo.getGameAchInfo(game), action);
+            savedataCache.setUserSavedata(uid, game, newState);
+            if(rowsChanged.length === 0) {
+                res.sendStatus(304);
+                return;
+            } else {
+                savedataManager.applyChanges(uid, game, newState, rowsChanged);
+            }
+            res.status(200).json(newState);
+        } catch (err) {
+            res.sendStatus(503);
+            return;
+        }
     });
 
     userSavedataRouter.put('/', (req, res) => res.sendStatus(405));
-    userSavedataRouter.post('/', (req, res) => res.sendStatus(405));
-    
+    userSavedataRouter.patch('/', (req, res) => res.sendStatus(405));
+    userSavedataRouter.delete('/', (req, res) => res.sendStatus(405));
     return userSavedataRouter;
 };
 

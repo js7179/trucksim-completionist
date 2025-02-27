@@ -4,8 +4,9 @@ import userdataRouter from "./routes/userdata";
 import gameInfo from "./data/gameinfo";
 import pg from 'pg';
 import UserSavedataPGDAO from "./data/savedata-dao";
-import { SavedataRebuilder } from "./data/savedata-rebuilder";
+import { SavedataManager } from "./data/savedata-manager";
 import AuthorizationHeaderMiddleware from "./middleware/auth";
+import InMemorySavedataCache from "./data/memorycache";
 
 //console.log(process.env);
 
@@ -18,13 +19,15 @@ const pgPool = new pg.Pool({
 });
 
 const dao = new UserSavedataPGDAO(pgPool);
-const savedataRebuider = new SavedataRebuilder(dao, gameInfo);
+const savedataRebuider = new SavedataManager(dao, gameInfo);
+const savedataCache = new InMemorySavedataCache();
 
 const app = express();
 
 app.use(cors());
 app.disable('x-powered-by');
 app.set('etag', false);
+app.use(express.json());
 
 const port = process.env.PORT || 3500;
 
@@ -34,6 +37,6 @@ app.get("/ping", (req, res) => {
     });
 });
 
-app.use('/:uid/:game', /*AuthorizationHeaderMiddleware,*/ userdataRouter(savedataRebuider));
+app.use('/:uid/:game', /*AuthorizationHeaderMiddleware,*/ userdataRouter(savedataRebuider, savedataCache));
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

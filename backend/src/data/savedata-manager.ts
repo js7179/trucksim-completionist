@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { UserSavedataDAO } from "./dao";
+import { DAOError, UserSavedataDAO } from "./dao";
 import { AchievementStateList, ObjectiveValueType } from "trucksim-completionist-common";
 import { GameInfo } from "./gameinfo";
 
@@ -38,7 +38,9 @@ export class SavedataManager {
             const split = rowChanged.split('.');
             const achID = split[0];
             if(split[1] === 'completed') {
-                await this.dao.setUserOneAchievementComplete(uuid, game, achID, newStateObject[achID].completed);
+                const newValue = newStateObject[achID].completed;
+                const result = await this.dao.setUserOneAchievementComplete(uuid, game, achID, newValue);
+                if(!result) throw new DAOError(`Could not save complete state change on ${achID} to ${newValue}`);
             } else if(split[1] === 'objectives') {
                 const objID = split[2];
                 const achInfo = gameInfo.find((ach) => ach.id === achID);
@@ -49,7 +51,8 @@ export class SavedataManager {
                 if(!(objInfo.type in UPDATE_OBJECTIVE)) throw new Error(`Unknown objtype ${objInfo.type} for objID ${objID} of achID ${achID}`);
 
                 const newValue = newStateObject[achID].objectives[objID];
-                await UPDATE_OBJECTIVE[objInfo.type](this.dao, uuid, game, achID, objID, newValue);
+                const result = await UPDATE_OBJECTIVE[objInfo.type](this.dao, uuid, game, achID, objID, newValue);
+                if(!result) throw new DAOError(`Could not save objective state change on achID=${achID} objID=${objID}`);
             } else {
                 throw new Error(`Unknown rowChanged ${rowChanged}`);
             }

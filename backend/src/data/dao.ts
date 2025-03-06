@@ -54,6 +54,14 @@ export interface UserSavedataDAO {
     setUserOneObjectiveCounter(user: UUID, game: string, achID: string, objID: string, newValue: number): Promise<boolean>;
 }
 
+export class DAOError extends Error {
+    constructor(message?: string) {
+        super(message);
+    }
+
+    toString() { return this.message; }
+}
+
 export type AchObj = {
     achID: string,
     objID: string

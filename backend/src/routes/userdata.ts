@@ -77,7 +77,7 @@ const userdataRouter = (savedataManager: SavedataManager, gameInfo: GameInfo, sa
             const action = req.body;
             const { newState, rowsChanged } = performStateUpdate(savedata, gameInfo.getGameAchInfo(game), action);
             if(rowsChanged.length === 0) {
-                res.sendStatus(304);
+                res.sendStatus(204);
                 return;
             }
             savedataManager.applyChanges(uid, game, newState, rowsChanged);
@@ -88,9 +88,6 @@ const userdataRouter = (savedataManager: SavedataManager, gameInfo: GameInfo, sa
         } catch (err) {
             if(err instanceof StateUpdateError) {
                 res.status(400).json({ message: err.message });
-                return;
-            } else if(err instanceof Error) {
-                res.status(503).json({ message: err.message });
                 return;
             } else {
                 res.sendStatus(503);

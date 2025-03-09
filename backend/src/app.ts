@@ -37,6 +37,6 @@ app.get("/ping", (req, res) => {
     });
 });
 
-app.use('/:uid/:game', /*AuthorizationHeaderMiddleware,*/ userdataRouter(savedataRebuider, gameInfo, savedataCache));
+app.use('/:uid/:game', AuthorizationHeaderMiddleware, userdataRouter(savedataRebuider, gameInfo, savedataCache));
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

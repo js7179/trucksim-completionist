@@ -27,10 +27,10 @@ const userdataRouter = (savedataManager: SavedataManager, gameInfo: GameInfo, sa
             res.status(404).send(`Invalid game "${game}"`);
             return;
         }
-        /*if(res.locals.uuid !== uid) {
+        if(res.locals.uuid !== uid) {
             res.status(403).send('Forbidden');
             return;
-        }*/
+        }
 
         let savedata: AchievementStateList;
         if(savedataCache.hasUserSavedataCached(uid, game)) {
@@ -57,10 +57,10 @@ const userdataRouter = (savedataManager: SavedataManager, gameInfo: GameInfo, sa
             res.status(404).send(`Invalid game "${game}"`);
             return;
         }
-        /*if(res.locals.uuid !== uid) {
+        if(res.locals.uuid !== uid) {
             res.status(403).send('Forbidden');
             return;
-        }*/
+        }
 
         let savedata: AchievementStateList;
         if(savedataCache.hasUserSavedataCached(uid, game)) {

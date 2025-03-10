@@ -16,7 +16,9 @@
     "types": ["vitest/globals"]
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "tests/**/*.ts",
+    "src/environment.d.ts"
   ],
   "exclude": [
     "node_modules",

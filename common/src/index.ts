@@ -1,5 +1,5 @@
 import { generateStateTemplate, STATE_ACTION, StateUpdate, performStateUpdate } from "./state";
-import { AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo, PartialObjectiveInfo } from "./types";
+import { AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo, PartialObjectiveInfo, ObjectiveValueType } from "./types";
 
 /** 
  * This function is used to copy values over from an old format
@@ -81,4 +81,4 @@ export function isNonorderedArrayEqual<T>(a: T[], b: T[]): boolean {
 export const clamp = (min: number, num: number, max: number): number => Math.min(Math.max(num, min), max);
 
 export { generateStateTemplate, STATE_ACTION, performStateUpdate }; // re-export
-export type { StateUpdate, AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo, PartialObjectiveInfo };
+export type { StateUpdate, AchievementInfo, AchievementStateList, AchievementState, ObjectiveState, ObjectiveValueType, ObjectiveInfo, ListObjectiveInfo, ListSubobjectiveItem, SequentialObjectiveInfo, CounterObjectiveInfo, PartialObjectiveInfo };

@@ -1,9 +1,9 @@
-import { useStateAchievementListObj } from "@/hooks/AchievementHooks";
+import { useStateAchievementListObj } from "@/hooks/LocalAchievementHooks";
 import { clamp, PartialObjectiveInfo } from "trucksim-completionist-common";
 import styles from './Objectives.module.css';
 import SubobjList from "./SubobjList";
 
-export default function PartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
+export default function LocalPartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
     const listValues = useStateAchievementListObj(achID, objid);
 
     return (
@@ -14,6 +14,6 @@ export default function PartialObjective({achID, objid, values, count: goalCount
     );
 }
 
-interface PartialObjectivesProp extends PartialObjectiveInfo {
+export interface PartialObjectivesProp extends PartialObjectiveInfo {
     achID: string;
 }

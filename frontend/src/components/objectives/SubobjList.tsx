@@ -1,4 +1,4 @@
-import { useStateAchievementListObj, useFuncMarkListObj } from "@/hooks/AchievementHooks";
+import { useStateAchievementListObj, useFuncMarkListObj } from "@/hooks/LocalAchievementHooks";
 import { ListObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from "../util/StylizedCheckbox";
 import styles from './Objectives.module.css';

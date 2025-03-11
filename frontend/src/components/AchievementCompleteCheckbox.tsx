@@ -1,5 +1,5 @@
 import { CheckboxButton } from './util/StylizedCheckbox';
-import { useStateAchievementCompleted, useFuncMarkAchievementComplete } from '@/hooks/AchievementHooks';
+import { useStateAchievementCompleted, useFuncMarkAchievementComplete } from '@/hooks/LocalAchievementHooks';
 
 export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
     const completed = useStateAchievementCompleted(achID);

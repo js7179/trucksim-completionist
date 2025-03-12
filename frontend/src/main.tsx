@@ -12,6 +12,7 @@ import LoginPage from './routes/auth/login.tsx';
 import SignoutPage from './routes/auth/signout.tsx';
 import SendPwResetPage from './routes/auth/sendpwreset.tsx';
 import ResetPasswordPage from './routes/auth/resetpw.tsx';
+import ETS2RemotePage from './routes/remoteets2.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route element={<NavbarLayout />}>
             <Route index element={<Root />} />
+            <Route path='/:uid/:game' element={<ETS2RemotePage />}></Route>
             <Route path='/ats' element={<ATSLocalPage/>} />
             <Route path='/ets2' element={<ETS2LocalPage/>} />
             <Route path='/signup' element={<SignupPage />} />

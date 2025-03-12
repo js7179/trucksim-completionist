@@ -3,7 +3,7 @@ import { ProgressBar } from '../util/ProgressBar';
 import { CounterObjectiveInfo } from 'trucksim-completionist-common';
 import { useFuncSetNumberObj, useStateAchievementNumberObj } from '@/hooks/LocalAchievementHooks';
 
-export default function LocalCounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {
+export function LocalCounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {
     const current = useStateAchievementNumberObj(achID, objid);
     const dispatch = useFuncSetNumberObj();
 
@@ -21,6 +21,10 @@ export default function LocalCounterObjective({achID, objid, goal, display}: Cou
             <button type="button" className={styles.incrementBtn} onClick={() => changeCount(+1)}>+</button>
         </div>
     );
+}
+
+export function RemoteCounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {
+    return (<p>To be implemented...</p>);
 }
 
 export interface CounterObjectiveProps extends Omit<CounterObjectiveInfo, "type"> {

@@ -3,7 +3,7 @@ import { SequentialObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from '../util/StylizedCheckbox';
 import { useFuncSetNumberObj, useStateAchievementNumberObj } from '@/hooks/LocalAchievementHooks';
 
-export default function LocalSequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
+export function LocalSequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
     const objValue = useStateAchievementNumberObj(achID, objid);
     const dispatch = useFuncSetNumberObj();
 
@@ -37,6 +37,11 @@ export default function LocalSequentialObjective({achID, objid, values}: Sequent
         </ol>
     );
 }
+
+export function RemoteSequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
+    return (<p>To be implemented...</p>);
+}
+
 
 export interface SequentialObjectiveProps extends Omit<SequentialObjectiveInfo, "type"> {
     achID: string;

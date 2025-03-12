@@ -16,6 +16,12 @@ export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
     );
 }
 
+export function RemoteCompleteCheckbox({achID}: AchievementCheckboxProps) {
+    return (
+        <p>To be implemented</p>
+    );
+}
+
 export interface AchievementCheckboxProps {
     achID: string;
 }

@@ -1,9 +1,9 @@
-import { AchievementCheckboxProps, LocalCompleteCheckbox } from "@/components/AchievementCompleteCheckbox";
-import { IconProps, LocalIcon } from "@/components/AchievementIcon";
-import LocalCounterObjective, { CounterObjectiveProps } from "@/components/objectives/CounterObjective";
-import LocalListObjective, { ListObjectiveProps } from "@/components/objectives/ListObjective";
-import LocalPartialObjective, { PartialObjectivesProp } from "@/components/objectives/PartialObjective";
-import LocalSequentialObjective, { SequentialObjectiveProps } from "@/components/objectives/SequentialObjective";
+import { AchievementCheckboxProps, LocalCompleteCheckbox, RemoteCompleteCheckbox } from "@/components/AchievementCompleteCheckbox";
+import { IconProps, LocalIcon, RemoteIcon } from "@/components/AchievementIcon";
+import { LocalCounterObjective, CounterObjectiveProps, RemoteCounterObjective } from "@/components/objectives/CounterObjective";
+import { ListObjectiveProps, LocalListObjective, RemoteListObjective } from "@/components/objectives/ListObjective";
+import { LocalPartialObjective, PartialObjectivesProp, RemotePartialObjective } from "@/components/objectives/PartialObjective";
+import { LocalSequentialObjective, RemoteSequentialObjective, SequentialObjectiveProps } from "@/components/objectives/SequentialObjective";
 import { ComponentType, PropsWithChildren, createContext, useContext } from "react";
 
 type ComponentContext = {
@@ -37,7 +37,21 @@ export const LocalComponentContext = ({children}: PropsWithChildren) => {
             AchObjPartial={LocalPartialObjective}>
             {children}
         </ComponentContextProvider>
-    )
+    );
+}
+
+export const RemoteComponentContext = ({children}: PropsWithChildren) => {
+    return (
+        <ComponentContextProvider 
+            AchIcon={RemoteIcon} 
+            AchCompleteCheckbox={RemoteCompleteCheckbox} 
+            AchObjCounter={RemoteCounterObjective} 
+            AchObjList={RemoteListObjective} 
+            AchObjSeq={RemoteSequentialObjective} 
+            AchObjPartial={RemotePartialObjective}>
+            {children}
+        </ComponentContextProvider>
+    );
 }
 
 export function useComponentContext() {

@@ -1,6 +1,6 @@
 import styles from "./AchievementIcon.module.css";
-import { useStateAchievementCompleted as useLocalStateAchievementCompleted } from "@/hooks/LocalAchievementHooks";
-import { useStateAchievementCompleted as useRemoteStateAchievementCompleted } from "@/hooks/RemoteAchievementHooks";
+import { useLocalStateAchievementCompleted } from "@/hooks/LocalAchievementHooks";
+import { useRemoteStateAchievementCompleted } from "@/hooks/RemoteAchievementHooks";
 import { useRemotePage } from "@/hooks/RemotePage";
 
 export function LocalIcon({achID, completed, incomplete}: IconProps) {

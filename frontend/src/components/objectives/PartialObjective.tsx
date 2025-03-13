@@ -1,22 +1,33 @@
-import { useStateAchievementListObj } from "@/hooks/LocalAchievementHooks";
+import { useLocalStateAchievementListObj } from "@/hooks/LocalAchievementHooks";
 import { clamp, PartialObjectiveInfo } from "trucksim-completionist-common";
 import styles from './Objectives.module.css';
-import SubobjList from "./SubobjList";
+import { LocalSubobjList, RemoteSubobjList } from "./SubobjList";
+import { useRemoteStateAchievementObjective } from "@/hooks/RemoteAchievementHooks";
+import { useRemotePage } from "@/hooks/RemotePage";
 
 export function LocalPartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
-    const listValues = useStateAchievementListObj(achID, objid);
+    const listValues = useLocalStateAchievementListObj(achID, objid);
 
     return (
         <div>
             <div className={styles.center}>{clamp(0, listValues.length, goalCount)}/{goalCount}</div>
-            <SubobjList achID={achID} values={values} objid={objid} />
+            <LocalSubobjList achID={achID} values={values} objid={objid} />
         </div>
     );
 }
 
 export function RemotePartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
-    return (<p>To be implemented</p>);
+    const { uid, game } = useRemotePage();
+    const { data } = useRemoteStateAchievementObjective(uid, game, achID, objid);
+
+    const listValues = data as string[];
+
+    return (
+        <div>
+            <div className={styles.center}>{clamp(0, listValues.length, goalCount)}/{goalCount}</div>
+            <RemoteSubobjList achID={achID} values={values} objid={objid} />
+        </div>
+    );
 }
-export interface PartialObjectivesProp extends PartialObjectiveInfo {
-    achID: string;
-}
+
+export type PartialObjectivesProp = Omit<PartialObjectiveInfo, "type"> & { achID: string; };

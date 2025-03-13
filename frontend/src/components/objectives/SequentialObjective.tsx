@@ -1,29 +1,55 @@
 import styles from './Objectives.module.css';
 import { SequentialObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from '../util/StylizedCheckbox';
-import { useFuncSetNumberObj, useStateAchievementNumberObj } from '@/hooks/LocalAchievementHooks';
+import { useLocalFuncSetNumberObj, useLocalStateAchievementNumberObj } from '@/hooks/LocalAchievementHooks';
+import { useRemoteStateAchievementObjective } from '@/hooks/RemoteAchievementHooks';
+import { useRemotePage } from '@/hooks/RemotePage';
 
 export function LocalSequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
-    const objValue = useStateAchievementNumberObj(achID, objid);
-    const dispatch = useFuncSetNumberObj();
+    const objValue = useLocalStateAchievementNumberObj(achID, objid);
+    const dispatch = useLocalFuncSetNumberObj();
 
     const selectListItem = (stepIndex: number) => {
-        if(stepIndex == objValue) {
+        if(stepIndex === objValue) {
             stepIndex -= 1;
         }
         dispatch(achID, objid, stepIndex);
     };
 
+    return (
+        <VisualSequentialObjective values={values} objid={objid} achID={achID} current={objValue} func={selectListItem} />
+    );
+}
+
+export function RemoteSequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
+    const { uid, game } = useRemotePage();
+    const { data } = useRemoteStateAchievementObjective(uid, game, achID, objid);
+    
+    const objValue = data as number;
+
+    const selectListItem = (stepIndex: number) => {
+        if(stepIndex === objValue) {
+            stepIndex -= 1;
+        }
+        console.log(`set ${objid} to ${stepIndex}`);
+    }
+
+    return (
+        <VisualSequentialObjective values={values} objid={objid} achID={achID} current={objValue} func={selectListItem} />
+    );
+}
+
+function VisualSequentialObjective({achID, objid, values, current, func}: VisualSequentialObjectiveProps) {
     const stepList = values.map((step, index) => {
         const stepIndex = index + 1;
-        const isChecked = objValue >= stepIndex;
+        const isChecked = current >= stepIndex;
         const htmlID = `${achID}.${objid}.${step.subobjid}`;
         return (
             <li className={styles.seqObjListItem} key={htmlID}>
                 <CheckboxButton 
                     htmlID={htmlID}
                     checked={isChecked}
-                    onClick={() => selectListItem(stepIndex)}
+                    onClick={() => func(stepIndex)}
                     size="1lh"
                     colorFilter="var(--text-color-filter)"
                     label={step.display}/>
@@ -38,11 +64,8 @@ export function LocalSequentialObjective({achID, objid, values}: SequentialObjec
     );
 }
 
-export function RemoteSequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
-    return (<p>To be implemented...</p>);
-}
-
-
-export interface SequentialObjectiveProps extends Omit<SequentialObjectiveInfo, "type"> {
-    achID: string;
-}
+export type SequentialObjectiveProps = Omit<SequentialObjectiveInfo, "type"> & { achID: string; };
+type VisualSequentialObjectiveProps = SequentialObjectiveProps & { 
+    current: number,
+    func: (stepIndex: number) => void
+ };

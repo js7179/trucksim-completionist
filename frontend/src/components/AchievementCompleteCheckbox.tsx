@@ -1,9 +1,11 @@
+import { useRemoteStateAchievementCompleted } from '@/hooks/RemoteAchievementHooks';
 import { CheckboxButton } from './util/StylizedCheckbox';
-import { useStateAchievementCompleted, useFuncMarkAchievementComplete } from '@/hooks/LocalAchievementHooks';
+import { useLocalStateAchievementCompleted, useLocalFuncMarkAchievementComplete } from '@/hooks/LocalAchievementHooks';
+import { useRemotePage } from '@/hooks/RemotePage';
 
 export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
-    const completed = useStateAchievementCompleted(achID);
-    const dispatch = useFuncMarkAchievementComplete();
+    const completed = useLocalStateAchievementCompleted(achID);
+    const dispatch = useLocalFuncMarkAchievementComplete();
 
     const toggleAchievement = () => {
         dispatch(achID, !completed);
@@ -17,8 +19,16 @@ export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
 }
 
 export function RemoteCompleteCheckbox({achID}: AchievementCheckboxProps) {
+    const { uid, game } = useRemotePage();
+    const { data } = useRemoteStateAchievementCompleted(uid, game, achID);
+
+    const toggleAchievement = () => {
+        console.log("Clicked");
+    };
+
+    const htmlID = `${achID}.completed`;
     return (
-        <p>To be implemented</p>
+        <CheckboxButton htmlID={htmlID} checked={data} onClick={toggleAchievement} size="48px" colorFilter="var(--primary-color-filter)"/>
     );
 }
 

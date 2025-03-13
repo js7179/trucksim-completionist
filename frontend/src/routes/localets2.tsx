@@ -10,7 +10,7 @@ export default function ETS2LocalPage() {
     return (
         <LocalComponentContext>
             <AchievementStateContext.Provider value={store}>
-                <AchievementList aList={ets2List} />
+                <AchievementList achList={ets2List} />
             </AchievementStateContext.Provider>
         </LocalComponentContext>
     );

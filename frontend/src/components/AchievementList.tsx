@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import styles from "./AchievementList.module.css";
 import { AchievementInfo, CounterObjectiveInfo, ListObjectiveInfo, PartialObjectiveInfo, SequentialObjectiveInfo } from 'trucksim-completionist-common';
 import { ShowInformationButton } from './util/StylizedCheckbox';
 import { useComponentContext } from '@/hooks/ComponentContext';
 
-export default function AchievementList({ aList }:{ aList:AchievementInfo[] }) {
-    const list = aList.map((achievement) => <Achievement {...achievement} key={achievement.id} />);
+export default function AchievementList({ achList }: AchievementListProps) {
+    const list = achList.map((achievement) => <Achievement {...achievement} key={achievement.id} />);
     return (
         <main className={styles.achievementList}>
             {list}
@@ -55,4 +55,8 @@ function Achievement(props: AchievementInfo) {
             )}
         </section>
     );
+}
+
+type AchievementListProps = {
+    achList: AchievementInfo[];
 }

@@ -10,7 +10,7 @@ export default function ATSLocalPage() {
     return (
         <LocalComponentContext>
             <AchievementStateContext.Provider value={store}>
-                <AchievementList aList={atsList} />
+                <AchievementList achList={atsList} />
             </AchievementStateContext.Provider>
         </LocalComponentContext>
     );

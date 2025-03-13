@@ -1,5 +1,6 @@
 import { api } from "@/api/api";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { AchievementStateList } from "trucksim-completionist-common";
 
 const DEFAULT_QUERY_OPTS = (uuid: string, game: string) => ({
     queryKey: [uuid, game],
@@ -19,16 +20,15 @@ export function useFuncMarkListObj() {
 }
 
 export function useStateAchievementCompleted(uuid: string, game: string, achID: string) {
-    return useQuery({
+    return useSuspenseQuery({
         ...DEFAULT_QUERY_OPTS(uuid, game),
-        select: (savedata) => savedata[achID].completed
+        select: (savedata: AchievementStateList) => savedata[achID].completed
     });
 }
 
 export function useStateAchievementObjective(uuid: string, game: string, achID: string, objID: string) {
-    return useQuery({
+    return useSuspenseQuery({
         ...DEFAULT_QUERY_OPTS(uuid, game),
-        select: (savedata) => savedata[achID].objectives[objID]
+        select: (savedata: AchievementStateList) => savedata[achID].objectives[objID]
     });
 }
-

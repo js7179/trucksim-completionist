@@ -2,7 +2,7 @@ import styles from './Objectives.module.css';
 import { ProgressBar } from '../util/ProgressBar';
 import { CounterObjectiveInfo } from 'trucksim-completionist-common';
 import { useLocalFuncSetNumberObj, useLocalStateAchievementNumberObj } from '@/hooks/LocalAchievementHooks';
-import { useRemoteStateAchievementObjective } from '@/hooks/RemoteAchievementHooks';
+import { useRemoteFuncSetNumberObj, useRemoteStateAchievementObjective } from '@/hooks/RemoteAchievementHooks';
 import { useRemotePage } from '@/hooks/RemotePage';
 
 export function LocalCounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {
@@ -16,23 +16,25 @@ export function LocalCounterObjective({achID, objid, goal, display}: CounterObje
     }
 
     return (
-        <VisualCounterObjective display={display} goal={goal} objid={objid} achID={achID} current={current} func={(delta) => changeCount(delta)} />
+        <VisualCounterObjective display={display} goal={goal} objid={objid} achID={achID} current={current} func={changeCount} />
     );
 }
 
 export function RemoteCounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {
     const { uid, game } = useRemotePage();
     const { data } = useRemoteStateAchievementObjective(uid, game, achID, objid);
+    const dispatch = useRemoteFuncSetNumberObj();
+
     const current = data as number;
 
     const changeCount = (delta: number) => {
         const newValue = current + delta;
         if(newValue < 0 || newValue > goal) return;
-        console.log(`TODO`);
+        dispatch.mutate({ uid, game, achID, objid, n: newValue });
     };
 
     return (
-        <VisualCounterObjective display={display} goal={goal} objid={''} achID={''} current={0} func={(delta) => changeCount(delta)} />
+        <VisualCounterObjective display={display} goal={goal} objid={objid} achID={achID} current={current} func={changeCount} />
     );
 }
 

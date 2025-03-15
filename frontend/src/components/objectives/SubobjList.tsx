@@ -2,7 +2,7 @@ import { useLocalStateAchievementListObj, useLocalFuncMarkListObj } from "@/hook
 import { ListObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from "../util/StylizedCheckbox";
 import styles from './Objectives.module.css';
-import { useRemoteStateAchievementObjective } from "@/hooks/RemoteAchievementHooks";
+import { useRemoteFuncMarkListObj, useRemoteStateAchievementObjective } from "@/hooks/RemoteAchievementHooks";
 import { useRemotePage } from "@/hooks/RemotePage";
 
 export function LocalSubobjList({achID, objid, values}: SubobjListProps) {
@@ -22,11 +22,13 @@ export function LocalSubobjList({achID, objid, values}: SubobjListProps) {
 export function RemoteSubobjList({achID, objid, values}: SubobjListProps) {
     const { uid, game } = useRemotePage();
     const { data } = useRemoteStateAchievementObjective(uid, game, achID, objid);
+    const dispatch = useRemoteFuncMarkListObj();
 
     const listValues = data as string[];
 
     const toggleItem = (subobjID: string) => {
-        console.log(`${subobjID} clicked`);
+        const curSubobjState = listValues.includes(subobjID);
+        dispatch.mutate({ uid, game, achID, objid, subobjid: subobjID, shouldMarkOff: !curSubobjState });
     }
 
     return (
@@ -34,7 +36,7 @@ export function RemoteSubobjList({achID, objid, values}: SubobjListProps) {
     )
 }
 
-export function VisualSubobjList({achID, objid, values, current, func}: VisualSubobjListProps) {
+function VisualSubobjList({achID, objid, values, current, func}: VisualSubobjListProps) {
     const listItems = values.map((subobj) => {
         const inputID = `${achID}.${objid}.${subobj.subobjid}`;
         const isChecked = current.includes(subobj.subobjid);

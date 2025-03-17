@@ -38,7 +38,7 @@ export function RemoteCounterObjective({achID, objid, goal, display}: CounterObj
     );
 }
 
-function VisualCounterObjective({goal, display, current, func}: VisualCounterObjectiveProps) {
+export function VisualCounterObjective({goal, display, current, func}: VisualCounterObjectiveProps) {
     return (
         <div className={styles.counterObjective}>
             <p>{display}</p>

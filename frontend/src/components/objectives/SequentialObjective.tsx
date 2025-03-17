@@ -40,7 +40,7 @@ export function RemoteSequentialObjective({achID, objid, values}: SequentialObje
     );
 }
 
-function VisualSequentialObjective({achID, objid, values, current, func}: VisualSequentialObjectiveProps) {
+export function VisualSequentialObjective({achID, objid, values, current, func}: VisualSequentialObjectiveProps) {
     const stepList = values.map((step, index) => {
         const stepIndex = index + 1;
         const isChecked = current >= stepIndex;

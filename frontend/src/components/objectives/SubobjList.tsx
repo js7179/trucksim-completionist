@@ -1,46 +1,11 @@
-import { useLocalStateAchievementListObj, useLocalFuncMarkListObj } from "@/hooks/LocalAchievementHooks";
-import { ListObjectiveInfo } from "trucksim-completionist-common";
+import { ListObjectiveInfo, ListSubobjectiveItem } from "trucksim-completionist-common";
 import { CheckboxButton } from "../util/StylizedCheckbox";
 import styles from './Objectives.module.css';
-import { useRemoteFuncMarkListObj, useRemoteStateAchievementObjective } from "@/hooks/RemoteAchievementHooks";
-import { useRemotePage } from "@/hooks/RemotePage";
 
-export function LocalSubobjList({achID, objid, values}: SubobjListProps) {
-    const listValues = useLocalStateAchievementListObj(achID, objid);
-    const dispatch = useLocalFuncMarkListObj();
-
-    const toggleItem = (subobjID: string) => {
-        const isMarkedOffCurrently = listValues.includes(subobjID);
-        dispatch(achID, objid, subobjID, !isMarkedOffCurrently);
-    };
-
-    return (
-        <VisualSubobjList values={values} objid={objid} achID={achID} current={listValues} func={toggleItem} />
-    );
-}
-
-export function RemoteSubobjList({achID, objid, values}: SubobjListProps) {
-    const { uid, game } = useRemotePage();
-    const { data } = useRemoteStateAchievementObjective(uid, game, achID, objid);
-    const dispatch = useRemoteFuncMarkListObj();
-
-    const listValues = data as string[];
-
-    const toggleItem = (subobjID: string) => {
-        const curSubobjState = listValues.includes(subobjID);
-        dispatch.mutate({ uid, game, achID, objid, subobjid: subobjID, shouldMarkOff: !curSubobjState });
-    }
-
-    return (
-        <VisualSubobjList values={values} objid={objid} achID={achID} current={listValues} func={toggleItem} />
-    )
-}
-
-function VisualSubobjList({achID, objid, values, current, func}: VisualSubobjListProps) {
-    const listItems = values.map((subobj) => {
+export default function SubobjList({achID, objid, values, current, func}: SubobjListProps) {
+    const listItems = values.map((subobj: ListSubobjectiveItem) => {
         const inputID = `${achID}.${objid}.${subobj.subobjid}`;
         const isChecked = current.includes(subobj.subobjid);
-
         return (
             <li className={styles.listObjItem} key={inputID}>
                 <CheckboxButton 
@@ -62,10 +27,8 @@ function VisualSubobjList({achID, objid, values, current, func}: VisualSubobjLis
 
 }
 
-type SubobjListProps = Omit<ListObjectiveInfo, "type">  & {
+export type SubobjListProps = Omit<ListObjectiveInfo, "type"> & {
     achID: string; 
-};
-type VisualSubobjListProps = SubobjListProps & { 
     current: string[];
     func: (subobjid: string) => void;
  };

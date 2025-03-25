@@ -20,9 +20,9 @@ export function RemoteIcon({achID, completed, incomplete}: IconProps) {
     )
 }
 
-function VisualIcon({completed, incomplete, isAchComplete}: IconProps & VisualIconProps) {
+function VisualIcon({completed, incomplete, isAchComplete, achID}: IconProps & VisualIconProps) {
     return (
-        <img src={isAchComplete ? completed : incomplete} className={styles.icon} alt='' />
+        <img src={isAchComplete ? completed : incomplete} className={styles.icon} data-achicon={achID} alt='' />
     );
 }
 

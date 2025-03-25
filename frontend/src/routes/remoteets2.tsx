@@ -1,5 +1,6 @@
 import { queryClient } from "@/api/query";
 import AchievementList from "@/components/AchievementList";
+import LoadingSpinner from "@/components/util/LoadingSpinner";
 import { RemotePageProvider } from "@/hooks/RemotePage";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
@@ -16,7 +17,7 @@ export default function ETS2RemotePage() {
     return (
         <QueryClientProvider client={queryClient}>
             <RemotePageProvider game={game} uid={uid}>
-                <Suspense fallback={<p>Loading...</p>}>
+                <Suspense fallback={<LoadingSpinner />}>
                     <AchievementList achList={ets2List} />
                 </Suspense>
             </RemotePageProvider>

@@ -32,24 +32,24 @@ function Achievement(props: AchievementInfo) {
     });
 
     return (
-        <section className={styles.achievement}>
+        <section className={styles.achievement} aria-labelledby={props.id + '.name'} data-ach-id={props.id}>
             <div className={styles.info}>
                 <div className={styles.icons}>
                     <components.AchIcon achID={props.id} {...props.icons} />
                 </div>
                 <div className={styles.desc}>
-                    <h2 className={styles.achievementName}>{props.name}</h2>
+                    <h2 className={styles.achievementName} id={props.id + '.name'}>{props.name}</h2>
                     <p>{props.desc}</p>
                 </div>
-                <div className={styles.showInformation}>
+                <div className={styles.showInformation} data-achexpandinfo={props.id}>
                     <ShowInformationButton htmlID={showInfoID} checked={showInfo} onClick={() => toggleInfoView(!showInfo)}/>
                 </div>
-                <div className={styles.achievementCompleted}>
+                <div className={styles.achievementCompleted} data-ach-checkbox={props.id}>
                     <components.AchCompleteCheckbox achID={props.id} />
                 </div>
             </div>
             {showInfo && (
-                <div className={styles.objectiveContainer}>
+                <div className={styles.objectiveContainer} data-obj-container={props.id}>
                     {...objs}
                 </div>
             )}

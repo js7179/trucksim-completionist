@@ -1,66 +1,25 @@
-import { Page, test, expect, Browser } from '@playwright/test';
-import { adminAuthClient } from './supabase';
-import { performLogin } from './utils/perform-login';
+import { Page, test, expect, BrowserContext, Browser } from '@playwright/test';
 
-const USER_DETAILS = {
-    email: "remote-achievement@test.com",
-    password: "RemoteAchievementTest",
-    displayName: "RemoteAchievementTest"
-};
-
-let USER_UUID: string;
 let pwBrowser: Browser;
+let browserContext: BrowserContext;
 let page: Page;
 
 test.beforeAll(async ({browser}) => {
-    // Cleanup any previous users associated with this email
-    const { data: { users }, error: listError } = await adminAuthClient.listUsers();
-    if(listError) throw listError;
-    const preexistingUser = users.filter((user) => user.email === USER_DETAILS.email);
-    if(preexistingUser.length !== 0) {
-        preexistingUser.forEach(async (user) => {
-            const { error } = await adminAuthClient.deleteUser(user.id);
-            if(error) throw error;
-        });
-    }
-
-    // Create the user
-    const { data, error: createError } = await adminAuthClient.createUser({
-        email: USER_DETAILS.email,
-        password: USER_DETAILS.password,
-        email_confirm: true,
-        user_metadata: { displayName: USER_DETAILS.displayName }
-    });
-    if(createError) throw createError;
-    USER_UUID = data.user?.id as string;
-
     pwBrowser = browser;
-    const browserContext = await browser.newContext();
+    browserContext = await browser.newContext();
     page = await browserContext.newPage();
-
-    // Perform login
-    await performLogin(page, USER_DETAILS.email, USER_DETAILS.password, USER_DETAILS.displayName);
 });
 
 test.afterAll(async () => {
     await page.close();
-
-    const { error } = await adminAuthClient.deleteUser(USER_UUID);
-    if(error) throw error;
 });
 
-test('Remote achievement interactivity', async () => {
+test('Local achievement interactivity', async () => {
     await test.step('Navigate to user page and wait for it to load', async () => {
-        await page.goto(`/${USER_UUID}/ets2`);
+        await page.goto(`/ets2`);
 
-        await page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'GET'
-            && resp.status() === 200);
-
-        // Test that we are logged in
-        const displayNameElement = page.locator('span[class*="displayName"]');
-        await expect(displayNameElement).toHaveText(USER_DETAILS.displayName);
-        await expect(page.locator('p#loading-indicator')).toBeHidden();
+        // TODO: Test that we are not logged in
+        await expect(page.locator('nav').getByText('Login')).toBeVisible();
     });
 
     await test.step('Marking off an achievement', async () => {
@@ -76,12 +35,8 @@ test('Remote achievement interactivity', async () => {
         const achievementIcon = achievement.locator(`img[data-achicon]`);
         const beforeSrc = await achievementIcon.getAttribute('src');
 
-        // Click on the checkbox and wait for the request to be fullfilled
-        const achMarkoffResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'POST'
-            && resp.status() === 200);
+        // Click on the checkbox
         await achievement.locator(`div[data-ach-checkbox] > label`).click({clickCount: 1});
-        await achMarkoffResponse;
 
         // Check that the state has changed to mark the objective complete
         await expect(achCompletedCheckbox).toBeChecked();
@@ -113,11 +68,7 @@ test('Remote achievement interactivity', async () => {
 
         // Increment to goal, checking that bar has updated
         for(let i = 1; i <= 5; i++) {
-            const buttonClickResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-                && resp.request().method() === 'POST'
-                && resp.status() === 200);
             await incrementButton.click({ clickCount: 1 });
-            await buttonClickResponse;
 
             const barText = objectiveContainer.getByText(`${i} / 5`);
             await expect(barText).toBeVisible();
@@ -128,12 +79,7 @@ test('Remote achievement interactivity', async () => {
         await expect(achCompletedCheckbox).toBeChecked();
 
         // Perform decrement and check that bar has updated
-        const decrementButtonResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'POST'                    
-            && resp.status() === 200);
         await decrementButton.click({ clickCount: 1 });
-        await decrementButtonResponse;
-
         const decrementedProgressText = objectiveContainer.getByText('4 / 5');
         await expect(decrementedProgressText).toBeVisible();
         await expect(achCompletedCheckbox).not.toBeChecked();
@@ -149,25 +95,16 @@ test('Remote achievement interactivity', async () => {
         // Expand achievement
         await achievement.locator('div[data-achexpandinfo] > label').click({ clickCount: 1 });
         const objectiveContainer = achievement.locator(`div[data-obj-container]`);
-
         const esbjergCheckbox = objectiveContainer.getByLabel('Esbjerg', { exact: false });
         const osloCheckbox = objectiveContainer.getByLabel('Oslo', { exact: false });
 
         // Check off Esbjerg
-        const esbjergMarkoffResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'POST'
-            && resp.status() === 200);
         await objectiveContainer.getByText('Esbjerg', { exact: false }).click({ clickCount: 1 });
-        await esbjergMarkoffResponse;
         await expect(esbjergCheckbox).toBeChecked();
         await expect(osloCheckbox).not.toBeChecked();
 
         // Check off Oslo
-        const osloMarkoffResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'POST'
-            && resp.status() === 200);    
         await objectiveContainer.getByText('Oslo', { exact: false }).click({ clickCount: 1 });
-        await osloMarkoffResponse;
         await expect(esbjergCheckbox).toBeChecked();
         await expect(osloCheckbox).toBeChecked();
     
@@ -175,11 +112,7 @@ test('Remote achievement interactivity', async () => {
         await expect(achCompleteElement).toBeChecked();
 
         // Check that the achievement goes back to incomplete when we uncheck Oslo
-        const osloUnmarkResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'POST'
-            && resp.status() === 200);
         await objectiveContainer.getByText('Oslo', { exact: false }).click({ clickCount: 1 });
-        await osloUnmarkResponse;
         await expect(esbjergCheckbox).toBeChecked();
         await expect(osloCheckbox).not.toBeChecked();
         await expect(achCompleteElement).not.toBeChecked();
@@ -200,23 +133,14 @@ test('Remote achievement interactivity', async () => {
         // Click on campervans to complete achievement right away
         await expect(electronicsCheckbox).not.toBeChecked();
         await expect(campervanCheckbox).not.toBeChecked();
-
-        const campervanMarkoffResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'POST'
-            && resp.status() === 200);
         await objectiveContainer.getByText('Campervans', { exact: false }).click({ clickCount: 1 });
-        await campervanMarkoffResponse;
 
         await expect(electronicsCheckbox).toBeChecked();
         await expect(campervanCheckbox).toBeChecked();
         await expect(achCompleteElement).toBeChecked();
 
         // Click on campervans, see that campervan + achievement is no longer marked off
-        const campervanUnmarkResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'POST'
-            && resp.status() === 200);
         await objectiveContainer.getByText('Campervans', { exact: false }).click({ clickCount: 1 });
-        await campervanUnmarkResponse;
 
         await expect(electronicsCheckbox).toBeChecked();
         await expect(campervanCheckbox).not.toBeChecked();
@@ -238,13 +162,7 @@ test('Remote achievement interactivity', async () => {
         for(let i = 0; i < CITY_OPTIONS.length; i++) {
             const subobjCheckbox = objectiveContainer.getByLabel(CITY_OPTIONS[i], { exact: false });
             await expect(subobjCheckbox).not.toBeChecked();
-
-            const markoffResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-                && resp.request().method() === 'POST'
-                && resp.status() === 200);
             await objectiveContainer.getByText(CITY_OPTIONS[i], { exact: false }).click({ clickCount: 1 });
-            await markoffResponse;
-
             await expect(subobjCheckbox).toBeChecked();
 
             const currentProgress = i + 1;
@@ -258,49 +176,49 @@ test('Remote achievement interactivity', async () => {
         // Now we uncheck the first subobjective (Argostoli) to make sure achievement reverts to incomplete
         const firstSubobjCheckbox = objectiveContainer.getByLabel(CITY_OPTIONS[0], { exact: false });
         await expect(firstSubobjCheckbox).toBeChecked();
-        
-        const firstSubobjUnmarkResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'POST'
-            && resp.status() === 200);
-        await objectiveContainer.getByText(CITY_OPTIONS[0], { exact: false }).click({ clickCount: 1 });
-        await firstSubobjUnmarkResponse;
 
+        await objectiveContainer.getByText(CITY_OPTIONS[0], { exact: false }).click({ clickCount: 1 });
         await expect(firstSubobjCheckbox).not.toBeChecked();
+
         await expect(page.getByText('3/4')).toBeVisible();
         await expect(achCompleteElement).not.toBeChecked();
     });
 
-    await test.step("Persists across different contexts after logging in", async () => {
+    await test.step("Persists within the same context, but not within different contexts", async () => {
         const achievementID = 'map_discover_100';
         const oldAchLocator = page.locator(`section[data-ach-id="${achievementID}"]`);
         const oldAchCompletedCheckbox = oldAchLocator.locator(`div[data-ach-checkbox] > input`);
 
         // Mark the achievement complete and wait for it to be checked off
-        const markOffAchievementResponse = page.waitForResponse(resp => resp.url().includes(`/${USER_UUID}/ets2`) 
-            && resp.request().method() === 'POST'
-            && resp.status() === 200);
         await oldAchLocator.locator(`div[data-ach-checkbox] > label`).click({clickCount: 1});
-        await markOffAchievementResponse;
 
         // Check that the state has changed to mark the objective off
         await expect(oldAchCompletedCheckbox).toBeChecked();
         
-        // Load up a new context
-        const newContext = await pwBrowser.newContext();
-        const newPage = await newContext.newPage();
-
-        // Login and go to the remote page
-        await performLogin(newPage, USER_DETAILS.email, USER_DETAILS.password, USER_DETAILS.displayName);
-        await newPage.goto(`/${USER_UUID}/ets2`);
-        await expect(newPage.locator('p#loading-indicator')).toBeHidden();
+        // Load up a new page within the context and go to the local page
+        const sameContextPage = await browserContext.newPage();
+        await sameContextPage.goto(`/ets2`);
 
         // Make sure what we marked off is saved
-        const newAchLocator = newPage.locator(`section[data-ach-id="${achievementID}"]`);
-        const newAchCompletedCheckbox = newAchLocator.locator(`div[data-ach-checkbox] > input`);
-        await expect(newAchCompletedCheckbox).toBeChecked();
+        const newAchLocatorSame = sameContextPage.locator(`section[data-ach-id="${achievementID}"]`);
+        const newAchCompletedCheckboxSame = newAchLocatorSame.locator(`div[data-ach-checkbox] > input`);
+        await expect(newAchCompletedCheckboxSame).toBeChecked();
 
         // Clean up
-        await newPage.close();
+        await sameContextPage.close();
+
+        // Load up a new page within a new context and go to the local page
+        const newContext = await pwBrowser.newContext();
+        const diffContextPage = await newContext.newPage();
+        await diffContextPage.goto(`/ets2`);
+
+        // Ensure that what we marked off isn't saved in this new context
+        const newAchLocatorDifferent = diffContextPage.locator(`section[data-ach-id="${achievementID}"]`);
+        const newAchCompletedCheckboxDifferent = newAchLocatorDifferent.locator(`div[data-ach-checkbox] > input`);
+        await expect(newAchCompletedCheckboxDifferent).not.toBeChecked();
+        
+        // Cleanup
+        await diffContextPage.close();
         await newContext.close();
     });
 });

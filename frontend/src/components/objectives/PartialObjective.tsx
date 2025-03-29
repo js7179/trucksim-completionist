@@ -1,19 +1,49 @@
-import { useStateAchievementListObj } from "@/hooks/AchievementHooks";
+import { useLocalFuncMarkListObj, useLocalStateAchievementListObj } from "@/hooks/LocalAchievementHooks";
 import { clamp, PartialObjectiveInfo } from "trucksim-completionist-common";
 import styles from './Objectives.module.css';
-import SubobjList from "./SubobjList";
+import SubobjList, { SubobjListProps } from "./SubobjList";
+import { useRemoteFuncMarkListObj, useRemoteStateAchievementObjective } from "@/hooks/RemoteAchievementHooks";
+import { useRemotePage } from "@/hooks/RemotePage";
 
-export default function PartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
-    const listValues = useStateAchievementListObj(achID, objid);
+export function LocalPartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
+    const listValues = useLocalStateAchievementListObj(achID, objid);
+    const dispatch = useLocalFuncMarkListObj();
+
+    const toggleItem = (subobjID: string) => {
+        const isMarkedOffCurrently = listValues.includes(subobjID);
+        dispatch(achID, objid, subobjID, !isMarkedOffCurrently);
+    };
 
     return (
+        <VisualPartialObjective count={goalCount} values={values} objid={objid} achID={achID} current={listValues} func={toggleItem} />
+    );
+}
+
+export function RemotePartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
+    const { uid, game } = useRemotePage();
+    const { data } = useRemoteStateAchievementObjective(uid, game, achID, objid);
+    const dispatch = useRemoteFuncMarkListObj();
+
+    const listValues = data as string[];
+
+    const toggleItem = (subobjID: string) => {
+        const isMarkedOffCurrently = listValues.includes(subobjID);
+        dispatch.mutate({ uid, game, achID, objid, subobjid: subobjID, shouldMarkOff: !isMarkedOffCurrently });
+    }
+
+    return (
+        <VisualPartialObjective count={goalCount} values={values} objid={objid} achID={achID} current={listValues} func={toggleItem} />
+    );
+}
+
+export function VisualPartialObjective({achID, objid, values, count: goalCount, current, func}: VisualPartialObjectivesProp) {
+    return (
         <div>
-            <div className={styles.center}>{clamp(0, listValues.length, goalCount)}/{goalCount}</div>
-            <SubobjList achID={achID} values={values} objid={objid} />
+            <div className={styles.center}>{clamp(0, current.length, goalCount)}/{goalCount}</div>
+            <SubobjList achID={achID} values={values} objid={objid} current={current} func={func} />
         </div>
     );
 }
 
-interface PartialObjectivesProp extends PartialObjectiveInfo {
-    achID: string;
-}
+export type PartialObjectivesProp = Omit<PartialObjectiveInfo, "type"> & { achID: string; };
+type VisualPartialObjectivesProp = PartialObjectivesProp & SubobjListProps;

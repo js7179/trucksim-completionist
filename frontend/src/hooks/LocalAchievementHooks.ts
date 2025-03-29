@@ -4,37 +4,37 @@ import { isNonorderedArrayEqual } from "trucksim-completionist-common";
 import { useStore } from "zustand";
 import { useStoreWithEqualityFn } from "zustand/traditional";
 
-export function useFuncMarkAchievementComplete() {
+export function useLocalFuncMarkAchievementComplete() {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
     return useStore(store, (s) => s.markComplete);
 }
 
-export function useFuncSetNumberObj() {
+export function useLocalFuncSetNumberObj() {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
     return useStore(store, (s) => s.setCounter);
 }
 
-export function useFuncMarkListObj() {
+export function useLocalFuncMarkListObj() {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
     return useStore(store, (s) => s.markListObj);
 }
 
-export function useStateAchievementCompleted(achID: string): boolean {
+export function useLocalStateAchievementCompleted(achID: string): boolean {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
     return useStore(store, (s) => s.saveData[achID].completed);
 }
 
-export function useStateAchievementNumberObj(achID: string, objID: string): number {
+export function useLocalStateAchievementNumberObj(achID: string, objID: string): number {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
     return useStore(store, (s) => s.saveData[achID].objectives[objID] as number);
 }
 
-export function useStateAchievementListObj(achID: string, objID: string): string[] {
+export function useLocalStateAchievementListObj(achID: string, objID: string): string[] {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
     return useStoreWithEqualityFn(store,

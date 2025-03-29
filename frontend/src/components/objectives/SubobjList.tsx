@@ -1,28 +1,17 @@
-import { useStateAchievementListObj, useFuncMarkListObj } from "@/hooks/AchievementHooks";
-import { ListObjectiveInfo } from "trucksim-completionist-common";
+import { ListObjectiveInfo, ListSubobjectiveItem } from "trucksim-completionist-common";
 import { CheckboxButton } from "../util/StylizedCheckbox";
 import styles from './Objectives.module.css';
 
-export default function SubobjList({achID, objid, values}: SubobjListProps) {
-        const listValues = useStateAchievementListObj(achID, objid);
-        const dispatch = useFuncMarkListObj();
-    
-        const toggleItem = (subobjID: string) => {
-            const isMarkedOffCurrently = listValues.includes(subobjID);
-            dispatch(achID, objid, subobjID, !isMarkedOffCurrently);
-        };
-    
-    
-    const listItems = values.map((subobj) => {
+export default function SubobjList({achID, objid, values, current, func}: SubobjListProps) {
+    const listItems = values.map((subobj: ListSubobjectiveItem) => {
         const inputID = `${achID}.${objid}.${subobj.subobjid}`;
-        const isChecked = listValues.includes(subobj.subobjid);
-
+        const isChecked = current.includes(subobj.subobjid);
         return (
             <li className={styles.listObjItem} key={inputID}>
                 <CheckboxButton 
                     htmlID={inputID}
                     checked={isChecked}
-                    onClick={() => toggleItem(subobj.subobjid)}
+                    onClick={() => func(subobj.subobjid)}
                     size="1lh"
                     colorFilter="var(--text-color-filter)"
                     label={subobj.display}/>
@@ -35,8 +24,11 @@ export default function SubobjList({achID, objid, values}: SubobjListProps) {
             {...listItems}
         </ul>
     );
+
 }
 
-interface SubobjListProps extends Omit<ListObjectiveInfo, "type"> {
-    achID: string;
-}
+export type SubobjListProps = Omit<ListObjectiveInfo, "type"> & {
+    achID: string; 
+    current: string[];
+    func: (subobjid: string) => void;
+ };

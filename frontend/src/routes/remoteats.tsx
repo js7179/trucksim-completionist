@@ -5,9 +5,9 @@ import { RemotePageProvider } from "@/hooks/RemotePage";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { useParams } from "react-router-dom";
-import ets2List from "trucksim-completionist-common/data/ets2_achievements.json";
+import atsList from "trucksim-completionist-common/data/ats_achievements.json";
 
-export default function ETS2RemotePage() {
+export default function ATSRemotePage() {
     const { uid } = useParams();
     if(!uid) {
         return (
@@ -16,9 +16,9 @@ export default function ETS2RemotePage() {
     }
     return (
         <QueryClientProvider client={queryClient}>
-            <RemotePageProvider game={'ets2'} uid={uid}>
+            <RemotePageProvider game={'ats'} uid={uid}>
                 <Suspense fallback={<LoadingSpinner />}>
-                    <AchievementList achList={ets2List} />
+                    <AchievementList achList={atsList} />
                 </Suspense>
             </RemotePageProvider>
         </QueryClientProvider>

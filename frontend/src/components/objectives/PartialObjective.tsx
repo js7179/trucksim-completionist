@@ -2,7 +2,7 @@ import { useLocalFuncMarkListObj, useLocalStateAchievementListObj } from "@/hook
 import { clamp, PartialObjectiveInfo } from "trucksim-completionist-common";
 import styles from './Objectives.module.css';
 import SubobjList, { SubobjListProps } from "./SubobjList";
-import { useRemoteFuncMarkListObj, useRemoteStateAchievementObjective } from "@/hooks/RemoteAchievementHooks";
+import { useRemoteFuncMarkListObj, useRemoteStateAchievementObjList } from "@/hooks/RemoteAchievementHooks";
 import { useRemotePage } from "@/hooks/RemotePage";
 
 export function LocalPartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
@@ -21,10 +21,9 @@ export function LocalPartialObjective({achID, objid, values, count: goalCount}: 
 
 export function RemotePartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
     const { uid, game } = useRemotePage();
-    const { data } = useRemoteStateAchievementObjective(uid, game, achID, objid);
+    const { data: listValues } = useRemoteStateAchievementObjList(uid, game, achID, objid);
     const dispatch = useRemoteFuncMarkListObj();
 
-    const listValues = data as string[];
 
     const toggleItem = (subobjID: string) => {
         const isMarkedOffCurrently = listValues.includes(subobjID);

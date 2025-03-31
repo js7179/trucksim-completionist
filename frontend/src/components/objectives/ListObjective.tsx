@@ -1,7 +1,7 @@
 import { ListObjectiveInfo } from "trucksim-completionist-common";
 import SubobjList from './SubobjList';
 import { useLocalStateAchievementListObj, useLocalFuncMarkListObj } from "@/hooks/LocalAchievementHooks";
-import { useRemoteStateAchievementObjective, useRemoteFuncMarkListObj } from "@/hooks/RemoteAchievementHooks";
+import { useRemoteStateAchievementObjList, useRemoteFuncMarkListObj } from "@/hooks/RemoteAchievementHooks";
 import { useRemotePage } from "@/hooks/RemotePage";
 
 export function LocalListObjective({achID, objid, values}: ListObjectiveProps) {
@@ -20,10 +20,8 @@ export function LocalListObjective({achID, objid, values}: ListObjectiveProps) {
 
 export function RemoteListObjective({achID, objid, values}: ListObjectiveProps) {
     const { uid, game } = useRemotePage();
-    const { data } = useRemoteStateAchievementObjective(uid, game, achID, objid);
+    const { data: listValues } = useRemoteStateAchievementObjList(uid, game, achID, objid);
     const dispatch = useRemoteFuncMarkListObj();
-
-    const listValues = data as string[];
 
     const toggleItem = (subobjID: string) => {
         const curSubobjState = listValues.includes(subobjID);

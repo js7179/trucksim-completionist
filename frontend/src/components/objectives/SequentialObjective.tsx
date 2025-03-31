@@ -2,7 +2,7 @@ import styles from './Objectives.module.css';
 import { SequentialObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from '../util/StylizedCheckbox';
 import { useLocalFuncSetNumberObj, useLocalStateAchievementNumberObj } from '@/hooks/LocalAchievementHooks';
-import { useRemoteFuncSetNumberObj, useRemoteStateAchievementObjective } from '@/hooks/RemoteAchievementHooks';
+import { useRemoteFuncSetNumberObj, useRemoteStateAchievementObjNumber } from '@/hooks/RemoteAchievementHooks';
 import { useRemotePage } from '@/hooks/RemotePage';
 
 export function LocalSequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
@@ -23,10 +23,8 @@ export function LocalSequentialObjective({achID, objid, values}: SequentialObjec
 
 export function RemoteSequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
     const { uid, game } = useRemotePage();
-    const { data } = useRemoteStateAchievementObjective(uid, game, achID, objid);
+    const { data: objValue } = useRemoteStateAchievementObjNumber(uid, game, achID, objid);
     const dispatch = useRemoteFuncSetNumberObj();
-
-    const objValue = data as number;
 
     const selectListItem = (stepIndex: number) => {
         if(stepIndex === objValue) {

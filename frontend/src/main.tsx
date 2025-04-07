@@ -14,26 +14,30 @@ import SendPwResetPage from './routes/auth/sendpwreset.tsx';
 import ResetPasswordPage from './routes/auth/resetpw.tsx';
 import ETS2RemotePage from './routes/remoteets2.tsx';
 import ATSRemotePage from './routes/remoteats.tsx';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './api/query.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<NavbarLayout />}>
-            <Route index element={<Root />} />
-            <Route path='/:uid/ets2' element={<ETS2RemotePage />}></Route>
-            <Route path='/:uid/ats' element={<ATSRemotePage />}></Route>
-            <Route path='/ats' element={<ATSLocalPage/>} />
-            <Route path='/ets2' element={<ETS2LocalPage/>} />
-            <Route path='/signup' element={<SignupPage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/signout' element={<SignoutPage />} />
-            <Route path='/sendpwreset' element={<SendPwResetPage />} />
-            <Route path='/resetpw' element={<ResetPasswordPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<NavbarLayout />}>
+              <Route index element={<Root />} />
+              <Route path='/:uid/ets2' element={<ETS2RemotePage />}></Route>
+              <Route path='/:uid/ats' element={<ATSRemotePage />}></Route>
+              <Route path='/ats' element={<ATSLocalPage/>} />
+              <Route path='/ets2' element={<ETS2LocalPage/>} />
+              <Route path='/signup' element={<SignupPage />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/signout' element={<SignoutPage />} />
+              <Route path='/sendpwreset' element={<SendPwResetPage />} />
+              <Route path='/resetpw' element={<ResetPasswordPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>,
 )

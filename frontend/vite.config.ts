@@ -22,5 +22,9 @@ export default defineConfig({
     setupFiles: './tests/vitest/setup.ts',
     include: ['**/tests/vitest/**/*.{test,spec}.?(c|m)[jt]s?(x)']
   },
-  envDir: '../'
+  envDir: '../',
+  assetsInclude: ['**/public/**/*.json'],
+  esbuild: {
+    legalComments: 'none',
+  }
 });

@@ -91,12 +91,10 @@ export const AuthProvider = ({children}: PropsWithChildren) => {
         auth.getSession().then(({data: { session }}) => {
             setSession(session);
             setLoading(false);
-            console.log(session);
         });
         const { data: { subscription }} = auth.onAuthStateChange((_event, session) => {
             setSession(session);
             setLoading(false);
-            console.log(session);
         });
 
         return () => subscription.unsubscribe();

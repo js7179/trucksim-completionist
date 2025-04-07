@@ -1,26 +1,34 @@
-import { queryClient } from "@/api/query";
 import AchievementList from "@/components/AchievementList";
 import LoadingSpinner from "@/components/util/LoadingSpinner";
+import useGameAchInfo from "@/hooks/AchInfoProvider";
+import { RemoteComponentContext } from "@/hooks/ComponentContext";
 import { RemotePageProvider } from "@/hooks/RemotePage";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { useParams } from "react-router-dom";
-import ets2List from "trucksim-completionist-common/data/ets2_achievements.json";
 
 export default function ETS2RemotePage() {
     const { uid } = useParams();
+    const { data: achList = [], error, isLoading } = useGameAchInfo('ets2');
+    
     if(!uid) {
-        return (
-            <p>Invalid parameters to this page</p>
-        )
+        return (<p>No user ID provided</p>);
     }
+
+    if(error) {
+        return (<p>{error.message ?? 'Error loading Euro Truck Simulator 2 achievements'}</p>);
+    }
+
+    if(isLoading || achList.length === 0) {
+        return (<LoadingSpinner />);
+    }
+
     return (
-        <QueryClientProvider client={queryClient}>
-            <RemotePageProvider game={'ets2'} uid={uid}>
-                <Suspense fallback={<LoadingSpinner />}>
-                    <AchievementList achList={ets2List} />
-                </Suspense>
-            </RemotePageProvider>
-        </QueryClientProvider>
+        <RemotePageProvider game={'ets2'} uid={uid}>
+            <Suspense fallback={<LoadingSpinner />}>
+                <RemoteComponentContext> 
+                    <AchievementList achList={achList} />
+                </RemoteComponentContext>
+            </Suspense>
+        </RemotePageProvider>
     );
 }

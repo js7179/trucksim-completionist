@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { copyChanges, AchievementStateList, AchievementInfo } from "trucksim-completionist-common";
-import { performStateUpdate, STATE_ACTION } from "trucksim-completionist-common/src/state";
+import { generateStateTemplate, performStateUpdate, STATE_ACTION } from "trucksim-completionist-common/src/state";
 import { createStore } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -14,11 +14,11 @@ export interface AchievementStateStore {
 
 export type AchievementStore = ReturnType<typeof createAchievementStore>;
 
-export const createAchievementStore = (defaultAchievementState: AchievementStateList, achList: AchievementInfo[], gameName: string) => {
+export const createAchievementStore = (achList: AchievementInfo[], gameName: string) => {
     return createStore<AchievementStateStore>()(
         persist(
             (set, get) => ({
-                saveData: structuredClone(defaultAchievementState),
+                saveData: generateStateTemplate(achList),
                 achList: achList,
                 markComplete: (achID, shouldMarkOff) => {
                     const oldState = get();
@@ -61,7 +61,10 @@ export const createAchievementStore = (defaultAchievementState: AchievementState
                 name: gameName,
                 version: 0,
                 partialize: (state) => ({ saveData: state.saveData }),
-                migrate: (persistedState) => copyChanges(defaultAchievementState, persistedState)
+                migrate: (persistedState) => {
+                    const newBlankSlate = generateStateTemplate(achList);
+                    return copyChanges(newBlankSlate, persistedState);
+                }
             }
         )
     );

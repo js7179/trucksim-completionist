@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitest/config'
 import { resolve } from "node:path";
 import react from '@vitejs/plugin-react'
-import { PluginOption } from 'vite';
-import { visualizer } from 'rollup-plugin-visualizer';
+// import { PluginOption } from 'vite';
+// import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({

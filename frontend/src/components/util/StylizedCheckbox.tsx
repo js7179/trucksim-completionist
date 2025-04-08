@@ -21,7 +21,7 @@ const CHECKBOX_IMG = {
  * @param {string} size             CSS value of the size of the checkbox
  * @param {string} colorFilter      What filter to apply to the image to achieve a certain look
  * @param {string?} label           If the checkbox has any associated text
- * @returns {React.FC}              Checkbox component (with label if provided)
+ * @returns {JSX.Element}              Checkbox component (with label if provided)
  */
 export function CheckboxButton({htmlID, checked, onClick, size, colorFilter, label}: CheckboxButtonProps) {
     const img = CHECKBOX_IMG[checked ? 'checked' : 'unchecked'];
@@ -57,7 +57,7 @@ export function CheckboxButton({htmlID, checked, onClick, size, colorFilter, lab
  * @param {string} htmlID           The ID associated with this HTML control
  * @param {boolean} checked         Is the checkbox currently checked?
  * @param {VoidFunction} onClick    What to trigger to change state when clicked
- * @returns {React.FC}              Show Information checkbox
+ * @returns {JSX.Element}              Show Information checkbox
  */
 export function ShowInformationButton({htmlID, checked, onClick}: ShowInformationButtonProps) {
     const transformValue = checked ? 'rotate(180deg)' : 'rotate(0deg)';

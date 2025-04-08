@@ -63,12 +63,12 @@ function Achievement(props: AchievementProps) {
 }
 
 export type AchListComponentProps = {
-    achIcon: React.FC<IconProps>;
-    achCompleteCheckbox: React.FC<AchievementCheckboxProps>;
-    achObjList: React.FC<ListObjectiveProps>;
-    achObjCounter: React.FC<CounterObjectiveProps>;
-    achObjSeq: React.FC<SequentialObjectiveProps>;
-    achObjPartial: React.FC<PartialObjectivesProp>;
+    achIcon: (props: IconProps) => JSX.Element;
+    achCompleteCheckbox: (props: AchievementCheckboxProps) => JSX.Element;
+    achObjList: (props: ListObjectiveProps) => JSX.Element;
+    achObjCounter: (props: CounterObjectiveProps) => JSX.Element;
+    achObjSeq: (props: SequentialObjectiveProps) => JSX.Element;
+    achObjPartial: (props: PartialObjectivesProp) => JSX.Element;
 };
 type AchievementListProps = AchListComponentProps & { achList: AchievementInfo[]; };
 type AchievementProps = AchievementInfo & AchListComponentProps;

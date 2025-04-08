@@ -1,27 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { lazy, StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Root from "./routes/root.tsx";
 import "./index.css";
-import ETS2LocalPage from './routes/localets2.tsx';
-import ATSLocalPage from './routes/localats.tsx';
 import NavbarLayout from './components/layout/NavbarLayout.tsx';
-import SignupPage from './routes/auth/signup.tsx';
+import Root from './routes/root.tsx';
 import { AuthProvider } from './hooks/Auth.tsx';
-import LoginPage from './routes/auth/login.tsx';
-import SignoutPage from './routes/auth/signout.tsx';
-import SendPwResetPage from './routes/auth/sendpwreset.tsx';
-import ResetPasswordPage from './routes/auth/resetpw.tsx';
-import ETS2RemotePage from './routes/remoteets2.tsx';
-import ATSRemotePage from './routes/remoteats.tsx';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './api/query.ts';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+const ETS2LocalPage = lazy(() => import('./routes/localets2.tsx'));
+const ATSLocalPage = lazy(() => import('./routes/localats.tsx'));
+const SignupPage = lazy(() => import('./routes/auth/signup.tsx'));
+const LoginPage = lazy(() => import('./routes/auth/login.tsx'));
+const SignoutPage = lazy(() => import('./routes/auth/signout.tsx'));
+const SendPwResetPage = lazy(() => import('./routes/auth/sendpwreset.tsx'));
+const ResetPasswordPage = lazy(() => import('./routes/auth/resetpw.tsx'));
+const ETS2RemotePage = lazy(() => import('./routes/remoteets2.tsx'));
+const ATSRemotePage = lazy(() => import('./routes/remoteats.tsx'));
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <BrowserRouter future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true
+        }}>
           <Routes>
             <Route element={<NavbarLayout />}>
               <Route index element={<Root />} />
@@ -39,5 +43,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </BrowserRouter>
       </QueryClientProvider>
     </AuthProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 )

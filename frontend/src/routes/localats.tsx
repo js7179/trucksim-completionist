@@ -1,7 +1,7 @@
 import AchievementList from "@/components/AchievementList";
+import { makeLocalAchListComponents } from "@/components/util/AchievementListComponents";
 import LoadingSpinner from "@/components/util/LoadingSpinner";
 import useGameAchInfo from "@/hooks/AchInfoProvider";
-import { LocalComponentContext } from "@/hooks/ComponentContext";
 import { AchievementStateContext, createAchievementStore } from "@/store/AchievementStore";
 import { useMemo } from "react";
 
@@ -14,6 +14,8 @@ export default function ATSLocalPage() {
         return createAchievementStore(achList, 'ats');
     }, [achList]);
 
+    const localComponents = makeLocalAchListComponents();
+
     if(error) {
         return (<p>{error.message ?? 'Error loading American Truck Simulator achievements'}</p>);
     }
@@ -23,10 +25,8 @@ export default function ATSLocalPage() {
     }
 
     return (
-        <LocalComponentContext>
-            <AchievementStateContext.Provider value={store}>
-                <AchievementList achList={achList} />
-            </AchievementStateContext.Provider>
-        </LocalComponentContext>
+        <AchievementStateContext.Provider value={store}>
+            <AchievementList achList={achList} {...localComponents} />
+        </AchievementStateContext.Provider>
     );  
 }

@@ -1,7 +1,7 @@
 import AchievementList from "@/components/AchievementList";
+import { makeRemoteAchListComponents } from "@/components/util/AchievementListComponents";
 import LoadingSpinner from "@/components/util/LoadingSpinner";
 import useGameAchInfo from "@/hooks/AchInfoProvider";
-import { RemoteComponentContext } from "@/hooks/ComponentContext";
 import { RemotePageProvider } from "@/hooks/RemotePage";
 import { Suspense } from "react";
 import { useParams } from "react-router-dom";
@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom";
 export default function ETS2RemotePage() {
     const { uid } = useParams();
     const { data: achList = [], error, isLoading } = useGameAchInfo('ets2');
+
+    const remoteComponents = makeRemoteAchListComponents();
     
     if(!uid) {
         return (<p>No user ID provided</p>);
@@ -25,9 +27,7 @@ export default function ETS2RemotePage() {
     return (
         <RemotePageProvider game={'ets2'} uid={uid}>
             <Suspense fallback={<LoadingSpinner />}>
-                <RemoteComponentContext> 
-                    <AchievementList achList={achList} />
-                </RemoteComponentContext>
+                <AchievementList achList={achList} {...remoteComponents} />
             </Suspense>
         </RemotePageProvider>
     );

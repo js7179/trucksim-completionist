@@ -1,7 +1,7 @@
 import AchievementList from "@/components/AchievementList";
+import { makeLocalAchListComponents } from "@/components/util/AchievementListComponents";
 import LoadingSpinner from "@/components/util/LoadingSpinner";
 import useGameAchInfo from "@/hooks/AchInfoProvider";
-import { LocalComponentContext } from "@/hooks/ComponentContext";
 import { AchievementStateContext, createAchievementStore } from "@/store/AchievementStore";
 import { useMemo } from "react";
 
@@ -14,6 +14,8 @@ export default function ETS2LocalPage() {
         return createAchievementStore(achList, 'ets2');
     }, [achList]);
 
+    const localComponents = makeLocalAchListComponents();
+
     if(error) {
         return (<p>{error.message ?? 'Error loading Euro Truck Simulator 2 achievements'}</p>);
     }
@@ -23,11 +25,9 @@ export default function ETS2LocalPage() {
     }
 
     return (
-        <LocalComponentContext>
-            <AchievementStateContext.Provider value={store}>
-                <AchievementList achList={achList} />
-            </AchievementStateContext.Provider>
-        </LocalComponentContext>
+        <AchievementStateContext.Provider value={store}>
+            <AchievementList achList={achList} {...localComponents}  />
+        </AchievementStateContext.Provider>
     );  
 
 }

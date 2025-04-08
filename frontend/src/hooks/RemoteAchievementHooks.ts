@@ -90,13 +90,20 @@ export function useRemoteFuncMarkListObj() {
 export function useRemoteStateAchievementCompleted(uuid: string, game: string, achID: string) {
     return useSuspenseQuery({
         ...DEFAULT_QUERY_OPTS(uuid, game),
-        select: (savedata: AchievementStateList) => savedata[achID].completed
+        select: (savedata: AchievementStateList) => savedata?.[achID]?.completed ?? false
     });
 }
 
-export function useRemoteStateAchievementObjective(uuid: string, game: string, achID: string, objID: string) {
+export function useRemoteStateAchievementObjList(uuid: string, game: string, achID: string, objID: string) {
     return useSuspenseQuery({
         ...DEFAULT_QUERY_OPTS(uuid, game),
-        select: (savedata: AchievementStateList) => savedata[achID].objectives[objID]
+        select: (savedata: AchievementStateList) => savedata?.[achID]?.objectives?.[objID] as string[] ?? [] as string[]
+    });
+}
+
+export function useRemoteStateAchievementObjNumber(uuid: string, game: string, achID: string, objID: string) {
+    return useSuspenseQuery({
+        ...DEFAULT_QUERY_OPTS(uuid, game),
+        select: (savedata: AchievementStateList) => savedata?.[achID]?.objectives?.[objID] as number ?? 0
     });
 }

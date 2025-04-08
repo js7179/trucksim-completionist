@@ -25,20 +25,20 @@ export function useLocalFuncMarkListObj() {
 export function useLocalStateAchievementCompleted(achID: string): boolean {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
-    return useStore(store, (s) => s.saveData[achID].completed);
+    return useStore(store, (s) => s.saveData?.[achID]?.completed ?? false);
 }
 
 export function useLocalStateAchievementNumberObj(achID: string, objID: string): number {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
-    return useStore(store, (s) => s.saveData[achID].objectives[objID] as number);
+    return useStore(store, (s) => s.saveData?.[achID]?.objectives?.[objID] as number ?? 0);
 }
 
 export function useLocalStateAchievementListObj(achID: string, objID: string): string[] {
     const store = useContext(AchievementStateContext);
     if(!store) throw new Error("Missing AchievementStateContext.Provider");
     return useStoreWithEqualityFn(store,
-        (s) => s.saveData[achID].objectives[objID] as string[],
+        (s) => s.saveData?.[achID]?.objectives?.[objID] as string[] ?? [] as string[],
         (a, b) => isNonorderedArrayEqual(a, b)
     );
 }

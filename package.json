@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "dev": "concurrently --names \"SERVER, VITE \" -c \"bgCyan.bold,bgWhite.bold\" -- \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "setup": "node ./setup.js"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.0",

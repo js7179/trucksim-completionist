@@ -27,3 +27,5 @@ dist-ssr
 */coverage/*
 **/trace.zip
 **/.last-run.json
+
+frontend/public/**/achdata/*.json

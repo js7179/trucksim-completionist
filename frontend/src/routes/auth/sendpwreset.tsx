@@ -8,9 +8,6 @@ export default function SendPwResetPage() {
     const { session } = useAuth();
     const navigate = useNavigate();
 
-    
-    console.log(import.meta.env.BASE_URL);
-
     useEffect(() => {
         if(session !== null) {
             navigate("/");

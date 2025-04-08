@@ -28,7 +28,7 @@ async function getLatestEmail(address: string, maxTries: number): Promise<string
         const responseData = response.data;
                 
         if(Object.keys(responseData).length > 0) {
-            const sortedInbox = responseData.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
+            const sortedInbox = responseData.sort((a: EmailObject, b: EmailObject) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
             emailID = sortedInbox.at(-1).id;
             found = true;
         } else {
@@ -85,5 +85,7 @@ function getLinkFromEmailBody(body: string): string | null {
     if(links.length === 0) return null;
     return links[0].href;
 }
+
+type EmailObject = Record<string, string>;
 
 export { getLatestEmail, getEmailBody, purgeMailbox, getLinkFromEmailBody };

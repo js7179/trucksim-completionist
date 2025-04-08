@@ -20,10 +20,12 @@ vi.mock('@/hooks/LocalAchievementHooks', () => ({
     useLocalFuncMarkListObj: vi.fn()
 }));
 
+type MockFunction = ReturnType<typeof vi.fn>;
+
 describe('List objective', () => {
     beforeAll(() => {
-        (useLocalStateAchievementListObj as vi.Mock).mockReturnValue([]);
-        (useLocalFuncMarkListObj as vi.Mock).mockReturnValue(DISPATCH_MOCK);
+        (useLocalStateAchievementListObj as MockFunction).mockReturnValue([]);
+        (useLocalFuncMarkListObj as MockFunction).mockReturnValue(DISPATCH_MOCK);
     });
 
     afterEach(() => {
@@ -39,7 +41,7 @@ describe('List objective', () => {
     });
 
     it("renders normally, Bar checked off", async () => {
-        (useLocalStateAchievementListObj as vi.Mock).mockReturnValueOnce(['bar']);
+        (useLocalStateAchievementListObj as MockFunction).mockReturnValueOnce(['bar']);
 
         render(<LocalListObjective {...DEFAULT_PROPS} />);
 

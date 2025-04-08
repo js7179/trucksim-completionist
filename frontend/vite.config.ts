@@ -1,10 +1,15 @@
 import { defineConfig } from 'vitest/config'
 import { resolve } from "node:path";
 import react from '@vitejs/plugin-react'
+// import { PluginOption } from 'vite';
+// import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), /*visualizer({
+    emitFile: true,
+    filename: 'stats.html'
+  }) as PluginOption*/],
   server: {
     port: 3000
   },
@@ -22,5 +27,19 @@ export default defineConfig({
     setupFiles: './tests/vitest/setup.ts',
     include: ['**/tests/vitest/**/*.{test,spec}.?(c|m)[jt]s?(x)']
   },
-  envDir: '../'
+  envDir: '../',
+  assetsInclude: ['**/public/**/*.json'],
+  esbuild: {
+    legalComments: 'none',
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          common: ['trucksim-completionist-common'],
+          reactVendor: ['react', 'react-dom']
+        }
+      }
+    }
+  }
 });

@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 
 export default function ATSRemotePage() {
     const { uid } = useParams();
-    const { data: achList = [], error, isLoading } = useGameAchInfo('ets2');
+    const { data: achList = [], error, isLoading } = useGameAchInfo('ats');
 
     const remoteComponents = makeRemoteAchListComponents();
 

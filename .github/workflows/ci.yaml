@@ -18,6 +18,9 @@ jobs:
 
       - name: Start local Supabase instance
         run: supabase start
+      
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run backend unit tests
         run: npm run test

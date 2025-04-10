@@ -28,6 +28,15 @@ jobs:
       - name: Run backend unit tests
         run: npm run test
         working-directory: ./backend
+        env:
+          JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
+          JWT_ISS: http://127.0.0.1:54321/auth/v1
+          PGUSER: webserv1
+          PGPASSWORD: webserv1
+          PGHOST: 127.0.0.1
+          PGPORT: 54322
+          PGDATABASE: postgres
+
 
       - name: Run common unit tests
         run: npm run test

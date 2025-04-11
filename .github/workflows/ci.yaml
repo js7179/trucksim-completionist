@@ -7,8 +7,10 @@ env:
   VITE_SUPABASE_PROJECT_URL: http://127.0.0.1:54321
   JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
   JWT_ISS: http://127.0.0.1:54321/auth/v1
-  PGUSER: webserv1
-  PGPASSWORD: webserv1
+  PG_MASTER_USER: postgres
+  PG_MASTER_PASSWORD: postgres
+  PG_WEBSERV_USER: webserv1
+  PG_WEBSERV_PASS: webserv1
   PGHOST: 127.0.0.1
   PGPORT: 54322
   PGDATABASE: postgres

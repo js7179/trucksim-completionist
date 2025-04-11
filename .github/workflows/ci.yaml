@@ -8,7 +8,7 @@ env:
   JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
   JWT_ISS: http://127.0.0.1:54321/auth/v1
   PG_MASTER_USER: postgres
-  PG_MASTER_PASSWORD: postgres
+  PG_MASTER_PASS: postgres
   PG_WEBSERV_USER: webserv1
   PG_WEBSERV_PASS: webserv1
   PGHOST: 127.0.0.1

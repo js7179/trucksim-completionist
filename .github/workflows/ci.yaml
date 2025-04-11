@@ -56,7 +56,9 @@ jobs:
         working-directory: ./frontend
 
       - name: Run frontend e2e tests
-        run: npm run test:e2e
+        run: |
+          npx playwright install --with-deps
+          npm run test:e2e
         working-directory: ./frontend     
 
       - name: Stop local Supabase instance

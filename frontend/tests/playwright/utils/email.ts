@@ -24,7 +24,11 @@ async function getLatestEmail(address: string, maxTries: number): Promise<string
     let nTries = 0;
     let found = false;
     while(nTries < maxTries && !found ) {
-        const response = await axios.get(requestURL);
+        const response = await axios.get(requestURL, { validateStatus: () => true });
+        if(response.status !== 200) {
+            console.error(requestURL);
+            console.error(response);
+        }
         const responseData = response.data;
                 
         if(Object.keys(responseData).length > 0) {
@@ -70,7 +74,7 @@ async function getEmailBody(address: string, id: string): Promise<string | null>
 async function purgeMailbox(address: string): Promise<boolean> {
     const requestURL = new URL(`/api/v1/mailbox/${address}`, process.env.INBUCKET_URL).href;
 
-    const response = await axios.delete(requestURL);
+    const response = await axios.delete(requestURL, { validateStatus: () => true });
     return response.status === 200;
 }
 

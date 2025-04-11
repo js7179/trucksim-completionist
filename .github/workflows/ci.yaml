@@ -53,7 +53,7 @@ jobs:
 
       - name: Run frontend e2e tests
         run: |
-          npx playwright install
+          npx playwright install --with-deps
           npm run test:e2e
         working-directory: ${{ github.workspace }}/frontend
 

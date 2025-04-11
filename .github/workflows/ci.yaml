@@ -1,23 +1,15 @@
 name: tests-lints
 run-name: Run tests & lint
-on:
-  pull_request:
-    branches:
-      - main
+#on:
+#  pull_request:
+#    branches:
+#      - main
+on: [push]
 env:
   VITE_SITE_URL: http://localhost:3000/
   VITE_API_URL: http://localhost:3500/
-  VITE_SUPABASE_PROJECT_URL: http://127.0.0.1:54321
-  JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
-  JWT_ISS: http://127.0.0.1:54321/auth/v1
-  PG_MASTER_USER: postgres
-  PG_MASTER_PASS: postgres
   PG_WEBSERV_USER: webserv1
   PG_WEBSERV_PASS: webserv1
-  PGHOST: 127.0.0.1
-  PGPORT: 54322
-  PGDATABASE: postgres
-  INBUCKET_URL: http://127.0.0.1:54324
 jobs:
   ci:
     name: Run tests
@@ -72,11 +64,22 @@ jobs:
         with:
           version: latest
 
-      - name: Start local Supabase instance
+      - name: Start local Supabase instance and set environment variables
         run: |
           supabase start
+          SUPABASE_STATUS=$(supabase status)
+          echo "VITE_SUPABASE_PROJECT_URL=$(echo "$SUPABASE_STATUS" | grep 'API URL:' | awk '{print $3}')" >> $GITHUB_ENV
+          echo "JWT_SECRET=$(echo "$SUPABASE_STATUS" | grep 'JWT secret:' | awk '{print $3}')" >> $GITHUB_ENV
+          echo "INBUCKET_URL=$(echo "$SUPABASE_STATUS" | grep 'Inbucket URL:' | awk '{print $3}')" >> $GITHUB_ENV
+          echo "JWT_ISS=$(echo "$SUPABASE_STATUS" | grep 'API URL:' | awk '{print $3}')/auth/v1" >> $GITHUB_ENV
           echo "VITE_SUPABASE_ANON_KEY=$(supabase status | grep 'anon key:' | sed 's/.*anon key: //')" >> $GITHUB_ENV
           echo "SUPABASE_SERVICE_KEY=$(supabase status | grep 'service_role key:' | sed 's/.*service_role key: //')" >> $GITHUB_ENV
+          DB_URL=$(echo "$SUPABASE_STATUS" | grep 'DB URL:' | awk '{print $3}')
+          echo "PGUSER=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\1/')" >> $GITHUB_ENV
+          echo "PG_MASTER_USER=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\2/')" >> $GITHUB_ENV
+          echo "PG_MASTER_PASS=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\3/')" >> $GITHUB_ENV
+          echo "PGPORT=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\4/')" >> $GITHUB_ENV
+          echo "PGDATABASE=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\5/')" >> $GITHUB_ENV
       
       - name: Install dependencies
         if: steps.cache-root.outputs.cache-hit != 'true'

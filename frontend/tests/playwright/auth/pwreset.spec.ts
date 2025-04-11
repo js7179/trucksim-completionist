@@ -1,6 +1,7 @@
 import { Page, test, expect } from '@playwright/test';
 import { adminAuthClient } from '../supabase';
 import { getEmailBody, getLatestEmail, getLinkFromEmailBody, purgeMailbox } from '../utils/email';
+import cleanupSupabaseUser from '../utils/supabase-cleanup';
 
 const USER_DETAILS = {
     email: "testpwreset@gmail.com",
@@ -13,6 +14,8 @@ let USER_UUID: string = '';
 let page: Page;
 
 test.beforeAll(async ({browser}) => {
+    cleanupSupabaseUser(USER_DETAILS.email);
+    
     const { data, error } = await adminAuthClient.createUser({
         email: USER_DETAILS.email,
         password: USER_DETAILS.oldpassword,
@@ -51,7 +54,7 @@ test('Password reset flow', async () => {
         const emailID = await getLatestEmail(USER_DETAILS.email, 100);
         expect(emailID).not.toBeNull();
 
-        const emailBody = await getEmailBody(USER_DETAILS.email, emailID!);
+        const emailBody = await getEmailBody(emailID!);
         expect(emailBody).not.toBeNull();
 
         const pwResetLink = getLinkFromEmailBody(emailBody!);

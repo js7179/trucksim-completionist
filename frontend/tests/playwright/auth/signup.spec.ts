@@ -1,6 +1,7 @@
 import { Page, test, expect } from '@playwright/test';
 import { adminAuthClient } from '../supabase';
 import { getEmailBody, getLatestEmail, getLinkFromEmailBody, purgeMailbox } from '../utils/email';
+import cleanupSupabaseUser from '../utils/supabase-cleanup';
 
 const USER_DETAILS = {
     email: "testsignup@gmail.com",
@@ -11,6 +12,8 @@ const USER_DETAILS = {
 let page: Page;
 
 test.beforeAll(async ({browser}) => {
+    cleanupSupabaseUser(USER_DETAILS.email);
+    
     const context = await browser.newContext();
     page = await context.newPage();
 });
@@ -49,7 +52,7 @@ test('Sign up flow', async () => {
         const emailID = await getLatestEmail(USER_DETAILS.email, 100);
         expect(emailID).not.toBeNull();
 
-        const emailBody = await getEmailBody(USER_DETAILS.email, emailID!);
+        const emailBody = await getEmailBody(emailID!);
         expect(emailBody).not.toBeNull();
 
         const verificationLink = getLinkFromEmailBody(emailBody!);

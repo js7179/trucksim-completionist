@@ -1,24 +1,24 @@
 {
   "name": "trucksim-completionist-common",
+  "type": "module",
   "private": true,
   "version": "0.0.0",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc -b",
-    "test": "jest",
+    "test": "vitest",
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.23.3",
     "@eslint/js": "^9.4.0",
     "@types/eslint__js": "^8.42.3",
-    "@types/jest": "^29.5.12",
     "@types/node": "^20.11.28",
+    "@vitest/coverage-v8": "^3.1.1",
     "eslint": "^8.57.0",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.12.0"
+    "typescript-eslint": "^7.12.0",
+    "vitest": "^3.1.1"
   }
 }

@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '../.env.test.local' });
 
+const backendPort = Number(process.env.PORT) || 3500;
+
 export default defineConfig({
     testDir: 'tests/playwright',
     fullyParallel: true,
@@ -20,10 +22,19 @@ export default defineConfig({
         use: { ...devices['Desktop Chrome'] },
       },
     ],
-    webServer: {
-      command: 'npm run dev',
-      url: process.env.VITE_SITE_URL,
-      reuseExistingServer: !process.env.CI,
-    },
+    webServer: [
+      {
+        command: 'npm run dev',
+        url: process.env.VITE_SITE_URL,
+        reuseExistingServer: !process.env.CI,
+      },
+      {
+        command: 'npm run server',
+        port: backendPort,
+        reuseExistingServer: !process.env.CI,
+        cwd: '../backend',
+        stdout: 'pipe',
+      }
+  ],
     timeout: 30000,
 });

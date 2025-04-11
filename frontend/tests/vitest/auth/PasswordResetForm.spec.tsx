@@ -49,7 +49,7 @@ describe('Password Reset form', () => {
         await user.type(confirmPasswordInput, VALID_PASSWORD);
         await user.click(submitButton);
 
-        expect(newPasswordInput).toHaveValue('');
+        expect(newPasswordInput).not.toHaveValue();
         expect(confirmPasswordInput).toHaveValue(VALID_PASSWORD);
 
         expect(screen.getByText(/Password is required/)).toBeInTheDocument();

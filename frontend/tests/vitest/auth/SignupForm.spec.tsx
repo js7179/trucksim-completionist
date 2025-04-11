@@ -114,7 +114,7 @@ describe('Sign up form', () => {
 
         await performInputs(user, formControls, {...VALID_FORM_FIELD_VALUES, email: ''});
 
-        expect(formControls.emailInput).toHaveValue('');
+        expect(formControls.emailInput).not.toHaveValue();
         expect(formControls.displayNameInput).toHaveValue(VALID_DISPLAY_NAME);
         expect(formControls.passwordInput).toHaveValue(VALID_PASSWORD);
         expect(formControls.passwordConfirmationInput).toHaveValue(VALID_PASSWORD);
@@ -132,7 +132,7 @@ describe('Sign up form', () => {
         await performInputs(user, formInputs, {...VALID_FORM_FIELD_VALUES, displayName: ''});
 
         expect(formInputs.emailInput).toHaveValue(VALID_EMAIL);
-        expect(formInputs.displayNameInput).toHaveValue('');
+        expect(formInputs.displayNameInput).not.toHaveValue();;
         expect(formInputs.passwordInput).toHaveValue(VALID_PASSWORD);
         expect(formInputs.passwordConfirmationInput).toHaveValue(VALID_PASSWORD);
 
@@ -150,7 +150,7 @@ describe('Sign up form', () => {
 
         expect(formControls.emailInput).toHaveValue(VALID_EMAIL);
         expect(formControls.displayNameInput).toHaveValue(VALID_DISPLAY_NAME);
-        expect(formControls.passwordInput).toHaveValue('');
+        expect(formControls.passwordInput).not.toHaveValue();;
         expect(formControls.passwordConfirmationInput).toHaveValue(VALID_PASSWORD);
 
         expect(mockSignup).toHaveBeenCalledTimes(0);
@@ -168,7 +168,7 @@ describe('Sign up form', () => {
         expect(formControls.emailInput).toHaveValue(VALID_EMAIL);
         expect(formControls.displayNameInput).toHaveValue(VALID_DISPLAY_NAME);
         expect(formControls.passwordInput).toHaveValue(VALID_PASSWORD);
-        expect(formControls.passwordConfirmationInput).toHaveValue('');
+        expect(formControls.passwordConfirmationInput).not.toHaveValue();;
 
         expect(mockSignup).toHaveBeenCalledTimes(0);
         expect(screen.getByText(/Passwords do not match/)).toBeInTheDocument();

@@ -1,0 +1,110 @@
+name: tests-lints
+run-name: Run tests & lint
+on:
+  pull_request:
+    branches:
+      - main
+env:
+  VITE_SITE_URL: http://localhost:3000/
+  VITE_API_URL: http://localhost:3500/
+  PG_WEBSERV_USER: webserv1
+  PG_WEBSERV_PASS: webserv1
+jobs:
+  ci:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Node 20 LTS
+
+      - name: Cache root node_modules
+        uses: actions/cache@v3
+        id: cache-root
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('./package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache frontend node_modules
+        uses: actions/cache@v3
+        id: cache-frontend
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-
+
+      - name: Cache backend node_modules
+        uses: actions/cache@v3
+        id: cache-backend
+        with:
+          path: backend/node_modules
+          key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-backend-
+
+      - name: Cache common node_modules
+        uses: actions/cache@v3
+        id: cache-common
+        with:
+          path: common/node_modules
+          key: ${{ runner.os }}-common-${{ hashFiles('common/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-common-
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Start local Supabase instance and set environment variables
+        run: |
+          supabase start
+          SUPABASE_STATUS=$(supabase status)
+          echo "VITE_SUPABASE_PROJECT_URL=$(echo "$SUPABASE_STATUS" | grep 'API URL:' | awk '{print $3}')" >> $GITHUB_ENV
+          echo "JWT_SECRET=$(echo "$SUPABASE_STATUS" | grep 'JWT secret:' | awk '{print $3}')" >> $GITHUB_ENV
+          echo "INBUCKET_URL=$(echo "$SUPABASE_STATUS" | grep 'Inbucket URL:' | awk '{print $3}')" >> $GITHUB_ENV
+          echo "JWT_ISS=$(echo "$SUPABASE_STATUS" | grep 'API URL:' | awk '{print $3}')/auth/v1" >> $GITHUB_ENV
+          echo "VITE_SUPABASE_ANON_KEY=$(supabase status | grep 'anon key:' | sed 's/.*anon key: //')" >> $GITHUB_ENV
+          echo "SUPABASE_SERVICE_KEY=$(supabase status | grep 'service_role key:' | sed 's/.*service_role key: //')" >> $GITHUB_ENV
+          DB_URL=$(echo "$SUPABASE_STATUS" | grep 'DB URL:' | awk '{print $3}')
+          echo "PG_MASTER_USER=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\1/')" >> $GITHUB_ENV
+          echo "PG_MASTER_PASS=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\2/')" >> $GITHUB_ENV
+          echo "PGHOST=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\3/')" >> $GITHUB_ENV
+          echo "PGPORT=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\4/')" >> $GITHUB_ENV
+          echo "PGDATABASE=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\5/')" >> $GITHUB_ENV
+      
+      - name: Install dependencies
+        if: steps.cache-root.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Perform setup
+        run: npm run setup
+
+      - name: Run backend unit tests
+        run: npm run test
+        working-directory: ${{ github.workspace }}/backend
+
+      - name: Run common unit tests
+        run: npm run test
+        working-directory: ${{ github.workspace }}/common
+
+      - name: Run frontend unit tests
+        run: npm run test:unit
+        working-directory: ${{ github.workspace }}/frontend
+        
+      - name: Run frontend e2e tests
+        run: |
+          npx playwright install --with-deps
+          npm run test:e2e
+        working-directory: ${{ github.workspace }}/frontend
+
+      - name: Lint
+        run: npm run lint
+        working-directory: ${{ github.workspace }}

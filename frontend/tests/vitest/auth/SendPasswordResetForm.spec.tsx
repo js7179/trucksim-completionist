@@ -54,7 +54,7 @@ describe('Send password reset form', () => {
         await user.click(emailInput);
         await user.click(submitButton);
 
-        expect(emailInput).toHaveValue('');
+        expect(emailInput).not.toHaveValue();;
         expect(mockSendPWReset).toHaveBeenCalledTimes(0);
         expect(screen.getByText(/Email is required/)).toBeInTheDocument();
     });

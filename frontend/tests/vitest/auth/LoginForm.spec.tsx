@@ -63,7 +63,7 @@ describe('Login Form', () => {
         await user.click(submitButton);
 
         expect(mockLogin).not.toHaveBeenCalled();
-        expect(emailInput).toHaveValue('');
+        expect(emailInput).not.toHaveValue();;
         expect(passwordInput).toHaveValue(VALID_PASSWORD);
         expect(screen.getByText(/Email is required/)).toBeInTheDocument();
     });
@@ -105,7 +105,7 @@ describe('Login Form', () => {
 
         expect(mockLogin).not.toHaveBeenCalled();
         expect(emailInput).toHaveValue(VALID_EMAIL);
-        expect(passwordInput).toHaveValue('');
+        expect(passwordInput).not.toHaveValue();;
         expect(screen.getByText(/Password is required/)).toBeInTheDocument();
     });
 });

@@ -1,6 +1,9 @@
 name: tests-lints
 run-name: Run tests & lint
-on: [push]
+on:
+  pull_request:
+    branches:
+      - main
 env:
   VITE_SITE_URL: http://localhost:3000/
   VITE_API_URL: http://localhost:3500/
@@ -33,7 +36,7 @@ jobs:
         id: cache-root
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('./package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
@@ -75,7 +78,7 @@ jobs:
           echo "VITE_SUPABASE_ANON_KEY=$(supabase status | grep 'anon key:' | sed 's/.*anon key: //')" >> $GITHUB_ENV
           echo "SUPABASE_SERVICE_KEY=$(supabase status | grep 'service_role key:' | sed 's/.*service_role key: //')" >> $GITHUB_ENV
       
-      - name: Install root dependencies
+      - name: Install dependencies
         if: steps.cache-root.outputs.cache-hit != 'true'
         run: npm ci
 

@@ -1,4 +1,4 @@
-name: ci
+name: tests-lints
 run-name: Run tests & lint
 on: [push]
 env:
@@ -50,12 +50,7 @@ jobs:
       - name: Run frontend unit tests
         run: npm run test:unit
         working-directory: ${{ github.workspace }}/frontend
-
-      - name: SSH breakpoint
-        uses: mxschmitt/action-tmate@v3
-        with:
-          limit-access-to-actor: true
-
+        
       - name: Run frontend e2e tests
         run: |
           npx playwright install --with-deps

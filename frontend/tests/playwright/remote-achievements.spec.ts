@@ -1,6 +1,7 @@
 import { Page, test, expect, Browser } from '@playwright/test';
 import { adminAuthClient } from './supabase';
 import { performLogin } from './utils/perform-login';
+import cleanupSupabaseUser from './utils/supabase-cleanup';
 
 const USER_DETAILS = {
     email: "remote-achievement@test.com",
@@ -14,15 +15,7 @@ let page: Page;
 
 test.beforeAll(async ({browser}) => {
     // Cleanup any previous users associated with this email
-    const { data: { users }, error: listError } = await adminAuthClient.listUsers();
-    if(listError) throw listError;
-    const preexistingUser = users.filter((user) => user.email === USER_DETAILS.email);
-    if(preexistingUser.length !== 0) {
-        preexistingUser.forEach(async (user) => {
-            const { error } = await adminAuthClient.deleteUser(user.id);
-            if(error) throw error;
-        });
-    }
+    cleanupSupabaseUser(USER_DETAILS.email);
 
     // Create the user
     const { data, error: createError } = await adminAuthClient.createUser({

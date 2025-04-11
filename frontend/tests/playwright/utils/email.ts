@@ -20,20 +20,22 @@ axios.defaults.headers.get["Accept"] = "application/json";
 async function getLatestEmail(address: string, maxTries: number): Promise<string | null> {
     let emailID: string | null = null;
 
-    const requestURL = new URL(`/api/v1/mailbox/${address}`, process.env.INBUCKET_URL).href;
+    const requestURL = new URL(`/api/v1/search`, process.env.INBUCKET_URL).href;
     let nTries = 0;
     let found = false;
     while(nTries < maxTries && !found ) {
-        const response = await axios.get(requestURL, { validateStatus: () => true });
-        if(response.status !== 200) {
-            console.error(requestURL);
-            console.error(response);
-        }
+        const response = await axios.get(requestURL, {
+            params: {
+                query: `to:${address}`
+            }
+        });
         const responseData = response.data;
                 
-        if(Object.keys(responseData).length > 0) {
-            const sortedInbox = responseData.sort((a: EmailObject, b: EmailObject) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
-            emailID = sortedInbox.at(-1).id;
+        const searchCount = responseData.count as number;
+        if(searchCount > 0) {
+            const messageList = responseData.messages;
+            const firstMessage = messageList[0];
+            emailID = firstMessage.ID;
             found = true;
         } else {
             nTries += 1;
@@ -47,22 +49,22 @@ async function getLatestEmail(address: string, maxTries: number): Promise<string
     }
 }
 
-/** Given an address and an email ID, get the response body for the email associated with the ID.
+/** Given an address and an email ID, get the HTML response body for the email associated with the ID.
  * 
  * See {@link https://github.com/inbucket/inbucket/wiki/REST-GET-message} for the response data format and how the API endpoint works.
  * @param address Inbox that the email ID given is located in
  * @param id ID of the email
- * @returns Textual representation of the email body if it exists, null otherwise
+ * @returns HTML representation of the email body if it exists, null otherwise
  */
-async function getEmailBody(address: string, id: string): Promise<string | null> {
-    const requestURL = new URL(`/api/v1/mailbox/${address}/${id}`, process.env.INBUCKET_URL).href;
+async function getEmailBody(id: string): Promise<string | null> {
+    const requestURL = new URL(`/api/v1/message/${id}`, process.env.INBUCKET_URL).href;
     
     const response = await axios.get(requestURL);
     if(response.status !== 200) {
         return null;
     }
     const responseData = response.data;
-    return responseData.body.html;
+    return responseData.HTML;
 }
 
 /** Given an address, purge the mailbox
@@ -72,9 +74,13 @@ async function getEmailBody(address: string, id: string): Promise<string | null>
  * @returns True if it succeeded (HTTP 200), false otherwise
  */
 async function purgeMailbox(address: string): Promise<boolean> {
-    const requestURL = new URL(`/api/v1/mailbox/${address}`, process.env.INBUCKET_URL).href;
+    const requestURL = new URL(`/api/v1/search`, process.env.INBUCKET_URL).href;
 
-    const response = await axios.delete(requestURL, { validateStatus: () => true });
+    const response = await axios.delete(requestURL, {
+        params: {
+            query: `to:${address}`
+        }
+    });
     return response.status === 200;
 }
 
@@ -89,7 +95,5 @@ function getLinkFromEmailBody(body: string): string | null {
     if(links.length === 0) return null;
     return links[0].href;
 }
-
-type EmailObject = Record<string, string>;
 
 export { getLatestEmail, getEmailBody, purgeMailbox, getLinkFromEmailBody };

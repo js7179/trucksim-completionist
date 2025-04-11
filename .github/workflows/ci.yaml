@@ -57,7 +57,7 @@ jobs:
 
       - name: Run frontend e2e tests
         run: |
-          npx playwright install --with-deps
+          npx playwright install
           npm run test:e2e
         working-directory: ./frontend     
 

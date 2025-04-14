@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/Auth";
+import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import SendPasswordResetForm from "@/components/auth/SendPasswordResetForm";
@@ -12,7 +12,7 @@ export default function SendPwResetPage() {
         if(session !== null) {
             navigate("/");
         }
-    }, [session]);
+    }, [session, navigate]);
 
     return (
         <main className={styles.centerForm}>

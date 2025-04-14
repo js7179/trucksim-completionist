@@ -2,7 +2,7 @@ import { ListObjectiveInfo } from "trucksim-completionist-common";
 import SubobjList from './SubobjList';
 import { useLocalStateAchievementListObj, useLocalFuncMarkListObj } from "@/hooks/LocalAchievementHooks";
 import { useRemoteStateAchievementObjList, useRemoteFuncMarkListObj } from "@/hooks/RemoteAchievementHooks";
-import { useRemotePage } from "@/hooks/RemotePage";
+import { useRemotePage } from "@/hooks/RemotePageContext";
 
 export function LocalListObjective({achID, objid, values}: ListObjectiveProps) {
     const listValues = useLocalStateAchievementListObj(achID, objid);

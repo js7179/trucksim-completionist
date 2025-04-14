@@ -1,7 +1,7 @@
 import { useRemoteFuncMarkAchievementComplete, useRemoteStateAchievementCompleted } from '@/hooks/RemoteAchievementHooks';
 import { CheckboxButton } from './util/StylizedCheckbox';
 import { useLocalStateAchievementCompleted, useLocalFuncMarkAchievementComplete } from '@/hooks/LocalAchievementHooks';
-import { useRemotePage } from '@/hooks/RemotePage';
+import { useRemotePage } from '@/hooks/RemotePageContext';
 
 export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
     const completed = useLocalStateAchievementCompleted(achID);

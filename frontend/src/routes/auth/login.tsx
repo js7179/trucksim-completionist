@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/Auth";
+import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import LoginForm from "@/components/auth/LoginForm";
@@ -12,7 +12,7 @@ export default function LoginPage() {
         if(session !== null) {
             navigate("/");
         }
-    }, [session]);
+    }, [session, navigate]);
 
     return (
         <main className={styles.centerForm}>

@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import styles from './AuthForms.module.css';
-import { useAuth } from "@/hooks/Auth";
+import { useAuth } from '@/hooks/useAuth';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
@@ -49,7 +49,7 @@ export default function ResetPasswordForm() {
             const timeout = setTimeout(() => navigate('/'), 5000);
             return () => clearTimeout(timeout);
         }
-    }, [resetSuccess]);
+    }, [resetSuccess, navigate]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

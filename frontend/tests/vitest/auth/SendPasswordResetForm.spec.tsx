@@ -1,22 +1,23 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SendPasswordResetForm from '@/components/auth/SendPasswordResetForm';
-import { useAuth } from '@/hooks/Auth';
 
 const VALID_EMAIL: string = "test@example.com";
 const INVALID_EMAIL: string = '@.';
 
 const mockSendPWReset = vi.fn();
 
-beforeAll(() => {
-    (useAuth as jest.Mock).mockReturnValue({ sendPasswordReset: mockSendPWReset });
-});
-
-afterEach(() => {
-    mockSendPWReset.mockClear();
-});
+vi.mock('@/hooks/useAuth', () => ({
+    useAuth: () => ({
+        sendPasswordReset: mockSendPWReset
+    })
+}));
 
 describe('Send password reset form', () => {
+    afterEach(() => {
+        mockSendPWReset.mockClear();
+    });
+
     it('Renders with fields', async () => {
         render(<SendPasswordResetForm />);
 

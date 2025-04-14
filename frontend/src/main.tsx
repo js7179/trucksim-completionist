@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "./index.css";
 import NavbarLayout from './components/layout/NavbarLayout.tsx';
 import Root from './routes/root.tsx';
-import { AuthProvider } from './hooks/Auth.tsx';
+import AuthProvider from '@/hooks/Auth';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './api/query.ts';
 

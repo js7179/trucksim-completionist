@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LoginForm from '@/components/auth/LoginForm';
-import { useAuth } from '@/hooks/Auth';
 
 const VALID_PASSWORD: string = 'password12345';
 const INVALID_EMAIL: string = '@.';
@@ -9,15 +8,17 @@ const VALID_EMAIL: string = 'test@example.com';
 
 const mockLogin = vi.fn();
 
-beforeAll(() => {
-    (useAuth as jest.Mock).mockReturnValue({ login: mockLogin });
-});
-
-afterEach(() => {
-    mockLogin.mockClear();
-});
+vi.mock('@/hooks/useAuth', () => ({
+    useAuth: () => ({
+        login: mockLogin
+    })
+}));
 
 describe('Login Form', () => {
+    afterEach(() => {
+        mockLogin.mockClear();
+    });
+
     it('Renders normally', () => {
         render(<LoginForm />);
 

@@ -3,7 +3,7 @@ import { ProgressBar } from '../util/ProgressBar';
 import { CounterObjectiveInfo } from 'trucksim-completionist-common';
 import { useLocalFuncSetNumberObj, useLocalStateAchievementNumberObj } from '@/hooks/LocalAchievementHooks';
 import { useRemoteFuncSetNumberObj, useRemoteStateAchievementObjNumber } from '@/hooks/RemoteAchievementHooks';
-import { useRemotePage } from '@/hooks/RemotePage';
+import { useRemotePage } from '@/hooks/RemotePageContext';
 
 export function LocalCounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {
     const current = useLocalStateAchievementNumberObj(achID, objid);

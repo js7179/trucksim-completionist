@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent, { UserEvent } from '@testing-library/user-event';
 import SignupForm from '@/components/auth/SignupForm';
-import { useAuth } from '@/hooks/Auth';
 
 const VALID_EMAIL: string = 'test@example.com';
 const VALID_PASSWORD: string = 'password12345';
@@ -12,13 +11,11 @@ const INVALID_PASSWORD: string = '1234'; // 4 char does not meet 8 char requirem
 
 const mockSignup = vi.fn();
 
-beforeAll(() => {
-    (useAuth as jest.Mock).mockReturnValue({ signUp: mockSignup });
-});
-
-afterEach(() => {
-    mockSignup.mockClear();
-});
+vi.mock('@/hooks/useAuth', () => ({
+    useAuth: () => ({
+        signUp: mockSignup
+    })
+}));
 
 function getFormControls () {
     return {
@@ -72,6 +69,10 @@ const VALID_FORM_FIELD_VALUES: FormValues = {
 };
 
 describe('Sign up form', () => {
+    afterEach(() => {
+        mockSignup.mockClear();
+    });
+
     it('Renders with fields', async () => {
         render(<SignupForm />);
 

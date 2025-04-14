@@ -1,35 +1,8 @@
-import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { auth } from '@/supabase';
-import { Session } from "@supabase/supabase-js";
+import { AuthContext, AuthContextValue, SupabaseSessionState } from "./AuthContext";
 
-type SupabaseSessionState = Session | null;
-
-interface AuthContextValue {
-    session: SupabaseSessionState;
-    loading: boolean;
-    signUp: (email: string, password: string, displayName: string) => void;
-    login: (email: string, password: string) => void;
-    sendPasswordReset: (email: string) => void;
-    setNewPassword: (newPassword: string) => void;
-    signOut: () => void;
-};
-
-const AuthContext = createContext<AuthContextValue>({
-    session: null,
-    loading: false,
-    signUp: () => {},
-    login: () => {},
-    sendPasswordReset: () => {},
-    setNewPassword: () => {},
-    signOut: () => {}
-});
-
-export function useAuth() {
-    return useContext(AuthContext);
-}
-
-
-export const AuthProvider = ({children}: PropsWithChildren) => {
+const AuthProvider = ({children}: PropsWithChildren) => {
     const [session, setSession] = useState<SupabaseSessionState>(null);
     const [loading, setLoading] = useState(false);
 
@@ -108,3 +81,5 @@ export const AuthProvider = ({children}: PropsWithChildren) => {
         </AuthContext.Provider>
     );
 }
+
+export default AuthProvider;

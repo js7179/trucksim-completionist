@@ -1,11 +1,5 @@
-import { PropsWithChildren, createContext, useContext } from "react";
-
-type RemotePage = {
-    game: string;
-    uid: string;
-}
-
-export const RemotePageContext = createContext<RemotePage>({} as RemotePage);
+import { PropsWithChildren } from "react";
+import { RemotePage, RemotePageContext } from "./RemotePageContext";
 
 export const RemotePageProvider = ({game, uid, children}: PropsWithChildren<RemotePage>) => {
     return (
@@ -13,8 +7,4 @@ export const RemotePageProvider = ({game, uid, children}: PropsWithChildren<Remo
             {children}
         </RemotePageContext.Provider>
     );
-}
-
-export function useRemotePage() {
-    return useContext(RemotePageContext);
 }

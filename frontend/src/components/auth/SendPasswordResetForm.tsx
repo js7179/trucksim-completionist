@@ -3,7 +3,7 @@ import styles from './AuthForms.module.css';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { useAuth } from '@/hooks/Auth';
+import { useAuth } from '@/hooks/useAuth';
 
 const schema = yup.object().shape({
     email: yup.string().required("Email is required").email("Email must be a valid email address")

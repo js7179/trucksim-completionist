@@ -3,7 +3,7 @@ import { clamp, PartialObjectiveInfo } from "trucksim-completionist-common";
 import styles from './Objectives.module.css';
 import SubobjList, { SubobjListProps } from "./SubobjList";
 import { useRemoteFuncMarkListObj, useRemoteStateAchievementObjList } from "@/hooks/RemoteAchievementHooks";
-import { useRemotePage } from "@/hooks/RemotePage";
+import { useRemotePage } from "@/hooks/RemotePageContext";
 
 export function LocalPartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
     const listValues = useLocalStateAchievementListObj(achID, objid);

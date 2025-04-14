@@ -1,5 +1,5 @@
 import SignupForm from "@/components/auth/SignupForm";
-import { useAuth } from "@/hooks/Auth";
+import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import styles from './authroutes.module.css';
@@ -12,7 +12,7 @@ export default function SignupPage() {
         if(session !== null) {
             navigate("/");
         }
-    }, [session]);
+    }, [session, navigate]);
 
     return (
         <main className={styles.centerForm}>

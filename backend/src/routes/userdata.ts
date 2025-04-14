@@ -40,6 +40,7 @@ const userdataRouter = (savedataManager: SavedataManager, gameInfo: GameInfo, sa
                 savedata = await savedataManager.rebuildSavedata(uid, game);
                 savedataCache.setUserSavedata(uid, game, savedata);
             } catch(err) {
+                console.error(err);
                 res.sendStatus(503);
                 return;
             }
@@ -69,6 +70,7 @@ const userdataRouter = (savedataManager: SavedataManager, gameInfo: GameInfo, sa
             try {
                 savedata = await savedataManager.rebuildSavedata(uid, game);
             } catch (err) {
+                console.error(err);
                 res.sendStatus(503);
                 return;
             }

@@ -1,6 +1,6 @@
 import styles from './authroutes.module.css';
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
-import { useAuth } from '@/hooks/Auth';
+import { useAuth } from '@/hooks/useAuth';
 
 
 export default function ResetPasswordPage() {

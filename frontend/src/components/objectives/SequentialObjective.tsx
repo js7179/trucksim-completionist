@@ -3,7 +3,7 @@ import { SequentialObjectiveInfo } from "trucksim-completionist-common";
 import { CheckboxButton } from '../util/StylizedCheckbox';
 import { useLocalFuncSetNumberObj, useLocalStateAchievementNumberObj } from '@/hooks/LocalAchievementHooks';
 import { useRemoteFuncSetNumberObj, useRemoteStateAchievementObjNumber } from '@/hooks/RemoteAchievementHooks';
-import { useRemotePage } from '@/hooks/RemotePage';
+import { useRemotePage } from '@/hooks/RemotePageContext';
 
 export function LocalSequentialObjective({achID, objid, values}: SequentialObjectiveProps) {
     const objValue = useLocalStateAchievementNumberObj(achID, objid);

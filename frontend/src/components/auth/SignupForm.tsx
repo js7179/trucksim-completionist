@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styles from './AuthForms.module.css';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAuth } from "@/hooks/Auth";
+import { useAuth } from '@/hooks/useAuth';
 import { useState } from "react";
 
 const schema = yup.object().shape({

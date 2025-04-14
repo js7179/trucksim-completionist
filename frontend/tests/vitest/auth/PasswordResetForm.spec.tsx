@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
-import { useAuth } from '@/hooks/Auth';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 
 const VALID_PASSWORD: string = '12345678';
@@ -9,13 +8,11 @@ const INVALID_PASSWORD: string = '1234'; // 4 char does not meet 8 char requirem
 
 const mockSetNewPassword = vi.fn();
 
-beforeAll(() => {
-    (useAuth as jest.Mock).mockReturnValue({ setNewPassword: mockSetNewPassword });
-});
-
-afterEach(() => {
-    vi.clearAllMocks();
-});
+vi.mock('@/hooks/useAuth', () => ({
+    useAuth: () => ({
+        setNewPassword: mockSetNewPassword
+    })
+}));
 
 function renderPWResetForm() {
     render(<ResetPasswordForm/>, {
@@ -28,6 +25,10 @@ function renderPWResetForm() {
 }
 
 describe('Password Reset form', () => {
+    afterEach(() => {
+        mockSetNewPassword.mockClear();
+    })
+    
     it('Renders with fields', async () => {
         renderPWResetForm();
 

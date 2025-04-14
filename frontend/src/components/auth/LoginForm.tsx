@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/Auth";
+import { useAuth } from '@/hooks/useAuth';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";

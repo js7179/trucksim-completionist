@@ -1,0 +1,35 @@
+name: deploy
+run-name: Deploy
+on: [push]
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Node 20 LTS
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      
+      - name: Perform setup
+        runs: |
+          npm run setup
+    
+      - name: Build frontend
+        runs: |
+          npm run build
+        working-directory: ${{ github.workspace }}/frontend
+
+      - name: Publish frontend
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ${{ github.workspace }}/frontend/dist --project-names=${{ env.CLOUDFLARE_PROJECT_NAME }}
+          

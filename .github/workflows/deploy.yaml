@@ -18,11 +18,11 @@ jobs:
           cache-dependency-path: '**/package-lock.json'
       
       - name: Perform setup
-        runs: |
+        run: |
           npm run setup
     
       - name: Build frontend
-        runs: |
+        run: |
           npm run build
         working-directory: ${{ github.workspace }}/frontend
 

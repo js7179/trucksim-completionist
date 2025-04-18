@@ -16,14 +16,15 @@ jobs:
           node-version: '20' # Node 20 LTS
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci
       
       - name: Perform setup
-        run: |
-          npm run setup
+        run: npm run setup
     
       - name: Build frontend
-        run: |
-          npm run build
+        run: npm run build
         working-directory: ${{ github.workspace }}/frontend
 
       - name: Publish frontend

@@ -40,10 +40,11 @@ const authHeader = await buildAuthMiddleware(process.env.JWT_SECRET, process.env
 
 const app = express();
 
-const CORS_ORIGIN = process.env['NODE_ENV'] === 'production' ? process.env.CORS_ORIGIN : true;
+const CORS_ORIGIN: string | boolean = process.env['NODE_ENV'] === 'production' ? process.env.CORS_ORIGIN : true;
 
 app.use(cors({
     origin: CORS_ORIGIN,
+    credentials: true,
 }));
 app.disable('x-powered-by');
 app.set('etag', false);

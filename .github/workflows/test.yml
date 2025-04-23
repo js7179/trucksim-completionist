@@ -21,42 +21,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20' # Node 20 LTS
-
-      - name: Cache root node_modules
-        uses: actions/cache@v3
-        id: cache-root
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('./package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Cache frontend node_modules
-        uses: actions/cache@v3
-        id: cache-frontend
-        with:
-          path: frontend/node_modules
-          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-frontend-
-
-      - name: Cache backend node_modules
-        uses: actions/cache@v3
-        id: cache-backend
-        with:
-          path: backend/node_modules
-          key: ${{ runner.os }}-backend-${{ hashFiles('backend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-backend-
-
-      - name: Cache common node_modules
-        uses: actions/cache@v3
-        id: cache-common
-        with:
-          path: common/node_modules
-          key: ${{ runner.os }}-common-${{ hashFiles('common/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-common-
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Setup Supabase CLI
         uses: supabase/setup-cli@v1
@@ -81,8 +47,11 @@ jobs:
           echo "PGDATABASE=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\5/')" >> $GITHUB_ENV
       
       - name: Install dependencies
-        if: steps.cache-root.outputs.cache-hit != 'true'
         run: npm ci
+
+      - name: Build common package
+        run: npm run build
+        working-directory: ${{ github.workspace }}/common
 
       - name: Perform setup
         run: npm run setup

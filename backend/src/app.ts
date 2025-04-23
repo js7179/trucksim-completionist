@@ -5,10 +5,25 @@ import gameInfo from "./data/gameinfo";
 import pg from 'pg';
 import UserSavedataPGDAO from "./data/savedata-dao";
 import { SavedataManager } from "./data/savedata-manager";
-import AuthorizationHeaderMiddleware from "./middleware/auth";
 import InMemorySavedataCache from "./data/memorycache";
+import buildAuthMiddleware from "@/middleware/auth";
 
-//console.log(process.env);
+let passEnv: boolean = true;
+const ENV_VARS = [
+    'JWT_ISS', 'JWT_SECRET', 
+    'PGHOST', 'PGPORT', 'PGDATABASE', 'PG_WEBSERV_USER', 'PG_WEBSERV_PASS',
+];
+for(const envVar of ENV_VARS) {
+    if(process.env[envVar] === undefined) {
+        console.error(`Environment variable '${envVar}' is not configured!`);
+        passEnv = false;
+    }
+}
+if(process.env['NODE_ENV'] === 'production' && process.env['CORS_ORIGIN'] === undefined) {
+    console.error(`Environment variable 'CORS_ORIGIN' is not configured!`);
+    passEnv = false;
+}
+if(!passEnv) process.exit(1);
 
 const pgPool = new pg.Pool({
     host: process.env.PGHOST,
@@ -21,10 +36,16 @@ const pgPool = new pg.Pool({
 const dao = new UserSavedataPGDAO(pgPool);
 const savedataRebuider = new SavedataManager(dao, gameInfo);
 const savedataCache = new InMemorySavedataCache();
+const authHeader = await buildAuthMiddleware(process.env.JWT_SECRET, process.env.JWT_ISS);
 
 const app = express();
 
-app.use(cors());
+const CORS_ORIGIN: string | boolean = process.env['NODE_ENV'] === 'production' ? process.env.CORS_ORIGIN : true;
+
+app.use(cors({
+    origin: CORS_ORIGIN,
+    credentials: true,
+}));
 app.disable('x-powered-by');
 app.set('etag', false);
 app.use(express.json());
@@ -37,6 +58,6 @@ app.get("/ping", (req, res) => {
     });
 });
 
-app.use('/:uid/:game', AuthorizationHeaderMiddleware, userdataRouter(savedataRebuider, gameInfo, savedataCache));
+app.use('/:uid/:game', authHeader, userdataRouter(savedataRebuider, gameInfo, savedataCache));
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

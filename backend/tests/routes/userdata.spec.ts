@@ -5,11 +5,12 @@ import userdataRouter from "../../src/routes/userdata";
 import express, { NextFunction, Request, Response } from "express";
 import request from 'supertest';
 import { UUID } from "crypto";
-import { performStateUpdate } from "trucksim-completionist-common";
-import { StateUpdateError } from "trucksim-completionist-common/src/state";
+import { performStateUpdate, StateUpdateError } from "trucksim-completionist-common";
 
-vi.mock('trucksim-completionist-common', () => {
+vi.mock(import('trucksim-completionist-common'), async (importOriginal) => {
+    const actual = await importOriginal();
     return {
+        ...actual,
         performStateUpdate: vi.fn()
     };
 });

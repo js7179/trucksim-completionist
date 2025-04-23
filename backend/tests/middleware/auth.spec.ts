@@ -1,11 +1,15 @@
 import * as jose from 'jose';
 import { vi } from 'vitest';
-import AuthorizationHeaderMiddleware from '../../src/middleware/auth';
 import httpMocks from 'node-mocks-http';
 import { JOSEError, JWSInvalid, JWTClaimValidationFailed, JWTExpired } from 'jose/errors';
+import buildAuthMiddleware from '../../src/middleware/auth';
 
 const TEST_UUID: string = '12345678-1234-1234-1234-1234567890ab';
 const VALID_AUTH_HEADER: string = 'Bearer doesnt.matter.itsmocked';
+
+// The secret or ISS does not matter since we are overriding the jose functions
+// to return what we want
+const MIDDLEWARE_FUNC = await buildAuthMiddleware('foo', 'bar');
 
 vi.mock('jose');
 
@@ -14,11 +18,9 @@ describe("Auth middleware", () => {
     
     it("Good auth header", async () => {
         vi.mocked(jose.jwtVerify).mockResolvedValue({ 
-            payload: await Promise.resolve({
-                                sub: TEST_UUID
-                            }),
-            protectedHeader: { alg: "test"},
-            key: {type: "test"}
+            payload: await Promise.resolve({ sub: TEST_UUID }),
+            protectedHeader: { alg: "test" },
+            key: {type: "test" }
         });
         const request = httpMocks.createRequest({
             headers: { authorization: VALID_AUTH_HEADER }
@@ -26,7 +28,7 @@ describe("Auth middleware", () => {
         const response = httpMocks.createResponse();
         const nextMock = vi.fn();
 
-        await AuthorizationHeaderMiddleware(request, response, nextMock);
+        await MIDDLEWARE_FUNC(request, response, nextMock);
 
         expect(nextMock).toHaveBeenCalled();
         expect(response.locals.uuid).toBe(TEST_UUID);
@@ -37,7 +39,7 @@ describe("Auth middleware", () => {
         const response = httpMocks.createResponse();
         const nextMock = vi.fn();
 
-        await AuthorizationHeaderMiddleware(request, response, nextMock);
+        await MIDDLEWARE_FUNC(request, response, nextMock);
 
         expect(nextMock).not.toHaveBeenCalled();
         expect(response.statusCode).toBe(401);
@@ -52,7 +54,7 @@ describe("Auth middleware", () => {
         const response = httpMocks.createResponse();
         const nextMock = vi.fn();
 
-        await AuthorizationHeaderMiddleware(request, response, nextMock);
+        await MIDDLEWARE_FUNC(request, response, nextMock);
 
         expect(nextMock).not.toHaveBeenCalled();
         expect(response.statusCode).toBe(400);
@@ -70,7 +72,7 @@ describe("Auth middleware", () => {
         const response = httpMocks.createResponse();
         const nextMock = vi.fn();
 
-        await AuthorizationHeaderMiddleware(request, response, nextMock);
+        await MIDDLEWARE_FUNC(request, response, nextMock);
 
         expect(nextMock).not.toHaveBeenCalled();
         expect(response.statusCode).toBe(401);
@@ -88,7 +90,7 @@ describe("Auth middleware", () => {
         const response = httpMocks.createResponse();
         const nextMock = vi.fn();
 
-        await AuthorizationHeaderMiddleware(request, response, nextMock);
+        await MIDDLEWARE_FUNC(request, response, nextMock);
 
         expect(nextMock).not.toHaveBeenCalled();
         expect(response.statusCode).toBe(400);
@@ -106,7 +108,7 @@ describe("Auth middleware", () => {
         const response = httpMocks.createResponse();
         const nextMock = vi.fn();
 
-        await AuthorizationHeaderMiddleware(request, response, nextMock);
+        await MIDDLEWARE_FUNC(request, response, nextMock);
 
         expect(nextMock).not.toHaveBeenCalled();
         expect(response.statusCode).toBe(401);
@@ -124,7 +126,7 @@ describe("Auth middleware", () => {
         const response = httpMocks.createResponse();
         const nextMock = vi.fn();
 
-        await AuthorizationHeaderMiddleware(request, response, nextMock);
+        await MIDDLEWARE_FUNC(request, response, nextMock);
 
         expect(nextMock).not.toHaveBeenCalled();
         expect(response.statusCode).toBe(500);

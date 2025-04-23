@@ -46,6 +46,10 @@ jobs:
       
       - name: Perform setup
         run: npm run setup
+
+      - name: Build common
+        run: npm run build
+        working-directory: ${{ github.workspace }}/common
     
       - name: Build frontend
         run: npm run build

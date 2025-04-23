@@ -1,9 +1,9 @@
 import { AchievementInfo, AchievementStateList, generateStateTemplate } from "trucksim-completionist-common";
-import ets2List from "trucksim-completionist-common/data/ets2_achievements.json";
-import atsList from "trucksim-completionist-common/data/ats_achievements.json";
+import ets2List from "trucksim-completionist-common/data/ets2_achievements.json" with { type: 'json' };
+import atsList from "trucksim-completionist-common/data/ats_achievements.json" with { type: 'json' };
 
 class GameInfo {
-    private achInfos= new Map<string, AchievementInfo[]>();
+    private achInfos = new Map<string, AchievementInfo[]>();
     private savedataTemplates = new Map<string, AchievementStateList>();
 
     constructor(gameInfos: Map<string, AchievementInfo[]>) {

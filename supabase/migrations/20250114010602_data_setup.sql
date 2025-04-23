@@ -167,3 +167,4 @@ CREATE USER infomanager WITH PASSWORD 'infomanager' IN ROLE info;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO info, webserv;
 GRANT INSERT, UPDATE, DELETE ON data_last_updated, data_ach_completed, data_obj_counter, data_obj_list TO webserv;
 GRANT INSERT, UPDATE, DELETE ON info_achievement, info_obj_counter, info_obj_list TO info;
+GRANT USAGE, SELECT ON info_objnid_seq TO info;

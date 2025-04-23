@@ -8,7 +8,15 @@ import { SavedataManager } from "./data/savedata-manager";
 import AuthorizationHeaderMiddleware from "./middleware/auth";
 import InMemorySavedataCache from "./data/memorycache";
 
-//console.log(process.env);
+let passEnv: boolean = true;
+const ENV_VARS = ['JWT_ISS', 'JWT_SECRET', 'PGHOST', 'PGPORT', 'PGDATABASE', 'PG_WEBSERV_USER', 'PG_WEBSERV_PASS'];
+for(const envVar of ENV_VARS) {
+    if(process.env[envVar] !== undefined) {
+        console.error(`Environment variable '${envVar}' is not configured!`);
+        passEnv = false;
+    }
+}
+if(!passEnv) process.exit(1);
 
 const pgPool = new pg.Pool({
     host: process.env.PGHOST,

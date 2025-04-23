@@ -4,8 +4,7 @@ import { UUID } from "crypto";
 import { SavedataManager } from '@/data/savedata-manager';
 import { GameInfo } from '@/data/gameinfo';
 import { UserSavedataCache } from '@/data/cache';
-import { AchievementStateList, performStateUpdate } from 'trucksim-completionist-common';
-import { StateUpdateError } from 'trucksim-completionist-common/src/state';
+import { AchievementStateList, performStateUpdate, StateUpdateError } from 'trucksim-completionist-common';
 
 const userSavedataRouter = express.Router({
     mergeParams: true
@@ -92,6 +91,7 @@ const userdataRouter = (savedataManager: SavedataManager, gameInfo: GameInfo, sa
                 res.status(400).json({ message: err.message });
                 return;
             } else {
+                console.error(err);
                 res.sendStatus(503);
                 return;
             }

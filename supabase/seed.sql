@@ -206,6 +206,10 @@ INSERT INTO public.info_achievement (ach_nid, ach_tid, game) VALUES (205, 'aca_t
 INSERT INTO public.info_achievement (ach_nid, ach_tid, game) VALUES (206, 'aca_no_forward', 'ats');
 INSERT INTO public.info_achievement (ach_nid, ach_tid, game) VALUES (207, 'aca_manual_transmission', 'ats');
 INSERT INTO public.info_achievement (ach_nid, ach_tid, game) VALUES (208, 'aca_consecutive', 'ats');
+INSERT INTO public.info_achievement (ach_nid, ach_tid, game) VALUES (209, 'mo_visit_cities', 'ats');
+INSERT INTO public.info_achievement (ach_nid, ach_tid, game) VALUES (210, 'mo_cutscenes', 'ats');
+INSERT INTO public.info_achievement (ach_nid, ach_tid, game) VALUES (211, 'mo_trs_whs', 'ats');
+INSERT INTO public.info_achievement (ach_nid, ach_tid, game) VALUES (212, 'mo_dynamite', 'ats');
 
 INSERT INTO public.info_obj_counter (obj_nid, ach_nid, obj_tid, goal) VALUES (4, 16, 'jobs', 5);
 INSERT INTO public.info_obj_counter (obj_nid, ach_nid, obj_tid, goal) VALUES (14, 43, 'deliveries', 3);
@@ -359,6 +363,10 @@ INSERT INTO public.info_obj_list (obj_nid, ach_nid, obj_tid, goal) VALUES (144, 
 INSERT INTO public.info_obj_list (obj_nid, ach_nid, obj_tid, goal) VALUES (147, 202, 'companies', '{cj,ept,fb,gss,gp,na,sh,st,tcg}');
 INSERT INTO public.info_obj_list (obj_nid, ach_nid, obj_tid, goal) VALUES (148, 204, 'scenarios', '{41,42,43,44,45,46,47,48,49}');
 INSERT INTO public.info_obj_list (obj_nid, ach_nid, obj_tid, goal) VALUES (150, 207, 'scenarios', '{21,22,23,24,25,26,27,31,32,33,34,35,36,37,41,42,43,44,45,46,47,48,49}');
+INSERT INTO public.info_obj_list (obj_nid, ach_nid, obj_tid, goal) VALUES (152, 209, 'cities', '{cg,co,jc,jo,kc,ki,ma,po,ro,sj,sl,sp}');
+INSERT INTO public.info_obj_list (obj_nid, ach_nid, obj_tid, goal) VALUES (153, 210, 'viewpoints', '{cg,co,hi,jc,jo,ku,kc,ki,mt,ma,oz,po,ro,se,sp,sj,sl}');
+INSERT INTO public.info_obj_list (obj_nid, ach_nid, obj_tid, goal) VALUES (154, 211, 'depots', '{jo,kc,sp,sl}');
+INSERT INTO public.info_obj_list (obj_nid, ach_nid, obj_tid, goal) VALUES (155, 212, 'cargo', '{a,s,d}');
 
-SELECT pg_catalog.setval('public.info_achievement_ach_nid_seq', 208, true);
-SELECT pg_catalog.setval('public.info_objnid_seq', 151, true);
+SELECT pg_catalog.setval('public.info_achievement_ach_nid_seq', 213, true);
+SELECT pg_catalog.setval('public.info_objnid_seq', 156, true);

@@ -4355,5 +4355,220 @@
                 "goal": 5
             }
         ]
+    },
+    {
+        "desc": "Discover at least 10 cities in Missouri (requires Missouri DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/24e936c61c493b3465f11327c0923b213ed214ab.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/1ab941eb834db32134ef4e2326808a5061878d00.jpg"
+        },
+        "id": "mo_visit_cities",
+        "name": "Show-Me State!",
+        "objectives": [
+            {
+                "type": "partial",
+                "objid": "cities",
+                "count": 10,
+                "values": [
+                    {
+                        "subobjid": "cg",
+                        "display": "Cape Girardeau"
+                    },
+                    {
+                        "subobjid": "co",
+                        "display": "Columbia"
+                    },
+                    {
+                        "subobjid": "jc",
+                        "display": "Jefferson City"
+                    },
+                    {
+                        "subobjid": "jo",
+                        "display": "Joplin"
+                    },
+                    {
+                        "subobjid": "kc",
+                        "display": "Kansas City"
+                    },
+                    {
+                        "subobjid": "ki",
+                        "display": "Kirksville"
+                    },
+                    {
+                        "subobjid": "ma",
+                        "display": "Maryville"
+                    },
+                    {
+                        "subobjid": "po",
+                        "display": "Poplar Bluff"
+                    },
+                    {
+                        "subobjid": "ro",
+                        "display": "Rolla"
+                    },
+                    {
+                        "subobjid": "sj",
+                        "display": "St. Joseph"
+                    },
+                    {
+                        "subobjid": "sl",
+                        "display": "St. Louis"
+                    },
+                    {
+                        "subobjid": "sp",
+                        "display": "Springfield"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "desc": "View cutscenes from at least 12 viewpoints in Missouri (requires Missouri DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/2a7862a33d1452148ca2d66a0b08d0b76e7f9504.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/72cd3ef2f42db7d82b36f412b3feb687ce7c8830.jpg"
+        },
+        "id": "mo_cutscenes",
+        "name": "Ozark Explorer",
+        "objectives": [
+            {
+                "type": "partial",
+                "count": 12,
+                "objid": "viewpoints",
+                "values": [
+                    {
+                        "subobjid": "cg",
+                        "display": "Cape Girardeau"
+                    },
+                    {
+                        "subobjid": "co",
+                        "display": "Columbia"
+                    },
+                    {
+                        "subobjid": "hi",
+                        "display": "Highland Farms"
+                    },
+                    {
+                        "subobjid": "jc",
+                        "display": "Jefferson City"
+                    },
+                    {
+                        "subobjid": "jo",
+                        "display": "Joplin"
+                    },
+                    {
+                        "subobjid": "ku",
+                        "display": "Kansas City Underground"
+                    },
+                    {
+                        "subobjid": "kc",
+                        "display": "Kansas City"
+                    },
+                    {
+                        "subobjid": "ki",
+                        "display": "Kirksville"
+                    },
+                    {
+                        "subobjid": "mt",
+                        "display": "Mark Twain National Forest"
+                    },
+                    {
+                        "subobjid": "ma",
+                        "display": "Maryville"
+                    },
+                    {
+                        "subobjid": "oz",
+                        "display": "Ozark Lakes"
+                    },
+                    {
+                        "subobjid": "po",
+                        "display": "Poplar Bluff"
+                    },
+                    {
+                        "subobjid": "ro",
+                        "display": "Rolla"
+                    },
+                    {
+                        "subobjid": "se",
+                        "display": "Sedalia"
+                    },
+                    {
+                        "subobjid": "sp",
+                        "display": "Springfield"
+                    },
+                    {
+                        "subobjid": "sj",
+                        "display": "St. Joseph"
+                    },
+                    {
+                        "subobjid": "sl",
+                        "display": "St. Louis"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "desc": "Complete a delivery to at least 2 underground Terrastore warehouses (requires Missouri DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/5bb7985f9d128e24a078c1f5bb0ae4386ce2de4c.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/39a1e14a65d0feb7a69655bf1ad2a87e7c43f450.jpg"
+        },
+        "id": "mo_trs_whs",
+        "name": "Subterranean",
+        "objectives": [
+            {
+                "type": "partial",
+                "count": 2,
+                "objid": "depots",
+                "values": [
+                    {
+                        "subobjid": "jo",
+                        "display": "Joplin"
+                    },
+                    {
+                        "subobjid": "kc",
+                        "display": "Kansas City"
+                    },
+                    {
+                        "subobjid": "sp",
+                        "display": "Springfield"
+                    },
+                    {
+                        "subobjid": "sl",
+                        "display": "St. Louis"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "desc": "Deliver ammonia and sulphuric acid to Namiq in Joplin, then complete a dynamite delivery from it (requires Missouri DLC)",
+        "icons": {
+            "completed": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/f8811182f8fe9e2c3def0b312ffea6910e9c3ea4.jpg",
+            "incomplete": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/270880/8d03e658a5f56d8ccd7f9974114f7248e1d920b5.jpg"
+        },
+        "id": "mo_dynamite",
+        "name": "What a Blast!",
+        "objectives": [
+            {
+                "type": "list",
+                "objid": "cargo",
+                "values": [
+                    {
+                        "subobjid": "a",
+                        "display": "Anhydrous Ammonia"
+                    },
+                    {
+                        "subobjid": "s",
+                        "display": "Sulphuric Acid"
+                    },
+                    {
+                        "subobjid": "d",
+                        "display": "Dynamite"
+                    }
+                ]
+            }
+        ]
     }
 ]

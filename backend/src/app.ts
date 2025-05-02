@@ -7,36 +7,67 @@ import UserSavedataPGDAO from "./data/savedata-dao";
 import { SavedataManager } from "./data/savedata-manager";
 import InMemorySavedataCache from "./data/memorycache";
 import buildAuthMiddleware from "@/middleware/auth";
+import { existsSync, readFileSync } from "fs";
 
-let passEnv: boolean = true;
-const ENV_VARS = [
-    'JWT_ISS', 'JWT_SECRET', 
-    'PGHOST', 'PGPORT', 'PGDATABASE', 'PG_WEBSERV_USER', 'PG_WEBSERV_PASS',
-];
-for(const envVar of ENV_VARS) {
-    if(process.env[envVar] === undefined) {
-        console.error(`Environment variable '${envVar}' is not configured!`);
+const secrets: Record<string, string> = {
+    PG_WEBSERV_USER: '',
+    PG_WEBSERV_PASS: '',
+    JWT_SECRET: ''
+};
+
+function setupEnv() {
+    let passEnv: boolean = true;
+    const ENV_VARS = [ 'JWT_ISS', 'PGHOST', 'PGPORT', 'PGDATABASE' ];
+    for(const envVar of ENV_VARS) {
+        if(process.env[envVar] === undefined) {
+            console.error(`Environment variable '${envVar}' is not configured!`);
+            passEnv = false;
+        }
+    }
+    // CORS
+    if(process.env['NODE_ENV'] === 'production' && process.env['CORS_ORIGIN'] === undefined) {
+        console.error(`Environment variable 'CORS_ORIGIN' is not configured!`);
         passEnv = false;
     }
+    // Secrets
+    for(const key of Object.keys(secrets)) {
+        if(process.env[key] !== undefined) { // we've defined it via env variable
+            secrets[key] = String(process.env[key]);
+            console.warn(`Secret ${key} is exposed in environment variable!`);
+            continue;
+        }
+        const envKeyPath = `${key}_FILE`;
+        if(process.env[envKeyPath] === undefined) {
+            console.error(`${envKeyPath} is not defined!`);
+            passEnv = false;
+            continue;
+        }
+        const secretPath = process.env[envKeyPath]!;
+        if(existsSync(secretPath)) {
+            const secretValue = readFileSync(secretPath, { encoding: 'utf8' });
+            secrets[key] = secretValue;
+        } else {
+            console.error(`Secret ${key} is not set either through environment variable or mounted in container!`);
+            passEnv = false;
+        }
+    }
+    if(!passEnv) process.exit(1);
 }
-if(process.env['NODE_ENV'] === 'production' && process.env['CORS_ORIGIN'] === undefined) {
-    console.error(`Environment variable 'CORS_ORIGIN' is not configured!`);
-    passEnv = false;
-}
-if(!passEnv) process.exit(1);
+
+setupEnv();
 
 const pgPool = new pg.Pool({
     host: process.env.PGHOST,
     port: Number(process.env.PGPORT),
     database: process.env.PGDATABASE,
-    user: process.env.PG_WEBSERV_USER,
-    password: String(process.env.PG_WEBSERV_PASS),
+    user: secrets.PG_WEBSERV_USER,
+    password: secrets.PG_WEBSERV_PASS,
 });
 
 const dao = new UserSavedataPGDAO(pgPool);
 const savedataRebuider = new SavedataManager(dao, gameInfo);
 const savedataCache = new InMemorySavedataCache();
-const authHeader = await buildAuthMiddleware(process.env.JWT_SECRET, process.env.JWT_ISS);
+const authHeader = await buildAuthMiddleware(secrets.JWT_SECRET, process.env.JWT_ISS);
 
 const app = express();
 

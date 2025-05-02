@@ -1,5 +1,6 @@
 import { Page, test, expect } from '@playwright/test';
 import { adminAuthClient } from '../supabase';
+import cleanupSupabaseUser from '../utils/supabase-cleanup';
 
 const USER_DETAILS = {
     email: "test-login@gmail.com",
@@ -7,18 +8,18 @@ const USER_DETAILS = {
     displayName: "Test12345"
 };
 
-let USER_UUID: string = '';
 let page: Page;
 
 test.beforeAll(async ({browser}) => {
-    const { data, error } = await adminAuthClient.createUser({
+    cleanupSupabaseUser(USER_DETAILS.email);
+
+    const { error } = await adminAuthClient.createUser({
         email: USER_DETAILS.email,
         password: USER_DETAILS.password,
         email_confirm: true,
         user_metadata: { displayName: USER_DETAILS.displayName }
     });
     if(error) throw error;
-    USER_UUID = data.user?.id as string;
 
     const context = await browser.newContext();
     page = await context.newPage();
@@ -27,8 +28,7 @@ test.beforeAll(async ({browser}) => {
 test.afterAll(async () => {
     await page.close();
     
-    const { error } = await adminAuthClient.deleteUser(USER_UUID);
-    if(error) throw error;
+    cleanupSupabaseUser(USER_DETAILS.email);
 });
 
 test('Login and Signout flow', async () => {

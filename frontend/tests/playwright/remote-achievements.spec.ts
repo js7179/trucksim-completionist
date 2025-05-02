@@ -38,8 +38,7 @@ test.beforeAll(async ({browser}) => {
 test.afterAll(async () => {
     await page.close();
 
-    const { error } = await adminAuthClient.deleteUser(USER_UUID);
-    if(error) throw error;
+    cleanupSupabaseUser(USER_DETAILS.email);
 });
 
 test('Remote achievement interactivity', async () => {

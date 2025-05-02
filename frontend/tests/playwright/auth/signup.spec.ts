@@ -1,5 +1,4 @@
 import { Page, test, expect } from '@playwright/test';
-import { adminAuthClient } from '../supabase';
 import { getEmailBody, getLatestEmail, getLinkFromEmailBody, purgeMailbox } from '../utils/email';
 import cleanupSupabaseUser from '../utils/supabase-cleanup';
 
@@ -23,13 +22,7 @@ test.afterAll(async () => {
 
     await purgeMailbox(USER_DETAILS.email);
 
-    const { data: { users }, error:listError } = await adminAuthClient.listUsers();
-    if(listError) throw listError;
-    const userToDelete = users.find((user) => user.email === USER_DETAILS.email);
-    if(!userToDelete) throw new Error(`Could not find email associated with ${USER_DETAILS.email} to delete account`);
-
-    const { error:deleteError } = await adminAuthClient.deleteUser(userToDelete.id);
-    if(deleteError) throw deleteError;
+    cleanupSupabaseUser(USER_DETAILS.email);
 });
 
 test('Sign up flow', async () => {

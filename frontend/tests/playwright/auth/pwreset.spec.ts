@@ -10,20 +10,18 @@ const USER_DETAILS = {
     displayName: "Test12345"
 };
 
-let USER_UUID: string = '';
 let page: Page;
 
 test.beforeAll(async ({browser}) => {
     cleanupSupabaseUser(USER_DETAILS.email);
     
-    const { data, error } = await adminAuthClient.createUser({
+    const { error } = await adminAuthClient.createUser({
         email: USER_DETAILS.email,
         password: USER_DETAILS.oldpassword,
         email_confirm: true,
         user_metadata: { displayName: USER_DETAILS.displayName }
     });
     if(error) throw error;
-    USER_UUID = data.user?.id as string;
 
     const context = await browser.newContext();
     page = await context.newPage();
@@ -34,8 +32,7 @@ test.afterAll(async () => {
 
     await purgeMailbox(USER_DETAILS.email);
 
-    const { error } = await adminAuthClient.deleteUser(USER_UUID);
-    if(error) throw error;
+    cleanupSupabaseUser(USER_DETAILS.email);
 });
 
 test('Password reset flow', async () => {

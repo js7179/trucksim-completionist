@@ -9,8 +9,8 @@ class InMemorySavedataCache implements UserSavedataCache {
 
     private cache: LRUCache<string, AchievementStateList>;
 
-    constructor() {
-        this.cache = new LRUCache(75);
+    constructor(nKeys: number) {
+        this.cache = new LRUCache(nKeys);
     }
 
     hasUserSavedataCached(uuid: UUID, game: string): boolean {

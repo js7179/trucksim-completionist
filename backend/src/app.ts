@@ -15,6 +15,10 @@ const secrets: Record<string, string> = {
     JWT_SECRET: ''
 };
 
+const optConsts: Record<string, string> = {
+    CACHE_SIZE: '50'
+};
+
 function setupEnv() {
     let passEnv: boolean = true;
     const ENV_VARS = [ 'JWT_ISS', 'PGHOST', 'PGPORT', 'PGDATABASE' ];
@@ -52,6 +56,14 @@ function setupEnv() {
         }
     }
     if(!passEnv) process.exit(1);
+    // Optional constants
+    for(const key of Object.keys(optConsts)) {
+        if(process.env[key] !== undefined) {
+            console.log(`Overridden ${key} with '${process.env[key]}'`);
+        } else {
+            console.log(`${key} set to default '${ optConsts[key] }'`);
+        }
+    }
 }
 
 setupEnv();
@@ -66,7 +78,7 @@ const pgPool = new pg.Pool({
 
 const dao = new UserSavedataPGDAO(pgPool);
 const savedataRebuider = new SavedataManager(dao, gameInfo);
-const savedataCache = new InMemorySavedataCache();
+const savedataCache = new InMemorySavedataCache(Number(optConsts.CACHE_SIZE));
 const authHeader = await buildAuthMiddleware(secrets.JWT_SECRET, process.env.JWT_ISS);
 
 const app = express();

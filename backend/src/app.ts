@@ -48,7 +48,7 @@ function setupEnv() {
         }
         const secretPath = process.env[envKeyPath]!;
         if(existsSync(secretPath)) {
-            const secretValue = readFileSync(secretPath, { encoding: 'utf8' });
+            const secretValue = readFileSync(secretPath, { encoding: 'utf8' }).trim();
             secrets[key] = secretValue;
         } else {
             console.error(`Secret ${key} is not set either through environment variable or mounted in container!`);

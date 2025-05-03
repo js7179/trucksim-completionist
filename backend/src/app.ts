@@ -8,6 +8,7 @@ import { SavedataManager } from "./data/savedata-manager";
 import InMemorySavedataCache from "./data/memorycache";
 import buildAuthMiddleware from "@/middleware/auth";
 import { existsSync, readFileSync } from "fs";
+import { ConnectionOptions } from "tls";
 
 const secrets: Record<string, string> = {
     PG_WEBSERV_USER: '',
@@ -18,6 +19,8 @@ const secrets: Record<string, string> = {
 const optConsts: Record<string, string> = {
     CACHE_SIZE: '50'
 };
+
+let pgPoolSSLOption: boolean | ConnectionOptions = false;
 
 function setupEnv() {
     let passEnv: boolean = true;
@@ -55,6 +58,18 @@ function setupEnv() {
             passEnv = false;
         }
     }
+    // Postgres certificate for production
+    if(process.env['NODE_ENV'] === 'production') {
+        if(process.env['SUPABASE_CERTIFICATE_LOCATION'] === undefined) {
+            console.error(`App is running in production but SUPABASE_CERTIFICATE_LOCATION is not set!`);
+            passEnv = false;
+        } else {
+            const certificate = readFileSync(process.env['SUPABASE_CERTIFICATE_LOCATION'], { encoding: 'utf8' }).trim();
+            pgPoolSSLOption = {
+                ca: certificate
+            };
+        }
+    }
     if(!passEnv) process.exit(1);
     // Optional constants
     for(const key of Object.keys(optConsts)) {
@@ -74,7 +89,7 @@ const pgPool = new pg.Pool({
     database: process.env.PGDATABASE,
     user: secrets.PG_WEBSERV_USER,
     password: secrets.PG_WEBSERV_PASS,
-    ssl: true,
+    ssl: pgPoolSSLOption,
 });
 
 const dao = new UserSavedataPGDAO(pgPool);

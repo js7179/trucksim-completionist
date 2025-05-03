@@ -74,6 +74,7 @@ const pgPool = new pg.Pool({
     database: process.env.PGDATABASE,
     user: secrets.PG_WEBSERV_USER,
     password: secrets.PG_WEBSERV_PASS,
+    ssl: true,
 });
 
 const dao = new UserSavedataPGDAO(pgPool);

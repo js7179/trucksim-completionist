@@ -21,6 +21,7 @@ const optConsts: Record<string, string> = {
 };
 
 let pgPoolSSLOption: boolean | ConnectionOptions = false;
+let CORS_ORIGIN: string[] = ['*'];
 
 function setupEnv() {
     let passEnv: boolean = true;
@@ -32,9 +33,13 @@ function setupEnv() {
         }
     }
     // CORS
-    if(process.env['NODE_ENV'] === 'production' && process.env['CORS_ORIGIN'] === undefined) {
-        console.error(`Environment variable 'CORS_ORIGIN' is not configured!`);
-        passEnv = false;
+    if(process.env['NODE_ENV'] === 'production') {
+        if(process.env['CORS_ORIGIN'] === undefined){            
+            console.error(`Environment variable 'CORS_ORIGIN' is not configured!`);
+            passEnv = false;
+        } else {
+            CORS_ORIGIN = process.env['CORS_ORIGIN']!.trim().split(',');
+        }
     }
     // Secrets
     for(const key of Object.keys(secrets)) {
@@ -98,8 +103,6 @@ const savedataCache = new InMemorySavedataCache(Number(optConsts.CACHE_SIZE));
 const authHeader = await buildAuthMiddleware(secrets.JWT_SECRET, process.env.JWT_ISS);
 
 const app = express();
-
-const CORS_ORIGIN: string | boolean = process.env['NODE_ENV'] === 'production' ? process.env.CORS_ORIGIN : true;
 
 app.use(cors({
     origin: CORS_ORIGIN,

@@ -26,4 +26,6 @@ COPY --from=builder /app/common/dist ./common/dist
 COPY --from=builder /app/backend/dist ./backend/dist
 COPY --from=builder /app/common/data ./node_modules/trucksim-completionist-common/data
 
+ENV PORT=3000
 CMD ["node", "backend/dist/app.js"]
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f http://localhost:$PORT/ping || exit 1

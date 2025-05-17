@@ -1,5 +1,5 @@
 import { useAuth } from '@/hooks/useAuth';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import SendPasswordResetForm from "@/components/auth/SendPasswordResetForm";
 import styles from './authroutes.module.css';

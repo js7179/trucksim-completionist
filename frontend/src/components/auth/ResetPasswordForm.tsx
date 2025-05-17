@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const schema = yup.object().shape({
     newPassword: yup.string()

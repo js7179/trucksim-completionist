@@ -1,6 +1,6 @@
 import { lazy, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router';
 import "./index.css";
 import NavbarLayout from './components/layout/NavbarLayout.tsx';
 import Root from './routes/root.tsx';
@@ -22,10 +22,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter future={{
-          v7_startTransition: true,
-          v7_relativeSplatPath: true
-        }}>
+        <BrowserRouter>
           <Routes>
             <Route element={<NavbarLayout />}>
               <Route index element={<Root />} />

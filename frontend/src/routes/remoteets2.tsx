@@ -4,7 +4,7 @@ import LoadingSpinner from "@/components/util/LoadingSpinner";
 import useGameAchInfo from "@/hooks/AchInfoProvider";
 import { RemotePageProvider } from "@/hooks/RemotePage";
 import { Suspense } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 export default function ETS2RemotePage() {
     const { uid } = useParams();

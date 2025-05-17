@@ -9,6 +9,7 @@ env:
   VITE_API_URL: http://localhost:3500/
   PG_WEBSERV_USER: webserv1
   PG_WEBSERV_PASS: webserv1
+  CORS_ORIGIN: 'http://localhost:3000'
 jobs:
   ci:
     name: Run tests

@@ -33,13 +33,11 @@ function setupEnv() {
         }
     }
     // CORS
-    if(process.env['NODE_ENV'] === 'production') {
-        if(process.env['CORS_ORIGIN'] === undefined){            
-            console.error(`Environment variable 'CORS_ORIGIN' is not configured!`);
-            passEnv = false;
-        } else {
-            CORS_ORIGIN = process.env['CORS_ORIGIN']!.trim().split(',');
-        }
+    if(process.env['CORS_ORIGIN'] === undefined){            
+        console.error(`Environment variable 'CORS_ORIGIN' is not configured!`);
+        passEnv = false;
+    } else {
+        CORS_ORIGIN = process.env['CORS_ORIGIN']!.trim().split(',');
     }
     // Secrets
     for(const key of Object.keys(secrets)) {

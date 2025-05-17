@@ -1,6 +1,6 @@
 import SignupForm from "@/components/auth/SignupForm";
 import { useAuth } from '@/hooks/useAuth';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import styles from './authroutes.module.css';
 

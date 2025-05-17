@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
-import { MemoryRouter, useNavigate } from 'react-router-dom';
+import { MemoryRouter, useNavigate } from 'react-router';
 
 const VALID_PASSWORD: string = '12345678';
 const INVALID_PASSWORD: string = '1234'; // 4 char does not meet 8 char requirement

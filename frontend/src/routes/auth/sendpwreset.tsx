@@ -2,7 +2,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import SendPasswordResetForm from "@/components/auth/SendPasswordResetForm";
-import styles from './authroutes.module.css';
+import { Button, Group, Stack } from '@mantine/core';
 
 export default function SendPwResetPage() {
     const { session } = useAuth();
@@ -15,15 +15,14 @@ export default function SendPwResetPage() {
     }, [session, navigate]);
 
     return (
-        <main className={styles.centerForm}>
-            <h1>Reset Password</h1>
-            <section>
+        <main>
+            <Stack align='center' mt='lg'>
                 <SendPasswordResetForm />
-            </section>
-            <section>
-                <button type="button" onClick={() => navigate('/login')}>Back to Login</button><br/>
-                <button type="button" onClick={() => navigate('/signup')}>Sign Up</button>
-            </section>
+                <Group>
+                    <Button type="button" onClick={() => navigate('/login')}>Back to Login</Button><br/>
+                    <Button type="button" onClick={() => navigate('/signup')}>Sign Up</Button>
+                </Group>
+            </Stack>
         </main>
     );
 }

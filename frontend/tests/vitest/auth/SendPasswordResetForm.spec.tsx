@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SendPasswordResetForm from '@/components/auth/SendPasswordResetForm';
+import renderWithMantine from '../util/render';
 
 const VALID_EMAIL: string = "test@example.com";
 const INVALID_EMAIL: string = '@.';
@@ -13,24 +14,32 @@ vi.mock('@/hooks/useAuth', () => ({
     })
 }));
 
+function getFormControls() {
+    return {
+        emailInput: screen.getByLabelText('Email', { exact: false }),
+        submitButton: screen.getByRole('button', { name: 'Send Password Reset Email' })
+    };
+}
+
 describe('Send password reset form', () => {
     afterEach(() => {
         mockSendPWReset.mockClear();
     });
 
     it('Renders with fields', async () => {
-        render(<SendPasswordResetForm />);
+        renderWithMantine(<SendPasswordResetForm />);
 
-        expect(screen.getByLabelText("Email")).toBeInTheDocument();
-        expect(screen.getByText("Send Password Reset Email")).toBeInTheDocument();
+        const { emailInput, submitButton } = getFormControls();
+
+        expect(emailInput).toBeInTheDocument();
+        expect(submitButton).toBeInTheDocument();
     });
 
     it('Show success dialog on password reset sent', async () => { 
         const user = userEvent.setup();
-        render(<SendPasswordResetForm />);
+        renderWithMantine(<SendPasswordResetForm />);
 
-        const emailInput = screen.getByLabelText("Email");
-        const submitButton = screen.getByText("Send Password Reset Email");
+        const { emailInput, submitButton } = getFormControls();
 
         await user.type(emailInput, VALID_EMAIL);
         await user.click(submitButton);
@@ -40,17 +49,16 @@ describe('Send password reset form', () => {
         expect(mockSendPWReset).toHaveBeenCalledTimes(1);
         expect(mockSendPWReset).toHaveBeenCalledWith(VALID_EMAIL);
 
-        const confirmationDialogue = screen.getByText('A password reset email', { exact: false });
+        const confirmationDialogue = screen.getByText('A password reset request', { exact: false });
         expect(confirmationDialogue).toBeInTheDocument();
         expect(confirmationDialogue.textContent).toMatch(VALID_EMAIL); // verify email is within confirmation dialog
     });
 
     it('Error on missing email', async () => {
         const user = userEvent.setup();
-        render(<SendPasswordResetForm />);
+        renderWithMantine(<SendPasswordResetForm />);
         
-        const emailInput = screen.getByLabelText("Email");
-        const submitButton = screen.getByText("Send Password Reset Email");
+        const { emailInput, submitButton } = getFormControls();
 
         await user.click(emailInput);
         await user.click(submitButton);
@@ -62,10 +70,9 @@ describe('Send password reset form', () => {
 
     it('Error on invalid email', async () => {
         const user = userEvent.setup();
-        render(<SendPasswordResetForm />);
+        renderWithMantine(<SendPasswordResetForm />);
         
-        const emailInput = screen.getByLabelText("Email");
-        const submitButton = screen.getByText("Send Password Reset Email");
+        const { emailInput, submitButton } = getFormControls();
 
         await user.type(emailInput, INVALID_EMAIL);
         await user.click(submitButton);

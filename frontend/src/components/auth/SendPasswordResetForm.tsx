@@ -1,9 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import styles from './AuthForms.module.css';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { Button, Container, Fieldset, Group, TextInput } from '@mantine/core';
+import AuthAlertComponent, { FormStatus } from './AuthAlert';
 
 const schema = yup.object().shape({
     email: yup.string().required("Email is required").email("Email must be a valid email address")
@@ -18,34 +19,43 @@ export default function SendPasswordResetForm() {
         mode: 'onBlur',
         reValidateMode: 'onChange'
     });
-    const [emailSubmission, setEmailSubmission] = useState('');
+    const [formStatus, setFormStatus] = useState<FormStatus>({ show: false });
 
     const onSubmit: SubmitHandler<ResetPwInputs> = async (data: ResetPwInputs) => {
-        sendPasswordReset(data.email);
-        setEmailSubmission(data.email);
+        try {
+            sendPasswordReset(data.email);
+            setFormStatus({
+                show: true,
+                isSuccess: true,
+                message: `A password reset request has been sent to ${data.email} if an account associated with that email exists. Check your spam folder if you do not see it.`
+            })
+        } catch(err) {
+            const error = err as Error;
+            setFormStatus({
+                show: true,
+                isSuccess: false,
+                message: error.message ?? 'Could not successfully request a password reset, please try again later'
+            });
+        }
     };
 
     return (
-        <>
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <fieldset className={styles.formContent}>
-                {errors.email && !emailSubmission && 
-                    (<div className={styles.formError}>
-                        <ul>
-                            <li>{errors.email.message}</li>    
-                        </ul>
-                    </div>)}
-                {emailSubmission && 
-                    (<div className={styles.formSuccess}>
-                        <p>A password reset email has been sent to <strong className={styles.email}>{emailSubmission}</strong> if an account exists with that email. Check your spam folder if you do not receive the email shortly.</p>
-                    </div>)}
-                <div className={styles.formRow}>
-                    <label htmlFor="email" className={styles.formLabel}>Email</label>
-                    <input type="email" autoComplete="email" id="email" required {...register("email")} />
-                </div>
-                <button type="submit" className={styles.submit}>Send Password Reset Email</button>
-            </fieldset>
-        </form>
-        </>
+        <Container w='25%'>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Fieldset legend='Request Password Reset'>
+                    {formStatus.show && ( <AuthAlertComponent formStatus={formStatus} /> )}
+                    <TextInput
+                        required
+                        label='Email'
+                        {...register("email")} 
+                        error={errors.email ? errors.email.message : ''}
+                        mb='1.5rem'
+                    />
+                    <Group justify='center'>
+                        <Button variant='filled' type="submit">Send Password Reset Email</Button>
+                    </Group>
+                </Fieldset>
+            </form>
+        </Container>
     );
 }

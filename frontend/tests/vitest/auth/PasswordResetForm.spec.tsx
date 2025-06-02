@@ -1,12 +1,21 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
-import { MemoryRouter, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
+import { renderWithMemoryRouterAndMantine } from '../util/render';
 
 const VALID_PASSWORD: string = '12345678';
 const INVALID_PASSWORD: string = '1234'; // 4 char does not meet 8 char requirement
 
 const mockSetNewPassword = vi.fn();
+
+function getFormControls() {
+    return {
+        newPasswordInput: screen.getByLabelText(/(?<!Confirm\s+)New\s+Password/),
+        confirmPasswordInput: screen.getByLabelText("Confirm New Password", { exact: false }),
+        submitButton: screen.getByRole('button', { name: "Change Password" })
+    };
+}
 
 vi.mock('@/hooks/useAuth', () => ({
     useAuth: () => ({
@@ -14,37 +23,27 @@ vi.mock('@/hooks/useAuth', () => ({
     })
 }));
 
-function renderPWResetForm() {
-    render(<ResetPasswordForm/>, {
-        wrapper: ({children}) => (
-            <MemoryRouter initialEntries={["/"]}>
-                {children}
-            </MemoryRouter>
-        )
-    });
-}
-
 describe('Password Reset form', () => {
     afterEach(() => {
         mockSetNewPassword.mockClear();
     })
     
     it('Renders with fields', async () => {
-        renderPWResetForm();
+        renderWithMemoryRouterAndMantine(<ResetPasswordForm />);
 
-        expect(screen.getByLabelText("New Password")).toBeInTheDocument();
-        expect(screen.getByLabelText("Confirm New Password")).toBeInTheDocument();
-        expect(screen.getByText("Change Password")).toBeInTheDocument();
+        const { newPasswordInput, confirmPasswordInput, submitButton } = getFormControls();
+
+        expect(newPasswordInput).toBeInTheDocument();
+        expect(confirmPasswordInput).toBeInTheDocument();
+        expect(submitButton).toBeInTheDocument();
     });
 
     it('Error on missing password', async () => {
         const user = userEvent.setup();
         const navigate = useNavigate();
-        renderPWResetForm();
+        renderWithMemoryRouterAndMantine(<ResetPasswordForm />);
 
-        const newPasswordInput = screen.getByLabelText("New Password");
-        const confirmPasswordInput = screen.getByLabelText("Confirm New Password");
-        const submitButton = screen.getByText("Change Password");
+        const { newPasswordInput, confirmPasswordInput, submitButton } = getFormControls();
 
         await user.click(newPasswordInput);
         await user.type(confirmPasswordInput, VALID_PASSWORD);
@@ -60,11 +59,9 @@ describe('Password Reset form', () => {
     it('Error on invalid password', async () => {
         const user = userEvent.setup();
         const navigate = useNavigate();
-        renderPWResetForm();
+        renderWithMemoryRouterAndMantine(<ResetPasswordForm />);
 
-        const newPasswordInput = screen.getByLabelText("New Password");
-        const confirmPasswordInput = screen.getByLabelText("Confirm New Password");
-        const submitButton = screen.getByText("Change Password");
+        const { newPasswordInput, confirmPasswordInput, submitButton } = getFormControls();
 
         await user.type(newPasswordInput, INVALID_PASSWORD);
         await user.type(confirmPasswordInput, INVALID_PASSWORD);
@@ -80,11 +77,9 @@ describe('Password Reset form', () => {
     it('Error on invalid confirmation password', async () => {
         const user = userEvent.setup();
         const navigate = useNavigate();
-        renderPWResetForm();
+        renderWithMemoryRouterAndMantine(<ResetPasswordForm />);
 
-        const newPasswordInput = screen.getByLabelText("New Password");
-        const confirmPasswordInput = screen.getByLabelText("Confirm New Password");
-        const submitButton = screen.getByText("Change Password");
+        const { newPasswordInput, confirmPasswordInput, submitButton } = getFormControls();
 
         await user.type(newPasswordInput, VALID_PASSWORD);
         await user.type(confirmPasswordInput, INVALID_PASSWORD);
@@ -100,11 +95,9 @@ describe('Password Reset form', () => {
     it('Show success dialog on password reset sent', async () => {
         const user = userEvent.setup();
         const navigate = useNavigate();
-        renderPWResetForm();
+        renderWithMemoryRouterAndMantine(<ResetPasswordForm />);
 
-        const newPasswordInput = screen.getByLabelText("New Password");
-        const confirmPasswordInput = screen.getByLabelText("Confirm New Password");
-        const submitButton = screen.getByText("Change Password");
+        const { newPasswordInput, confirmPasswordInput, submitButton } = getFormControls();
 
         await user.type(newPasswordInput, VALID_PASSWORD);
         await user.type(confirmPasswordInput, VALID_PASSWORD);
@@ -113,7 +106,7 @@ describe('Password Reset form', () => {
         expect(newPasswordInput).toHaveValue(VALID_PASSWORD);
         expect(confirmPasswordInput).toHaveValue(VALID_PASSWORD);
 
-        const confirmationDialogue = screen.getByText('Your password has been set!', { exact: false });
+        const confirmationDialogue = screen.getByText('Your password has been reset!', { exact: false });
         expect(confirmationDialogue).toBeInTheDocument();
 
         await waitFor(() => {

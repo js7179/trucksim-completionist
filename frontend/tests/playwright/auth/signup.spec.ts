@@ -32,12 +32,12 @@ test('Sign up flow', async () => {
         // Fill out form
         await page.getByLabel("Email").fill(USER_DETAILS.email);
         await page.getByLabel("Display Name").fill(USER_DETAILS.displayName);
-        await page.getByLabel("Password", {exact: true}).fill(USER_DETAILS.password);
-        await page.getByLabel("Confirm Password", {exact: true}).fill(USER_DETAILS.password);
+        await page.getByLabel(/(?<!Confirm.*)Password/).fill(USER_DETAILS.password);
+        await page.getByLabel("Confirm Password").fill(USER_DETAILS.password);
         
         await page.getByRole('button', {name: 'Sign Up'}).click();
 
-        const successDialog = page.locator('div[class*=formSuccess]');
+        const successDialog = page.locator('*[data-authdialog-success]');
         await expect(successDialog).toBeVisible();
     });
 

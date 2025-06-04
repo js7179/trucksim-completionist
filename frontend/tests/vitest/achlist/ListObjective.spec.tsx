@@ -1,8 +1,9 @@
 import { LocalListObjective } from "@/components/objectives/ListObjective";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import { ListSubobjectiveItem } from "trucksim-completionist-common";
 import { useLocalStateAchievementListObj, useLocalFuncMarkListObj } from "@/hooks/LocalAchievementHooks";
+import renderWithMantine from "../util/render";
 
 const ACHID = 'foo';
 const OBJID = 'bar';
@@ -33,7 +34,7 @@ describe('List objective', () => {
     })
 
     it("renders normally, no interactivity", async () => {
-        render(<LocalListObjective {...DEFAULT_PROPS} />);
+        renderWithMantine(<LocalListObjective {...DEFAULT_PROPS} />);
 
         expect(screen.getByLabelText('Test')).not.toBeChecked();
         expect(screen.getByLabelText('Foo')).not.toBeChecked();
@@ -43,7 +44,7 @@ describe('List objective', () => {
     it("renders normally, Bar checked off", async () => {
         (useLocalStateAchievementListObj as MockFunction).mockReturnValueOnce(['bar']);
 
-        render(<LocalListObjective {...DEFAULT_PROPS} />);
+        renderWithMantine(<LocalListObjective {...DEFAULT_PROPS} />);
 
         expect(screen.getByLabelText('Test')).not.toBeChecked();
         expect(screen.getByLabelText('Foo')).not.toBeChecked();
@@ -53,7 +54,7 @@ describe('List objective', () => {
     it("renders normally, check dispatch called", async () => {
         const user = userEvent.setup();
 
-        render(<LocalListObjective {...DEFAULT_PROPS} />);
+        renderWithMantine(<LocalListObjective {...DEFAULT_PROPS} />);
 
         const fooCheckbox = screen.getByLabelText('Foo');
         await user.click(fooCheckbox);

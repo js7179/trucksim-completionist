@@ -1,8 +1,9 @@
 
 import { VisualPartialObjective } from "@/components/objectives/PartialObjective";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import { ListSubobjectiveItem } from "trucksim-completionist-common";
+import renderWithMantine from "../util/render";
 
 const ACHID = 'foo';
 const OBJID = 'bar';
@@ -24,7 +25,7 @@ describe("Partial objective", () => {
     it("renders normally, default state", () => {
         const current_state: string[] = [];
 
-        render(<VisualPartialObjective count={GOAL} values={VALUES} objid={OBJID} achID={ACHID} current={current_state} func={DISPATCH_MOCK} />);
+        renderWithMantine(<VisualPartialObjective count={GOAL} values={VALUES} objid={OBJID} achID={ACHID} current={current_state} func={DISPATCH_MOCK} />);
 
         expect(screen.getByLabelText('Alpha')).not.toBeChecked();
         expect(screen.getByLabelText('Bravo')).not.toBeChecked();
@@ -37,7 +38,7 @@ describe("Partial objective", () => {
     it("renders normally, meets goal with extra", () => {
         const current_state: string[] = ['aaa', 'bbb', 'ccc', 'eee'];
 
-        render(<VisualPartialObjective count={GOAL} values={VALUES} objid={OBJID} achID={ACHID} current={current_state} func={DISPATCH_MOCK} />);
+        renderWithMantine(<VisualPartialObjective count={GOAL} values={VALUES} objid={OBJID} achID={ACHID} current={current_state} func={DISPATCH_MOCK} />);
 
         expect(screen.getByLabelText('Alpha')).toBeChecked();
         expect(screen.getByLabelText('Bravo')).toBeChecked();
@@ -51,7 +52,7 @@ describe("Partial objective", () => {
         const user = userEvent.setup();
         const current_state: string[] = [];
 
-        render(<VisualPartialObjective count={GOAL} values={VALUES} objid={OBJID} achID={ACHID} current={current_state} func={DISPATCH_MOCK} />);
+        renderWithMantine(<VisualPartialObjective count={GOAL} values={VALUES} objid={OBJID} achID={ACHID} current={current_state} func={DISPATCH_MOCK} />);
 
         const bravo = screen.getByLabelText('Bravo');
         await user.click(bravo);
@@ -63,7 +64,7 @@ describe("Partial objective", () => {
         const user = userEvent.setup();
         const current_state: string[] = [];
 
-        render(<VisualPartialObjective count={GOAL} values={VALUES} objid={OBJID} achID={ACHID} current={current_state} func={DISPATCH_MOCK} />);
+        renderWithMantine(<VisualPartialObjective count={GOAL} values={VALUES} objid={OBJID} achID={ACHID} current={current_state} func={DISPATCH_MOCK} />);
 
         const delta = screen.getByLabelText('Delta');
         await user.click(delta);

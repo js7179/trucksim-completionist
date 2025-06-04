@@ -1,7 +1,8 @@
 import { VisualSequentialObjective } from "@/components/objectives/SequentialObjective";
-import { render, screen, within } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import { ListSubobjectiveItem } from "trucksim-completionist-common";
+import renderWithMantine from "../util/render";
 
 const ACHID = 'foo';
 const OBJID = 'bar';
@@ -22,7 +23,7 @@ describe("Sequential objective", () => {
     it("renders normally, default state", () => {
         const current_step = 0;
 
-        render(<VisualSequentialObjective values={VALUES} objid={OBJID} achID={ACHID} current={current_step} func={DISPATCH_MOCK} />);
+        renderWithMantine(<VisualSequentialObjective values={VALUES} objid={OBJID} achID={ACHID} current={current_step} func={DISPATCH_MOCK} />);
 
         const ol = screen.getByRole('list');
         expect(ol).toBeInTheDocument();
@@ -42,7 +43,7 @@ describe("Sequential objective", () => {
     it("renders normally, goal state", () => {
         const current_step = 5;
 
-        render(<VisualSequentialObjective values={VALUES} objid={OBJID} achID={ACHID} current={current_step} func={DISPATCH_MOCK} />);
+        renderWithMantine(<VisualSequentialObjective values={VALUES} objid={OBJID} achID={ACHID} current={current_step} func={DISPATCH_MOCK} />);
 
         const ol = screen.getByRole('list');
         expect(ol).toBeInTheDocument();
@@ -63,7 +64,7 @@ describe("Sequential objective", () => {
         const user = userEvent.setup();
         const current_step = 0;
 
-        render(<VisualSequentialObjective values={VALUES} objid={OBJID} achID={ACHID} current={current_step} func={DISPATCH_MOCK} />);
+        renderWithMantine(<VisualSequentialObjective values={VALUES} objid={OBJID} achID={ACHID} current={current_step} func={DISPATCH_MOCK} />);
 
         const stepButton = screen.getByLabelText('Step 2');
         await user.click(stepButton);
@@ -75,7 +76,7 @@ describe("Sequential objective", () => {
         const user = userEvent.setup();
         const current_step = 5;
 
-        render(<VisualSequentialObjective values={VALUES} objid={OBJID} achID={ACHID} current={current_step} func={DISPATCH_MOCK} />);
+        renderWithMantine(<VisualSequentialObjective values={VALUES} objid={OBJID} achID={ACHID} current={current_step} func={DISPATCH_MOCK} />);
 
         const stepButton = screen.getByLabelText('Step 5');
         await user.click(stepButton);

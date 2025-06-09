@@ -1,18 +1,19 @@
 import { useRemoteFuncMarkAchievementComplete, useRemoteStateAchievementCompleted } from '@/hooks/RemoteAchievementHooks';
 import { useLocalStateAchievementCompleted, useLocalFuncMarkAchievementComplete } from '@/hooks/LocalAchievementHooks';
 import { useRemotePage } from '@/hooks/RemotePageContext';
-import { Checkbox, CheckboxProps } from '@mantine/core';
+import { Checkbox } from '@mantine/core';
+import { useCallback } from 'react';
 
 export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
     const completed = useLocalStateAchievementCompleted(achID);
     const dispatch = useLocalFuncMarkAchievementComplete();
 
-    const toggleAchievement = () => {
-        dispatch(achID, !completed);
-    };
+    const toggleAchievement = useCallback((newState: boolean) => {
+        dispatch(achID, newState);
+    }, [dispatch, achID]);
 
     return (
-        <VisualCompleteCheckbox achID={achID} completed={completed} onClick={toggleAchievement} />
+        <VisualCompleteCheckbox achID={achID} completed={completed} callbackToggle={toggleAchievement} />
     );
 }
 
@@ -21,21 +22,21 @@ export function RemoteCompleteCheckbox({achID}: AchievementCheckboxProps) {
     const { data: completed } = useRemoteStateAchievementCompleted(uid, game, achID);
     const dispatch = useRemoteFuncMarkAchievementComplete();
 
-    const toggleAchievement = () => {
-        dispatch.mutate({ uid, game, achID, shouldMarkOff: !completed });
-    };
+    const toggleAchievement = useCallback((newState: boolean) => {
+        dispatch.mutate({ uid, game, achID, shouldMarkOff: newState });
+    }, [dispatch, uid, game, achID]);
 
     return (
-        <VisualCompleteCheckbox achID={achID} completed={completed} onClick={toggleAchievement} />
+        <VisualCompleteCheckbox achID={achID} completed={completed} callbackToggle={toggleAchievement} />
     );
 }
 
-function VisualCompleteCheckbox({achID, completed, onClick}: VisualCompleteCheckboxProps) {
+function VisualCompleteCheckbox({achID, completed, callbackToggle}: VisualCompleteCheckboxProps) {
     return (
         <Checkbox 
             id={`${achID}.completed`}
             checked={completed} 
-            onClick={onClick} 
+            onChange={(event) => callbackToggle(event.currentTarget.checked)} 
             size='48px' 
             styles={{
                 input: {
@@ -53,5 +54,5 @@ export interface AchievementCheckboxProps {
 interface VisualCompleteCheckboxProps {
     achID: string;
     completed: boolean;
-    onClick: CheckboxProps['onClick'];
+    callbackToggle: (newState: boolean) => void;
 }

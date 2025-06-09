@@ -49,7 +49,7 @@ export function VisualSequentialObjective({achID, objid, values, current, func}:
                     color='gray'
                     checked={isChecked}
                     label={step.display}
-                    onClick={() => func(index + 1)} />
+                    onChange={() => func(index + 1)} />
             </List.Item>
         );
     });

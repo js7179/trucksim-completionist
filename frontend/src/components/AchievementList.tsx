@@ -1,7 +1,7 @@
 import {  useState } from 'react';
 import styles from "./AchievementList.module.css";
 import { AchievementInfo, CounterObjectiveInfo, ListObjectiveInfo, PartialObjectiveInfo, SequentialObjectiveInfo } from 'trucksim-completionist-common';
-import { ShowInformationButton } from './util/StylizedCheckbox';
+import ShowInformationButton from './util/ShowInformationButton';
 import { IconProps } from './AchievementIcon';
 import { AchievementCheckboxProps } from './AchievementCompleteCheckbox';
 import { CounterObjectiveProps } from './objectives/CounterObjective';
@@ -21,7 +21,6 @@ export default function AchievementList(props: AchievementListProps) {
 
 function Achievement(props: AchievementProps) {
     const [showInfo, toggleInfoView] = useState(false);
-    const showInfoID = `${props.id}.showInfo`;
 
     const objs = props.objectives.map((obj) => {
         switch(obj.type) {
@@ -47,7 +46,7 @@ function Achievement(props: AchievementProps) {
                     <p>{props.desc}</p>
                 </div>
                 <div className={styles.showInformation} data-achexpandinfo={props.id}>
-                    <ShowInformationButton htmlID={showInfoID} checked={showInfo} onClick={() => toggleInfoView(!showInfo)}/>
+                    <ShowInformationButton id={props.id} name={props.name} isToggled={showInfo} onClick={() => toggleInfoView(!showInfo)} />
                 </div>
                 <div className={styles.achievementCompleted} data-ach-checkbox={props.id}>
                     <props.achCompleteCheckbox achID={props.id} />

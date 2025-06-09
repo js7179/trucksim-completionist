@@ -10,7 +10,6 @@ export default createTheme({
         Checkbox: Checkbox.extend({
             defaultProps: {
                 variant: 'outline',
-                color: 'gray'
             },
         }),
         Button: Button.extend({

@@ -10,7 +10,8 @@ export default function SubobjList({achID, objid, values, current, func}: Subobj
                 key={inputID}
                 checked={isChecked}
                 label={subobj.display}
-                onClick={() => func(subobj.subobjid)} />
+                onClick={() => func(subobj.subobjid)}
+                color='gray' />
         );
     });
 

@@ -1,7 +1,7 @@
 import { useRemoteFuncMarkAchievementComplete, useRemoteStateAchievementCompleted } from '@/hooks/RemoteAchievementHooks';
-import { CheckboxButton } from './util/StylizedCheckbox';
 import { useLocalStateAchievementCompleted, useLocalFuncMarkAchievementComplete } from '@/hooks/LocalAchievementHooks';
 import { useRemotePage } from '@/hooks/RemotePageContext';
+import { Checkbox, CheckboxProps } from '@mantine/core';
 
 export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
     const completed = useLocalStateAchievementCompleted(achID);
@@ -11,10 +11,8 @@ export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
         dispatch(achID, !completed);
     };
 
-    const htmlID = `${achID}.completed`;
-
     return (
-        <CheckboxButton htmlID={htmlID} checked={completed} onClick={toggleAchievement} size="48px" colorFilter="var(--primary-color-filter)"/>
+        <VisualCompleteCheckbox achID={achID} completed={completed} onClick={toggleAchievement} />
     );
 }
 
@@ -27,12 +25,33 @@ export function RemoteCompleteCheckbox({achID}: AchievementCheckboxProps) {
         dispatch.mutate({ uid, game, achID, shouldMarkOff: !completed });
     };
 
-    const htmlID = `${achID}.completed`;
     return (
-        <CheckboxButton htmlID={htmlID} checked={completed} onClick={toggleAchievement} size="48px" colorFilter="var(--primary-color-filter)"/>
+        <VisualCompleteCheckbox achID={achID} completed={completed} onClick={toggleAchievement} />
+    );
+}
+
+function VisualCompleteCheckbox({achID, completed, onClick}: VisualCompleteCheckboxProps) {
+    return (
+        <Checkbox 
+            id={`${achID}.completed`}
+            checked={completed} 
+            onClick={onClick} 
+            size='48px' 
+            styles={{
+                input: {
+                    border: '4px solid var(--mantine-primary-color-8)',
+                    backgroundColor: 'var(--mantine-color-dark-7)'
+                }
+            }} />
     );
 }
 
 export interface AchievementCheckboxProps {
     achID: string;
+}
+
+interface VisualCompleteCheckboxProps {
+    achID: string;
+    completed: boolean;
+    onClick: CheckboxProps['onClick'];
 }

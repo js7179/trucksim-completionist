@@ -46,6 +46,7 @@ export function VisualSequentialObjective({achID, objid, values, current, func}:
             <List.Item key={htmlID}>
                 <Checkbox
                     key={htmlID}
+                    color='gray'
                     checked={isChecked}
                     label={step.display}
                     onClick={() => func(index + 1)} />

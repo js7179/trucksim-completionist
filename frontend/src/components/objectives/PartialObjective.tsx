@@ -1,9 +1,9 @@
 import { useLocalFuncMarkListObj, useLocalStateAchievementListObj } from "@/hooks/LocalAchievementHooks";
 import { clamp, PartialObjectiveInfo } from "trucksim-completionist-common";
-import styles from './Objectives.module.css';
 import SubobjList, { SubobjListProps } from "./SubobjList";
 import { useRemoteFuncMarkListObj, useRemoteStateAchievementObjList } from "@/hooks/RemoteAchievementHooks";
 import { useRemotePage } from "@/hooks/RemotePageContext";
+import { Center, Stack, Text } from "@mantine/core";
 
 export function LocalPartialObjective({achID, objid, values, count: goalCount}: PartialObjectivesProp) {
     const listValues = useLocalStateAchievementListObj(achID, objid);
@@ -36,11 +36,16 @@ export function RemotePartialObjective({achID, objid, values, count: goalCount}:
 }
 
 export function VisualPartialObjective({achID, objid, values, count: goalCount, current, func}: VisualPartialObjectivesProp) {
+    const clampedValue = clamp(0, current.length, goalCount);
+    const text = `${clampedValue} / ${goalCount}`;
+
     return (
-        <div>
-            <div className={styles.center}>{clamp(0, current.length, goalCount)}/{goalCount}</div>
+        <Stack mt='md' gap='0'>
+            <Center>
+                <Text>{text}</Text>
+            </Center>
             <SubobjList achID={achID} values={values} objid={objid} current={current} func={func} />
-        </div>
+        </Stack>
     );
 }
 

@@ -6,7 +6,10 @@ import { useRemotePage } from "@/hooks/RemotePageContext";
 export function LocalIcon({achID, completed, incomplete}: IconProps) {
     const isDone = useLocalStateAchievementCompleted(achID);
     return (
-        <VisualIcon completed={completed} incomplete={incomplete} achID={achID} isAchComplete={isDone} />
+        <VisualIcon 
+            completed={completed} 
+            incomplete={incomplete}
+            isAchComplete={isDone} />
     )
 }
 
@@ -16,13 +19,21 @@ export function RemoteIcon({achID, completed, incomplete}: IconProps) {
     
     const isDone = data as boolean;
     return (
-        <VisualIcon completed={completed} incomplete={incomplete} achID={achID} isAchComplete={isDone} />
+        <VisualIcon 
+            completed={completed}
+            incomplete={incomplete} 
+            isAchComplete={isDone} />
     )
 }
 
-function VisualIcon({completed, incomplete, isAchComplete, achID}: IconProps & VisualIconProps) {
+function VisualIcon({completed, incomplete, isAchComplete}: VisualIconProps) {
     return (
-        <img src={isAchComplete ? completed : incomplete} className={styles.icon} data-achicon={achID} alt='' />
+        <img 
+            src={isAchComplete ? completed : incomplete} 
+            className={styles.icon}
+            role='presentation'
+            aria-hidden='true'
+            alt='' />
     );
 }
 
@@ -32,6 +43,6 @@ export type IconProps = {
     achID: string;
 }
 
-type VisualIconProps = {
+type VisualIconProps = Omit<IconProps, "achID"> & {
     isAchComplete: boolean;
 }

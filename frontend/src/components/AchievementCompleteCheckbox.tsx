@@ -4,7 +4,7 @@ import { useRemotePage } from '@/hooks/RemotePageContext';
 import { Checkbox } from '@mantine/core';
 import { useCallback } from 'react';
 
-export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
+export function LocalCompleteCheckbox({achID, achName}: AchievementCheckboxProps) {
     const completed = useLocalStateAchievementCompleted(achID);
     const dispatch = useLocalFuncMarkAchievementComplete();
 
@@ -13,11 +13,11 @@ export function LocalCompleteCheckbox({achID}: AchievementCheckboxProps) {
     }, [dispatch, achID]);
 
     return (
-        <VisualCompleteCheckbox achID={achID} completed={completed} callbackToggle={toggleAchievement} />
+        <VisualCompleteCheckbox achID={achID} achName={achName} completed={completed} callbackToggle={toggleAchievement} />
     );
 }
 
-export function RemoteCompleteCheckbox({achID}: AchievementCheckboxProps) {
+export function RemoteCompleteCheckbox({achID, achName}: AchievementCheckboxProps) {
     const { uid, game } = useRemotePage();
     const { data: completed } = useRemoteStateAchievementCompleted(uid, game, achID);
     const dispatch = useRemoteFuncMarkAchievementComplete();
@@ -27,11 +27,11 @@ export function RemoteCompleteCheckbox({achID}: AchievementCheckboxProps) {
     }, [dispatch, uid, game, achID]);
 
     return (
-        <VisualCompleteCheckbox achID={achID} completed={completed} callbackToggle={toggleAchievement} />
+        <VisualCompleteCheckbox achID={achID} achName={achName} completed={completed} callbackToggle={toggleAchievement} />
     );
 }
 
-function VisualCompleteCheckbox({achID, completed, callbackToggle}: VisualCompleteCheckboxProps) {
+function VisualCompleteCheckbox({achID, achName, completed, callbackToggle}: VisualCompleteCheckboxProps) {
     return (
         <Checkbox 
             id={`${achID}.completed`}
@@ -43,16 +43,19 @@ function VisualCompleteCheckbox({achID, completed, callbackToggle}: VisualComple
                     border: '4px solid var(--mantine-primary-color-8)',
                     backgroundColor: 'var(--mantine-color-dark-7)'
                 }
-            }} />
+            }}
+            aria-label={`${achName} achievement`} />
     );
 }
 
 export interface AchievementCheckboxProps {
     achID: string;
+    achName: string;
 }
 
 interface VisualCompleteCheckboxProps {
     achID: string;
+    achName: string;
     completed: boolean;
     callbackToggle: (newState: boolean) => void;
 }

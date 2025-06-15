@@ -36,7 +36,7 @@ function Achievement(props: AchievementProps) {
     });
 
     return (
-        <section className={styles.achievement} aria-labelledby={props.id + '.name'} data-ach-id={props.id}>
+        <section className={styles.achievement} aria-labelledby={props.id + '.name'}>
             <div className={styles.info}>
                 <div className={styles.icons}>
                     <props.achIcon achID={props.id} {...props.icons} />
@@ -45,11 +45,11 @@ function Achievement(props: AchievementProps) {
                     <h2 className={styles.achievementName} id={props.id + '.name'}>{props.name}</h2>
                     <p>{props.desc}</p>
                 </div>
-                <div className={styles.showInformation} data-achexpandinfo={props.id}>
+                <div className={styles.showInformation}>
                     <ShowInformationButton id={props.id} name={props.name} isToggled={showInfo} onClick={() => toggleInfoView(!showInfo)} />
                 </div>
-                <div className={styles.achievementCompleted} data-ach-checkbox={props.id}>
-                    <props.achCompleteCheckbox achID={props.id} />
+                <div className={styles.achievementCompleted}>
+                    <props.achCompleteCheckbox achID={props.id} achName={props.name} />
                 </div>
             </div>
             {showInfo && (

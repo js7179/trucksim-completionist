@@ -3,13 +3,18 @@ import { resolve } from "node:path";
 import react from '@vitejs/plugin-react'
 // import { PluginOption } from 'vite';
 // import { visualizer } from 'rollup-plugin-visualizer';
+import VitePluginSvgSpritemap from '@spiriit/vite-plugin-svg-spritemap';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), /*visualizer({
-    emitFile: true,
-    filename: 'stats.html'
-  }) as PluginOption*/],
+  plugins: [
+    react(),
+    VitePluginSvgSpritemap('./src/icons/*.svg'),
+    /*visualizer({
+        emitFile: true,
+        filename: 'stats.html'
+    }) as PluginOption*/
+  ],
   server: {
     port: 3000
   },

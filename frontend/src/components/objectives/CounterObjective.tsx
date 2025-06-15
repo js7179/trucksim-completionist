@@ -3,8 +3,8 @@ import { useLocalFuncSetNumberObj, useLocalStateAchievementNumberObj } from '@/h
 import { useRemoteFuncSetNumberObj, useRemoteStateAchievementObjNumber } from '@/hooks/RemoteAchievementHooks';
 import { useRemotePage } from '@/hooks/RemotePageContext';
 import { Group, Button } from '@mantine/core';
-import { ProgressBar } from '../util/ProgressBar';
-import { IconMinus, IconPlus } from '@tabler/icons-react';
+import { ProgressBar } from '@/components/util/ProgressBar';
+import { IconMinus, IconPlus } from '@/components/util/Icons';
 
 export function LocalCounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {
     const current = useLocalStateAchievementNumberObj(achID, objid);
@@ -41,12 +41,12 @@ export function VisualCounterObjective({goal, display, current, func}: VisualCou
     return (
         <Group style={{ width: '100%' }} p='md'>
             <p>{display}</p>
-            <Button onClick={() => func(-1)}>
-                <IconMinus />
+            <Button onClick={() => func(-1)} aria-label='Decrement'>
+                <IconMinus height='1rem' width='1rem' />
             </Button>
             <ProgressBar current={current} max={goal} boxStyle={{flex: 1}} />
-            <Button onClick={() => func(+1)}>
-                <IconPlus />
+            <Button onClick={() => func(+1)} aria-label='Increment'>
+                <IconPlus height='1rem' width='1rem' />
             </Button>
         </Group>
     );
@@ -55,6 +55,6 @@ export function VisualCounterObjective({goal, display, current, func}: VisualCou
 export type CounterObjectiveProps = Omit<CounterObjectiveInfo, "type"> & { achID: string };
 
 type VisualCounterObjectiveProps = CounterObjectiveProps & { 
-    current: number, 
-    func: (delta: number) => void 
+    current: number;
+    func: (delta: number) => void;
 };

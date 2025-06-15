@@ -32,7 +32,7 @@ describe("Partial objective", () => {
         expect(screen.getByLabelText('Charlie')).not.toBeChecked();
         expect(screen.getByLabelText('Delta')).not.toBeChecked();
         expect(screen.getByLabelText('Echo')).not.toBeChecked();
-        expect(screen.getByText(`${current_state.length}/${GOAL}`)).toBeInTheDocument();
+        expect(screen.getByText(`${current_state.length} / ${GOAL}`)).toBeInTheDocument();
     });
 
     it("renders normally, meets goal with extra", () => {
@@ -45,7 +45,7 @@ describe("Partial objective", () => {
         expect(screen.getByLabelText('Charlie')).toBeChecked();
         expect(screen.getByLabelText('Delta')).not.toBeChecked();
         expect(screen.getByLabelText('Echo')).toBeChecked();
-        expect(screen.getByText(`3/${GOAL}`)).toBeInTheDocument();
+        expect(screen.getByText(`3 / ${GOAL}`)).toBeInTheDocument();
     });
 
     it("Bravo clicked, dispatch called with subobjid", async () => {

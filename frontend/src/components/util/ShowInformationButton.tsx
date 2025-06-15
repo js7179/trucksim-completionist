@@ -1,5 +1,5 @@
 import { ActionIcon } from "@mantine/core";
-import { IconChevronUp } from "@tabler/icons-react";
+import { IconChevronUp } from "@/components/util/Icons";
 import React from "react";
 
 export default function ShowInformationButton({id, name, isToggled, onClick}: ShowInformationButtonProps) {
@@ -13,8 +13,9 @@ export default function ShowInformationButton({id, name, isToggled, onClick}: Sh
             onClick={onClick}
         >
             <IconChevronUp 
-                size='48'
-                stroke={2} 
+                width='48'
+                height='48'
+                stroke='2' 
                 color='var(--mantine-primary-color-8)' 
                 style={{ transition: '0.125s ease', ...additionalStyles }}/>
         </ActionIcon>

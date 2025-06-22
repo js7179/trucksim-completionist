@@ -1,21 +1,8 @@
 import { Box, MantineStyleProp, Progress, Text } from "@mantine/core";
-import { useCallback } from "react";
 
 export function ProgressBar({current, max, boxStyle}: ProgressBarProps) {
     const progressValue = (current / max) * 100;
     const progressText = `${current} / ${max}`;
-
-    const overrideAriaAttributes = useCallback((node: HTMLDivElement) => {
-        if(!node) return;
-        const progressBarElement = node.querySelector("[role='progressbar']");
-        if(!progressBarElement) return;
-
-        progressBarElement.setAttribute('aria-valuemin', `0`);
-        progressBarElement.setAttribute('aria-valuemax', `${max}`);
-        progressBarElement.setAttribute('aria-valuenow', `${current}`);
-        progressBarElement.setAttribute('aria-valuetext', progressText);
-        return;
-    }, [current, max, progressText]);
 
     return (
         <Box style={{ position: 'relative', ...boxStyle}}>
@@ -23,8 +10,10 @@ export function ProgressBar({current, max, boxStyle}: ProgressBarProps) {
                 value={progressValue}
                 size='1lh'
                 transitionDuration={200}
-                aria-valuetext={progressText}
-                ref={overrideAriaAttributes} />
+                aria-valuemin={0}
+                aria-valuemax={max}
+                aria-valuenow={current}
+                aria-valuetext={progressText} />
             <Text 
                 size='md'
                 style={{

@@ -57,7 +57,7 @@ test('Sign up flow', async () => {
     await test.step('See logged in', async () => {
         await page.waitForURL('**/');
 
-        const displayNameElement = page.locator('span[class*="displayName"]');
-        await expect(displayNameElement).toHaveText(USER_DETAILS.displayName);
+        const displayNameElement = page.getByText(USER_DETAILS.displayName);
+        await expect(displayNameElement).toBeVisible();
     });
 });

@@ -80,7 +80,7 @@ export function HomePageUserInfo() {
                         <Menu.Item 
                             leftSection={<IconLogout width='24' height='24' />}
                             component={Link} to='/signout'>
-                                Logout
+                                Sign Out
                         </Menu.Item>
                     </Menu.Dropdown>
                 </Menu>

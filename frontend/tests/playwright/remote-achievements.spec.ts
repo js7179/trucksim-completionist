@@ -51,8 +51,8 @@ test('Remote achievement interactivity', async () => {
             && resp.status() === 200);
 
         // Test that we are logged in
-        const displayNameElement = page.locator('span[class*="displayName"]');
-        await expect(displayNameElement).toHaveText(USER_DETAILS.displayName);
+        const displayNameElement = page.getByText(USER_DETAILS.displayName);
+        await expect(displayNameElement).toBeVisible();
         await expect(page.locator('p#loading-indicator')).toBeHidden();
     });
 

@@ -7,6 +7,6 @@ export async function performLogin(page: Page, email: string, password: string, 
     await page.getByRole('button', {name: 'Login'}).click();
     await page.waitForURL('**/');
 
-    const displayNameElement = page.locator('span[class*="displayName"]');
-    await expect(displayNameElement).toHaveText(displayName);
+    const displayNameElement = page.getByText(displayName);
+    await expect(displayNameElement).toBeVisible();
 }

@@ -76,7 +76,7 @@ test('Password reset flow', async () => {
 
         await page.waitForURL('/', { timeout: 7500 });
 
-        const displayNameElement = page.locator('span[class*="displayName"]');
-        await expect(displayNameElement).toHaveText(USER_DETAILS.displayName);
+        const displayNameElement = page.getByText(USER_DETAILS.displayName);
+        await expect(displayNameElement).toBeVisible();
     });
 });

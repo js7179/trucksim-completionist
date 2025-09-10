@@ -1,17 +1,25 @@
-import {  useState } from 'react';
 import styles from "./AchievementList.module.css";
 import { AchievementInfo, CounterObjectiveInfo, ListObjectiveInfo, PartialObjectiveInfo, SequentialObjectiveInfo } from 'trucksim-completionist-common';
-import ShowInformationButton from './util/ShowInformationButton';
+import ShowInformationButton from '@/components/util/ShowInformationButton';
 import { IconProps } from './AchievementIcon';
 import { AchievementCheckboxProps } from './AchievementCompleteCheckbox';
-import { CounterObjectiveProps } from './objectives/CounterObjective';
-import { ListObjectiveProps } from './objectives/ListObjective';
-import { PartialObjectivesProp } from './objectives/PartialObjective';
-import { SequentialObjectiveProps } from './objectives/SequentialObjective';
+import { CounterObjectiveProps } from '@/components/objectives/CounterObjective';
+import { ListObjectiveProps } from '@/components/objectives/ListObjective';
+import { PartialObjectivesProp } from '@/components/objectives/PartialObjective';
+import { SequentialObjectiveProps } from '@/components/objectives/SequentialObjective';
+import { Collapse, Divider } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import React from 'react';
 
 export default function AchievementList(props: AchievementListProps) {
     const {achList, ...rest} = props;
-    const list = achList.map((achievement) => <Achievement {...achievement} key={achievement.id} {...rest} />);
+    const list = achList.map(
+        (achievement, index, arr) => 
+        <React.Fragment key={achievement.id}>
+            <Achievement {...achievement} {...rest} />
+            {index != (arr.length - 1) && (<Divider size='md' color='orange' />) }
+        </React.Fragment>
+    );
     return (
         <main className={styles.achievementList}>
             {list}
@@ -20,7 +28,7 @@ export default function AchievementList(props: AchievementListProps) {
 }
 
 function Achievement(props: AchievementProps) {
-    const [showInfo, toggleInfoView] = useState(false);
+    const [opened, {toggle}] = useDisclosure(false);
 
     const objs = props.objectives.map((obj) => {
         switch(obj.type) {
@@ -46,17 +54,17 @@ function Achievement(props: AchievementProps) {
                     <p>{props.desc}</p>
                 </div>
                 <div className={styles.showInformation}>
-                    <ShowInformationButton id={props.id} name={props.name} isToggled={showInfo} onClick={() => toggleInfoView(!showInfo)} />
+                    <ShowInformationButton id={props.id} name={props.name} isToggled={opened} onClick={toggle} />
                 </div>
                 <div className={styles.achievementCompleted}>
                     <props.achCompleteCheckbox achID={props.id} achName={props.name} />
                 </div>
             </div>
-            {showInfo && (
+            <Collapse in={opened}>
                 <div className={styles.objectiveContainer} data-obj-container={props.id}>
                     {...objs}
                 </div>
-            )}
+            </Collapse>
         </section>
     );
 }

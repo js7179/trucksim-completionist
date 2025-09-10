@@ -4,11 +4,8 @@ div.achievementList {
 }
 
 section.achievement {
-    border-style: solid;
-    border-color: var(--primary-color);
     display: flex;
     flex-direction: column;
-    gap: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
@@ -19,7 +16,7 @@ div.info {
 }
 
 div.icons {
-    padding-left: 16px;
+    padding-left: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,7 +26,7 @@ div.desc {
     align-self: center;
     width: auto;
     margin-top: -5px;
-    margin-left: 16px;
+    margin-left: 1rem;
     flex-grow: 2;
 }
 
@@ -40,7 +37,7 @@ h2.achievementName {
 
 div.achievementCompleted {
     margin-left: auto;
-    margin-right: 16px;
+    margin-right: 1rem;
     height: auto;
     display: flex;
     align-items: center;
@@ -49,7 +46,7 @@ div.achievementCompleted {
 
 div.showInformation {
     margin-left: auto;
-    margin-right: 16px;
+    margin-right: 1rem;
     height: auto;
     display: flex;
     align-items: center;
@@ -59,8 +56,28 @@ div.showInformation {
 div.objectiveContainer {
     background-color: #13191a;
     background-clip: content-box;
-    border-radius: 5px;
-    padding-left: 16px;
-    padding-right: 16px;
+    border-radius: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-bottom: 5px;
+    margin-top: 8px;
+}
+
+.skeletonSection {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.skeletonInfo {
+    margin-right: 1.5rem;
+}
+
+.skeletonTitle {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.skeletonDesc {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }

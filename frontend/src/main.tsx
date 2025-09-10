@@ -11,6 +11,7 @@ import theme from './theme.ts';
 
 import '@mantine/core/styles.css';
 import Home from './routes/home.tsx';
+import LoadingAchievementList from './components/achievements/LoadingAchievement.tsx';
 
 const ETS2LocalPage = lazy(() => import('./routes/localets2.tsx'));
 const ATSLocalPage = lazy(() => import('./routes/localats.tsx'));
@@ -40,6 +41,7 @@ createRoot(document.getElementById('root')!).render(
                 <Route path='/signout' element={<SignoutPage />} />
                 <Route path='/sendpwreset' element={<SendPwResetPage />} />
                 <Route path='/resetpw' element={<ResetPasswordPage />} />
+                <Route path='/loading' element={<LoadingAchievementList /> } />
               </Route>
             </Routes>
           </BrowserRouter>

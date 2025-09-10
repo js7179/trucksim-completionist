@@ -1,6 +1,6 @@
-import AchievementList from "@/components/AchievementList";
+import AchievementList from "@/components/achievements/AchievementList";
 import { makeRemoteAchListComponents } from "@/components/util/AchievementListComponents";
-import LoadingSpinner from "@/components/util/LoadingSpinner";
+import LoadingAchievementList from "@/components/achievements/LoadingAchievement";
 import useGameAchInfo from "@/hooks/AchInfoProvider";
 import { RemotePageProvider } from "@/hooks/RemotePage";
 import { Suspense } from "react";
@@ -21,12 +21,12 @@ export default function ETS2RemotePage() {
     }
 
     if(isLoading || achList.length === 0) {
-        return (<LoadingSpinner />);
+        return (<LoadingAchievementList />);
     }
 
     return (
         <RemotePageProvider game={'ets2'} uid={uid}>
-            <Suspense fallback={<LoadingSpinner />}>
+            <Suspense fallback={<LoadingAchievementList />}>
                 <AchievementList achList={achList} {...remoteComponents} />
             </Suspense>
         </RemotePageProvider>

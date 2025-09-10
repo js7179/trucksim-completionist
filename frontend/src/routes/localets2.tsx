@@ -1,6 +1,6 @@
-import AchievementList from "@/components/AchievementList";
+import AchievementList from "@/components/achievements/AchievementList";
 import { makeLocalAchListComponents } from "@/components/util/AchievementListComponents";
-import LoadingSpinner from "@/components/util/LoadingSpinner";
+import LoadingAchievementList from "@/components/achievements/LoadingAchievement";
 import useGameAchInfo from "@/hooks/AchInfoProvider";
 import { AchievementStateContext, createAchievementStore } from "@/store/AchievementStore";
 import { useMemo } from "react";
@@ -21,7 +21,7 @@ export default function ETS2LocalPage() {
     }
 
     if(isLoading || achList.length === 0) {
-        return (<LoadingSpinner />);
+        return (<LoadingAchievementList />);
     }
 
     return (

@@ -1,10 +1,10 @@
-import { AchListComponentProps } from "../AchievementList";
-import { LocalIcon, RemoteIcon } from "../AchievementIcon";
-import { LocalCompleteCheckbox, RemoteCompleteCheckbox } from "../AchievementCompleteCheckbox";
-import { LocalListObjective, RemoteListObjective } from "../objectives/ListObjective";
-import { LocalCounterObjective, RemoteCounterObjective } from "../objectives/CounterObjective";
-import { LocalSequentialObjective, RemoteSequentialObjective } from "../objectives/SequentialObjective";
-import { LocalPartialObjective, RemotePartialObjective } from "../objectives/PartialObjective";
+import { AchListComponentProps } from "@/components/achievements/AchievementList";
+import { LocalIcon, RemoteIcon } from "@/components/achievements/AchievementIcon";
+import { LocalCompleteCheckbox, RemoteCompleteCheckbox } from "@/components/achievements/AchievementCompleteCheckbox";
+import { LocalListObjective, RemoteListObjective } from "@/components/objectives/ListObjective";
+import { LocalCounterObjective, RemoteCounterObjective } from "@/components/objectives/CounterObjective";
+import { LocalSequentialObjective, RemoteSequentialObjective } from "@/components/objectives/SequentialObjective";
+import { LocalPartialObjective, RemotePartialObjective } from "@/components/objectives/PartialObjective";
 
 export const makeLocalAchListComponents = (): AchListComponentProps => ({
     achIcon: LocalIcon,

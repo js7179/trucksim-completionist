@@ -28,7 +28,7 @@ jobs:
       - name: Setup Supabase CLI
         uses: supabase/setup-cli@v1
         with:
-          version: latest
+          version: 2.23.4
 
       - name: Start local Supabase instance and set environment variables
         run: |

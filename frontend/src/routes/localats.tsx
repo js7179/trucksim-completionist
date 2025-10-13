@@ -3,10 +3,12 @@ import { makeLocalAchListComponents } from "@/components/util/AchievementListCom
 import LoadingAchievementList from "@/components/achievements/LoadingAchievement";
 import useGameAchInfo from "@/hooks/AchInfoProvider";
 import { AchievementStateContext, createAchievementStore } from "@/store/AchievementStore";
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
+import { Box, Stack } from "@mantine/core";
+import LocalProgressAlert from "@/components/achievements/LocalProgressAlert";
 
 export default function ATSLocalPage() {
-    const { data: achList = [], error, isLoading } = useGameAchInfo('ats');
+    const { data: achList = [], error } = useGameAchInfo('ats');
     const store = useMemo(() => {
         if(achList.length === 0) {
             return null;
@@ -20,13 +22,16 @@ export default function ATSLocalPage() {
         return (<p>{error.message ?? 'Error loading American Truck Simulator achievements'}</p>);
     }
 
-    if(isLoading || achList.length === 0) {
-        return (<LoadingAchievementList />);
-    }
-
     return (
-        <AchievementStateContext.Provider value={store}>
-            <AchievementList achList={achList} {...localComponents} />
-        </AchievementStateContext.Provider>
+        <Stack align='center'>
+            <LocalProgressAlert gameName={"American Truck Simulator"} />
+            <AchievementStateContext.Provider value={store}>
+                <Box ml='2.5vw' mr='2.5vw'>
+                    <Suspense fallback={<LoadingAchievementList />}>
+                        <AchievementList achList={achList} {...localComponents}  />
+                    </Suspense>
+                </Box>
+            </AchievementStateContext.Provider>
+        </Stack>
     );  
 }

@@ -1,4 +1,4 @@
-div.achievementList {
+.achievementList {
     display: flex;
     flex-direction: column;
 }

@@ -17,7 +17,7 @@ export default function AchievementList(props: AchievementListProps) {
         (achievement, index, arr) => 
         <React.Fragment key={achievement.id}>
             <Achievement {...achievement} {...rest} />
-            {index != (arr.length - 1) && (<Divider size='md' color='orange' />) }
+            {index != (arr.length - 1) && (<Divider size='md' ml='md' mr='md' />) }
         </React.Fragment>
     );
     return (

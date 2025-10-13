@@ -25,3 +25,6 @@ export const IconCloud = (props: SVGProps<SVGSVGElement>) =>
 
 export const IconInfoCircle = (props: SVGProps<SVGSVGElement>) =>
     (<svg {...props} viewBox={VIEWBOX24}><use xlinkHref='/__spritemap#sprite-info-circle'></use></svg>);
+
+export const IconAlertTriangle = (props: SVGProps<SVGSVGElement>) =>
+    (<svg {...props} viewBox={VIEWBOX24}><use xlinkHref='/__spritemap#sprite-alert-triangle'></use></svg>);

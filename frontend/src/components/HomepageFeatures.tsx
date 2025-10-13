@@ -32,7 +32,7 @@ export default function HomepageFeatures() {
         return (
             <Card key={card.id}>
                 <Flex gap='xl' justify='flex-start' align='center'>
-                    <div style={{ width: '64px', height: '64px', flexShrink: 0 }}>
+                    <div style={{ width: '4rem', height: '4rem', flexShrink: 0 }}>
                         <card.icon color='white' width='100%' height='100%' />
                     </div>
                     <Text>{card.text}</Text>

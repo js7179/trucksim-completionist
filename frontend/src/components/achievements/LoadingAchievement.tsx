@@ -25,7 +25,7 @@ export default function LoadingAchievementList() {
     const skeletonList = Array(12).fill(<LoadingAchievement />).map((ele, index, arr) => (
         <React.Fragment key={index}>
             {ele}
-            {index != (arr.length - 1) && (<Divider size='md' color='orange' />) }
+            {index != (arr.length - 1) && (<Divider size='md' ml='md' mr='md' />) }
         </React.Fragment>
     ));
 

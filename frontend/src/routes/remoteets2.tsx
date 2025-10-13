@@ -5,6 +5,7 @@ import useGameAchInfo from "@/hooks/AchInfoProvider";
 import { RemotePageProvider } from "@/hooks/RemotePage";
 import { Suspense } from "react";
 import { useParams } from "react-router";
+import { Box } from "@mantine/core";
 
 export default function ETS2RemotePage() {
     const { uid } = useParams();
@@ -26,9 +27,11 @@ export default function ETS2RemotePage() {
 
     return (
         <RemotePageProvider game={'ets2'} uid={uid}>
-            <Suspense fallback={<LoadingAchievementList />}>
-                <AchievementList achList={achList} {...remoteComponents} />
-            </Suspense>
+            <Box ml='2.5vw' mr='2.5vw'>
+                <Suspense fallback={<LoadingAchievementList />}>
+                    <AchievementList achList={achList} {...remoteComponents}  />
+                </Suspense>
+            </Box>
         </RemotePageProvider>
     );
 }

@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent, { UserEvent } from '@testing-library/user-event';
 import SignupForm from '@/components/auth/SignupForm';
+import renderWithMantine from '../util/render';
 
 const VALID_EMAIL: string = 'test@example.com';
 const VALID_PASSWORD: string = 'password12345';
@@ -19,11 +20,11 @@ vi.mock('@/hooks/useAuth', () => ({
 
 function getFormControls () {
     return {
-        emailInput: screen.getByLabelText("Email"),
-        displayNameInput: screen.getByLabelText("Display Name"),
-        passwordInput: screen.getByLabelText("Password"),
-        passwordConfirmationInput: screen.getByLabelText("Confirm Password"),
-        submitButton: screen.getByText("Sign Up")
+        emailInput: screen.getByLabelText("Email", { exact: false }),
+        displayNameInput: screen.getByLabelText("Display Name", { exact: false }),
+        passwordInput: screen.getByLabelText(/(?<!Confirm\s+)Password/),
+        passwordConfirmationInput: screen.getByLabelText("Confirm Password", { exact: false }),
+        submitButton: screen.getByRole('button', { name: "Sign Up" })
     };
 }
 
@@ -74,7 +75,7 @@ describe('Sign up form', () => {
     });
 
     it('Renders with fields', async () => {
-        render(<SignupForm />);
+        renderWithMantine(<SignupForm />);
 
         const { emailInput, displayNameInput, passwordInput, passwordConfirmationInput, submitButton } = getFormControls();
 
@@ -88,7 +89,7 @@ describe('Sign up form', () => {
 
     it('Show success dialog on sign-in', async () => {      
         const user = userEvent.setup();
-        render(<SignupForm />);
+        renderWithMantine(<SignupForm />);
 
         const formControls = getFormControls();
 
@@ -109,7 +110,7 @@ describe('Sign up form', () => {
 
     it('Error on missing email', async () => {
         const user = userEvent.setup();
-        render(<SignupForm />);
+        renderWithMantine(<SignupForm />);
 
         const formControls = getFormControls();
 
@@ -126,7 +127,7 @@ describe('Sign up form', () => {
 
     it('Error on missing display name', async () => {
         const user = userEvent.setup();
-        render(<SignupForm />);
+        renderWithMantine(<SignupForm />);
 
         const formInputs = getFormControls();
 
@@ -143,7 +144,7 @@ describe('Sign up form', () => {
 
     it('Error on missing password', async () => {
         const user = userEvent.setup();
-        render(<SignupForm />);
+        renderWithMantine(<SignupForm />);
 
         const formControls = getFormControls();
 
@@ -160,7 +161,7 @@ describe('Sign up form', () => {
 
     it('Error on missing confirm password', async () => {
         const user = userEvent.setup();
-        render(<SignupForm />);
+        renderWithMantine(<SignupForm />);
 
         const formControls = getFormControls();
 
@@ -177,7 +178,7 @@ describe('Sign up form', () => {
 
     it('Error on invalid email', async () => {
         const user = userEvent.setup();
-        render(<SignupForm />);
+        renderWithMantine(<SignupForm />);
 
         const formControls = getFormControls();
 
@@ -194,7 +195,7 @@ describe('Sign up form', () => {
 
     it('Error on invalid display name', async () => {
         const user = userEvent.setup();
-        render(<SignupForm />);
+        renderWithMantine(<SignupForm />);
 
         const formControls = getFormControls();
 
@@ -211,7 +212,7 @@ describe('Sign up form', () => {
 
     it('Error on invalid password', async () => {
         const user = userEvent.setup();
-        render(<SignupForm />);
+        renderWithMantine(<SignupForm />);
 
         const formControls = getFormControls();
 

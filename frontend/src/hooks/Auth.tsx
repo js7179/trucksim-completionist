@@ -18,9 +18,7 @@ const AuthProvider = ({children}: PropsWithChildren) => {
             }
         });
         setLoading(false);
-        if(error) {
-            throw new Error(error.message);
-        }
+        if(error) throw error;
     }
 
     async function login(email: string, password: string) {
@@ -30,34 +28,29 @@ const AuthProvider = ({children}: PropsWithChildren) => {
             password: password
         });
         setLoading(false);
-        if(error) {
-            throw new Error(error.message);
-        }
+        if(error) throw error;
     }
 
     async function signOut() {
         setLoading(true);
         const { error } = await auth.signOut({ scope: 'local' });
         setLoading(false);
-        if(error) {
-            throw new Error(error.message);
-        }
+        if(error) throw error;
     }
     
     async function sendPasswordReset(email: string) {
         const url = import.meta.env.VITE_SITE_URL + 'resetpw';
-        await auth.resetPasswordForEmail(email, {
+        const { error } = await auth.resetPasswordForEmail(email, {
             redirectTo: url
         });
+        if(error) throw error;
     }
 
     async function setNewPassword(newPassword: string) {
         setLoading(true);
         const { error } = await auth.updateUser({ password: newPassword });
         setLoading(false);
-        if(error) {
-            throw new Error(error.message);
-        }
+        if(error) throw error;
     }
 
     useEffect(() => {

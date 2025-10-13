@@ -43,7 +43,7 @@ test('Password reset flow', async () => {
 
         await page.getByRole('button', {name: 'Send Password Reset Email'}).click();
 
-        const successDialog = page.locator('div[class*=formSuccess]');
+        const successDialog = page.locator('*[data-authdialog-success]');
         await expect(successDialog).toBeVisible();
     });
 
@@ -66,17 +66,17 @@ test('Password reset flow', async () => {
         const header = page.locator('h1');
         await expect(header).toHaveText(`Reset Password for ${USER_DETAILS.email}`);
 
-        await page.getByLabel("New Password", {exact: true}).fill(USER_DETAILS.newpassword);
-        await page.getByLabel("Confirm New Password", {exact: true}).fill(USER_DETAILS.newpassword);
+        await page.getByLabel(/(?<!Confirm.*)New.*Password/).fill(USER_DETAILS.newpassword);
+        await page.getByLabel("Confirm New Password").fill(USER_DETAILS.newpassword);
 
         await page.getByRole('button', {name: 'Change Password'}).click();
 
-        const successDialog = page.locator('div[class*=formSuccess]');
+        const successDialog = page.locator('*[data-authdialog-success]');
         await expect(successDialog).toBeVisible();
 
         await page.waitForURL('/', { timeout: 7500 });
 
-        const displayNameElement = page.locator('span[class*="displayName"]');
-        await expect(displayNameElement).toHaveText(USER_DETAILS.displayName);
+        const displayNameElement = page.getByText(USER_DETAILS.displayName);
+        await expect(displayNameElement).toBeVisible();
     });
 });

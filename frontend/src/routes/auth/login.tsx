@@ -1,8 +1,8 @@
 import { useAuth } from '@/hooks/useAuth';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import LoginForm from "@/components/auth/LoginForm";
-import styles from './authroutes.module.css';
+import { Button, Stack } from '@mantine/core';
 
 export default function LoginPage() {
     const { session } = useAuth();
@@ -15,12 +15,11 @@ export default function LoginPage() {
     }, [session, navigate]);
 
     return (
-        <main className={styles.centerForm}>
-            <h1>Login</h1>
-            <section>
+        <main>
+            <Stack align='center' mt='lg'>
                 <LoginForm />
-                <button type="button" onClick={() => navigate('/sendpwreset')}>Forgot Password?</button>
-            </section>
+                <Button mt='xs' type="button" onClick={() => navigate('/sendpwreset')}>Forgot Password?</Button>
+            </Stack>
         </main>
     );
 }

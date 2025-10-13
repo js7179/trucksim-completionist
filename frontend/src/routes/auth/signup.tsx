@@ -1,8 +1,8 @@
 import SignupForm from "@/components/auth/SignupForm";
 import { useAuth } from '@/hooks/useAuth';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import styles from './authroutes.module.css';
+import { Stack, Button } from "@mantine/core";
 
 export default function SignupPage() {
     const { session } = useAuth();
@@ -15,14 +15,11 @@ export default function SignupPage() {
     }, [session, navigate]);
 
     return (
-        <main className={styles.centerForm}>
-            <h1>Create account</h1>
-            <section>
+        <main>
+            <Stack align='center' mt='lg'>
                 <SignupForm />
-            </section>
-            <section>
-                <button type="button" onClick={() => navigate('/login')}>Login with an existing account</button>
-            </section>
+                <Button variant='filled' type="button" onClick={() => navigate('/login')}>Login with an existing account</Button>
+            </Stack>
         </main>
     );
 }

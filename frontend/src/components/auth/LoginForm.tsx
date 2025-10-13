@@ -3,7 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import styles from './AuthForms.module.css';
+import { PasswordInput, TextInput, Button, Container, Group, Fieldset } from '@mantine/core';
+import AuthAlertComponent, { FormStatus } from './AuthAlert';
 
 const schema = yup.object().shape({
     email: yup.string().required("Email is required").email("Email must be a valid email address"),
@@ -19,44 +20,50 @@ export default function LoginForm() {
         mode: 'onBlur', 
         reValidateMode: 'onChange',
         shouldFocusError: false});
-    const [ status, setStatus ] = useState("");
+    const [ formStatus, setFormStatus ] = useState<FormStatus>({ show: false });
 
     const onSubmit: SubmitHandler<LoginInputs> = async (data: LoginInputs) => {
         try {
             await login(data.email, data.password);
-            setStatus("Logged in! Redirecting shortly...");
+            setFormStatus({
+                show: true, 
+                isSuccess: true,
+                message: 'Logged in! Redirecting you shortly...'
+            });
         } catch (error) {
             const err = error as Error;
-            setStatus(err.message);
+            setFormStatus({
+                show: true,
+                isSuccess: false,
+                message: err.message ?? 'Could not log you in, please try again later'
+            });
         }
     };
 
-    const formErrors = [];
-    for(const [fieldKey, fieldErr] of Object.entries(errors)) {
-        formErrors.push(<li key={fieldKey}>{fieldErr.message}</li>)
-    }
-    if(status) formErrors.push(status);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <fieldset className={styles.formContent}>
-                {formErrors.length !== 0 && (
-                    <div className={styles.formError}>
-                        <ul>
-                            {...formErrors}
-                        </ul>
-                    </div>
-                )}
-                <div className={styles.formRow}>
-                    <label htmlFor="email" className={styles.formLabel}>Email</label>
-                    <input type="email" autoComplete="email" id="email" required {...register("email")} />
-                </div>
-                <div className={styles.formRow}>
-                    <label htmlFor="password" className={styles.formLabel}>Password</label>
-                    <input type="password" autoComplete="current-password" id="password" required {...register("password")} />
-                </div>
-                <button type="submit" className={styles.submit}>Login</button>
-            </fieldset>
-        </form>
+        <Container w='25%'>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Fieldset>
+                    {formStatus.show && ( <AuthAlertComponent formStatus={formStatus} /> )}
+                    <TextInput 
+                        required
+                        label='Email'
+                        {...register("email")} 
+                        error={errors.email ? errors.email.message : ''}
+                    />
+                    <PasswordInput 
+                        required
+                        label='Password'
+                        {...register("password")}
+                        error={errors.password ? errors.password.message : ''}
+                        mb={'1.5rem'}
+                    />
+                    <Group justify='center'>
+                        <Button variant='filled' type="submit">Login</Button>
+                    </Group>
+                </Fieldset>
+            </form>
+        </Container>
     );
 }

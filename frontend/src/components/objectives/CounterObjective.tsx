@@ -1,9 +1,10 @@
-import styles from './Objectives.module.css';
-import { ProgressBar } from '../util/ProgressBar';
 import { CounterObjectiveInfo } from 'trucksim-completionist-common';
 import { useLocalFuncSetNumberObj, useLocalStateAchievementNumberObj } from '@/hooks/LocalAchievementHooks';
 import { useRemoteFuncSetNumberObj, useRemoteStateAchievementObjNumber } from '@/hooks/RemoteAchievementHooks';
 import { useRemotePage } from '@/hooks/RemotePageContext';
+import { Group, Button } from '@mantine/core';
+import { ProgressBar } from '@/components/util/ProgressBar';
+import { IconMinus, IconPlus } from '@/components/util/Icons';
 
 export function LocalCounterObjective({achID, objid, goal, display}: CounterObjectiveProps) {
     const current = useLocalStateAchievementNumberObj(achID, objid);
@@ -38,18 +39,22 @@ export function RemoteCounterObjective({achID, objid, goal, display}: CounterObj
 
 export function VisualCounterObjective({goal, display, current, func}: VisualCounterObjectiveProps) {
     return (
-        <div className={styles.counterObjective}>
+        <Group style={{ width: '100%' }} p='md'>
             <p>{display}</p>
-            <button type="button" className={styles.decrementBtn} onClick={() => func(-1)}>-</button>
-            <ProgressBar current={current} max={goal} />
-            <button type="button" className={styles.incrementBtn} onClick={() => func(+1)}>+</button>
-        </div>
+            <Button onClick={() => func(-1)} aria-label='Decrement'>
+                <IconMinus height='1rem' width='1rem' />
+            </Button>
+            <ProgressBar current={current} max={goal} boxStyle={{flex: 1}} />
+            <Button onClick={() => func(+1)} aria-label='Increment'>
+                <IconPlus height='1rem' width='1rem' />
+            </Button>
+        </Group>
     );
 }
 
 export type CounterObjectiveProps = Omit<CounterObjectiveInfo, "type"> & { achID: string };
 
 type VisualCounterObjectiveProps = CounterObjectiveProps & { 
-    current: number, 
-    func: (delta: number) => void 
+    current: number;
+    func: (delta: number) => void;
 };

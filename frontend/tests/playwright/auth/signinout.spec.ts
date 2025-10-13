@@ -38,20 +38,21 @@ test('Login and Signout flow', async () => {
         await page.getByLabel("Email").fill(USER_DETAILS.email);
         await page.getByLabel("Password").fill(USER_DETAILS.password);
 
-        await page.getByRole('button', {name: 'Login'}).click();
+        await page.getByRole('button', { name: 'Login' }).click();
 
         await page.waitForURL('**/');
         
-        const displayNameElement = page.locator('span[class*="displayName"]');
-        await expect(displayNameElement).toHaveText(USER_DETAILS.displayName);
+        const displayNameElement = page.getByText(USER_DETAILS.displayName);
+        await expect(displayNameElement).toBeVisible();
     });
 
     await test.step('Signout', async () => {
+        await page.getByText(USER_DETAILS.displayName).click();
         await page.getByText("Sign Out").click();
 
         await page.waitForURL('**/');
 
-        const loginButton = page.locator('a[href="/login"]');
+        const loginButton = page.getByRole('link', { name: 'Login' });
         await expect(loginButton).toBeVisible();
     });
 });

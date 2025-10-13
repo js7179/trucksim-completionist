@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LoginForm from '@/components/auth/LoginForm';
+import renderWithMantine from '../util/render';
 
 const VALID_PASSWORD: string = 'password12345';
 const INVALID_EMAIL: string = '@.';
@@ -14,28 +15,36 @@ vi.mock('@/hooks/useAuth', () => ({
     })
 }));
 
+function getFormControls() {
+    return {
+        emailInput: screen.getByLabelText("Email", { exact: false }),
+        passwordInput: screen.getByLabelText("Password", { exact: false }),
+        submitButton: screen.getByRole('button', { name: 'Login' })
+    };
+}
+
 describe('Login Form', () => {
     afterEach(() => {
         mockLogin.mockClear();
     });
 
     it('Renders normally', () => {
-        render(<LoginForm />);
+        renderWithMantine(<LoginForm />);
+
+        const { emailInput, passwordInput, submitButton } = getFormControls();
 
         // Validate form fields exist in document
-        expect(screen.getByLabelText("Email")).toBeInTheDocument();
-        expect(screen.getByLabelText("Password")).toBeInTheDocument();
-        expect(screen.getByText("Login")).toBeInTheDocument();
+        expect(emailInput).toBeInTheDocument();
+        expect(passwordInput).toBeInTheDocument();
+        expect(submitButton).toBeInTheDocument();
     });
 
     it('Show success dialog on sign-in', async () => {
         const user = userEvent.setup();
 
-        render(<LoginForm />);
-
-        const emailInput = screen.getByLabelText("Email");
-        const passwordInput = screen.getByLabelText("Password");
-        const submitButton = screen.getByText("Login");
+        renderWithMantine(<LoginForm />);
+        
+        const { emailInput, passwordInput, submitButton } = getFormControls();
 
         await user.click(emailInput);
         await user.keyboard(VALID_EMAIL);
@@ -52,11 +61,9 @@ describe('Login Form', () => {
     it('Blank email', async () => {
         const user = userEvent.setup();
 
-        render(<LoginForm />);
+        renderWithMantine(<LoginForm />);
 
-        const emailInput = screen.getByLabelText("Email");
-        const passwordInput = screen.getByLabelText("Password");
-        const submitButton = screen.getByText("Login");
+        const { emailInput, passwordInput, submitButton } = getFormControls();
 
         await user.click(emailInput);
         await user.click(passwordInput);
@@ -64,7 +71,7 @@ describe('Login Form', () => {
         await user.click(submitButton);
 
         expect(mockLogin).not.toHaveBeenCalled();
-        expect(emailInput).not.toHaveValue();;
+        expect(emailInput).not.toHaveValue();
         expect(passwordInput).toHaveValue(VALID_PASSWORD);
         expect(screen.getByText(/Email is required/)).toBeInTheDocument();
     });
@@ -72,12 +79,10 @@ describe('Login Form', () => {
     it('Invalid email format', async () => {
         const user = userEvent.setup();
 
-        render(<LoginForm />);
+        renderWithMantine(<LoginForm />);
 
-        const emailInput = screen.getByLabelText("Email");
-        const passwordInput = screen.getByLabelText("Password");
-        const submitButton = screen.getByText("Login");
-
+        const { emailInput, passwordInput, submitButton } = getFormControls();
+        
         await user.click(emailInput);
         await user.keyboard(INVALID_EMAIL);
         await user.click(passwordInput);
@@ -93,12 +98,10 @@ describe('Login Form', () => {
     it('Blank password', async () => {
         const user = userEvent.setup();
 
-        render(<LoginForm />);
+        renderWithMantine(<LoginForm />);
 
-        const emailInput = screen.getByLabelText("Email");
-        const passwordInput = screen.getByLabelText("Password");
-        const submitButton = screen.getByText("Login");
-
+        const { emailInput, passwordInput, submitButton } = getFormControls();
+        
         await user.click(emailInput);
         await user.keyboard(VALID_EMAIL);
         await user.click(passwordInput);

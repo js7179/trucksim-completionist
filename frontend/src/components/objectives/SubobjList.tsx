@@ -1,30 +1,25 @@
 import { ListObjectiveInfo, ListSubobjectiveItem } from "trucksim-completionist-common";
-import { CheckboxButton } from "../util/StylizedCheckbox";
-import styles from './Objectives.module.css';
+import { Checkbox, SimpleGrid } from "@mantine/core";
 
 export default function SubobjList({achID, objid, values, current, func}: SubobjListProps) {
     const listItems = values.map((subobj: ListSubobjectiveItem) => {
         const inputID = `${achID}.${objid}.${subobj.subobjid}`;
         const isChecked = current.includes(subobj.subobjid);
         return (
-            <li className={styles.listObjItem} key={inputID}>
-                <CheckboxButton 
-                    htmlID={inputID}
-                    checked={isChecked}
-                    onClick={() => func(subobj.subobjid)}
-                    size="1lh"
-                    colorFilter="var(--text-color-filter)"
-                    label={subobj.display}/>
-            </li>
+            <Checkbox
+                key={inputID}
+                checked={isChecked}
+                label={subobj.display}
+                onChange={() => func(subobj.subobjid)}
+                color='gray' />
         );
     });
 
     return (
-        <ul className={styles.listObj}>
+        <SimpleGrid cols={{base: 1, sm: 2, md: 3, lg: 4}} p='md'>
             {...listItems}
-        </ul>
+        </SimpleGrid>
     );
-
 }
 
 export type SubobjListProps = Omit<ListObjectiveInfo, "type"> & {

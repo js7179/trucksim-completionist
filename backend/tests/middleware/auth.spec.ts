@@ -9,7 +9,7 @@ const VALID_AUTH_HEADER: string = 'Bearer doesnt.matter.itsmocked';
 
 // The secret or ISS does not matter since we are overriding the jose functions
 // to return what we want
-const MIDDLEWARE_FUNC = await buildAuthMiddleware('foo', 'bar');
+const MIDDLEWARE_FUNC = await buildAuthMiddleware('http://127.0.0.1:54321/auth/v1');
 
 vi.mock('jose');
 

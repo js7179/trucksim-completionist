@@ -6,7 +6,8 @@ export default defineConfig({
         include: ['**/*.spec.ts'],
         exclude: ['node_modules/**'],
         dir: 'tests/',
-        globals: true
+        globals: true,
+        silent: 'passed-only',
     },
     env: {
         ...config({ path: '../.env.test.local'}).parsed,

@@ -1,10 +1,12 @@
-import { createSecretKey } from 'crypto';
 import { Request, Response, NextFunction } from 'express';
-import { jwtVerify } from 'jose';
+import { createRemoteJWKSet, jwtVerify } from 'jose';
 import { JOSEError, JWSInvalid, JWSSignatureVerificationFailed, JWTClaimValidationFailed, JWTExpired } from 'jose/errors';
 
-export default async function buildAuthMiddleware(jwtSecret: string, jwtISS: string) {
-    const jwtSecretKey = createSecretKey(jwtSecret, 'utf-8');
+export default async function buildAuthMiddleware(jwtISS: string) {
+    // Ensure a trailing slash in the base URL because otherwise parts of the URL gets lost
+    const baseURL = jwtISS.endsWith('/') ? jwtISS : jwtISS + '/';
+    const jwksURL = new URL('.well-known/jwks.json', baseURL);
+    const jwtSecretKey = createRemoteJWKSet(jwksURL);
 
     return async function authorizationHeaderMiddleware(req: Request, res: Response, next: NextFunction) {
         const authorizationHeader = req.headers.authorization;
@@ -26,6 +28,7 @@ export default async function buildAuthMiddleware(jwtSecret: string, jwtISS: str
             });
             res.locals.uuid = payload.sub;
         } catch (err) {
+            console.error(err);
             if(err instanceof JOSEError) {
                 const joseErr = err as JOSEError;
                 if(joseErr instanceof JWTExpired) {

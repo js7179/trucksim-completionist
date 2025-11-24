@@ -13,7 +13,6 @@ import { ConnectionOptions } from "tls";
 const secrets: Record<string, string> = {
     PG_WEBSERV_USER: '',
     PG_WEBSERV_PASS: '',
-    JWT_SECRET: ''
 };
 
 const optConsts: Record<string, string> = {
@@ -98,7 +97,7 @@ const pgPool = new pg.Pool({
 const dao = new UserSavedataPGDAO(pgPool);
 const savedataRebuider = new SavedataManager(dao, gameInfo);
 const savedataCache = new InMemorySavedataCache(Number(optConsts.CACHE_SIZE));
-const authHeader = await buildAuthMiddleware(secrets.JWT_SECRET, process.env.JWT_ISS);
+const authHeader = await buildAuthMiddleware(process.env.JWT_ISS);
 
 const app = express();
 

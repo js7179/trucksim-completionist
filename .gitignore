@@ -29,3 +29,4 @@ dist-ssr
 **/.last-run.json
 
 frontend/public/**/achdata/*.json
+supabase/signing_key.json

@@ -60,7 +60,7 @@ jobs:
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
           VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_PUB_KEY: ${{ vars.VITE_SUPABASE_PUB_KEY }}
           VITE_SUPABASE_PROJECT_URL: ${{ vars.VITE_SUPABASE_PROJECT_URL }}
       
       - name: Build and push backend

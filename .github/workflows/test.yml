@@ -28,19 +28,22 @@ jobs:
       - name: Setup Supabase CLI
         uses: supabase/setup-cli@v1
         with:
-          version: 2.23.4
+          version: 2.50.2
+      
+      - name: Generate signing key
+        run: supabase gen signing-key --algorithm EWS256 -o json
+        working-directory: ${{ github.workspace }}
 
       - name: Start local Supabase instance and set environment variables
         run: |
           supabase start
           SUPABASE_STATUS=$(supabase status)
           echo "VITE_SUPABASE_PROJECT_URL=$(echo "$SUPABASE_STATUS" | grep 'API URL:' | awk '{print $3}')" >> $GITHUB_ENV
-          echo "JWT_SECRET=$(echo "$SUPABASE_STATUS" | grep 'JWT secret:' | awk '{print $3}')" >> $GITHUB_ENV
-          echo "INBUCKET_URL=$(echo "$SUPABASE_STATUS" | grep 'Inbucket URL:' | awk '{print $3}')" >> $GITHUB_ENV
+          echo "INBUCKET_URL=$(echo "$SUPABASE_STATUS" | grep 'Mailpit URL:' | awk '{print $3}')" >> $GITHUB_ENV
           echo "JWT_ISS=$(echo "$SUPABASE_STATUS" | grep 'API URL:' | awk '{print $3}')/auth/v1" >> $GITHUB_ENV
-          echo "VITE_SUPABASE_ANON_KEY=$(supabase status | grep 'anon key:' | sed 's/.*anon key: //')" >> $GITHUB_ENV
-          echo "SUPABASE_SERVICE_KEY=$(supabase status | grep 'service_role key:' | sed 's/.*service_role key: //')" >> $GITHUB_ENV
-          DB_URL=$(echo "$SUPABASE_STATUS" | grep 'DB URL:' | awk '{print $3}')
+          echo "VITE_SUPABASE_PUB_KEY=$(supabase status | grep 'Publishable key:' | sed 's/.*Publishable key: //')" >> $GITHUB_ENV
+          echo "SUPABASE_SECRET_KEY=$(supabase status | grep 'Secret key:' | sed 's/.*Secret key: //')" >> $GITHUB_ENV
+          DB_URL=$(echo "$SUPABASE_STATUS" | grep 'Database URL:' | awk '{print $3}')
           echo "PG_MASTER_USER=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\1/')" >> $GITHUB_ENV
           echo "PG_MASTER_PASS=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\2/')" >> $GITHUB_ENV
           echo "PGHOST=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\3/')" >> $GITHUB_ENV

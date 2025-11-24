@@ -31,7 +31,7 @@ jobs:
           version: 2.50.2
       
       - name: Generate signing key
-        run: supabase gen signing-key --algorithm EWS256 -o json
+        run: supabase gen signing-key --algorithm ES256 -o json
         working-directory: ${{ github.workspace }}
 
       - name: Start local Supabase instance and set environment variables

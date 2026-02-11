@@ -9,6 +9,7 @@ import InMemorySavedataCache from "./data/memorycache";
 import buildAuthMiddleware from "@/middleware/auth";
 import { existsSync, readFileSync } from "fs";
 import { ConnectionOptions } from "tls";
+import { HealthCheck, buildHcApp } from "./healthcheck";
 
 const secrets: Record<string, string> = {
     PG_WEBSERV_USER: '',
@@ -16,7 +17,9 @@ const secrets: Record<string, string> = {
 };
 
 const optConsts: Record<string, string> = {
-    CACHE_SIZE: '50'
+    CACHE_SIZE: '50',
+    PORT: '3500',
+    HEALTHCHECK_PORT: '3501',
 };
 
 let pgPoolSSLOption: boolean | ConnectionOptions = false;
@@ -76,6 +79,7 @@ function setupEnv() {
     // Optional constants
     for(const key of Object.keys(optConsts)) {
         if(process.env[key] !== undefined) {
+            optConsts[key] = process.env[key]!;
             console.log(`Overridden ${key} with '${process.env[key]}'`);
         } else {
             console.log(`${key} set to default '${ optConsts[key] }'`);
@@ -109,7 +113,8 @@ app.disable('x-powered-by');
 app.set('etag', false);
 app.use(express.json());
 
-const port = process.env.PORT || 3500;
+const port = Number(optConsts['PORT']);
+const HEALTHCHECK_PORT = Number(optConsts['HEALTHCHECK_PORT']);
 
 app.get("/ping", (req, res) => {
     res.send({
@@ -119,4 +124,10 @@ app.get("/ping", (req, res) => {
 
 app.use('/:uid/:game', authHeader, userdataRouter(savedataRebuider, gameInfo, savedataCache));
 
-app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
+// Initialize healthcheck
+const healthCheck = new HealthCheck(pgPool);
+const hcApp = buildHcApp(healthCheck);
+
+// Start apps
+app.listen(port, () => console.log(`Server running on port ${port}`));
+hcApp.listen(HEALTHCHECK_PORT, () => console.log(`Health check running on port ${HEALTHCHECK_PORT}`));

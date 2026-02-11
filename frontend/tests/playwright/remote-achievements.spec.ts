@@ -1,4 +1,4 @@
-import { Page, test, expect, Browser } from '@playwright/test';
+import { test, expect, type Page, type Browser } from '@playwright/test';
 import { adminAuthClient } from './supabase';
 import { performLogin } from './utils/perform-login';
 import cleanupSupabaseUser from './utils/supabase-cleanup';

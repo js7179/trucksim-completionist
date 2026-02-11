@@ -1,4 +1,4 @@
-import { Page, test, expect, BrowserContext, Browser } from '@playwright/test';
+import { test, expect, type Page, type BrowserContext, type Browser } from '@playwright/test';
 import { getAchievementRegion, getObjectivesForAchievement } from './utils/page-operations';
 
 let pwBrowser: Browser;

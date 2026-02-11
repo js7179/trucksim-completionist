@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { type Page, type Locator } from "@playwright/test";
 
 export function getAchievementRegion(page: Page, achievementName: string) {
     const region = page.getByRole('region', { name: achievementName });

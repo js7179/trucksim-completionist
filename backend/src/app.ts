@@ -18,8 +18,8 @@ const secrets: Record<string, string> = {
 
 const optConsts: Record<string, string> = {
     CACHE_SIZE: '50',
-    PORT: '3000',
-    HEALTHCHECK_PORT: '3001',
+    PORT: '3500',
+    HEALTHCHECK_PORT: '3501',
 };
 
 let pgPoolSSLOption: boolean | ConnectionOptions = false;

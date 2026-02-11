@@ -83,6 +83,7 @@ jobs:
       
       - name: Install Playwright dependencies
         run: npx playwright install --with-deps
+        working-directory: ${{ github.workspace }}/frontend
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Run frontend e2e tests

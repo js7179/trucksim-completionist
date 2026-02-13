@@ -28,10 +28,12 @@ jobs:
       - name: Setup Supabase CLI
         uses: supabase/setup-cli@v1
         with:
-          version: 2.75.0
+          version: 2.76.8
       
       - name: Generate signing key
-        run: supabase gen signing-key --algorithm ES256 -o json
+        run: |
+          echo "[]" > supabase/signing_key.json
+          supabase gen signing-key --algorithm ES256 --yes
         working-directory: ${{ github.workspace }}
 
       - name: Start local Supabase instance and set environment variables

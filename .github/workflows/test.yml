@@ -28,22 +28,25 @@ jobs:
       - name: Setup Supabase CLI
         uses: supabase/setup-cli@v1
         with:
-          version: 2.50.2
+          version: 2.76.8
       
       - name: Generate signing key
-        run: supabase gen signing-key --algorithm ES256 -o json
+        run: |
+          echo "[]" > supabase/signing_key.json
+          supabase gen signing-key --algorithm ES256 --yes
         working-directory: ${{ github.workspace }}
 
       - name: Start local Supabase instance and set environment variables
         run: |
           supabase start
-          SUPABASE_STATUS=$(supabase status)
-          echo "VITE_SUPABASE_PROJECT_URL=$(echo "$SUPABASE_STATUS" | grep 'API URL:' | awk '{print $3}')" >> $GITHUB_ENV
-          echo "INBUCKET_URL=$(echo "$SUPABASE_STATUS" | grep 'Mailpit URL:' | awk '{print $3}')" >> $GITHUB_ENV
-          echo "JWT_ISS=$(echo "$SUPABASE_STATUS" | grep 'API URL:' | awk '{print $3}')/auth/v1" >> $GITHUB_ENV
-          echo "VITE_SUPABASE_PUB_KEY=$(supabase status | grep 'Publishable key:' | sed 's/.*Publishable key: //')" >> $GITHUB_ENV
-          echo "SUPABASE_SECRET_KEY=$(supabase status | grep 'Secret key:' | sed 's/.*Secret key: //')" >> $GITHUB_ENV
-          DB_URL=$(echo "$SUPABASE_STATUS" | grep 'Database URL:' | awk '{print $3}')
+          SUPABASE_STATUS=$(supabase status -o env)
+          SUPABASE_API_URL=$(echo "$SUPABASE_STATUS" | grep 'API_URL' | sed -E 's/^API_URL=\"(.+)\"$/\1/')
+          echo "VITE_SUPABASE_PROJECT_URL=$(echo "$SUPABASE_API_URL")" >> $GITHUB_ENV
+          echo "INBUCKET_URL=$(echo "$SUPABASE_STATUS" | grep 'INBUCKET_URL' | sed -E 's/^INBUCKET_URL=\"(.+)\"$/\1/')" >> $GITHUB_ENV
+          echo "JWT_ISS=$(echo "$SUPABASE_API_URL")/auth/v1" >> $GITHUB_ENV
+          echo "VITE_SUPABASE_PUB_KEY=$(echo "$SUPABASE_STATUS" | grep 'PUBLISHABLE_KEY' | sed -E 's/^PUBLISHABLE_KEY=\"(.+)\"$/\1/')" >> $GITHUB_ENV
+          echo "SUPABASE_SECRET_KEY=$(supabase status -o env | grep 'SECRET_KEY' | sed -E 's/^SECRET_KEY=\"(.+)\"$/\1/')" >> $GITHUB_ENV
+          DB_URL=$(supabase status -o env | grep 'DB_URL' | sed -E 's/^DB_URL=\"(.+)\"$/\1/')
           echo "PG_MASTER_USER=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\1/')" >> $GITHUB_ENV
           echo "PG_MASTER_PASS=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\2/')" >> $GITHUB_ENV
           echo "PGHOST=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\3/')" >> $GITHUB_ENV
@@ -72,10 +75,21 @@ jobs:
         run: npm run test:unit
         working-directory: ${{ github.workspace }}/frontend
         
+      - name: Cache Playwright binary dependencies
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+      
+      - name: Install Playwright dependencies
+        run: npx playwright install --with-deps
+        working-directory: ${{ github.workspace }}/frontend
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
       - name: Run frontend e2e tests
-        run: |
-          npx playwright install --with-deps
-          npm run test:e2e
+        run: npm run test:e2e
         working-directory: ${{ github.workspace }}/frontend
 
       - name: Lint

@@ -28,7 +28,7 @@ jobs:
       - name: Setup Supabase CLI
         uses: supabase/setup-cli@v1
         with:
-          version: 2.76.8
+          version: 2.93.0
       
       - name: Generate signing key
         run: |
@@ -53,6 +53,9 @@ jobs:
           echo "PGPORT=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\4/')" >> $GITHUB_ENV
           echo "PGDATABASE=$(echo $DB_URL | sed -E 's/^postgresql:\/\/([^:]+):([^@]+)@([^:]+):([^\/]+)\/(.+)$/\5/')" >> $GITHUB_ENV
       
+      - name: Create database users
+        run: psql "$DB_URL" -f create_users.sql
+
       - name: Install dependencies
         run: npm ci
 
